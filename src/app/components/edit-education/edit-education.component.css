@@ -1,0 +1,16 @@
+.education-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 3%;
+    gap: 15px;
+}
+
+.education-container div {
+    flex: 1;
+}
+
+.education-container img {
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,42 @@
+<div id="edit-contact">
+    <form action="javascript:void(0);" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group pr-2">
+            <label for="edit-phone">Phone number <span class="small">[ code area in 
+                parenthesis like this: (261)5556122 ]</span>  </label>
+            <input type="text" id="edit-phone" class="form-control" formControlName="phone">
+            <div *ngIf="m.phone.touched && m.phone.invalid" class="alert alert-danger">
+                <div *ngIf="m.phone.errors?.required">Please provide phone</div>
+                <div *ngIf="m.phone.errors?.pattern">Please provide valid phone</div>
+            </div>
+        </div>
+        <div class="form-group pr-2">
+            <label for="edit-email">Email</label>
+            <input type="email" id="edit-email" class="form-control" formControlName="email">
+            <div *ngIf="m.email.touched && m.email.invalid" class="alert alert-danger">
+                <div *ngIf="m.email.errors?.required">Please provide email</div>
+                <div *ngIf="m.email.errors?.email">Please provide valid email</div>
+            </div>
+        </div>
+        <div class="form-group pr-2">
+            <label for="edit-linkedIn">LinkedIn</label>
+            <input type="text" id="edit-linkedIn" class="form-control" formControlName="linkedIn">
+            <div *ngIf="m.linkedIn.touched && m.linkedIn.invalid" class="alert alert-danger">
+                <div *ngIf="m.linkedIn.errors?.required">Please provide url</div>
+                <div *ngIf="m.linkedIn.errors?.pattern">Please provide valid url</div>
+            </div>
+        </div>
+        <div class="form-group pr-2">
+            <label for="edit-repository">Remote repository</label>
+            <input type="text" id="edit-repository" class="form-control" formControlName="remoteRepository">
+            <div *ngIf="m.remoteRepository.touched && m.remoteRepository.invalid" class="alert alert-danger">
+                <div *ngIf="m.remoteRepository.errors?.required">Please provide url</div>
+                <div *ngIf="m.remoteRepository.errors?.pattern">Please provide valid url</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">Save</button>
+        <button type="button" class="btn btn-secondary ml-2" (click)="emitOff()">Cancel</button>
+    </form>
+
+
+
+</div>

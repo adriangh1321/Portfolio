@@ -1,0 +1,21 @@
+<div *ngIf="isOnShowContact">
+    <div class="info-contact">
+        <h4>Contact information <a href='javascript:void(0);' (click)="offShowContact()"><i
+                    class="fa-solid fa-circle-minus"></i></a></h4>
+        <a href='javascript:void(0);' id="edit-contact" (click)="onEditContact()"><i class="fa-solid fa-pen"></i></a>
+    </div>
+
+    <div class="card">
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="fa-solid fa-phone"></i> {{person.contactInformation.phone}}</li>
+            <li class="list-group-item"><i class="fa-solid fa-envelope"></i> {{person.contactInformation.email}}</li>
+            <li class="list-group-item"><a href="//{{person.contactInformation.linkedIn}}"><i
+                        class="fa-brands fa-linkedin"></i> {{person.contactInformation.linkedIn}}</a></li>
+            <li class="list-group-item"><a href="//{{person.contactInformation.remoteRepository}}"><i
+                        class="fa-brands fa-git-square"></i> {{person.contactInformation.remoteRepository}}</a></li>
+        </ul>
+    </div>
+
+    
+</div>

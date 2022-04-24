@@ -1,0 +1,73 @@
+<div id="edit-image-container" >
+    <div >
+        <img class="profile-image" src="{{updatedPerson.photo}}" alt="">
+    </div>
+    <div >
+        <img id="current-company-image" src="{{updatedPerson.currentCompany.image}}" alt="">
+    </div>
+</div>
+
+<div class="mb-4" >
+    <form action="javascript:void();" #personForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-row col-md-12 p-0 m-0">
+            <div class="form-group col-md-6 p-0 pr-2 " >
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-photo">Profile photo</label>
+                    <input type="file" id="input-photo" class="form-control-file" name="photo"
+                        (change)="onPhotoUpload($event)">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-firstname">Firstname</label>
+                    <input type="text" id="input-firstname" class="form-control" name="firstname" #firstname="ngModel"
+                        [(ngModel)]="updatedPerson.firstname">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-lastname">Lastname</label>
+                    <input type="text" id="input-lastname" class="form-control" name="lastname" #lastname="ngModel"
+                        [(ngModel)]="updatedPerson.lastname">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-ocupation">Ocupation</label>
+                    <input type="text" id="input-ocupation" class="form-control" name="ocupation" #ocupation="ngModel"
+                        [(ngModel)]="updatedPerson.ocupation">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-country">Country</label>
+                    <input type="text" id="input-country" class="form-control" name="country" #country="ngModel"
+                        [(ngModel)]="updatedPerson.country">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-location">State</label>
+                    <input type="text" id="input-location" class="form-control" name="state" #state="ngModel"
+                        [(ngModel)]="updatedPerson.state">
+                </div>
+                
+            </div>
+            <div class="form-group col-md-6 p-0 pr-2">
+
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-company-image">Company image</label>
+                    <input type="file" id="input-company-image" class="form-control-file" name="companyImage"
+                        (change)="onImageCompanyUpload($event)">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-current-company-name">Current company</label>
+                    <input type="text" id="input-current-company-name" class="form-control" name="currentCompanyName"
+                        #currentCompanyName="ngModel" [(ngModel)]="updatedPerson.currentCompany.name">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-current-company-url">Company url</label>
+                    <input type="text" id="input-current-company-url" class="form-control" name="currentCompanyUrl"
+                        #currentCompanyUrl="ngModel" [(ngModel)]="updatedPerson.currentCompany.url">
+                </div>
+                
+
+            </div>
+            
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn-edit-info">Save</button>
+        <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-info" (click)="onCancel()">Cancel</button>
+        
+
+    </form>
+</div>
