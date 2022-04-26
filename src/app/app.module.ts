@@ -17,6 +17,9 @@ import { EditContactComponent } from './components/edit-contact/edit-contact.com
 import { EditSkillComponent } from './components/edit-skill/edit-skill.component';
 import { EditProyectComponent } from './components/edit-proyect/edit-proyect.component';
 import { ShowProfileComponent } from './components/show-profile/show-profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { ShowProfileComponent } from './components/show-profile/show-profile.com
     EditContactComponent,
     EditSkillComponent,
     EditProyectComponent,
-    ShowProfileComponent
+    ShowProfileComponent,
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent
     
   ],
   imports: [
