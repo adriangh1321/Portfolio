@@ -1,0 +1,89 @@
+{
+    "persons": [
+        {
+            "firstname": "Gustavo",
+            "lastname": "Hernández",
+            "ocupation": "Chemical Engineer",
+            "currentCompany": {
+                "name": "Ecogas",
+                "image": "./assets/img/ecogas-logo.png",
+                "url": "https://www.ecogas.com.ar/"
+            },
+            "country": "Argentine",
+            "state": "Mendoza",
+            "photo": "./assets/img/profile-photo.png",
+            "aboutMe": "I am a java backend developer!",
+            "experiences": {
+                "position": "Documentation control",
+                "company": "Ecogas",
+                "description": "Loading and control of documentation of external works for the digitization department of Ecogas",
+                "image": "./assets/img/ecogas-logo.png",
+                "startDate": "2017, 3, 17",
+                "endDate": "2018, 5, 30",
+                "state": "Mendoza",
+                "country": "Argentine"
+            },
+            "educations": [
+                {
+                    "title": "Chemical Engineer",
+                    "institute": "Universidad Tecnológica Nacional",
+                    "startDate": "2011/2/1",
+                    "endDate": "2019/10/25",
+                    "image": "./assets/img/utn-logo.png"
+                },
+                {
+                    "name": "Chemical Technician",
+                    "institute": "Universidad Tecnológica Nacional",
+                    "startDate": "2011/2/1",
+                    "endDate": "2014/10/25",
+                    "image": "./assets/img/utn-logo.png"
+                },
+                {
+                    "title": "Fullstack Developer",
+                    "institute": "Egg Institute",
+                    "startDate": "2021/5/1",
+                    "endDate": "2021/11/1",
+                    "image": "./assets/img/logo-egg.JPG"
+                }
+            ],
+            "contactInformation": {
+                "phone": "(261)5749942",
+                "email": "adriangh1321@gmail.com",
+                "linkedIn": "linkedin.com/in/gustavohernandez-ing/",
+                "remoteRepository": "github.com/adriangh1321"
+            },
+            "skills": [
+                {
+                    "type": "HARD",
+                    "name": "Authentication API",
+                    "percent": 75
+                },
+                {
+                    "type": "HARD",
+                    "name": "Spring Security",
+                    "percent": 50
+                },
+                {
+                    "type": "SOFT",
+                    "name": "Teamwork",
+                    "percent": 90
+                },
+                {
+                    "type": "SOFT",
+                    "name": "Problem-solving",
+                    "percent": 100
+                }
+            ],
+            "proyects": [
+                {
+                    "name": "API for SOMOS MAS organization",
+                    "description": "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "
+                },
+                {
+                    "name": "Accommodation Application",
+                    "description": "This web application was developed with Java Spring that allows renting accommodation "
+                }
+            ]
+        }
+    ]
+}
