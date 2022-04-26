@@ -7,6 +7,7 @@ import { Experience } from 'src/app/models/Experience';
 import { Person } from 'src/app/models/Person';
 import { Proyect } from 'src/app/models/Proyect';
 import { Skill } from 'src/app/models/Skill';
+import { PersonService } from 'src/app/services/person.service';
 
 @Component({
   selector: 'app-show-profile',
@@ -30,50 +31,54 @@ export class ShowProfileComponent implements OnInit {
   person: Person;
   skillType = SkillType
 
-  constructor() {
+  constructor(private personService: PersonService) {
+
+    // this.person = new Person();
+    // this.person.firstname = "Gustavo"
+    // this.person.lastname = "Hernandez"
+    // this.person.ocupation = "Chemical Engineer"
+    // this.person.currentCompany = new CurrentCompany()
+    // this.person.currentCompany.name = "Ecogas"
+    // this.person.currentCompany.image = "./assets/img/ecogas-logo.png"
+    // this.person.currentCompany.url = "https://www.ecogas.com.ar/"
+    // this.person.country = "Argentine"
+    // this.person.state = "Mendoza"
+    // this.person.image = "./assets/img/profile-photo.png"
+    // this.person.aboutMe = "I am a java backend developer!"
+    // this.person.experiences = [
+    //   Experience.factoryAllProperties("Documentation control", "Ecogas", "Loading and control of documentation of external works for the digitization department of Ecogas", "./assets/img/ecogas-logo.png", new Date(2017, 3, 17), new Date(2018, 5, 30), "Mendoza", "Argentine"),
+    //   Experience.factoryAllProperties("Laboratory Technician", "Aguas Danone S.A.", "Quality control at Villavicencio Plant", "./assets/img/villavicencio-logo.jpg", new Date(2010, 9, 1), new Date(2019, 10, 29), "Mendoza", "Argentine")
+    // ];
+    // this.person.educations = [
+    //   Education.factoryAllProperties("Chemical Engineer", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2019, 10, 25), "./assets/img/utn-logo.png"),
+    //   Education.factoryAllProperties("Chemical Technician", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2014, 10, 25), "./assets/img/utn-logo.png"),
+    //   Education.factoryAllProperties("Fullstack Developer", "Egg Institute", new Date(2021, 5, 1), new Date(2021, 11, 1), "./assets/img/logo-egg.JPG")
+    // ];
+    // this.person.contactInformation =
+    //   ContactInformation.factoryAllProperties("(261)5749942", "adriangh1321@gmail.com", "linkedin.com/in/gustavohernandez-ing/", "github.com/adriangh1321");
+    // this.person.skills = [
+    //   Skill.factoryAllProperties(SkillType.HARD, "Authentication API", 75),
+    //   Skill.factoryAllProperties(SkillType.HARD, "Spring Security", 50),
+    //   Skill.factoryAllProperties(SkillType.SOFT, "Teamwork", 90),
+    //   Skill.factoryAllProperties(SkillType.SOFT, "Problem-solving", 100)
+    // ]
+    // this.person.proyects = [
+    //   Proyect.factoryAllProperties("API for SOMOS MAS organization", "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "),
+    //   Proyect.factoryAllProperties("Accommodation Application", "This web application was developed with Java Spring that allows renting accommodation ")
+
+    // ]
 
     this.person = new Person();
-    this.person.firstname = "Gustavo"
-    this.person.lastname = "Hernandez"
-    this.person.ocupation = "Chemical Engineer"
-    this.person.currentCompany = new CurrentCompany()
-    this.person.currentCompany.name = "Ecogas"
-    this.person.currentCompany.image = "./assets/img/ecogas-logo.png"
-    this.person.currentCompany.url = "https://www.ecogas.com.ar/"
-    this.person.country = "Argentine"
-    this.person.state = "Mendoza"
-    this.person.photo = "./assets/img/profile-photo.png"
-    this.person.aboutMe = "I am a java backend developer!"
-    this.person.experiences = [
-      Experience.factoryAllProperties("Documentation control", "Ecogas", "Loading and control of documentation of external works for the digitization department of Ecogas", "./assets/img/ecogas-logo.png", new Date(2017, 3, 17), new Date(2018, 5, 30), "Mendoza", "Argentine"),
-      Experience.factoryAllProperties("Laboratory Technician", "Aguas Danone S.A.", "Quality control at Villavicencio Plant", "./assets/img/villavicencio-logo.jpg", new Date(2010, 9, 1), new Date(2019, 10, 29), "Mendoza", "Argentine")
-    ];
-    this.person.educations = [
-      Education.factoryAllProperties("Chemical Engineer", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2019, 10, 25), "./assets/img/utn-logo.png"),
-      Education.factoryAllProperties("Chemical Technician", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2014, 10, 25), "./assets/img/utn-logo.png"),
-      Education.factoryAllProperties("Fullstack Developer", "Egg Institute", new Date(2021, 5, 1), new Date(2021, 11, 1), "./assets/img/logo-egg.JPG")
-    ];
-    this.person.contactInformation =
-      ContactInformation.factoryAllProperties("(261)5749942", "adriangh1321@gmail.com", "linkedin.com/in/gustavohernandez-ing/", "github.com/adriangh1321");
-    this.person.skills = [
-      Skill.factoryAllProperties(SkillType.HARD, "Authentication API", 75),
-      Skill.factoryAllProperties(SkillType.HARD, "Spring Security", 50),
-      Skill.factoryAllProperties(SkillType.SOFT, "Teamwork", 90),
-      Skill.factoryAllProperties(SkillType.SOFT, "Problem-solving", 100)
-    ]
-    this.person.proyects = [
-      Proyect.factoryAllProperties("API for SOMOS MAS organization", "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "),
-      Proyect.factoryAllProperties("Accommodation Application", "This web application was developed with Java Spring that allows renting accommodation ")
+    this.isOnEditExperience=[];
+    this.isOnEditEducation=[];
+    this.isOnEditSkill=[];
+    this.isOnEditProyect=[];
 
-    ]
-
-    this.isOnEditExperience = new Array(this.person.experiences.length).fill(false)
     this.isOnEditAbout = false;
-    this.isOnEditEducation = new Array(this.person.educations.length).fill(false)
+
     this.isOnShowContact = false;
     this.isOnEditContact = false;
-    this.isOnEditSkill = new Array(this.person.skills.length).fill(false)
-    this.isOnEditProyect = new Array(this.person.proyects.length).fill(false);
+
 
     //this.isOnEditHardSkill = new Array(this.person.skills.filter(skill => { skill.type == this.skillType.HARD }).length).fill(false)
     this.indexExperience = 0;
@@ -186,6 +191,16 @@ export class ShowProfileComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.personService.getPersonById(1).subscribe((res) => {
+      this.person= res
+      
+      this.isOnEditExperience = new Array(this.person.experiences.length).fill(false);
+      this.isOnEditEducation = new Array(this.person.educations.length).fill(false);
+      this.isOnEditSkill = new Array(this.person.skills.length).fill(false);
+      this.isOnEditProyect = new Array(this.person.proyects.length).fill(false);
+      console.log(res);
+    })
+
   }
 }
 

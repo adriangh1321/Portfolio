@@ -1,6 +1,7 @@
 {
     "persons": [
         {
+            "id":1,
             "firstname": "Gustavo",
             "lastname": "Hernández",
             "ocupation": "Chemical Engineer",
@@ -11,9 +12,9 @@
             },
             "country": "Argentine",
             "state": "Mendoza",
-            "photo": "./assets/img/profile-photo.png",
+            "image": "./assets/img/profile-photo.png",
             "aboutMe": "I am a java backend developer!",
-            "experiences": {
+            "experiences": [{
                 "position": "Documentation control",
                 "company": "Ecogas",
                 "description": "Loading and control of documentation of external works for the digitization department of Ecogas",
@@ -22,7 +23,7 @@
                 "endDate": "2018, 5, 30",
                 "state": "Mendoza",
                 "country": "Argentine"
-            },
+            }],
             "educations": [
                 {
                     "title": "Chemical Engineer",

@@ -2,7 +2,7 @@
     <div id="profile-background"><img src="./assets/img/background-header.jpg" alt=""></div>
     <div id="info">
       <div class="info-image" [hidden]="isOnEditPerson">
-        <img class="profile-image" src="{{person.photo}}" alt="">
+        <img class="profile-image" [src]="person.image" alt="">
         <a href='javascript:void(0);' id="edit-info-data" (click)="onEditPerson()"><i class="fa-solid fa-pen"></i></a>
       </div>
       <app-edit-person *ngIf="isOnEditPerson" [person]="person" (offEvent)="offEditPerson()"

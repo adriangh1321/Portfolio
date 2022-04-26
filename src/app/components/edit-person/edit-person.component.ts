@@ -41,7 +41,7 @@ export class EditPersonComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       // convierte la imagen a una cadena en base64
-      this.updatedPerson.photo = reader.result as string;
+      this.updatedPerson.image = reader.result as string;
     }, false);
 
     if (file) {
