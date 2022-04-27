@@ -7,6 +7,7 @@ import { Skill } from "./Skill";
 
 
 export class Person {
+    private _id:number;
     private _firstname: string;
     private _lastname: string;
     private _ocupation: string;
@@ -20,6 +21,14 @@ export class Person {
     private _contactInformation: ContactInformation;
     private _skills:Skill[]
     private _proyects:Proyect[]
+
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
+    }
     
     public get proyects(): Proyect[] {
         return this._proyects;
@@ -136,6 +145,7 @@ export class Person {
 
 
     constructor() {
+        this._id=0;
         this._firstname = "firstname"
         this._lastname = "lastname"
         this._ocupation = "ocupation"

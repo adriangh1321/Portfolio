@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/app/models/Person';
+import { PersonService } from 'src/app/services/person.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 
@@ -16,9 +17,9 @@ export class EditContactComponent implements OnInit {
   @Input() person: Person;
   updatedPerson: Person;
   @Output() offEvent = new EventEmitter()
-  @Output() refreshPerson = new EventEmitter<Person>()
+  
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private personService: PersonService) {
 
     this.person = new Person()
     this.updatedPerson = new Person()
@@ -32,8 +33,8 @@ export class EditContactComponent implements OnInit {
   ngOnInit(): void {
     this.updatedPerson = Cloneable.deepCopy(this.person)
     this.contactForm = this.formBuilder.group({
-      phone: ['',[Validators.required,Validators.pattern("^[(]{1}[0-9]+[)]{1}[0-9]+$")]],
-      email: ['',[Validators.required,Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern("^[(]{1}[0-9]+[)]{1}[0-9]+$")]],
+      email: ['', [Validators.required, Validators.email]],
       linkedIn: ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
       remoteRepository: []
     })
@@ -53,15 +54,22 @@ export class EditContactComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.contactForm.invalid){
+    if (this.contactForm.invalid) {
       alert('Invalid input');
       return;
     }
-    this.updatedPerson.contactInformation.phone=this.contactForm.get("phone")?.value
-    this.updatedPerson.contactInformation.email=this.contactForm.get("email")?.value
-    this.updatedPerson.contactInformation.linkedIn=this.contactForm.get("linkedIn")?.value
-    this.updatedPerson.contactInformation.remoteRepository=this.contactForm.get("remoteRepository")?.value
-    this.refreshPerson.emit(this.updatedPerson)
+    this.updatedPerson.contactInformation.phone = this.contactForm.get("phone")?.value
+    this.updatedPerson.contactInformation.email = this.contactForm.get("email")?.value
+    this.updatedPerson.contactInformation.linkedIn = this.contactForm.get("linkedIn")?.value
+    this.updatedPerson.contactInformation.remoteRepository = this.contactForm.get("remoteRepository")?.value
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The contact data was updated successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
+
+
+
+    
     this.emitOff()
   }
   emitOff() {

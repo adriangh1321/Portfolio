@@ -69,10 +69,10 @@ export class ShowProfileComponent implements OnInit {
     // ]
 
     this.person = new Person();
-    this.isOnEditExperience=[];
-    this.isOnEditEducation=[];
-    this.isOnEditSkill=[];
-    this.isOnEditProyect=[];
+    this.isOnEditExperience = [];
+    this.isOnEditEducation = [];
+    this.isOnEditSkill = [];
+    this.isOnEditProyect = [];
 
     this.isOnEditAbout = false;
 
@@ -185,20 +185,32 @@ export class ShowProfileComponent implements OnInit {
   }
 
 
-  refreshPersonData(person: Person) {
-    this.person = person;
+  refreshPersonData(id: number) {
+    console.log("llego al refresh")
+    this.personService.getPersonById(id).subscribe(res => {
+      console.log("el refresh:");
+      console.log(res)
+      this.person = res
+    })
 
 
   }
-  ngOnInit(): void {
-    this.personService.getPersonById(1).subscribe((res) => {
-      this.person= res
-      
+
+  getPerson(id: number) {
+    this.personService.getPersonById(id).subscribe((res) => {
+      this.person = res
+
       this.isOnEditExperience = new Array(this.person.experiences.length).fill(false);
       this.isOnEditEducation = new Array(this.person.educations.length).fill(false);
       this.isOnEditSkill = new Array(this.person.skills.length).fill(false);
       this.isOnEditProyect = new Array(this.person.proyects.length).fill(false);
-      console.log(res);
+      
+    })
+  }
+  ngOnInit(): void {
+    this.getPerson(1);
+    this.personService.RefreshRequired.subscribe(() => {
+      this.getPerson(1)
     })
 
   }

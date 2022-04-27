@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Person } from 'src/app/models/Person';
+import { PersonService } from 'src/app/services/person.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 
@@ -9,13 +10,13 @@ import { Cloneable } from 'src/app/utilities/Clone';
   styleUrls: ['./edit-about.component.css']
 })
 export class EditAboutComponent implements OnInit {
-  @Output() refreshPerson = new EventEmitter<Person>();
+  
   @Output() offEvent=new EventEmitter();
   @Input() person: Person;
   updatedPerson: Person;
 
 
-  constructor() {
+  constructor(private personService:PersonService) {
     this.person = new Person()
     this.updatedPerson = new Person()
   }
@@ -26,7 +27,10 @@ export class EditAboutComponent implements OnInit {
   }
 
   onSubmit() {
-    this.refreshPerson.emit(this.updatedPerson)
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The data was updated successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
     this.emitOff();
   }
 
