@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkillType } from 'src/app/enums/SkillType';
 import { Person } from 'src/app/models/Person';
+import { PersonService } from 'src/app/services/person.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 
@@ -16,10 +17,10 @@ export class EditSkillComponent implements OnInit {
   updatedPerson: Person;
   @Input()indexSkill: number;
   @Output() offEvent = new EventEmitter<number>();
-  @Output() refreshPerson = new EventEmitter<Person>();
+ 
 
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder ,private personService:PersonService) {
     this.skillForm = this.formBuilder.group({
       type: [SkillType.NONE, []],
       name: ['', [Validators.required]],
@@ -53,8 +54,11 @@ export class EditSkillComponent implements OnInit {
     }
     this.updatedPerson.skills[this.indexSkill].name=this.skillForm.get("name")?.value
     this.updatedPerson.skills[this.indexSkill].percent=this.skillForm.get("percent")?.value
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The skill was updated successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
     
-    this.refreshPerson.emit(this.updatedPerson)
     this.emitOff(this.indexSkill)
   }
 

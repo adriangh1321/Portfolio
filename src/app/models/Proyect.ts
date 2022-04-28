@@ -28,6 +28,16 @@ export class Proyect{
     public set description(description: string) {
         this._description = description;
     }
+
+    toContract() {
+        const result:any = {};
+        for (let key in this) {
+            
+            result[key.replace('_', '')] = this[key];
+            
+        }
+        return result;
+    }
     
 
     

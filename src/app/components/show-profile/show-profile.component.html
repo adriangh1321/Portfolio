@@ -127,7 +127,7 @@
         </div>
       </div>
       <app-edit-education *ngIf="isOnEditEducation[i]" [indexEducation]="i" [person]="person"
-        (offEvent)="offEditEducation($event)" (refreshPerson)="refreshPersonData(1)"></app-edit-education>
+        (offEvent)="offEditEducation($event)"></app-edit-education>
     </li>
   </ul>
 
@@ -159,7 +159,7 @@
                 aria-valuenow="hardSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
-              (refreshPerson)="refreshPersonData(1)" [indexSkill]="i"></app-edit-skill>
+              [indexSkill]="i"></app-edit-skill>
           </li>
         </ng-container>
       </ul>
@@ -195,7 +195,7 @@
                 aria-valuenow="softSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
-              (refreshPerson)="refreshPersonData(1)" [indexSkill]="i"></app-edit-skill>
+              [indexSkill]="i"></app-edit-skill>
           </li>
         </ng-container>
       </ul>
@@ -228,7 +228,7 @@
           <p [hidden]="isOnEditProyect[i]" class="small">{{proyect.description}}</p>
 
           <app-edit-proyect *ngIf="isOnEditProyect[i]" [person]="person" (offEvent)="offEditProyect($event)"
-            (refreshPerson)="refreshPersonData(1)" [indexProyect]="i"></app-edit-proyect>
+             [indexProyect]="i"></app-edit-proyect>
         </li>
 
       </ul>

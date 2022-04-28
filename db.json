@@ -24,11 +24,21 @@
           "endDate": "2018, 5, 30",
           "state": "Mendoza",
           "country": "Argentine"
+        },
+        {
+          "position": "Laboratory analyst",
+          "company": "Aguas Danone S.A.",
+          "description": "Quality control at Villavicencio plant",
+          "image": "./assets/img/villavicencio-logo.jpg",
+          "startDate": "2010-10-01",
+          "endDate": "2010-10-31",
+          "state": "Mendoza",
+          "country": "Argentina"
         }
       ],
       "educations": [
         {
-          "title": "Chemical Engineer",
+          "title": "Chemical Engineer!!",
           "institute": "Universidad Tecnológica Nacional",
           "startDate": "2011/2/1",
           "endDate": "2019/10/25",
@@ -75,6 +85,16 @@
           "type": "SOFT",
           "name": "Problem-solving",
           "percent": 100
+        },
+        {
+          "type": "SOFT",
+          "name": "Comunication",
+          "percent": 100
+        },
+        {
+          "type": "HARD",
+          "name": "MVC Design Pattern",
+          "percent": 90
         }
       ],
       "proyects": [

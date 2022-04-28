@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Person } from 'src/app/models/Person';
+import { PersonService } from 'src/app/services/person.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
@@ -13,9 +14,9 @@ export class EditProyectComponent implements OnInit {
   updatedPerson: Person;
   @Input() indexProyect: number;
   @Output() offEvent = new EventEmitter<number>()
-  @Output() refreshPerson = new EventEmitter<Person>()
+  
   proyectForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,private personService:PersonService) {
     this.person = new Person();
     this.updatedPerson = new Person();
     this.indexProyect = 0;
@@ -40,9 +41,11 @@ export class EditProyectComponent implements OnInit {
     }
     this.updatedPerson.proyects[this.indexProyect].name=this.proyectForm.get('name')?.value
     this.updatedPerson.proyects[this.indexProyect].description=this.proyectForm.get('description')?.value
-    this.refreshPerson.emit(this.updatedPerson)
-    
-    console.log(this.updatedPerson)
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The proyect was updated successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
+        
     this.emitOff(this.indexProyect)
   }
 
