@@ -220,17 +220,6 @@ export class ShowProfileComponent implements OnInit {
     this.isOnEditSkill[i] = true;
   }
 
-
-  refreshPersonData(id: number) {
-    console.log("llego al refresh")
-    this.personService.getPersonById(id).subscribe(res => {
-      console.log("el refresh:");
-      console.log(res)
-      this.person = res
-    })
-
-  }
-
   getPerson(id: number) {
     this.personService.getPersonById(id).subscribe((res) => {
       this.person = res
