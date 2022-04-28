@@ -1,3 +1,3 @@
-export enum SkillType{
-    HARD,SOFT,NONE
+export enum SkillType {
+    HARD = "HARD", SOFT = "SOFT", NONE = "NONE"
 }

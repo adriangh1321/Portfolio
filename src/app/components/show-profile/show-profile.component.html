@@ -1,240 +1,237 @@
 <div class="card mat-card" id="first-card">
-    <div id="profile-background"><img src="./assets/img/background-header.jpg" alt=""></div>
-    <div id="info">
-      <div class="info-image" [hidden]="isOnEditPerson">
-        <img class="profile-image" src="{{person.photo}}" alt="">
-        <a href='javascript:void(0);' id="edit-info-data" (click)="onEditPerson()"><i class="fa-solid fa-pen"></i></a>
-      </div>
-      <app-edit-person *ngIf="isOnEditPerson" [person]="person" (offEvent)="offEditPerson()"
-        (refreshPerson)="refreshPersonData($event)">
-      </app-edit-person>
-      <div class="container-fluid" [hidden]="isOnEditPerson">
-        <div class="row ">
-          <div class="col-md-6">
-            <div class="row">
-              <h1 class="h-50 vertical-text-center" id="full-name">{{person.firstname}} {{person.lastname}}</h1>
-            </div>
-  
-            <div class="row h-25" id="ocupation">{{person.ocupation}}</div>
-            <div class="row h-25" id="info-contact">
-              <p>{{person.state}} ({{person.country}}) <span [hidden]="isOnShowContact || isOnEditContact"><a
-                    href='javascript:void(0);' (click)="onShowContact()">Contact information</a></span>
-              </p>
-            </div>
+  <div id="profile-background"><img src="./assets/img/background-header.jpg" alt=""></div>
+  <div id="info">
+    <div class="info-image" [hidden]="isOnEditPerson">
+      <img class="profile-image" [src]="person.image" alt="">
+      <a href='javascript:void(0);' id="edit-info-data" (click)="onEditPerson()"><i class="fa-solid fa-pen"></i></a>
+    </div>
+    <app-edit-person *ngIf="isOnEditPerson" [person]="person" (offEvent)="offEditPerson()">
+    </app-edit-person>
+    <div class="container-fluid" [hidden]="isOnEditPerson">
+      <div class="row ">
+        <div class="col-md-6">
+          <div class="row">
+            <h1 class="h-50 vertical-text-center" id="full-name">{{person.firstname}} {{person.lastname}}</h1>
           </div>
-          <div class="col-md-6 current-company">
-            <div class="row h-50">
-              <h4 class="vertical-text-center">Work at the company:</h4>
-            </div>
-            <div class="row h-50">
-              <ul id="info-details">
-                <li><a href="{{person.currentCompany.url}}">
-                    <img src="{{person.currentCompany.image}}" alt="">
-                    <h2>{{person.currentCompany.name}}</h2>
-                  </a>
-                </li>
-              </ul>
-            </div>
+
+          <div class="row h-25" id="ocupation">{{person.ocupation}}</div>
+          <div class="row h-25" id="info-contact">
+            <p>{{person.state}} ({{person.country}}) <span [hidden]="isOnShowContact || isOnEditContact"><a
+                  href='javascript:void(0);' (click)="onShowContact()">Contact information</a></span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 current-company">
+          <div class="row h-50">
+            <h4 class="vertical-text-center">Work at the company:</h4>
+          </div>
+          <div class="row h-50">
+            <ul id="info-details">
+              <li><a href="{{person.currentCompany.url}}">
+                  <img src="{{person.currentCompany.image}}" alt="">
+                  <h2>{{person.currentCompany.name}}</h2>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  
-  
-  
-    <app-show-contact *ngIf="isOnShowContact" [person]="person" (offEvent)="offShowContact()"
-      (editContactEvent)="onEditContact()"></app-show-contact>
-    <app-edit-contact *ngIf="isOnEditContact" [person]="person" (offEvent)="offEditContact()"
-      (refreshPerson)="refreshPersonData($event)"></app-edit-contact>
-    <div id="info-actions">
-  
-      <button type="button" class="btn btn-primary">My interests</button>
-      <button type="button" class="btn btn-light">Add section</button>
-      <button type="button" class="btn btn-light">More</button>
-    </div>
   </div>
-  <div class="card mat-card">
-    <div class="card-titles">
-      <div class="title-container">
-        <h2>About me</h2>
-        <a href='javascript:void(0);' (click)="onEditAbout()"><i class="fa-solid fa-pen"></i>
-        </a>
-  
-      </div>
-  
-      <div>
-        <p [hidden]="isOnEditAbout">{{person.aboutMe}}</p>
-        <app-edit-about *ngIf="isOnEditAbout" [person]="person" (offEvent)="offEditAbout()"
-          (refreshPerson)="refreshPersonData($event)"></app-edit-about>
-      </div>
-  
-    </div>
+
+
+
+  <app-show-contact *ngIf="isOnShowContact" [person]="person" (offEvent)="offShowContact()"
+    (editContactEvent)="onEditContact()"></app-show-contact>
+  <app-edit-contact *ngIf="isOnEditContact" [person]="person" (offEvent)="offEditContact()"></app-edit-contact>
+  <div id="info-actions">
+
+    <button type="button" class="btn btn-primary">My interests</button>
+    <button type="button" class="btn btn-light">Add section</button>
+    <button type="button" class="btn btn-light">More</button>
   </div>
-  
-  <div class="card mat-card">
+</div>
+<div class="card mat-card">
+  <div class="card-titles">
     <div class="title-container">
-      <h2>Experience</h2>
-      <a href='javascript:void(0);' id="add-experience" (click)="onAddExperience()"><i class="fa-solid fa-plus"></i>
+      <h2>About me</h2>
+      <a href='javascript:void(0);' (click)="onEditAbout()"><i class="fa-solid fa-pen"></i>
       </a>
+
     </div>
-  
-    <ul class="item-list">
-      <li *ngFor="let experience of person.experiences;index as i" class="mt-4">
-        <div class="new-item-container" [hidden]="isOnEditExperience[i]">
-          <img src="{{experience.image}}" alt="Add new image">
-          <div class="item-text">
-            <div class="item-title-edit">
-              <h4>{{experience.position}}</h4>
-              <div>
-                <a href='javascript:void(0);' (click)="onEditExperience(i)"><i class="fa-solid fa-pen"></i> </a>
-                <a href='javascript:void(0);' (click)="onRemoveExperience(i)"><i class="fa-solid fa-trash"></i> </a>
-              </div>
-            </div>
-            <p class="font-weight-bold mb-1">{{experience.company}}</p>
-            <p class="mb-1" id="job-description-{{i}}">{{experience.description}}</p>
-            <p class="font-weight-light mb-1">From <span>{{experience.startDate? (experience.startDate |
-                date:'dd-MM-yyyy'):'-'}}</span> to <span>{{experience.endDate? (experience.endDate |
-                date:'dd-MM-yyyy'):'-'}}</span> {{experience.state}} ({{experience.country}})</p>
-          </div>
-        </div>
-        <app-edit-experience *ngIf="isOnEditExperience[i]" [indexExperience]="i" [person]="person"
-          (offEvent)="offEditExperience($event)" (refreshPerson)="refreshPersonData($event)"></app-edit-experience>
-      </li>
-    </ul>
+
+    <div>
+      <p [hidden]="isOnEditAbout">{{person.aboutMe}}</p>
+      <app-edit-about *ngIf="isOnEditAbout" [person]="person" (offEvent)="offEditAbout()"></app-edit-about>
+    </div>
+
   </div>
-  
-  <div class="card mat-card">
-  
+</div>
+
+<div class="card mat-card">
+  <div class="title-container">
+    <h2>Experience</h2>
+    <a href='javascript:void(0);' id="add-experience" (click)="onAddExperience()"><i class="fa-solid fa-plus"></i>
+    </a>
+  </div>
+
+  <ul class="item-list">
+    <li *ngFor="let experience of person.experiences;index as i" class="mt-4">
+      <div class="new-item-container" [hidden]="isOnEditExperience[i]">
+        <img src="{{experience.image}}" alt="Add new image">
+        <div class="item-text">
+          <div class="item-title-edit">
+            <h4>{{experience.position}}</h4>
+            <div>
+              <a href='javascript:void(0);' (click)="onEditExperience(i)"><i class="fa-solid fa-pen"></i> </a>
+              <a href='javascript:void(0);' (click)="onRemoveExperience(i)"><i class="fa-solid fa-trash"></i> </a>
+            </div>
+          </div>
+          <p class="font-weight-bold mb-1">{{experience.company}}</p>
+          <p class="mb-1" id="job-description-{{i}}">{{experience.description}}</p>
+          <p class="font-weight-light mb-1">From <span>{{experience.startDate? (experience.startDate |
+              date:'dd-MM-yyyy'):'-'}}</span> to <span>{{experience.endDate? (experience.endDate |
+              date:'dd-MM-yyyy'):'-'}}</span> {{experience.state}} ({{experience.country}})</p>
+        </div>
+      </div>
+      <app-edit-experience *ngIf="isOnEditExperience[i]" [indexExperience]="i" [person]="person"
+        (offEvent)="offEditExperience($event)"></app-edit-experience>
+    </li>
+  </ul>
+</div>
+
+<div class="card mat-card">
+
+  <div class="title-container">
+    <h2>Education</h2>
+    <a href='javascript:void(0);' (click)="onAddEducation()"><i class="fa-solid fa-plus"></i></a>
+  </div>
+
+  <ul class="item-list">
+    <li *ngFor="let education of person.educations;index as i" class="mt-4">
+      <div class="new-item-container" [hidden]="isOnEditEducation[i]">
+        <img src="{{education.image}}" alt="Add new image">
+        <div class="item-text">
+          <div class="item-title-edit">
+            <h4>{{education.title}}</h4>
+            <div>
+              <a href='javascript:void(0);' (click)="onEditEducation(i)"><i class="fa-solid fa-pen"></i> </a>
+              <a href='javascript:void(0);' (click)="onRemoveEducation(i)"><i class="fa-solid fa-trash"></i> </a>
+            </div>
+          </div>
+          <p class="font-weight-bold mb-1">{{education.institute}}</p>
+
+          <p class="font-weight-light mb-1">From <span>{{education.startDate? (education.startDate |
+              date:'dd-MM-yyyy'):'-'}}</span> to <span>{{education.endDate? (education.endDate |
+              date:'dd-MM-yyyy'):'-'}}</span> </p>
+        </div>
+      </div>
+      <app-edit-education *ngIf="isOnEditEducation[i]" [indexEducation]="i" [person]="person"
+        (offEvent)="offEditEducation($event)"></app-edit-education>
+    </li>
+  </ul>
+
+</div>
+
+<div class="card mat-card">
+  <div class="card-titles">
     <div class="title-container">
-      <h2>Education</h2>
-      <a href='javascript:void(0);' (click)="onAddEducation()"><i class="fa-solid fa-plus"></i></a>
+      <h2>Hard Skills</h2>
+      <a href='javascript:void(0);' (click)="onAddSkill(skillType.HARD)"><i class="fa-solid fa-plus"></i></a>
     </div>
-  
-    <ul class="item-list">
-      <li *ngFor="let education of person.educations;index as i" class="mt-4">
-        <div class="new-item-container" [hidden]="isOnEditEducation[i]">
-          <img src="{{education.image}}" alt="Add new image">
-          <div class="item-text">
-            <div class="item-title-edit">
-              <h4>{{education.title}}</h4>
+
+    <div class="d-flex justify-content-center">
+      <ul class="item-list text-center w-75 ">
+        <ng-container *ngFor="let hardSkill of person.skills;index as i">
+          <li *ngIf="hardSkill.type===skillType.HARD">
+
+
+            <div class="item-title-edit" [hidden]="isOnEditSkill[i]">
+              <p class="mb-0 d-flex justify-content-center w-100">{{hardSkill.name}}</p>
               <div>
-                <a href='javascript:void(0);' (click)="onEditEducation(i)"><i class="fa-solid fa-pen"></i> </a>
-                <a href='javascript:void(0);' (click)="onRemoveEducation(i)"><i class="fa-solid fa-trash"></i> </a>
+                <a href='javascript:void(0);' (click)="onEditSkill(i)"><i class="fa-solid fa-pen"></i> </a>
+                <a href='javascript:void(0);' (click)="onRemoveSkill(i)"><i class="fa-solid fa-trash"></i> </a>
               </div>
             </div>
-            <p class="font-weight-bold mb-1">{{education.institute}}</p>
-  
-            <p class="font-weight-light mb-1">From <span>{{education.startDate? (education.startDate |
-                date:'dd-MM-yyyy'):'-'}}</span> to <span>{{education.endDate? (education.endDate |
-                date:'dd-MM-yyyy'):'-'}}</span> </p>
-          </div>
-        </div>
-        <app-edit-education *ngIf="isOnEditEducation[i]" [indexEducation]="i" [person]="person"
-          (offEvent)="offEditEducation($event)" (refreshPerson)="refreshPersonData($event)"></app-edit-education>
-      </li>
-    </ul>
-  
-  </div>
-  
-  <div class="card mat-card">
-    <div class="card-titles">
-      <div class="title-container">
-        <h2>Hard Skills</h2>
-        <a href='javascript:void(0);' (click)="onAddSkill(skillType.HARD)"><i class="fa-solid fa-plus"></i></a>
-      </div>
-  
-      <div class="d-flex justify-content-center">
-        <ul class="item-list text-center w-75 ">
-          <ng-container *ngFor="let hardSkill of person.skills;index as i">
-            <li *ngIf="hardSkill.type===skillType.HARD">
-  
-  
-              <div class="item-title-edit" [hidden]="isOnEditSkill[i]">
-                <p class="mb-0 d-flex justify-content-center w-100">{{hardSkill.name}}</p>
-                <div>
-                  <a href='javascript:void(0);' (click)="onEditSkill(i)"><i class="fa-solid fa-pen"></i> </a>
-                  <a href='javascript:void(0);' (click)="onRemoveSkill(i)"><i class="fa-solid fa-trash"></i> </a>
-                </div>
-              </div>
-  
-              <div class="progress mb-2 " [hidden]="isOnEditSkill[i]">
-                <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="hardSkill.percent"
-                  aria-valuenow="hardSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
-                (refreshPerson)="refreshPersonData($event)" [indexSkill]="i"></app-edit-skill>
-            </li>
-          </ng-container>
-        </ul>
-      </div>
-  
-    </div>
-  </div>
-  
-  
-  <div class="card mat-card">
-    <div class="card-titles">
-      <div class="title-container">
-        <h2>Soft Skills</h2>
-        <a href='javascript:void(0);' (click)="onAddSkill(skillType.SOFT)"><i class="fa-solid fa-plus"></i></a>
-      </div>
-  
-      <div class="d-flex justify-content-center">
-        <ul class="item-list text-center w-75 ">
-          <ng-container *ngFor="let softSkill of person.skills;index as i">
-            <li *ngIf="softSkill.type===skillType.SOFT">
-  
-  
-              <div class="item-title-edit" [hidden]="isOnEditSkill[i]">
-                <p class="mb-0 d-flex justify-content-center w-100">{{softSkill.name}}</p>
-                <div>
-                  <a href='javascript:void(0);' (click)="onEditSkill(i)"><i class="fa-solid fa-pen"></i> </a>
-                  <a href='javascript:void(0);' (click)="onRemoveSkill(i)"><i class="fa-solid fa-trash"></i> </a>
-                </div>
-              </div>
-  
-              <div class="progress mb-2 " [hidden]="isOnEditSkill[i]">
-                <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="softSkill.percent"
-                  aria-valuenow="softSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
-                (refreshPerson)="refreshPersonData($event)" [indexSkill]="i"></app-edit-skill>
-            </li>
-          </ng-container>
-        </ul>
-      </div>
-    </div>
-  </div>
-  
-  
-  <div class="card mat-card">
-    <div class="card-titles">
-      <div class="title-container">
-        <h2>Proyects</h2>
-        <a href='javascript:void(0);' (click)="onAddProyect()"><i class="fa-solid fa-plus"></i></a>
-      </div>
-  
-      <div class="new-item-container">
-        <ul class="item-list w-100">
-  
-          <li *ngFor="let proyect of person.proyects;index as i" class="mt-4">
-  
-            <div class="item-title-edit" [hidden]="isOnEditProyect[i]">
-              <h4 >{{proyect.name}}</h4>
-              <div>
-                <a href='javascript:void(0);' (click)="onEditProyect(i)"><i class="fa-solid fa-pen"></i> </a>
-                <a href='javascript:void(0);' (click)="onRemoveProyect(i)"><i class="fa-solid fa-trash"></i> </a>
-              </div>
+
+            <div class="progress mb-2 " [hidden]="isOnEditSkill[i]">
+              <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="hardSkill.percent"
+                aria-valuenow="hardSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-  
-  
-            <p [hidden]="isOnEditProyect[i]" class="small">{{proyect.description}}</p>
-  
-            <app-edit-proyect *ngIf="isOnEditProyect[i]" [person]="person" (offEvent)="offEditProyect($event)"
-              (refreshPerson)="refreshPersonData($event)" [indexProyect]="i"></app-edit-proyect>
+            <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
+              [indexSkill]="i"></app-edit-skill>
           </li>
-  
-        </ul>
-      </div>
+        </ng-container>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="card mat-card">
+  <div class="card-titles">
+    <div class="title-container">
+      <h2>Soft Skills</h2>
+      <a href='javascript:void(0);' (click)="onAddSkill(skillType.SOFT)"><i class="fa-solid fa-plus"></i></a>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ul class="item-list text-center w-75 ">
+        <ng-container *ngFor="let softSkill of person.skills;index as i">
+          <li *ngIf="softSkill.type===skillType.SOFT">
+
+
+            <div class="item-title-edit" [hidden]="isOnEditSkill[i]">
+              <p class="mb-0 d-flex justify-content-center w-100">{{softSkill.name}}</p>
+              <div>
+                <a href='javascript:void(0);' (click)="onEditSkill(i)"><i class="fa-solid fa-pen"></i> </a>
+                <a href='javascript:void(0);' (click)="onRemoveSkill(i)"><i class="fa-solid fa-trash"></i> </a>
+              </div>
+            </div>
+
+            <div class="progress mb-2 " [hidden]="isOnEditSkill[i]">
+              <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="softSkill.percent"
+                aria-valuenow="softSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
+              [indexSkill]="i"></app-edit-skill>
+          </li>
+        </ng-container>
+      </ul>
     </div>
   </div>
+</div>
+
+
+<div class="card mat-card">
+  <div class="card-titles">
+    <div class="title-container">
+      <h2>Proyects</h2>
+      <a href='javascript:void(0);' (click)="onAddProyect()"><i class="fa-solid fa-plus"></i></a>
+    </div>
+
+    <div class="new-item-container">
+      <ul class="item-list w-100">
+
+        <li *ngFor="let proyect of person.proyects;index as i" class="mt-4">
+
+          <div class="item-title-edit" [hidden]="isOnEditProyect[i]">
+            <h4>{{proyect.name}}</h4>
+            <div>
+              <a href='javascript:void(0);' (click)="onEditProyect(i)"><i class="fa-solid fa-pen"></i> </a>
+              <a href='javascript:void(0);' (click)="onRemoveProyect(i)"><i class="fa-solid fa-trash"></i> </a>
+            </div>
+          </div>
+
+
+          <p [hidden]="isOnEditProyect[i]" class="small">{{proyect.description}}</p>
+
+          <app-edit-proyect *ngIf="isOnEditProyect[i]" [person]="person" (offEvent)="offEditProyect($event)"
+             [indexProyect]="i"></app-edit-proyect>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>

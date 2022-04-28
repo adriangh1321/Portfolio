@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Experience } from 'src/app/models/Experience';
 import { Person } from 'src/app/models/Person';
+import { PersonService } from 'src/app/services/person.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
@@ -9,13 +10,13 @@ import { Cloneable } from 'src/app/utilities/Clone';
   styleUrls: ['./edit-experience.component.css']
 })
 export class EditExperienceComponent implements OnInit {
-  @Output() refreshPerson = new EventEmitter<Person>();
+  
   @Output() offEvent=new EventEmitter<number>();
   @Input() indexExperience:number;
   @Input() person: Person;
   updatedPerson: Person;
   
-  constructor() {
+  constructor(private personService:PersonService) {
     this.indexExperience=0;
     this.person = new Person();
     this.updatedPerson = new Person();
@@ -28,8 +29,10 @@ export class EditExperienceComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.updatedPerson)
-    this.refreshPerson.emit(this.updatedPerson)
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The experience was updated successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
     
     this.emitOff(this.indexExperience)
   }

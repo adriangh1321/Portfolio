@@ -7,13 +7,14 @@ import { Skill } from "./Skill";
 
 
 export class Person {
+    private _id:number;
     private _firstname: string;
     private _lastname: string;
     private _ocupation: string;
     private _currentCompany: CurrentCompany;  
     private _country: string;
     private _state: string;
-    private _photo: string;
+    private _image: string;
     private _aboutMe: string;
     private _experiences: Experience[];
     private _educations: Education[];
@@ -21,6 +22,14 @@ export class Person {
     private _skills:Skill[]
     private _proyects:Proyect[]
 
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
+    }
+    
     public get proyects(): Proyect[] {
         return this._proyects;
     }
@@ -98,13 +107,13 @@ export class Person {
         this._state = state;
     }
 
-    public get photo(): string {
-        return this._photo;
+    public get image(): string {
+        return this._image;
     }
 
-    public set photo(photo: string
+    public set image(image: string
     ) {
-        this._photo = photo;
+        this._image = image;
     }
 
     public get aboutMe(): string {
@@ -136,19 +145,21 @@ export class Person {
 
 
     constructor() {
+        this._id=0;
         this._firstname = "firstname"
         this._lastname = "lastname"
         this._ocupation = "ocupation"
         this._currentCompany = new CurrentCompany();
         this._country = "country"
         this._state = "state"
-        this._photo = "photo"
+        this._image = ""
         this._aboutMe = "aboutMe"
         this._experiences = [];
         this._educations = [];
         this._contactInformation = new ContactInformation();
         this._skills=[]
         this._proyects=[]
+    
     }
 
 

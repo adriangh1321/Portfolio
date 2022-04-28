@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Person } from 'src/app/models/Person';
+import { PersonService } from 'src/app/services/person.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
@@ -10,12 +11,12 @@ import { Cloneable } from 'src/app/utilities/Clone';
 export class EditPersonComponent implements OnInit {
 
   @Output() offEvent = new EventEmitter();
-  @Output() refreshPerson = new EventEmitter<Person>();
+  
   @Input() person: Person;
   updatedPerson: Person;
 
 
-  constructor() {
+  constructor(private personService: PersonService) {
     this.person = new Person();
     this.updatedPerson = new Person;
   }
@@ -25,23 +26,25 @@ export class EditPersonComponent implements OnInit {
 
   onSubmit() {
 
-    console.log(this.person)
-    this.refreshPerson.emit(this.updatedPerson);
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The data was updated successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
+
     this.emitOff();
   }
 
   emitOff() {
-
     this.offEvent.emit();
   }
 
   onPhotoUpload(e: Event) {
-   
+
     let file = (e.target as HTMLInputElement).files![0]
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       // convierte la imagen a una cadena en base64
-      this.updatedPerson.photo = reader.result as string;
+      this.updatedPerson.image = reader.result as string;
     }, false);
 
     if (file) {
@@ -68,19 +71,7 @@ export class EditPersonComponent implements OnInit {
 
   }
 
-  onCancel() {
-
-    // this.updatedPerson.firstname = this.person.firstname
-    // this.updatedPerson.lastname = this.person.lastname
-    // this.updatedPerson.ocupation = this.person.ocupation
-    // this.updatedPerson.currentCompany = this.person.currentCompany
-    // this.updatedPerson.country = this.person.country
-    // this.updatedPerson.state = this.person.state
-    // this.updatedPerson.photo = this.person.photo
-    // this.updatedPerson.aboutMe = this.person.aboutMe
-    // this.updatedPerson.experiences = this.person.experiences
-    // this.updatedPerson.educations = this.person.educations
-    // this.updatedPerson.contactInformation = this.person.contactInformation
+  onCancel() {   
     this.emitOff();
   }
 

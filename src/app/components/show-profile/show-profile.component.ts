@@ -7,6 +7,8 @@ import { Experience } from 'src/app/models/Experience';
 import { Person } from 'src/app/models/Person';
 import { Proyect } from 'src/app/models/Proyect';
 import { Skill } from 'src/app/models/Skill';
+import { PersonService } from 'src/app/services/person.service';
+import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
   selector: 'app-show-profile',
@@ -28,52 +30,58 @@ export class ShowProfileComponent implements OnInit {
   indexSoftSkill: number;
   indexProyect: number;
   person: Person;
+  updatedPerson: Person;
   skillType = SkillType
 
-  constructor() {
+  constructor(private personService: PersonService) {
+
+    // this.person = new Person();
+    // this.person.firstname = "Gustavo"
+    // this.person.lastname = "Hernandez"
+    // this.person.ocupation = "Chemical Engineer"
+    // this.person.currentCompany = new CurrentCompany()
+    // this.person.currentCompany.name = "Ecogas"
+    // this.person.currentCompany.image = "./assets/img/ecogas-logo.png"
+    // this.person.currentCompany.url = "https://www.ecogas.com.ar/"
+    // this.person.country = "Argentine"
+    // this.person.state = "Mendoza"
+    // this.person.image = "./assets/img/profile-photo.png"
+    // this.person.aboutMe = "I am a java backend developer!"
+    // this.person.experiences = [
+    //   Experience.factoryAllProperties("Documentation control", "Ecogas", "Loading and control of documentation of external works for the digitization department of Ecogas", "./assets/img/ecogas-logo.png", new Date(2017, 3, 17), new Date(2018, 5, 30), "Mendoza", "Argentine"),
+    //   Experience.factoryAllProperties("Laboratory Technician", "Aguas Danone S.A.", "Quality control at Villavicencio Plant", "./assets/img/villavicencio-logo.jpg", new Date(2010, 9, 1), new Date(2019, 10, 29), "Mendoza", "Argentine")
+    // ];
+    // this.person.educations = [
+    //   Education.factoryAllProperties("Chemical Engineer", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2019, 10, 25), "./assets/img/utn-logo.png"),
+    //   Education.factoryAllProperties("Chemical Technician", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2014, 10, 25), "./assets/img/utn-logo.png"),
+    //   Education.factoryAllProperties("Fullstack Developer", "Egg Institute", new Date(2021, 5, 1), new Date(2021, 11, 1), "./assets/img/logo-egg.JPG")
+    // ];
+    // this.person.contactInformation =
+    //   ContactInformation.factoryAllProperties("(261)5749942", "adriangh1321@gmail.com", "linkedin.com/in/gustavohernandez-ing/", "github.com/adriangh1321");
+    // this.person.skills = [
+    //   Skill.factoryAllProperties(SkillType.HARD, "Authentication API", 75),
+    //   Skill.factoryAllProperties(SkillType.HARD, "Spring Security", 50),
+    //   Skill.factoryAllProperties(SkillType.SOFT, "Teamwork", 90),
+    //   Skill.factoryAllProperties(SkillType.SOFT, "Problem-solving", 100)
+    // ]
+    // this.person.proyects = [
+    //   Proyect.factoryAllProperties("API for SOMOS MAS organization", "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "),
+    //   Proyect.factoryAllProperties("Accommodation Application", "This web application was developed with Java Spring that allows renting accommodation ")
+
+    // ]
 
     this.person = new Person();
-    this.person.firstname = "Gustavo"
-    this.person.lastname = "Hernandez"
-    this.person.ocupation = "Chemical Engineer"
-    this.person.currentCompany = new CurrentCompany()
-    this.person.currentCompany.name = "Ecogas"
-    this.person.currentCompany.image = "./assets/img/ecogas-logo.png"
-    this.person.currentCompany.url = "https://www.ecogas.com.ar/"
-    this.person.country = "Argentine"
-    this.person.state = "Mendoza"
-    this.person.photo = "./assets/img/profile-photo.png"
-    this.person.aboutMe = "I am a java backend developer!"
-    this.person.experiences = [
-      Experience.factoryAllProperties("Documentation control", "Ecogas", "Loading and control of documentation of external works for the digitization department of Ecogas", "./assets/img/ecogas-logo.png", new Date(2017, 3, 17), new Date(2018, 5, 30), "Mendoza", "Argentine"),
-      Experience.factoryAllProperties("Laboratory Technician", "Aguas Danone S.A.", "Quality control at Villavicencio Plant", "./assets/img/villavicencio-logo.jpg", new Date(2010, 9, 1), new Date(2019, 10, 29), "Mendoza", "Argentine")
-    ];
-    this.person.educations = [
-      Education.factoryAllProperties("Chemical Engineer", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2019, 10, 25), "./assets/img/utn-logo.png"),
-      Education.factoryAllProperties("Chemical Technician", "Universidad Tecnológica Nacional", new Date(2011, 2, 1), new Date(2014, 10, 25), "./assets/img/utn-logo.png"),
-      Education.factoryAllProperties("Fullstack Developer", "Egg Institute", new Date(2021, 5, 1), new Date(2021, 11, 1), "./assets/img/logo-egg.JPG")
-    ];
-    this.person.contactInformation =
-      ContactInformation.factoryAllProperties("(261)5749942", "adriangh1321@gmail.com", "linkedin.com/in/gustavohernandez-ing/", "github.com/adriangh1321");
-    this.person.skills = [
-      Skill.factoryAllProperties(SkillType.HARD, "Authentication API", 75),
-      Skill.factoryAllProperties(SkillType.HARD, "Spring Security", 50),
-      Skill.factoryAllProperties(SkillType.SOFT, "Teamwork", 90),
-      Skill.factoryAllProperties(SkillType.SOFT, "Problem-solving", 100)
-    ]
-    this.person.proyects = [
-      Proyect.factoryAllProperties("API for SOMOS MAS organization", "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "),
-      Proyect.factoryAllProperties("Accommodation Application", "This web application was developed with Java Spring that allows renting accommodation ")
+    this.updatedPerson = new Person();
+    this.isOnEditExperience = [];
+    this.isOnEditEducation = [];
+    this.isOnEditSkill = [];
+    this.isOnEditProyect = [];
 
-    ]
-
-    this.isOnEditExperience = new Array(this.person.experiences.length).fill(false)
     this.isOnEditAbout = false;
-    this.isOnEditEducation = new Array(this.person.educations.length).fill(false)
+
     this.isOnShowContact = false;
     this.isOnEditContact = false;
-    this.isOnEditSkill = new Array(this.person.skills.length).fill(false)
-    this.isOnEditProyect = new Array(this.person.proyects.length).fill(false);
+
 
     //this.isOnEditHardSkill = new Array(this.person.skills.filter(skill => { skill.type == this.skillType.HARD }).length).fill(false)
     this.indexExperience = 0;
@@ -92,21 +100,37 @@ export class ShowProfileComponent implements OnInit {
 
   onAddExperience() {
     let experience: Experience = Experience.factoryAllProperties("Position", "Company", "Description", "./assets/img/add-image.png", null, null, "State", "Country")
-    this.person.experiences.push(experience)
+    this.updatedPerson.experiences.push(experience.toContract())
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The new experience was added successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
   }
 
   onAddEducation() {
     let education: Education = Education.factoryAllProperties("Title", "Institute", null, null, "./assets/img/add-image.png")
-    this.person.educations.push(education)
+    this.updatedPerson.educations.push(education.toContract())
+    this.personService.updatePerson(this.updatedPerson.id,this.updatedPerson).subscribe({
+      next: data => { alert("The new education was added successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
   }
 
   onAddSkill(type: SkillType) {
     const skill: Skill = Skill.factoryAllProperties(type, "Name", 1)
-    this.person.skills.push(skill);
+    this.updatedPerson.skills.push(skill.toContract());
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The new skill was added successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
   }
   onAddProyect() {
     let proyect = Proyect.factoryAllProperties("Name", "Description");
-    this.person.proyects.push(proyect);
+    this.updatedPerson.proyects.push(proyect.toContract());
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The new proyect was added successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
   }
   onEditExperience(i: number) {
 
@@ -124,18 +148,35 @@ export class ShowProfileComponent implements OnInit {
   }
 
   onRemoveExperience(i: number) {
-    this.person.experiences.splice(i, 1)
+    this.updatedPerson.experiences.splice(i, 1);
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The experience was deleted successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
   }
 
   onRemoveEducation(i: number) {
-    this.person.educations.splice(i, 1)
+    this.updatedPerson.educations.splice(i, 1)
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The education was deleted successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
+
   }
 
   onRemoveSkill(i: number) {
-    this.person.skills.splice(i, 1)
+    this.updatedPerson.skills.splice(i, 1)
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The skill was deleted successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
   }
   onRemoveProyect(i: number) {
-    this.person.proyects.splice(i, 1)
+    this.updatedPerson.proyects.splice(i, 1)
+    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+      next: data => { alert("The proyect was deleted successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
   }
 
   offEditExperience(indexExperience: number) {
@@ -180,12 +221,42 @@ export class ShowProfileComponent implements OnInit {
   }
 
 
-  refreshPersonData(person: Person) {
-    this.person = person;
-
+  refreshPersonData(id: number) {
+    console.log("llego al refresh")
+    this.personService.getPersonById(id).subscribe(res => {
+      console.log("el refresh:");
+      console.log(res)
+      this.person = res
+    })
 
   }
+
+  getPerson(id: number) {
+    this.personService.getPersonById(id).subscribe((res) => {
+      this.person = res
+
+      this.isOnEditExperience = new Array(this.person.experiences.length).fill(false);
+      this.isOnEditEducation = new Array(this.person.educations.length).fill(false);
+      this.isOnEditSkill = new Array(this.person.skills.length).fill(false);
+      this.isOnEditProyect = new Array(this.person.proyects.length).fill(false);
+      this.updatedPerson = Cloneable.deepCopy(this.person)
+      console.log("---------------")
+      console.log(this.person)
+      console.log(this.updatedPerson)
+     
+    })
+  }
   ngOnInit(): void {
+
+
+    this.getPerson(1);
+
+    this.personService.RefreshRequired.subscribe(() => {
+      this.getPerson(1)
+      
+    })
+
+
   }
 }
 

@@ -106,4 +106,14 @@ export class Experience {
         this._company = company;
     }
 
+    toContract() {
+        const result:any = {};
+        for (let key in this) {
+            
+            result[key.replace('_', '')] = this[key];
+            
+        }
+        return result;
+    }
+
 }
