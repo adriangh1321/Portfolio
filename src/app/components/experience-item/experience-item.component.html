@@ -1,0 +1,11 @@
+<app-experience-details 
+*ngIf="isOnShowDetails" 
+[experience]="experience" 
+(onToggleEditExperience)="toggleEditExperience()">
+</app-experience-details>
+
+<app-experience-edit 
+*ngIf="!isOnShowDetails"
+[experience]="experience" 
+(onShowDetails)="showDetails()">
+</app-experience-edit>

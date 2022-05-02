@@ -1,0 +1,5 @@
+<ul class="item-list">
+    <li *ngFor="let experience of experiences;index as i" class="mt-4">
+        <app-experience-item [experience]="experiences[i]"></app-experience-item>
+    </li>
+</ul>

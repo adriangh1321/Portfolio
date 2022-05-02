@@ -34,6 +34,16 @@
           "endDate": "2010-10-31",
           "state": "Mendoza",
           "country": "Argentina"
+        },
+        {
+          "position": "Position",
+          "company": "Company",
+          "description": "Description",
+          "image": "./assets/img/add-image.png",
+          "startDate": null,
+          "endDate": null,
+          "state": "State",
+          "country": "Country"
         }
       ],
       "educations": [
