@@ -75,29 +75,7 @@
     </a>
   </div>
 
-  <ul class="item-list">
-    <li *ngFor="let experience of person.experiences;index as i" class="mt-4">
-      <div class="new-item-container" [hidden]="isOnEditExperience[i]">
-        <img src="{{experience.image}}" alt="Add new image">
-        <div class="item-text">
-          <div class="item-title-edit">
-            <h4>{{experience.position}}</h4>
-            <div>
-              <a href='javascript:void(0);' (click)="onEditExperience(i)"><i class="fa-solid fa-pen"></i> </a>
-              <a href='javascript:void(0);' (click)="onRemoveExperience(i)"><i class="fa-solid fa-trash"></i> </a>
-            </div>
-          </div>
-          <p class="font-weight-bold mb-1">{{experience.company}}</p>
-          <p class="mb-1" id="job-description-{{i}}">{{experience.description}}</p>
-          <p class="font-weight-light mb-1">From <span>{{experience.startDate? (experience.startDate |
-              date:'dd-MM-yyyy'):'-'}}</span> to <span>{{experience.endDate? (experience.endDate |
-              date:'dd-MM-yyyy'):'-'}}</span> {{experience.state}} ({{experience.country}})</p>
-        </div>
-      </div>
-      <app-edit-experience *ngIf="isOnEditExperience[i]" [indexExperience]="i" [person]="person"
-        (offEvent)="offEditExperience($event)"></app-edit-experience>
-    </li>
-  </ul>
+  <app-experiences [experiences]="person.experiences"></app-experiences>
 </div>
 
 <div class="card mat-card">

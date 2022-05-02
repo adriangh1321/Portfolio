@@ -17,14 +17,14 @@ import { Cloneable } from 'src/app/utilities/Clone';
 })
 export class ShowProfileComponent implements OnInit {
   isOnEditPerson: Boolean = false;
-  isOnEditExperience: Boolean[];
+  
   isOnEditAbout: Boolean;
   isOnEditEducation: Boolean[];
   isOnShowContact: Boolean;
   isOnEditContact: Boolean;
   isOnEditSkill: Boolean[];
   isOnEditProyect: Boolean[]
-  indexExperience: number;
+  
   indexEducation: number;
   indexHardSkill: number;
   indexSoftSkill: number;
@@ -72,7 +72,7 @@ export class ShowProfileComponent implements OnInit {
 
     this.person = new Person();
     this.updatedPerson = new Person();
-    this.isOnEditExperience = [];
+    
     this.isOnEditEducation = [];
     this.isOnEditSkill = [];
     this.isOnEditProyect = [];
@@ -84,7 +84,7 @@ export class ShowProfileComponent implements OnInit {
 
 
     //this.isOnEditHardSkill = new Array(this.person.skills.filter(skill => { skill.type == this.skillType.HARD }).length).fill(false)
-    this.indexExperience = 0;
+    
     this.indexEducation = 0;
     this.indexHardSkill = 0;
     this.indexSoftSkill = 0;
@@ -132,11 +132,7 @@ export class ShowProfileComponent implements OnInit {
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
-  onEditExperience(i: number) {
-
-    this.indexExperience = i;
-    this.isOnEditExperience[this.indexExperience] = true;
-  }
+  
 
   onEditProyect(i: number) {
     this.indexProyect = i;
@@ -179,11 +175,7 @@ export class ShowProfileComponent implements OnInit {
     })
   }
 
-  offEditExperience(indexExperience: number) {
-    console.log("index parent: " + this.indexExperience)
-    console.log("index child: " + indexExperience)
-    this.isOnEditExperience[indexExperience] = false;
-  }
+  
 
   offEditAbout() {
     this.isOnEditAbout = false;
@@ -220,22 +212,11 @@ export class ShowProfileComponent implements OnInit {
     this.isOnEditSkill[i] = true;
   }
 
-
-  refreshPersonData(id: number) {
-    console.log("llego al refresh")
-    this.personService.getPersonById(id).subscribe(res => {
-      console.log("el refresh:");
-      console.log(res)
-      this.person = res
-    })
-
-  }
-
   getPerson(id: number) {
     this.personService.getPersonById(id).subscribe((res) => {
       this.person = res
 
-      this.isOnEditExperience = new Array(this.person.experiences.length).fill(false);
+      
       this.isOnEditEducation = new Array(this.person.educations.length).fill(false);
       this.isOnEditSkill = new Array(this.person.skills.length).fill(false);
       this.isOnEditProyect = new Array(this.person.proyects.length).fill(false);

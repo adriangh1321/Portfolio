@@ -1,0 +1,16 @@
+.experience-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 3%;
+    gap: 15px;
+}
+
+.experience-container div {
+    flex: 1;
+}
+
+.experience-container img {
+    width: 100px;
+    height: 100px;
+}

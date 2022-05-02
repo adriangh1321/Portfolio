@@ -21,6 +21,12 @@ import { ShowProfileComponent } from './components/show-profile/show-profile.com
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ExperiencesComponent } from './components/experiences/experiences.component';
+
+import { ExperienceItemComponent } from './components/experience-item/experience-item.component';
+
+import { ExperienceDetailsComponent } from './components/experience-details/experience-details.component';
+import { ExperienceEditComponent } from './components/experience-edit/experience-edit.component';
 
 
 @NgModule({
@@ -41,7 +47,13 @@ import { FooterComponent } from './components/footer/footer.component';
     ShowProfileComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ExperiencesComponent,
+   
+    ExperienceItemComponent,
+    
+    ExperienceDetailsComponent,
+    ExperienceEditComponent
     
   ],
   imports: [
