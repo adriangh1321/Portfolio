@@ -2,6 +2,7 @@ import { ContactInformation } from "./ContactInformation";
 import { CurrentCompany } from "./CurrentCompany";
 import { Education } from "./Education";
 import { Experience } from "./Experience";
+import { Interest } from "./Interest";
 import { Proyect } from "./Proyect";
 import { Skill } from "./Skill";
 
@@ -21,6 +22,16 @@ export class Person {
     private _contactInformation: ContactInformation;
     private _skills:Skill[]
     private _proyects:Proyect[]
+    private _interests:Interest[];
+
+    public get interests(): Interest[] {
+        return this._interests;
+    }
+
+    public set interests(interests: Interest[]) {
+        this._interests = interests;
+    }
+
 
     public get id(): number {
         return this._id;
@@ -159,6 +170,7 @@ export class Person {
         this._contactInformation = new ContactInformation();
         this._skills=[]
         this._proyects=[]
+        this._interests=[]
     
     }
 

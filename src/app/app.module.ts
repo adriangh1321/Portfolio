@@ -27,6 +27,11 @@ import { ExperienceItemComponent } from './components/experience-item/experience
 
 import { ExperienceDetailsComponent } from './components/experience-details/experience-details.component';
 import { ExperienceEditComponent } from './components/experience-edit/experience-edit.component';
+import { InterestsComponent } from './components/interests/interests.component';
+import { CollapseComponent } from './components/collapse/collapse.component';
+import { MoreComponent } from './components/more/more.component';
+import { AddSectionComponent } from './components/add-section/add-section.component';
+import { InterestDetailsComponent } from './components/interest-details/interest-details.component';
 
 
 @NgModule({
@@ -53,7 +58,12 @@ import { ExperienceEditComponent } from './components/experience-edit/experience
     ExperienceItemComponent,
     
     ExperienceDetailsComponent,
-    ExperienceEditComponent
+    ExperienceEditComponent,
+    InterestsComponent,
+    CollapseComponent,
+    MoreComponent,
+    AddSectionComponent,
+    InterestDetailsComponent
     
   ],
   imports: [

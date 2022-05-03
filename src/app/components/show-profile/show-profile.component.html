@@ -44,12 +44,11 @@
   <app-show-contact *ngIf="isOnShowContact" [person]="person" (offEvent)="offShowContact()"
     (editContactEvent)="onEditContact()"></app-show-contact>
   <app-edit-contact *ngIf="isOnEditContact" [person]="person" (offEvent)="offEditContact()"></app-edit-contact>
+  
   <div id="info-actions">
-
-    <button type="button" class="btn btn-primary">My interests</button>
-    <button type="button" class="btn btn-light">Add section</button>
-    <button type="button" class="btn btn-light">More</button>
+    <app-collapse class="w-100" [person]="person"></app-collapse>  
   </div>
+  
 </div>
 <div class="card mat-card">
   <div class="card-titles">
@@ -67,6 +66,7 @@
 
   </div>
 </div>
+
 
 <div class="card mat-card">
   <div class="title-container">
@@ -206,7 +206,7 @@
           <p [hidden]="isOnEditProyect[i]" class="small">{{proyect.description}}</p>
 
           <app-edit-proyect *ngIf="isOnEditProyect[i]" [person]="person" (offEvent)="offEditProyect($event)"
-             [indexProyect]="i"></app-edit-proyect>
+            [indexProyect]="i"></app-edit-proyect>
         </li>
 
       </ul>
