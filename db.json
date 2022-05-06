@@ -1,5 +1,5 @@
 {
-  "persons": [
+  "portfolios": [
     {
       "id": 1,
       "firstname": "Gustavo",
@@ -117,16 +117,16 @@
           "description": "This web application was developed with Java Spring that allows renting accommodation "
         }
       ],
-      "interests":[
+      "interests": [
         {
-          "id":1,
-          "name":"Games",
-          "image":"./assets/img/game-interest.jpg"
+          "id": 1,
+          "name": "Games",
+          "image": "./assets/img/game-interest.jpg"
         },
         {
-          "id":2,
-          "name":"Movies",
-          "image":"./assets/img/movie-interest.jpg"
+          "id": 2,
+          "name": "Movies",
+          "image": "./assets/img/movie-interest.jpg"
         }
       ]
     }

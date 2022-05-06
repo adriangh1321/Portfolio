@@ -1,32 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Person } from 'src/app/models/Person';
-import { PersonService } from 'src/app/services/person.service';
+import { Portfolio } from 'src/app/models/Portfolio';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
-  selector: 'app-edit-person',
-  templateUrl: './edit-person.component.html',
-  styleUrls: ['./edit-person.component.css']
+  selector: 'app-edit-portfolio',
+  templateUrl: './edit-portfolio.component.html',
+  styleUrls: ['./edit-portfolio.component.css']
 })
-export class EditPersonComponent implements OnInit {
+export class EditPortfolioComponent implements OnInit {
 
   @Output() offEvent = new EventEmitter();
   
-  @Input() person: Person;
-  updatedPerson: Person;
+  @Input() portfolio: Portfolio;
+  updatedPortfolio: Portfolio;
 
 
-  constructor(private personService: PersonService) {
-    this.person = new Person();
-    this.updatedPerson = new Person;
+  constructor(private portfolioService: PortfolioService) {
+    this.portfolio = new Portfolio();
+    this.updatedPortfolio = new Portfolio;
   }
   ngOnInit(): void {
-    this.updatedPerson = Cloneable.deepCopy(this.person)
+    this.updatedPortfolio = Cloneable.deepCopy(this.portfolio)
   }
 
   onSubmit() {
 
-    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
       next: data => { alert("The data was updated successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
@@ -44,7 +44,7 @@ export class EditPersonComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       // convierte la imagen a una cadena en base64
-      this.updatedPerson.image = reader.result as string;
+      this.updatedPortfolio.image = reader.result as string;
     }, false);
 
     if (file) {
@@ -62,7 +62,7 @@ export class EditPersonComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       // convierte la imagen a una cadena en base64
-      this.updatedPerson.currentCompany.image = reader.result as string;
+      this.updatedPortfolio.currentCompany.image = reader.result as string;
     }, false);
 
     if (file) {

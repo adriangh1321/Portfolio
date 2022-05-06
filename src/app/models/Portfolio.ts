@@ -7,7 +7,7 @@ import { Proyect } from "./Proyect";
 import { Skill } from "./Skill";
 
 
-export class Person {
+export class Portfolio {
     private _id:number;
     private _firstname: string;
     private _lastname: string;

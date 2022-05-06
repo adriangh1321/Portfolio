@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Experience } from 'src/app/models/Experience';
 import { ExperienceService } from 'src/app/services/experience.service';
-import { PersonService } from 'src/app/services/person.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({

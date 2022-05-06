@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Person } from 'src/app/models/Person';
-import { PersonService } from 'src/app/services/person.service';
+import { Portfolio } from 'src/app/models/Portfolio';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
@@ -12,23 +12,23 @@ export class EditEducationComponent implements OnInit {
   
   @Output() offEvent=new EventEmitter<number>();
   @Input() indexEducation:number;
-  @Input() person: Person;
-  updatedPerson: Person;
+  @Input() portfolio: Portfolio;
+  updatedPortfolio: Portfolio;
   
-  constructor(private personService:PersonService) {
+  constructor(private portfolioService:PortfolioService) {
     this.indexEducation=0;
-    this.person = new Person();
-    this.updatedPerson = new Person();
+    this.portfolio = new Portfolio();
+    this.updatedPortfolio = new Portfolio();
   }
 
   ngOnInit(): void {
-    this.updatedPerson = Cloneable.deepCopy(this.person);
-    console.log(this.updatedPerson)
+    this.updatedPortfolio = Cloneable.deepCopy(this.portfolio);
+    console.log(this.updatedPortfolio)
     console.log(this.indexEducation)
   }
 
   onSubmit() {
-    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
       next: data => { alert("The education was updated successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
@@ -46,7 +46,7 @@ export class EditEducationComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       // convierte la imagen a una cadena en base64
-      this.updatedPerson.educations[this.indexEducation].image = reader.result as string;
+      this.updatedPortfolio.educations[this.indexEducation].image = reader.result as string;
     }, false);
 
     if (file) {
@@ -55,10 +55,10 @@ export class EditEducationComponent implements OnInit {
   }
   
   setStartDate(startDate:Date){
-    this.updatedPerson.educations[this.indexEducation].startDate=startDate
+    this.updatedPortfolio.educations[this.indexEducation].startDate=startDate
   }
   setEndDate(endDate:Date){
-    this.updatedPerson.educations[this.indexEducation].endDate=endDate
+    this.updatedPortfolio.educations[this.indexEducation].endDate=endDate
   }
 
 

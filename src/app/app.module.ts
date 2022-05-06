@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 import { EducationComponent } from './components/education/education.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditPersonComponent } from './components/edit-person/edit-person.component';
+import { EditPortfolioComponent } from './components/edit-portfolio/edit-portfolio.component';
 import { EditExperienceComponent } from './components/edit-experience/edit-experience.component';
 import { AddExperienceComponent } from './components/add-experience/add-experience.component';
 import { EditAboutComponent } from './components/edit-about/edit-about.component';
@@ -40,7 +40,7 @@ import { InterestDetailsComponent } from './components/interest-details/interest
     
     
     EducationComponent,
-    EditPersonComponent,
+    EditPortfolioComponent,
     EditExperienceComponent,
     AddExperienceComponent,
     EditAboutComponent,

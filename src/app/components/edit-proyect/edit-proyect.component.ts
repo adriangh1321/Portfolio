@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Person } from 'src/app/models/Person';
-import { PersonService } from 'src/app/services/person.service';
+import { Portfolio } from 'src/app/models/Portfolio';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
@@ -10,15 +10,15 @@ import { Cloneable } from 'src/app/utilities/Clone';
   styleUrls: ['./edit-proyect.component.css']
 })
 export class EditProyectComponent implements OnInit {
-  @Input() person: Person;
-  updatedPerson: Person;
+  @Input() portfolio: Portfolio;
+  updatedPortfolio: Portfolio;
   @Input() indexProyect: number;
   @Output() offEvent = new EventEmitter<number>()
   
   proyectForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private personService:PersonService) {
-    this.person = new Person();
-    this.updatedPerson = new Person();
+  constructor(private formBuilder: FormBuilder,private portfolioService:PortfolioService) {
+    this.portfolio = new Portfolio();
+    this.updatedPortfolio = new Portfolio();
     this.indexProyect = 0;
     this.proyectForm = this.formBuilder.group({
       name: ['',[Validators.required]],
@@ -27,10 +27,10 @@ export class EditProyectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.updatedPerson=Cloneable.deepCopy(this.person)
+    this.updatedPortfolio=Cloneable.deepCopy(this.portfolio)
     this.proyectForm.patchValue({
-      name:this.updatedPerson.proyects[this.indexProyect].name,
-      description:this.updatedPerson.proyects[this.indexProyect].description
+      name:this.updatedPortfolio.proyects[this.indexProyect].name,
+      description:this.updatedPortfolio.proyects[this.indexProyect].description
     })
   }
 
@@ -39,9 +39,9 @@ export class EditProyectComponent implements OnInit {
       alert('Invalid input')
       return
     }
-    this.updatedPerson.proyects[this.indexProyect].name=this.proyectForm.get('name')?.value
-    this.updatedPerson.proyects[this.indexProyect].description=this.proyectForm.get('description')?.value
-    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+    this.updatedPortfolio.proyects[this.indexProyect].name=this.proyectForm.get('name')?.value
+    this.updatedPortfolio.proyects[this.indexProyect].description=this.proyectForm.get('description')?.value
+    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
       next: data => { alert("The proyect was updated successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })

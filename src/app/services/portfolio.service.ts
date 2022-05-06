@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
-import { Person } from '../models/Person';
+import { Portfolio } from '../models/Portfolio';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService {
-  private apiUrl: string = "http://localhost:5001/persons"
+export class PortfolioService {
+  private apiUrl: string = "http://localhost:5001/portfolios"
 
   private _refreshRequired = new Subject<void>()
 
@@ -17,14 +17,14 @@ export class PersonService {
 
   constructor(private http: HttpClient) { }
 
-  getPersonById(id: number): Observable<Person> {
+  getPortfolioById(id: number): Observable<Portfolio> {
     const url = `${this.apiUrl}/${id}`
-    return this.http.get<Person>(url)
+    return this.http.get<Portfolio>(url)
   }
 
-  updatePerson(id: number, person: Person): Observable<void> {
+  updatePortfolio(id: number, portfolio: Portfolio): Observable<void> {
     const url = `${this.apiUrl}/${id}`
-    return this.http.put<void>(url, person).pipe(
+    return this.http.put<void>(url, portfolio).pipe(
       tap(() => {
         this.RefreshRequired.next()
       })

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Person } from 'src/app/models/Person';
+import { Portfolio } from 'src/app/models/Portfolio';
 
 @Component({
   selector: 'app-collapse',
@@ -7,9 +7,9 @@ import { Person } from 'src/app/models/Person';
   styleUrls: ['./collapse.component.css']
 })
 export class CollapseComponent implements OnInit {
-  @Input() person:Person;
+  @Input() portfolio:Portfolio;
   constructor() { 
-    this.person=new Person();
+    this.portfolio=new Portfolio();
   }
 
   ngOnInit(): void {

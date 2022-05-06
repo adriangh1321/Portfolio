@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Experience } from 'src/app/models/Experience';
-import { Person } from 'src/app/models/Person';
-import { PersonService } from 'src/app/services/person.service';
+import { Portfolio } from 'src/app/models/Portfolio';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
@@ -13,23 +13,23 @@ export class EditExperienceComponent implements OnInit {
   
   @Output() offEvent=new EventEmitter<number>();
   @Input() indexExperience:number;
-  @Input() person: Person;
-  updatedPerson: Person;
+  @Input() portfolio: Portfolio;
+  updatedPortfolio: Portfolio;
   
-  constructor(private personService:PersonService) {
+  constructor(private portfolioService:PortfolioService) {
     this.indexExperience=0;
-    this.person = new Person();
-    this.updatedPerson = new Person();
+    this.portfolio = new Portfolio();
+    this.updatedPortfolio = new Portfolio();
   }
 
   ngOnInit(): void {
-    this.updatedPerson = Cloneable.deepCopy(this.person);
-    console.log(this.updatedPerson)
+    this.updatedPortfolio = Cloneable.deepCopy(this.portfolio);
+    console.log(this.updatedPortfolio)
     console.log(this.indexExperience)
   }
 
   onSubmit() {
-    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
       next: data => { alert("The experience was updated successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
@@ -46,7 +46,7 @@ export class EditExperienceComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       // convierte la imagen a una cadena en base64
-      this.updatedPerson.experiences[this.indexExperience].image = reader.result as string;
+      this.updatedPortfolio.experiences[this.indexExperience].image = reader.result as string;
     }, false);
 
     if (file) {
@@ -55,10 +55,10 @@ export class EditExperienceComponent implements OnInit {
   }
   
   setStartDate(startDate:Date){
-    this.updatedPerson.experiences[this.indexExperience].startDate=startDate
+    this.updatedPortfolio.experiences[this.indexExperience].startDate=startDate
   }
   setEndDate(endDate:Date){
-    this.updatedPerson.experiences[this.indexExperience].endDate=endDate
+    this.updatedPortfolio.experiences[this.indexExperience].endDate=endDate
   }
 
 }
