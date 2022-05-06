@@ -185,28 +185,28 @@
 <div class="card mat-card">
   <div class="card-titles">
     <div class="title-container">
-      <h2>Proyects</h2>
-      <a href='javascript:void(0);' (click)="onAddProyect()"><i class="fa-solid fa-plus"></i></a>
+      <h2>Projects</h2>
+      <a href='javascript:void(0);' (click)="onAddProject()"><i class="fa-solid fa-plus"></i></a>
     </div>
 
     <div class="new-item-container">
       <ul class="item-list w-100">
 
-        <li *ngFor="let proyect of portfolio.proyects;index as i" class="mt-4">
+        <li *ngFor="let project of portfolio.projects;index as i" class="mt-4">
 
-          <div class="item-title-edit" [hidden]="isOnEditProyect[i]">
-            <h4>{{proyect.name}}</h4>
+          <div class="item-title-edit" [hidden]="isOnEditProject[i]">
+            <h4>{{project.name}}</h4>
             <div>
-              <a href='javascript:void(0);' (click)="onEditProyect(i)"><i class="fa-solid fa-pen"></i> </a>
-              <a href='javascript:void(0);' (click)="onRemoveProyect(i)"><i class="fa-solid fa-trash"></i> </a>
+              <a href='javascript:void(0);' (click)="onEditProject(i)"><i class="fa-solid fa-pen"></i> </a>
+              <a href='javascript:void(0);' (click)="onRemoveProject(i)"><i class="fa-solid fa-trash"></i> </a>
             </div>
           </div>
 
 
-          <p [hidden]="isOnEditProyect[i]" class="small">{{proyect.description}}</p>
+          <p [hidden]="isOnEditProject[i]" class="small">{{project.description}}</p>
 
-          <app-edit-proyect *ngIf="isOnEditProyect[i]" [portfolio]="portfolio" (offEvent)="offEditProyect($event)"
-            [indexProyect]="i"></app-edit-proyect>
+          <app-edit-project *ngIf="isOnEditProject[i]" [portfolio]="portfolio" (offEvent)="offEditProject($event)"
+            [indexProject]="i"></app-edit-project>
         </li>
 
       </ul>

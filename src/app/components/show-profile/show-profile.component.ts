@@ -5,7 +5,7 @@ import { CurrentCompany } from 'src/app/models/CurrentCompany';
 import { Education } from 'src/app/models/Education';
 import { Experience } from 'src/app/models/Experience';
 import { Portfolio } from 'src/app/models/Portfolio';
-import { Proyect } from 'src/app/models/Proyect';
+import { Project } from 'src/app/models/Project';
 import { Skill } from 'src/app/models/Skill';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
@@ -23,12 +23,12 @@ export class ShowProfileComponent implements OnInit {
   isOnShowContact: Boolean;
   isOnEditContact: Boolean;
   isOnEditSkill: Boolean[];
-  isOnEditProyect: Boolean[]
+  isOnEditProject: Boolean[]
   
   indexEducation: number;
   indexHardSkill: number;
   indexSoftSkill: number;
-  indexProyect: number;
+  indexProject: number;
   portfolio: Portfolio;
   updatedPortfolio: Portfolio;
   skillType = SkillType
@@ -64,9 +64,9 @@ export class ShowProfileComponent implements OnInit {
     //   Skill.factoryAllProperties(SkillType.SOFT, "Teamwork", 90),
     //   Skill.factoryAllProperties(SkillType.SOFT, "Problem-solving", 100)
     // ]
-    // this.portfolio.proyects = [
-    //   Proyect.factoryAllProperties("API for SOMOS MAS organization", "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "),
-    //   Proyect.factoryAllProperties("Accommodation Application", "This web application was developed with Java Spring that allows renting accommodation ")
+    // this.portfolio.projects = [
+    //   Project.factoryAllProperties("API for SOMOS MAS organization", "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "),
+    //   Project.factoryAllProperties("Accommodation Application", "This web application was developed with Java Spring that allows renting accommodation ")
 
     // ]
 
@@ -75,7 +75,7 @@ export class ShowProfileComponent implements OnInit {
     
     this.isOnEditEducation = [];
     this.isOnEditSkill = [];
-    this.isOnEditProyect = [];
+    this.isOnEditProject = [];
 
     this.isOnEditAbout = false;
 
@@ -88,7 +88,7 @@ export class ShowProfileComponent implements OnInit {
     this.indexEducation = 0;
     this.indexHardSkill = 0;
     this.indexSoftSkill = 0;
-    this.indexProyect = 0;
+    this.indexProject = 0;
   }
   onEditPortfolio() {
     this.isOnEditPortfolio = true;
@@ -124,19 +124,19 @@ export class ShowProfileComponent implements OnInit {
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
-  onAddProyect() {
-    let proyect = Proyect.factoryAllProperties("Name", "Description");
-    this.updatedPortfolio.proyects.push(proyect.toContract());
+  onAddProject() {
+    let project = Project.factoryAllProperties("Name", "Description");
+    this.updatedPortfolio.projects.push(project.toContract());
     this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
-      next: data => { alert("The new proyect was added successfull!") },
+      next: data => { alert("The new project was added successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
   
 
-  onEditProyect(i: number) {
-    this.indexProyect = i;
-    this.isOnEditProyect[this.indexProyect] = true;
+  onEditProject(i: number) {
+    this.indexProject = i;
+    this.isOnEditProject[this.indexProject] = true;
   }
 
   onShowContact() {
@@ -167,10 +167,10 @@ export class ShowProfileComponent implements OnInit {
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
-  onRemoveProyect(i: number) {
-    this.updatedPortfolio.proyects.splice(i, 1)
+  onRemoveProject(i: number) {
+    this.updatedPortfolio.projects.splice(i, 1)
     this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
-      next: data => { alert("The proyect was deleted successfull!") },
+      next: data => { alert("The project was deleted successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
@@ -194,8 +194,8 @@ export class ShowProfileComponent implements OnInit {
   offEditSkill(indexSkill: number) {
     this.isOnEditSkill[indexSkill] = false;
   }
-  offEditProyect(indexProyect: number) {
-    this.isOnEditProyect[indexProyect] = false;
+  offEditProject(indexProject: number) {
+    this.isOnEditProject[indexProject] = false;
   }
 
   onEditAbout() {
@@ -219,7 +219,7 @@ export class ShowProfileComponent implements OnInit {
       
       this.isOnEditEducation = new Array(this.portfolio.educations.length).fill(false);
       this.isOnEditSkill = new Array(this.portfolio.skills.length).fill(false);
-      this.isOnEditProyect = new Array(this.portfolio.proyects.length).fill(false);
+      this.isOnEditProject = new Array(this.portfolio.projects.length).fill(false);
       this.updatedPortfolio = Cloneable.deepCopy(this.portfolio)
       console.log("---------------")
       console.log(this.portfolio)

@@ -5,22 +5,22 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
-  selector: 'app-edit-proyect',
-  templateUrl: './edit-proyect.component.html',
-  styleUrls: ['./edit-proyect.component.css']
+  selector: 'app-edit-project',
+  templateUrl: './edit-project.component.html',
+  styleUrls: ['./edit-project.component.css']
 })
-export class EditProyectComponent implements OnInit {
+export class EditProjectComponent implements OnInit {
   @Input() portfolio: Portfolio;
   updatedPortfolio: Portfolio;
-  @Input() indexProyect: number;
+  @Input() indexProject: number;
   @Output() offEvent = new EventEmitter<number>()
   
-  proyectForm: FormGroup;
+  projectForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private portfolioService:PortfolioService) {
     this.portfolio = new Portfolio();
     this.updatedPortfolio = new Portfolio();
-    this.indexProyect = 0;
-    this.proyectForm = this.formBuilder.group({
+    this.indexProject = 0;
+    this.projectForm = this.formBuilder.group({
       name: ['',[Validators.required]],
       description: ['',[Validators.required]]
     })
@@ -28,33 +28,33 @@ export class EditProyectComponent implements OnInit {
 
   ngOnInit(): void {
     this.updatedPortfolio=Cloneable.deepCopy(this.portfolio)
-    this.proyectForm.patchValue({
-      name:this.updatedPortfolio.proyects[this.indexProyect].name,
-      description:this.updatedPortfolio.proyects[this.indexProyect].description
+    this.projectForm.patchValue({
+      name:this.updatedPortfolio.projects[this.indexProject].name,
+      description:this.updatedPortfolio.projects[this.indexProject].description
     })
   }
 
   onSubmit(){
-    if(this.proyectForm.invalid){
+    if(this.projectForm.invalid){
       alert('Invalid input')
       return
     }
-    this.updatedPortfolio.proyects[this.indexProyect].name=this.proyectForm.get('name')?.value
-    this.updatedPortfolio.proyects[this.indexProyect].description=this.proyectForm.get('description')?.value
+    this.updatedPortfolio.projects[this.indexProject].name=this.projectForm.get('name')?.value
+    this.updatedPortfolio.projects[this.indexProject].description=this.projectForm.get('description')?.value
     this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
-      next: data => { alert("The proyect was updated successfull!") },
+      next: data => { alert("The project was updated successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
         
-    this.emitOff(this.indexProyect)
+    this.emitOff(this.indexProject)
   }
 
   get m() {
-    return this.proyectForm.controls;
+    return this.projectForm.controls;
   }
 
-  emitOff(indexProyect: number) {
-    this.offEvent.emit(indexProyect);
+  emitOff(indexProject: number) {
+    this.offEvent.emit(indexProject);
   }
 
 }

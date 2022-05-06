@@ -3,7 +3,7 @@ import { CurrentCompany } from "./CurrentCompany";
 import { Education } from "./Education";
 import { Experience } from "./Experience";
 import { Interest } from "./Interest";
-import { Proyect } from "./Proyect";
+import { Project } from "./Project";
 import { Skill } from "./Skill";
 
 
@@ -21,7 +21,7 @@ export class Portfolio {
     private _educations: Education[];
     private _contactInformation: ContactInformation;
     private _skills:Skill[]
-    private _proyects:Proyect[]
+    private _projects:Project[]
     private _interests:Interest[];
 
     public get interests(): Interest[] {
@@ -41,12 +41,12 @@ export class Portfolio {
         this._id = id;
     }
     
-    public get proyects(): Proyect[] {
-        return this._proyects;
+    public get projects(): Project[] {
+        return this._projects;
     }
 
-    public set proyects(proyects: Proyect[]) {
-        this._proyects = proyects;
+    public set projects(projects: Project[]) {
+        this._projects = projects;
     }
 
     public get skills(): Skill[] {
@@ -169,7 +169,7 @@ export class Portfolio {
         this._educations = [];
         this._contactInformation = new ContactInformation();
         this._skills=[]
-        this._proyects=[]
+        this._projects=[]
         this._interests=[]
     
     }

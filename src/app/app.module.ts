@@ -16,7 +16,7 @@ import { EditEducationComponent } from './components/edit-education/edit-educati
 import { ShowContactComponent } from './components/show-contact/show-contact.component';
 import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 import { EditSkillComponent } from './components/edit-skill/edit-skill.component';
-import { EditProyectComponent } from './components/edit-proyect/edit-proyect.component';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { ShowProfileComponent } from './components/show-profile/show-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -48,7 +48,7 @@ import { InterestDetailsComponent } from './components/interest-details/interest
     ShowContactComponent,
     EditContactComponent,
     EditSkillComponent,
-    EditProyectComponent,
+    EditProjectComponent,
     ShowProfileComponent,
     LoginComponent,
     HeaderComponent,

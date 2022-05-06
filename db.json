@@ -107,7 +107,7 @@
           "percent": 90
         }
       ],
-      "proyects": [
+      "projects": [
         {
           "name": "API for SOMOS MAS organization",
           "description": "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "

@@ -1,4 +1,4 @@
-export class Proyect{
+export class Project{
     private _name:string;
     private _description:string;
  
@@ -7,11 +7,11 @@ export class Proyect{
         this._description='';
     }
 
-    public static factoryAllProperties(name:string,description:string):Proyect{
-        const proyect:Proyect=new Proyect();
-        proyect.name=name;
-        proyect.description=description;
-        return proyect;
+    public static factoryAllProperties(name:string,description:string):Project{
+        const project:Project=new Project();
+        project.name=name;
+        project.description=description;
+        return project;
     }
     public get name(): string {
         return this._name;
