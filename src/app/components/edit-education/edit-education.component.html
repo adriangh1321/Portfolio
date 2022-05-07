@@ -1,5 +1,5 @@
 <div class="education-container">
-    <img src="{{updatedPerson.educations[indexEducation].image}}" alt="Add new image">
+    <img src="{{updatedPortfolio.educations[indexEducation].image}}" alt="Add new image">
 
     <div class="col pr-2">
         <form action="javascript:void(0);" #experienceForm="ngForm" (ngSubmit)="onSubmit()">
@@ -7,25 +7,25 @@
             <div class="form-group ">
                 <label for="education-title-indexEducation">Title</label>
                 <input type="text" id="education-title-indexEducation" class="form-control" name="title"
-                    #title="ngModel" [(ngModel)]="updatedPerson.educations[indexEducation].title">
+                    #title="ngModel" [(ngModel)]="updatedPortfolio.educations[indexEducation].title">
             </div>
             <div class="form-group">
                 <label for="education-institute-indexEducation">Institute</label>
                 <input type="text" id="education-institute-indexEducation" class="form-control" name="institute"
-                    #institute="ngModel" [(ngModel)]="updatedPerson.educations[indexEducation].institute">
+                    #institute="ngModel" [(ngModel)]="updatedPortfolio.educations[indexEducation].institute">
             </div>
             <div class="form-group">
                 <label for="education-start-indexEducation">Start date</label>
                 <input type="date" id="education-start-indexEducation" class="form-control" name="startDate"
                     #startDate="ngModel"
-                    [ngModel]="updatedPerson.educations[indexEducation].startDate | date:'yyyy-MM-dd'"
+                    [ngModel]="updatedPortfolio.educations[indexEducation].startDate | date:'yyyy-MM-dd'"
                     (ngModelChange)="setStartDate(startDate.value)">
             </div>
             <div class="form-group">
                 <label for="education-end-indexEducation">End date</label>
                 <input type="date" id="education-end-indexEducation" class="form-control" name="endDate"
                     #endDate="ngModel"
-                    [ngModel]="updatedPerson.educations[indexEducation].endDate | date:'yyyy-MM-dd'"
+                    [ngModel]="updatedPortfolio.educations[indexEducation].endDate | date:'yyyy-MM-dd'"
                     (ngModelChange)="setEndDate(endDate.value)">
             </div>
             <div class="form-group">

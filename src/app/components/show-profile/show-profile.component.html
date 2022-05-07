@@ -1,22 +1,22 @@
 <div class="card mat-card" id="first-card">
   <div id="profile-background"><img src="./assets/img/background-header.jpg" alt=""></div>
   <div id="info">
-    <div class="info-image" [hidden]="isOnEditPerson">
-      <img class="profile-image" [src]="person.image" alt="">
-      <a href='javascript:void(0);' id="edit-info-data" (click)="onEditPerson()"><i class="fa-solid fa-pen"></i></a>
+    <div class="info-image" [hidden]="isOnEditPortfolio">
+      <img class="profile-image" [src]="portfolio.image" alt="">
+      <a href='javascript:void(0);' id="edit-info-data" (click)="onEditPortfolio()"><i class="fa-solid fa-pen"></i></a>
     </div>
-    <app-edit-person *ngIf="isOnEditPerson" [person]="person" (offEvent)="offEditPerson()">
-    </app-edit-person>
-    <div class="container-fluid" [hidden]="isOnEditPerson">
+    <app-edit-portfolio *ngIf="isOnEditPortfolio" [portfolio]="portfolio" (offEvent)="offEditPortfolio()">
+    </app-edit-portfolio>
+    <div class="container-fluid" [hidden]="isOnEditPortfolio">
       <div class="row ">
         <div class="col-md-6">
           <div class="row">
-            <h1 class="h-50 vertical-text-center" id="full-name">{{person.firstname}} {{person.lastname}}</h1>
+            <h1 class="h-50 vertical-text-center" id="full-name">{{portfolio.firstname}} {{portfolio.lastname}}</h1>
           </div>
 
-          <div class="row h-25" id="ocupation">{{person.ocupation}}</div>
+          <div class="row h-25" id="ocupation">{{portfolio.ocupation}}</div>
           <div class="row h-25" id="info-contact">
-            <p>{{person.state}} ({{person.country}}) <span [hidden]="isOnShowContact || isOnEditContact"><a
+            <p>{{portfolio.state}} ({{portfolio.country}}) <span [hidden]="isOnShowContact || isOnEditContact"><a
                   href='javascript:void(0);' (click)="onShowContact()">Contact information</a></span>
             </p>
           </div>
@@ -27,9 +27,9 @@
           </div>
           <div class="row h-50">
             <ul id="info-details">
-              <li><a href="{{person.currentCompany.url}}">
-                  <img src="{{person.currentCompany.image}}" alt="">
-                  <h2>{{person.currentCompany.name}}</h2>
+              <li><a href="//{{portfolio.currentCompany.url}}">
+                  <img src="{{portfolio.currentCompany.image}}" alt="">
+                  <h2>{{portfolio.currentCompany.name}}</h2>
                 </a>
               </li>
             </ul>
@@ -41,15 +41,14 @@
 
 
 
-  <app-show-contact *ngIf="isOnShowContact" [person]="person" (offEvent)="offShowContact()"
+  <app-show-contact *ngIf="isOnShowContact" [portfolio]="portfolio" (offEvent)="offShowContact()"
     (editContactEvent)="onEditContact()"></app-show-contact>
-  <app-edit-contact *ngIf="isOnEditContact" [person]="person" (offEvent)="offEditContact()"></app-edit-contact>
+  <app-edit-contact *ngIf="isOnEditContact" [portfolio]="portfolio" (offEvent)="offEditContact()"></app-edit-contact>
+  
   <div id="info-actions">
-
-    <button type="button" class="btn btn-primary">My interests</button>
-    <button type="button" class="btn btn-light">Add section</button>
-    <button type="button" class="btn btn-light">More</button>
+    <app-collapse class="w-100" [portfolio]="portfolio"></app-collapse>  
   </div>
+  
 </div>
 <div class="card mat-card">
   <div class="card-titles">
@@ -61,12 +60,13 @@
     </div>
 
     <div>
-      <p [hidden]="isOnEditAbout">{{person.aboutMe}}</p>
-      <app-edit-about *ngIf="isOnEditAbout" [person]="person" (offEvent)="offEditAbout()"></app-edit-about>
+      <p [hidden]="isOnEditAbout">{{portfolio.aboutMe}}</p>
+      <app-edit-about *ngIf="isOnEditAbout" [portfolio]="portfolio" (offEvent)="offEditAbout()"></app-edit-about>
     </div>
 
   </div>
 </div>
+
 
 <div class="card mat-card">
   <div class="title-container">
@@ -75,7 +75,7 @@
     </a>
   </div>
 
-  <app-experiences [experiences]="person.experiences"></app-experiences>
+  <app-experiences [experiences]="portfolio.experiences"></app-experiences>
 </div>
 
 <div class="card mat-card">
@@ -86,7 +86,7 @@
   </div>
 
   <ul class="item-list">
-    <li *ngFor="let education of person.educations;index as i" class="mt-4">
+    <li *ngFor="let education of portfolio.educations;index as i" class="mt-4">
       <div class="new-item-container" [hidden]="isOnEditEducation[i]">
         <img src="{{education.image}}" alt="Add new image">
         <div class="item-text">
@@ -104,7 +104,7 @@
               date:'dd-MM-yyyy'):'-'}}</span> </p>
         </div>
       </div>
-      <app-edit-education *ngIf="isOnEditEducation[i]" [indexEducation]="i" [person]="person"
+      <app-edit-education *ngIf="isOnEditEducation[i]" [indexEducation]="i" [portfolio]="portfolio"
         (offEvent)="offEditEducation($event)"></app-edit-education>
     </li>
   </ul>
@@ -120,7 +120,7 @@
 
     <div class="d-flex justify-content-center">
       <ul class="item-list text-center w-75 ">
-        <ng-container *ngFor="let hardSkill of person.skills;index as i">
+        <ng-container *ngFor="let hardSkill of portfolio.skills;index as i">
           <li *ngIf="hardSkill.type===skillType.HARD">
 
 
@@ -136,7 +136,7 @@
               <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="hardSkill.percent"
                 aria-valuenow="hardSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
+            <app-edit-skill *ngIf="isOnEditSkill[i]" [portfolio]="portfolio" (offEvent)="offEditSkill($event)"
               [indexSkill]="i"></app-edit-skill>
           </li>
         </ng-container>
@@ -156,7 +156,7 @@
 
     <div class="d-flex justify-content-center">
       <ul class="item-list text-center w-75 ">
-        <ng-container *ngFor="let softSkill of person.skills;index as i">
+        <ng-container *ngFor="let softSkill of portfolio.skills;index as i">
           <li *ngIf="softSkill.type===skillType.SOFT">
 
 
@@ -172,7 +172,7 @@
               <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="softSkill.percent"
                 aria-valuenow="softSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <app-edit-skill *ngIf="isOnEditSkill[i]" [person]="person" (offEvent)="offEditSkill($event)"
+            <app-edit-skill *ngIf="isOnEditSkill[i]" [portfolio]="portfolio" (offEvent)="offEditSkill($event)"
               [indexSkill]="i"></app-edit-skill>
           </li>
         </ng-container>
@@ -185,28 +185,28 @@
 <div class="card mat-card">
   <div class="card-titles">
     <div class="title-container">
-      <h2>Proyects</h2>
-      <a href='javascript:void(0);' (click)="onAddProyect()"><i class="fa-solid fa-plus"></i></a>
+      <h2>Projects</h2>
+      <a href='javascript:void(0);' (click)="onAddProject()"><i class="fa-solid fa-plus"></i></a>
     </div>
 
     <div class="new-item-container">
       <ul class="item-list w-100">
 
-        <li *ngFor="let proyect of person.proyects;index as i" class="mt-4">
+        <li *ngFor="let project of portfolio.projects;index as i" class="mt-4">
 
-          <div class="item-title-edit" [hidden]="isOnEditProyect[i]">
-            <h4>{{proyect.name}}</h4>
+          <div class="item-title-edit" [hidden]="isOnEditProject[i]">
+            <h4>{{project.name}}</h4>
             <div>
-              <a href='javascript:void(0);' (click)="onEditProyect(i)"><i class="fa-solid fa-pen"></i> </a>
-              <a href='javascript:void(0);' (click)="onRemoveProyect(i)"><i class="fa-solid fa-trash"></i> </a>
+              <a href='javascript:void(0);' (click)="onEditProject(i)"><i class="fa-solid fa-pen"></i> </a>
+              <a href='javascript:void(0);' (click)="onRemoveProject(i)"><i class="fa-solid fa-trash"></i> </a>
             </div>
           </div>
 
 
-          <p [hidden]="isOnEditProyect[i]" class="small">{{proyect.description}}</p>
+          <p [hidden]="isOnEditProject[i]" class="small">{{project.description}}</p>
 
-          <app-edit-proyect *ngIf="isOnEditProyect[i]" [person]="person" (offEvent)="offEditProyect($event)"
-             [indexProyect]="i"></app-edit-proyect>
+          <app-edit-project *ngIf="isOnEditProject[i]" [portfolio]="portfolio" (offEvent)="offEditProject($event)"
+            [indexProject]="i"></app-edit-project>
         </li>
 
       </ul>

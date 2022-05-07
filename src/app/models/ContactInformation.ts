@@ -1,8 +1,17 @@
 export class ContactInformation {
+    private _id:number;  
     private _phone: string;
     private _email: string;
     private _linkedIn: string;
     private _remoteRepository: string;
+
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
+    }
 
     public get phone(): string
  {
@@ -44,6 +53,7 @@ export class ContactInformation {
 
   constructor(
 ) {
+    this._id=0
     this._phone = ""
     this._email = ""
     this._linkedIn = ""

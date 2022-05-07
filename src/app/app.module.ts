@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 import { EducationComponent } from './components/education/education.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditPersonComponent } from './components/edit-person/edit-person.component';
+import { EditPortfolioComponent } from './components/edit-portfolio/edit-portfolio.component';
 import { EditExperienceComponent } from './components/edit-experience/edit-experience.component';
 import { AddExperienceComponent } from './components/add-experience/add-experience.component';
 import { EditAboutComponent } from './components/edit-about/edit-about.component';
@@ -16,7 +16,7 @@ import { EditEducationComponent } from './components/edit-education/edit-educati
 import { ShowContactComponent } from './components/show-contact/show-contact.component';
 import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 import { EditSkillComponent } from './components/edit-skill/edit-skill.component';
-import { EditProyectComponent } from './components/edit-proyect/edit-proyect.component';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { ShowProfileComponent } from './components/show-profile/show-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -27,6 +27,11 @@ import { ExperienceItemComponent } from './components/experience-item/experience
 
 import { ExperienceDetailsComponent } from './components/experience-details/experience-details.component';
 import { ExperienceEditComponent } from './components/experience-edit/experience-edit.component';
+import { InterestsComponent } from './components/interests/interests.component';
+import { CollapseComponent } from './components/collapse/collapse.component';
+import { MoreComponent } from './components/more/more.component';
+import { AddSectionComponent } from './components/add-section/add-section.component';
+import { InterestDetailsComponent } from './components/interest-details/interest-details.component';
 
 
 @NgModule({
@@ -35,7 +40,7 @@ import { ExperienceEditComponent } from './components/experience-edit/experience
     
     
     EducationComponent,
-    EditPersonComponent,
+    EditPortfolioComponent,
     EditExperienceComponent,
     AddExperienceComponent,
     EditAboutComponent,
@@ -43,7 +48,7 @@ import { ExperienceEditComponent } from './components/experience-edit/experience
     ShowContactComponent,
     EditContactComponent,
     EditSkillComponent,
-    EditProyectComponent,
+    EditProjectComponent,
     ShowProfileComponent,
     LoginComponent,
     HeaderComponent,
@@ -53,7 +58,12 @@ import { ExperienceEditComponent } from './components/experience-edit/experience
     ExperienceItemComponent,
     
     ExperienceDetailsComponent,
-    ExperienceEditComponent
+    ExperienceEditComponent,
+    InterestsComponent,
+    CollapseComponent,
+    MoreComponent,
+    AddSectionComponent,
+    InterestDetailsComponent
     
   ],
   imports: [

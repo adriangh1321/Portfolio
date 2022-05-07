@@ -1,4 +1,5 @@
 export class Experience {
+    private _id:number;
     private _position: String;
     private _company: string;
     private _description: String;
@@ -10,7 +11,7 @@ export class Experience {
 
 
     constructor() {
-
+        this._id=0
         this._position = ""
         this._company = ""
         this._description = ""
@@ -33,6 +34,15 @@ export class Experience {
         experience.state=state
         experience.country=country
         return experience;
+    }
+
+    
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
     }
 
     public get position(): String {

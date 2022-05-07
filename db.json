@@ -1,5 +1,5 @@
 {
-  "persons": [
+  "portfolios": [
     {
       "id": 1,
       "firstname": "Gustavo",
@@ -107,7 +107,7 @@
           "percent": 90
         }
       ],
-      "proyects": [
+      "projects": [
         {
           "name": "API for SOMOS MAS organization",
           "description": "This API was developed with Java Spring for SOMOS MAS organization in Alkemy Aceleration "
@@ -115,6 +115,18 @@
         {
           "name": "Accommodation Application",
           "description": "This web application was developed with Java Spring that allows renting accommodation "
+        }
+      ],
+      "interests": [
+        {
+          "id": 1,
+          "name": "Games",
+          "image": "./assets/img/game-interest.jpg"
+        },
+        {
+          "id": 2,
+          "name": "Movies",
+          "image": "./assets/img/movie-interest.jpg"
         }
       ]
     }

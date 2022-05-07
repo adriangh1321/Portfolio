@@ -2,8 +2,8 @@ import { JsonPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Person } from 'src/app/models/Person';
-import { PersonService } from 'src/app/services/person.service';
+import { Portfolio } from 'src/app/models/Portfolio';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
 
@@ -14,15 +14,15 @@ import { Cloneable } from 'src/app/utilities/Clone';
 })
 export class EditContactComponent implements OnInit {
   contactForm!: FormGroup;
-  @Input() person: Person;
-  updatedPerson: Person;
+  @Input() portfolio: Portfolio;
+  updatedPortfolio: Portfolio;
   @Output() offEvent = new EventEmitter()
   
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private personService: PersonService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private portfolioService: PortfolioService) {
 
-    this.person = new Person()
-    this.updatedPerson = new Person()
+    this.portfolio = new Portfolio()
+    this.updatedPortfolio = new Portfolio()
 
 
   }
@@ -31,7 +31,7 @@ export class EditContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.updatedPerson = Cloneable.deepCopy(this.person)
+    this.updatedPortfolio = Cloneable.deepCopy(this.portfolio)
     this.contactForm = this.formBuilder.group({
       phone: ['', [Validators.required, Validators.pattern("^[(]{1}[0-9]+[)]{1}[0-9]+$")]],
       email: ['', [Validators.required, Validators.email]],
@@ -39,12 +39,12 @@ export class EditContactComponent implements OnInit {
       remoteRepository: []
     })
     this.contactForm.patchValue({
-      phone: this.updatedPerson.contactInformation.phone,
-      email: this.updatedPerson.contactInformation.email,
-      linkedIn: this.updatedPerson.contactInformation.linkedIn,
-      remoteRepository: this.updatedPerson.contactInformation.remoteRepository
+      phone: this.updatedPortfolio.contactInformation.phone,
+      email: this.updatedPortfolio.contactInformation.email,
+      linkedIn: this.updatedPortfolio.contactInformation.linkedIn,
+      remoteRepository: this.updatedPortfolio.contactInformation.remoteRepository
     })
-    //const json = JSON.parse(JSON.stringify(this.updatedPerson.contactInformation))
+    //const json = JSON.parse(JSON.stringify(this.updatedPortfolio.contactInformation))
     //this.contactForm.patchValue(json)
 
 
@@ -58,11 +58,11 @@ export class EditContactComponent implements OnInit {
       alert('Invalid input');
       return;
     }
-    this.updatedPerson.contactInformation.phone = this.contactForm.get("phone")?.value
-    this.updatedPerson.contactInformation.email = this.contactForm.get("email")?.value
-    this.updatedPerson.contactInformation.linkedIn = this.contactForm.get("linkedIn")?.value
-    this.updatedPerson.contactInformation.remoteRepository = this.contactForm.get("remoteRepository")?.value
-    this.personService.updatePerson(this.updatedPerson.id, this.updatedPerson).subscribe({
+    this.updatedPortfolio.contactInformation.phone = this.contactForm.get("phone")?.value
+    this.updatedPortfolio.contactInformation.email = this.contactForm.get("email")?.value
+    this.updatedPortfolio.contactInformation.linkedIn = this.contactForm.get("linkedIn")?.value
+    this.updatedPortfolio.contactInformation.remoteRepository = this.contactForm.get("remoteRepository")?.value
+    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
       next: data => { alert("The contact data was updated successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })

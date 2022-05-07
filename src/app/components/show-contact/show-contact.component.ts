@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Person } from 'src/app/models/Person';
+import { Portfolio } from 'src/app/models/Portfolio';
 
 
 @Component({
@@ -8,13 +8,13 @@ import { Person } from 'src/app/models/Person';
   styleUrls: ['./show-contact.component.css']
 })
 export class ShowContactComponent implements OnInit {
-@Input() person:Person;
+@Input() portfolio:Portfolio;
 @Output() offEvent=new EventEmitter()
 isOnShowContact:boolean
 @Output() editContactEvent=new EventEmitter()
 
   constructor() { 
-    this.person=new Person()
+    this.portfolio=new Portfolio()
     this.isOnShowContact=true
   }
 

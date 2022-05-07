@@ -9,7 +9,7 @@ import { Experience } from '../models/Experience';
 export class ExperienceService {
 
 
-  private apiUrl: string = "http://localhost:5001/persons"
+  private apiUrl: string = "http://localhost:5001/portfolios"
 
   private _refreshRequired = new Subject<void>()
 

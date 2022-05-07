@@ -1,7 +1,7 @@
 <div id="form-edit-about">
     <form action="javascript:void(0);" #aboutMeForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group pr-2">
-        <input type="text" id="input-about" class="form-control" name="aboutMe" #aboutMe [(ngModel)]="updatedPerson.aboutMe">
+        <input type="text" id="input-about" class="form-control" name="aboutMe" #aboutMe [(ngModel)]="updatedPortfolio.aboutMe">
       </div>
       <button type="submit" class="btn btn-primary" id="btn-edit-about">Save</button>
       <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-about" (click)="emitOff()" >Cancel</button>

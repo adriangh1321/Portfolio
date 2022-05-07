@@ -1,9 +1,20 @@
 export class Education {
+    private _id:number;
     private _title: String;
     private _institute: String;
     private _startDate: Date | null;
     private _endDate: Date | null;
     private _image: String;
+
+    
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
+    }
+
 
     public get title(): String {
         return this._title;
@@ -51,6 +62,7 @@ export class Education {
 
 
     constructor() {
+        this._id=0
         this._title = ""
         this._institute = ""
         this._startDate = null
