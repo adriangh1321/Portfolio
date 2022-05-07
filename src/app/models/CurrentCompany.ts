@@ -1,7 +1,16 @@
 export class CurrentCompany{
+    private _id:number; 
     private _name:string;
     private _image:string;
     private _url:string;
+
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
+    }
 
     public get url(): string {
         return this._url;
@@ -32,6 +41,7 @@ export class CurrentCompany{
 
 
     constructor(){
+        this._id=0;
         this._name="";
         this._image=""
         this._url=";"

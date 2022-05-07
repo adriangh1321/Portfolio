@@ -1,9 +1,19 @@
 import { SkillType } from "../enums/SkillType";
 
 export class Skill {
+    private _id:number;
     private _type: SkillType;
     private _name: string;
     private _percent: number;
+
+    
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
+    }
 
     public get type(): SkillType {
         return this._type;
@@ -40,6 +50,7 @@ export class Skill {
     }
 
     constructor() {
+        this._id=0
         this._type = SkillType.NONE
         this._name = ''
         this._percent = 0

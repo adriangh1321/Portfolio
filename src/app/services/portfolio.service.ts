@@ -7,7 +7,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PortfolioService {
-  private apiUrl: string = "http://localhost:5001/portfolios"
+  private apiUrl: string = "http://localhost:8080/v1/portfolios"
 
   private _refreshRequired = new Subject<void>()
 
