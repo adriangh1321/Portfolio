@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { Experience } from '../models/Experience';
@@ -9,7 +9,7 @@ import { Experience } from '../models/Experience';
 export class ExperienceService {
 
 
-  private apiUrl: string = "http://localhost:5001/portfolios"
+  private apiUrl: string = "http://localhost:8080/v1/experiences"
 
   private _refreshRequired = new Subject<void>()
 
@@ -19,10 +19,10 @@ export class ExperienceService {
 
   constructor(private http: HttpClient) { }
 
-  getExperienceById(id: number): Observable<Experience> {
-    const url = `${this.apiUrl}/${id}`
-    return this.http.get<Experience>(url)
-  }
+  // getExperienceById(id: number): Observable<Experience> {
+  //   const url = `${this.apiUrl}/${id}`
+  //   return this.http.get<Experience>(url)
+  // }
 
   updateExperience(id: number, experience: Experience): Observable<void> {
     const url = `${this.apiUrl}/${id}`
@@ -31,8 +31,20 @@ export class ExperienceService {
         this.RefreshRequired.next()
       })
     );
+
   }
 
+  getExperiencesByPortfolioId(idPortfolio: number): Observable<Experience[]> {
+    let params = new HttpParams().set('portfolioId', idPortfolio)
+    return this.http.get<Experience[]>(this.apiUrl, { params: params })
+  }
 
+  addExperience(experience:any): Observable<void> {
+    return this.http.post<void>(this.apiUrl, experience).pipe(
+      tap(() => {
+        this.RefreshRequired.next()
+      })
+    );
+  }
 
 }

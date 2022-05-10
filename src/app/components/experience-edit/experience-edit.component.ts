@@ -26,18 +26,18 @@ export class ExperienceEditComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.experienceService.updateExperience(this.updatedExperience.id, this.updatedExperience).subscribe({
-    //   next: data => { alert("The experience was updated successfull!") },
-    //   error: error => { alert("There was a error"); console.log(error) }
-    // })
+    this.experienceService.updateExperience(this.updatedExperience.id, this.updatedExperience).subscribe({
+      next: data => { alert("The experience was updated successfull!") },
+      error: error => { alert("There was a error"); console.log(error) }
+    })
 
     this.onCloseEdit()
   }
-  onCloseEdit(){
+  onCloseEdit() {
     this.onShowDetails.emit()
   }
 
- 
+
 
   onImageExperienceUpload(e: Event) {
     let file = (e.target as HTMLInputElement).files![0]

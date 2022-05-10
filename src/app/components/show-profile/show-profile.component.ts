@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { SkillType } from 'src/app/enums/SkillType';
 import { ContactInformation } from 'src/app/models/ContactInformation';
@@ -7,6 +8,7 @@ import { Experience } from 'src/app/models/Experience';
 import { Portfolio } from 'src/app/models/Portfolio';
 import { Project } from 'src/app/models/Project';
 import { Skill } from 'src/app/models/Skill';
+import { ExperienceService } from 'src/app/services/experience.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
@@ -33,7 +35,7 @@ export class ShowProfileComponent implements OnInit {
   updatedPortfolio: Portfolio;
   skillType = SkillType
 
-  constructor(private portfolioService: PortfolioService) {
+  constructor(private portfolioService: PortfolioService,private experienceService:ExperienceService) {
 
     // this.portfolio = new Portfolio();
     // this.portfolio.firstname = "Gustavo"
@@ -99,10 +101,16 @@ export class ShowProfileComponent implements OnInit {
   }
 
   onAddExperience() {
-    let experience: Experience = Experience.factoryAllProperties("Position", "Company", "Description", "./assets/img/add-image.png", null, null, "State", "Country")
-    this.updatedPortfolio.experiences.push(experience.toContract())
-    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
-      next: data => { alert("The new experience was added successfull!") },
+    const newExperience:any={position:"Position",company:"Company",description:"Description",image:"./assets/img/add-image.png",state:"State",country:"Country",idPortfolio:parseInt(localStorage.getItem("id_portfolio")!),startDate:new Date().toISOString().slice(0, 10)}
+    console.log(new Date().toISOString().split('T'))
+    // let experience: Experience = Experience.factoryAllProperties("Position", "Company", "Description", "./assets/img/add-image.png", null, null, "State", "Country")
+    // this.updatedPortfolio.experiences.push(experience.toContract())
+    // this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
+    //   next: data => { alert("The new experience was added successfull!") },
+    //   error: error => { alert("There was a error"); console.log(error) }
+    // })
+    this.experienceService.addExperience(newExperience).subscribe({
+      next: data => { alert("The experience was added successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
@@ -224,11 +232,12 @@ export class ShowProfileComponent implements OnInit {
       console.log("---------------")
       console.log(this.portfolio)
       console.log(this.updatedPortfolio)
+      localStorage.setItem("id_portfolio",this.portfolio.id.toString())
      
     })
   }
   ngOnInit(): void {
-
+    
 
     this.getPortfolio(1);
 
