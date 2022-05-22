@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { Portfolio } from '../models/Portfolio';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { Experience } from '../models/Experience';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,19 @@ export class PortfolioService {
 
   getPortfolioById(id: number): Observable<Portfolio> {
     const url = `${this.apiUrl}/${id}`
-    return this.http.get<Portfolio>(url)
+    return this.http.get<Portfolio>(url).pipe(
+      map(response => {
+        response.experiences.forEach(experience => {
+          if (experience.startDate !== null) {
+            experience.startDate = moment(experience.startDate, 'YYYY-MM-DD').toDate()
+          }
+
+          if (experience.endDate !== null) {
+            experience.endDate = moment(experience.endDate, 'YYYY-MM-DD').toDate()
+          }
+        })
+        return response
+      }))
   }
 
   updatePortfolio(id: number, portfolio: Portfolio): Observable<void> {
@@ -30,6 +44,6 @@ export class PortfolioService {
       })
     );
   }
-  
+
 }
 

@@ -32,6 +32,7 @@ import { CollapseComponent } from './components/collapse/collapse.component';
 import { MoreComponent } from './components/more/more.component';
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { InterestDetailsComponent } from './components/interest-details/interest-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { InterestDetailsComponent } from './components/interest-details/interest
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

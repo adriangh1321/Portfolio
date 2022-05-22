@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Experience } from 'src/app/models/Experience';
+import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
   selector: 'app-experience-details',
@@ -10,7 +11,7 @@ import { Experience } from 'src/app/models/Experience';
 export class ExperienceDetailsComponent implements OnInit {
   @Input() experience: Experience;
   @Output() onToggleEditExperience = new EventEmitter()
-  constructor() {
+  constructor(private experienceService:ExperienceService) {
     this.experience = new Experience()
   }
 
@@ -22,7 +23,10 @@ export class ExperienceDetailsComponent implements OnInit {
   }
 
   removeExperience(){
-    
+    this.experienceService.deleteExperience(this.experience.id).subscribe({
+      next:data=>alert('The experience was deleted successfull'),
+      error:error=>alert('There was error')
+    })
   }
 
 }
