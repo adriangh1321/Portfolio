@@ -1,50 +1,85 @@
 <div class="experience-container">
-    <img src="{{updatedExperience.image}}" alt="Add new image">
+    <img [src]="experienceForm.controls['image'].value" alt="Add new image">
 
     <div class="col pr-2">
-        <form action="javascript:void(0);" #experienceForm="ngForm" (ngSubmit)="onSubmit()">
-    
+        <form action="javascript:void(0);" [formGroup]="experienceForm" (ngSubmit)="onSubmit()" novalidate>
+
             <div class="form-group ">
                 <label for="experience-position-indexExperience">Job position</label>
-                <input type="text" id="experience-position-indexExperience" class="form-control" name="position" #position="ngModel"
-                    [(ngModel)]="updatedExperience.position">
+                <input type="text" id="experience-position-indexExperience" class="form-control"
+                    formControlName="position">
+                <div *ngIf="m.position.touched && m.position.invalid" class="alert alert-danger">
+                    <div *ngIf="m.position.errors?.required">Please provide a position</div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="experience-company-indexExperience">Company</label>
-                <input type="text" id="experience-company-indexExperience" class="form-control" name="company" #company="ngModel"
-                    [(ngModel)]="updatedExperience.company">
+                <input type="text" id="experience-company-indexExperience" class="form-control"
+                    formControlName="company">
+                <div *ngIf="m.company.touched && m.company.invalid" class="alert alert-danger">
+                    <div *ngIf="m.company.errors?.required">Please provide a company</div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="experience-description-indexExperience">Job description</label>
-                <input type="text" id="experience-description-indexExperience" class="form-control" name="description"
-                    #description="ngModel" [(ngModel)]="updatedExperience.description">
+                <input type="text" id="experience-description-indexExperience" class="form-control"
+                    formControlName="description">
+                <div *ngIf="m.description.touched && m.description.invalid" class="alert alert-danger">
+                    <div *ngIf="m.description.errors?.required">Please provide a description</div>
+                </div>
             </div>
+           
             <div class="form-group">
-                <label for="experience-start-indexExperience">Start date</label>
-                <input type="date" id="experience-start-indexExperience" class="form-control" name="startDate" #startDate="ngModel"
-                    [ngModel]="updatedExperience.startDate | date:'yyyy-MM-dd'" (ngModelChange)="setStartDate(startDate.value)">
+                <label for="experience-end-indexExperience">Start date</label>
+                <div class="input-group">
+                    <input id="experience-start-indexExperience" class="form-control" placeholder="yyyy-mm-dd"
+                        formControlName="startDate" ngbDatepicker #d="ngbDatepicker">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+                            class="fas fa-calendar-alt fa-fw"></i></button>
+                </div>
+                <div *ngIf="m.startDate.touched && m.startDate.invalid" class="alert alert-danger">
+                    <div *ngIf="m.startDate.errors?.required">You must provide a start date</div>
+                    <div *ngIf="m.startDate.errors?.ngbDate">The start date is invalid</div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="experience-end-indexExperience">End date</label>
-                <input type="date" id="experience-end-indexExperience" class="form-control" name="endDate" #endDate="ngModel"
-                    [ngModel]="updatedExperience.endDate | date:'yyyy-MM-dd'" (ngModelChange)="setEndDate(endDate.value)">
+                <div class="input-group">
+                    <input id="experience-end-indexExperience" class="form-control" placeholder="yyyy-mm-dd"
+                        formControlName="endDate" ngbDatepicker #dEnd="ngbDatepicker">
+                    <button class="btn btn-outline-secondary calendar" (click)="dEnd.toggle()" type="button"><i
+                            class="fas fa-calendar-alt fa-fw"></i></button>
+                </div>
+                <div *ngIf="m.endDate.touched && m.endDate.invalid" class="alert alert-danger">
+                    The end date is invalid
+                </div>
             </div>
+
             <div class="form-group">
                 <label for="experience-state-indexExperience">State</label>
-                <input type="text" id="experience-state-indexExperience" class="form-control" name="state" #state="ngModel"
-                    [(ngModel)]="updatedExperience.state">
+                <input type="text" id="experience-state-indexExperience" class="form-control" formControlName="state">
+                <div *ngIf="m.state.touched && m.state.invalid" class="alert alert-danger">
+                    <div *ngIf="m.state.errors?.required">Please provide a state</div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="experience-country-indexExperience">Country</label>
-                <input type="text" id="experience-country-indexExperience" class="form-control" name="country" #country="ngModel"
-                    [(ngModel)]="updatedExperience.country">
+                <input type="text" id="experience-country-indexExperience" class="form-control"
+                    formControlName="country">
+                <div *ngIf="m.country.touched && m.country.invalid" class="alert alert-danger">
+                    <div *ngIf="m.country.errors?.required">Please provide a country</div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="experience-image-indexExperience">Company image file</label>
-                <input type="file" id="experience-image-indexExperience" class="form-control-file" (change)="onImageExperienceUpload($event)">
+                <input type="file" id="experience-image-indexExperience" class="form-control-file"
+                    (change)="onImageExperienceUpload($event)">
+                <input type="hidden" formControlName="image">
             </div>
-            <button type="submit" class="btn btn-primary" id="btn-edit-experience-indexExperience">Save</button>
-            <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-experience-indexExperience" (click)="onCloseEdit()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-edit-experience-indexExperience"
+                [disabled]="!experienceForm.valid">Save</button>
+            <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-experience-indexExperience"
+                (click)="onCloseEdit()">Cancel</button>
         </form>
     </div>
 

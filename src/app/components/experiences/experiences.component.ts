@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Experience } from 'src/app/models/Experience';
+import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
   selector: 'app-experiences',
@@ -8,11 +9,15 @@ import { Experience } from 'src/app/models/Experience';
 })
 export class ExperiencesComponent implements OnInit {
 @Input() experiences:Experience[];
-  constructor() { 
+  constructor(private experienceService:ExperienceService) { 
     this.experiences=[]
   }
 
   ngOnInit(): void {
+    this.experienceService.RefreshRequired.subscribe(()=>this.getExperiences(parseInt(localStorage.getItem("id_portfolio")!)))
   }
 
+  getExperiences(idPortfolio:number){
+  this.experienceService.getExperiencesByPortfolioId(idPortfolio).subscribe(experiences=>this.experiences=experiences)
+  }
 }
