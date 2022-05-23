@@ -1,0 +1,17 @@
+<div class="new-item-container">
+    <img src="{{education.image}}" alt="Add new image">
+    <div class="item-text">
+        <div class="item-title-edit">
+            <h4>{{education.title}}</h4>
+            <div>
+                <a href='javascript:void(0);' (click)="editEducation()"><i class="fa-solid fa-pen"></i> </a>
+                <a href='javascript:void(0);' (click)="removeEducation()"><i class="fa-solid fa-trash"></i> </a>
+            </div>
+        </div>
+        <p class="font-weight-bold mb-1">{{education.institute}}</p>
+        <p class="font-weight-light mb-1">From <span>{{education.startDate? (education.startDate |
+                date:'dd-MM-yyyy'):'-'}}</span> to <span>{{education.endDate? (education.endDate |
+                date:'dd-MM-yyyy'):'-'}}</span> </p>
+    </div>
+</div>
+

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SkillType } from 'src/app/enums/SkillType';
-import { Education } from 'src/app/models/Education';
 import { Portfolio } from 'src/app/models/Portfolio';
 import { Project } from 'src/app/models/Project';
 import { Skill } from 'src/app/models/Skill';
+import { EducationService } from 'src/app/services/education.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Cloneable } from 'src/app/utilities/Clone';
@@ -17,13 +17,13 @@ export class ShowProfileComponent implements OnInit {
   isOnEditPortfolio: Boolean = false;
   
   isOnEditAbout: Boolean;
-  isOnEditEducation: Boolean[];
+  
   isOnShowContact: Boolean;
   isOnEditContact: Boolean;
   isOnEditSkill: Boolean[];
   isOnEditProject: Boolean[]
   
-  indexEducation: number;
+  
   indexHardSkill: number;
   indexSoftSkill: number;
   indexProject: number;
@@ -31,12 +31,12 @@ export class ShowProfileComponent implements OnInit {
   updatedPortfolio: Portfolio;
   skillType = SkillType
 
-  constructor(private portfolioService: PortfolioService,private experienceService:ExperienceService) {
+  constructor(private portfolioService: PortfolioService,private experienceService:ExperienceService,private educationService:EducationService) {
 
     this.portfolio = new Portfolio();
     this.updatedPortfolio = new Portfolio();
     
-    this.isOnEditEducation = [];
+    
     this.isOnEditSkill = [];
     this.isOnEditProject = [];
 
@@ -45,7 +45,7 @@ export class ShowProfileComponent implements OnInit {
     this.isOnShowContact = false;
     this.isOnEditContact = false;
    
-    this.indexEducation = 0;
+    
     this.indexHardSkill = 0;
     this.indexSoftSkill = 0;
     this.indexProject = 0;
@@ -68,10 +68,10 @@ export class ShowProfileComponent implements OnInit {
   }
 
   onAddEducation() {
-    let education: Education = Education.factoryAllProperties("Title", "Institute", null, null, "./assets/img/add-image.png")
-    this.updatedPortfolio.educations.push(education.toContract())
-    this.portfolioService.updatePortfolio(this.updatedPortfolio.id,this.updatedPortfolio).subscribe({
-      next: data => { alert("The new education was added successfull!") },
+    const newEducation:any={title:"Title",institute:"Institute",image:"./assets/img/add-image.png",idPortfolio:parseInt(localStorage.getItem("id_portfolio")!),startDate:new Date().toISOString().slice(0, 10)}
+    
+    this.educationService.addEducation(newEducation).subscribe({
+      next: data => { alert("The education was added successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
@@ -138,9 +138,7 @@ export class ShowProfileComponent implements OnInit {
   offEditAbout() {
     this.isOnEditAbout = false;
   }
-  offEditEducation(indexEducation: number) {
-    this.isOnEditEducation[indexEducation] = false;
-  }
+ 
 
   offShowContact() {
     this.isOnShowContact = false;
@@ -159,10 +157,7 @@ export class ShowProfileComponent implements OnInit {
   onEditAbout() {
     this.isOnEditAbout = true;
   }
-  onEditEducation(i: number) {
-    this.indexEducation = i;
-    this.isOnEditEducation[this.indexEducation] = true;
-  }
+  
   onEditContact() {
     this.isOnEditContact = true
   }
@@ -175,7 +170,7 @@ export class ShowProfileComponent implements OnInit {
       this.portfolio = res
 
       
-      this.isOnEditEducation = new Array(this.portfolio.educations.length).fill(false);
+      
       this.isOnEditSkill = new Array(this.portfolio.skills.length).fill(false);
       this.isOnEditProject = new Array(this.portfolio.projects.length).fill(false);
       this.updatedPortfolio = Cloneable.deepCopy(this.portfolio)

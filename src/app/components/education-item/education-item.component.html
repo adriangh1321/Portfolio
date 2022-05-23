@@ -1,0 +1,11 @@
+<app-education-details 
+*ngIf="isOnShowDetails" 
+[education]="education" 
+(onToggleEditEducation)="toggleEditEducation()">
+</app-education-details>
+
+<app-education-edit 
+*ngIf="!isOnShowDetails"
+[education]="education" 
+(onShowDetails)="showDetails()">
+</app-education-edit>

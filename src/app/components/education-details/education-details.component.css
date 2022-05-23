@@ -1,0 +1,36 @@
+.new-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 3%;
+    gap: 15px;
+}
+
+.new-item-container div {
+    flex: 1;
+}
+
+.new-item-container img {
+    width: 100px;
+    height: 100px;
+}
+
+.item-text {
+    flex: 1;
+}
+
+.item-title-edit {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+
+}
+
+.item-title-edit div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+
+}
