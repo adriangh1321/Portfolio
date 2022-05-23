@@ -32,6 +32,16 @@ export class PortfolioService {
             experience.endDate = moment(experience.endDate, 'YYYY-MM-DD').toDate()
           }
         })
+        response.educations.forEach(education => {
+          if (education.startDate !== null) {
+            education.startDate = moment(education.startDate, 'YYYY-MM-DD').toDate()
+          }
+
+          if (education.endDate !== null) {
+            education.endDate = moment(education.endDate, 'YYYY-MM-DD').toDate()
+          }
+        })
+
         return response
       }))
   }

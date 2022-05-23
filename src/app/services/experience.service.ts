@@ -20,11 +20,6 @@ export class ExperienceService {
 
   constructor(private http: HttpClient) { }
 
-  // getExperienceById(id: number): Observable<Experience> {
-  //   const url = `${this.apiUrl}/${id}`
-  //   return this.http.get<Experience>(url)
-  // }
-
   updateExperience(id: number, experience: Experience): Observable<void> {
     const url = `${this.apiUrl}/${id}`
     return this.http.put<void>(url, experience).pipe(

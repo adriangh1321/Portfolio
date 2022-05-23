@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
-import { EducationComponent } from './components/education/education.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditPortfolioComponent } from './components/edit-portfolio/edit-portfolio.component';
 import { EditExperienceComponent } from './components/edit-experience/edit-experience.component';
@@ -33,6 +33,10 @@ import { MoreComponent } from './components/more/more.component';
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { InterestDetailsComponent } from './components/interest-details/interest-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EducationsComponent } from './components/educations/educations.component';
+import { EducationItemComponent } from './components/education-item/education-item.component';
+import { EducationDetailsComponent } from './components/education-details/education-details.component';
+import { EducationEditComponent } from './components/education-edit/education-edit.component';
 
 
 @NgModule({
@@ -40,7 +44,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     
     
-    EducationComponent,
+    
     EditPortfolioComponent,
     EditExperienceComponent,
     AddExperienceComponent,
@@ -64,7 +68,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CollapseComponent,
     MoreComponent,
     AddSectionComponent,
-    InterestDetailsComponent
+    InterestDetailsComponent,
+    EducationsComponent,
+    EducationItemComponent,
+    EducationDetailsComponent,
+    EducationEditComponent
     
   ],
   imports: [
