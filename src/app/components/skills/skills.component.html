@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-center">
+    <ul class="item-list text-center w-75 ">
+        <ng-container *ngFor="let skill of skills;index as i">
+            <app-skill-item *ngIf="skill.type===skillType"[skill]="skills[i]"></app-skill-item>
+        </ng-container>
+    </ul>
+</div>

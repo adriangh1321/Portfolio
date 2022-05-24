@@ -95,35 +95,13 @@
       <h2>Hard Skills</h2>
       <a href='javascript:void(0);' (click)="onAddSkill(skillType.HARD)"><i class="fa-solid fa-plus"></i></a>
     </div>
-
-    <div class="d-flex justify-content-center">
-      <ul class="item-list text-center w-75 ">
-        <ng-container *ngFor="let hardSkill of portfolio.skills;index as i">
-          <li *ngIf="hardSkill.type===skillType.HARD">
-
-
-            <div class="item-title-edit" [hidden]="isOnEditSkill[i]">
-              <p class="mb-0 d-flex justify-content-center w-100">{{hardSkill.name}}</p>
-              <div>
-                <a href='javascript:void(0);' (click)="onEditSkill(i)"><i class="fa-solid fa-pen"></i> </a>
-                <a href='javascript:void(0);' (click)="onRemoveSkill(i)"><i class="fa-solid fa-trash"></i> </a>
-              </div>
-            </div>
-
-            <div class="progress mb-2 " [hidden]="isOnEditSkill[i]">
-              <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="hardSkill.percent"
-                aria-valuenow="hardSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <app-edit-skill *ngIf="isOnEditSkill[i]" [portfolio]="portfolio" (offEvent)="offEditSkill($event)"
-              [indexSkill]="i"></app-edit-skill>
-          </li>
-        </ng-container>
-      </ul>
-    </div>
+   <app-skills 
+   [skills]="portfolio.skills" 
+   [skillType]="skillType.HARD">
+  </app-skills>
 
   </div>
 </div>
-
 
 <div class="card mat-card">
   <div class="card-titles">
@@ -131,31 +109,11 @@
       <h2>Soft Skills</h2>
       <a href='javascript:void(0);' (click)="onAddSkill(skillType.SOFT)"><i class="fa-solid fa-plus"></i></a>
     </div>
+   <app-skills 
+   [skills]="portfolio.skills" 
+   [skillType]="skillType.SOFT">
+  </app-skills>
 
-    <div class="d-flex justify-content-center">
-      <ul class="item-list text-center w-75 ">
-        <ng-container *ngFor="let softSkill of portfolio.skills;index as i">
-          <li *ngIf="softSkill.type===skillType.SOFT">
-
-
-            <div class="item-title-edit" [hidden]="isOnEditSkill[i]">
-              <p class="mb-0 d-flex justify-content-center w-100">{{softSkill.name}}</p>
-              <div>
-                <a href='javascript:void(0);' (click)="onEditSkill(i)"><i class="fa-solid fa-pen"></i> </a>
-                <a href='javascript:void(0);' (click)="onRemoveSkill(i)"><i class="fa-solid fa-trash"></i> </a>
-              </div>
-            </div>
-
-            <div class="progress mb-2 " [hidden]="isOnEditSkill[i]">
-              <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="softSkill.percent"
-                aria-valuenow="softSkill.percent" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <app-edit-skill *ngIf="isOnEditSkill[i]" [portfolio]="portfolio" (offEvent)="offEditSkill($event)"
-              [indexSkill]="i"></app-edit-skill>
-          </li>
-        </ng-container>
-      </ul>
-    </div>
   </div>
 </div>
 
