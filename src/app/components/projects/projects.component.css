@@ -1,0 +1,21 @@
+.item-list {
+    list-style: none;
+    padding: 0;
+}
+
+.new-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 3%;
+    gap: 15px;
+}
+
+.new-item-container div {
+    flex: 1;
+}
+
+.new-item-container img {
+    width: 100px;
+    height: 100px;
+}

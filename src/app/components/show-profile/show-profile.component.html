@@ -124,28 +124,6 @@
       <h2>Projects</h2>
       <a href='javascript:void(0);' (click)="onAddProject()"><i class="fa-solid fa-plus"></i></a>
     </div>
-
-    <div class="new-item-container">
-      <ul class="item-list w-100">
-
-        <li *ngFor="let project of portfolio.projects;index as i" class="mt-4">
-
-          <div class="item-title-edit" [hidden]="isOnEditProject[i]">
-            <h4>{{project.name}}</h4>
-            <div>
-              <a href='javascript:void(0);' (click)="onEditProject(i)"><i class="fa-solid fa-pen"></i> </a>
-              <a href='javascript:void(0);' (click)="onRemoveProject(i)"><i class="fa-solid fa-trash"></i> </a>
-            </div>
-          </div>
-
-
-          <p [hidden]="isOnEditProject[i]" class="small">{{project.description}}</p>
-
-          <app-edit-project *ngIf="isOnEditProject[i]" [portfolio]="portfolio" (offEvent)="offEditProject($event)"
-            [indexProject]="i"></app-edit-project>
-        </li>
-
-      </ul>
-    </div>
+    <app-projects [projects]="portfolio.projects"></app-projects>
   </div>
 </div>

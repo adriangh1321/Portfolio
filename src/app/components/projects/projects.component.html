@@ -1,0 +1,7 @@
+<div class="new-item-container">
+    <ul class="item-list w-100">
+      <li *ngFor="let project of projects;index as i" class="mt-4">
+        <app-project-item [project]="project"></app-project-item>    
+      </li>
+    </ul>
+  </div>

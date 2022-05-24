@@ -1,30 +1,20 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditPortfolioComponent } from './components/edit-portfolio/edit-portfolio.component';
-
 import { AddExperienceComponent } from './components/add-experience/add-experience.component';
 import { EditAboutComponent } from './components/edit-about/edit-about.component';
-
 import { ShowContactComponent } from './components/show-contact/show-contact.component';
 import { EditContactComponent } from './components/edit-contact/edit-contact.component';
-
-import { EditProjectComponent } from './components/edit-project/edit-project.component';
 import { ShowProfileComponent } from './components/show-profile/show-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ExperiencesComponent } from './components/experiences/experiences.component';
-
 import { ExperienceItemComponent } from './components/experience-item/experience-item.component';
-
 import { ExperienceDetailsComponent } from './components/experience-details/experience-details.component';
 import { ExperienceEditComponent } from './components/experience-edit/experience-edit.component';
 import { InterestsComponent } from './components/interests/interests.component';
@@ -41,6 +31,10 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { SkillItemComponent } from './components/skill-item/skill-item.component';
 import { SkillDetailsComponent } from './components/skill-details/skill-details.component';
 import { SkillEditComponent } from './components/skill-edit/skill-edit.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { ProjectItemComponent } from './components/project-item/project-item.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { ProjectEditComponent } from './components/project-edit/project-edit.component';
 
 
 @NgModule({
@@ -51,7 +45,6 @@ import { SkillEditComponent } from './components/skill-edit/skill-edit.component
     EditAboutComponent,
     ShowContactComponent,
     EditContactComponent,
-    EditProjectComponent,
     ShowProfileComponent,
     LoginComponent,
     HeaderComponent,
@@ -72,7 +65,11 @@ import { SkillEditComponent } from './components/skill-edit/skill-edit.component
     SkillsComponent,
     SkillItemComponent,
     SkillDetailsComponent,
-    SkillEditComponent
+    SkillEditComponent,
+    ProjectsComponent,
+    ProjectItemComponent,
+    ProjectDetailsComponent,
+    ProjectEditComponent
 
   ],
   imports: [
