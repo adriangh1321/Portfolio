@@ -1,0 +1,15 @@
+<app-skill-details
+*ngIf="isOnShowDetails" 
+[skill]="skill" 
+(onToggleEditSkill)="toggleEditSkill()">
+></app-skill-details>
+
+<app-skill-edit 
+*ngIf="!isOnShowDetails"
+[skill]="skill" 
+(onShowDetails)="showDetails()">
+</app-skill-edit>
+
+
+
+

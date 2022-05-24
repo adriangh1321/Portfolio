@@ -1,0 +1,15 @@
+.item-title-edit {
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+  
+  }
+
+  .item-title-edit div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+  
+  }
