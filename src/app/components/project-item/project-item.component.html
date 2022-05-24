@@ -1,0 +1,15 @@
+<app-project-details
+*ngIf="isOnShowDetails" 
+[project]="project" 
+(onToggleEditProject)="toggleEditProject()">
+></app-project-details>
+
+<app-project-edit
+*ngIf="!isOnShowDetails"
+[project]="project"  
+(onShowDetails)="showDetails()">
+></app-project-edit>
+
+
+
+ 

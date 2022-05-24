@@ -5,6 +5,7 @@ import { Project } from 'src/app/models/Project';
 import { EducationService } from 'src/app/services/education.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { Cloneable } from 'src/app/utilities/Clone';
 
@@ -18,21 +19,25 @@ export class ShowProfileComponent implements OnInit {
   isOnEditAbout: Boolean;
   isOnShowContact: Boolean;
   isOnEditContact: Boolean;
-  isOnEditProject: Boolean[]
-  indexProject: number;
+
+
   portfolio: Portfolio;
   updatedPortfolio: Portfolio;
   skillType = SkillType
 
-  constructor(private portfolioService: PortfolioService, private experienceService: ExperienceService, private educationService: EducationService, private skillService: SkillService) {
+  constructor(
+    private portfolioService: PortfolioService,
+    private experienceService: ExperienceService,
+    private educationService: EducationService,
+    private skillService: SkillService,
+    private projectService: ProjectService) {
 
     this.portfolio = new Portfolio();
     this.updatedPortfolio = new Portfolio();
-    this.isOnEditProject = [];
     this.isOnEditAbout = false;
     this.isOnShowContact = false;
     this.isOnEditContact = false;
-    this.indexProject = 0;
+
   }
   onEditPortfolio() {
     this.isOnEditPortfolio = true;
@@ -67,30 +72,20 @@ export class ShowProfileComponent implements OnInit {
   }
 
   onAddProject() {
-    let project = Project.factoryAllProperties("Name", "Description");
-    this.updatedPortfolio.projects.push(project.toContract());
-    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
-      next: data => { alert("The new project was added successfull!") },
+    const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
+    this.projectService.addProject(newProject).subscribe({
+      next: data => { alert("The project was added successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
     })
   }
 
-  onEditProject(i: number) {
-    this.indexProject = i;
-    this.isOnEditProject[this.indexProject] = true;
-  }
+ 
 
   onShowContact() {
     this.isOnShowContact = true;
   }
 
-  onRemoveProject(i: number) {
-    this.updatedPortfolio.projects.splice(i, 1)
-    this.portfolioService.updatePortfolio(this.updatedPortfolio.id, this.updatedPortfolio).subscribe({
-      next: data => { alert("The project was deleted successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
-    })
-  }
+  
 
   offEditAbout() {
     this.isOnEditAbout = false;
@@ -105,9 +100,7 @@ export class ShowProfileComponent implements OnInit {
     this.onShowContact()
   }
 
-  offEditProject(indexProject: number) {
-    this.isOnEditProject[indexProject] = false;
-  }
+  
 
   onEditAbout() {
     this.isOnEditAbout = true;
@@ -123,7 +116,7 @@ export class ShowProfileComponent implements OnInit {
       this.portfolio = res
 
 
-      this.isOnEditProject = new Array(this.portfolio.projects.length).fill(false);
+      
       this.updatedPortfolio = Cloneable.deepCopy(this.portfolio)
       console.log("---------------")
       console.log(this.portfolio)

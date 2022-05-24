@@ -1,0 +1,23 @@
+<form action="javascript:void(0);" [formGroup]="projectForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="form-group ">
+        <label for="project-name-indexProject">Project name</label>
+        <input type="text" id="project-name-indexProject" class="form-control" formControlName="name">
+        <div *ngIf="m.name.touched && m.name.invalid" class="alert alert-danger">
+            <div *ngIf="m.name.errors?.required">Please provide a name</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="project-description-indexProject">Description</label>
+        <input type="text" id="project-description-indexProject" class="form-control" formControlName="description">
+        <div *ngIf="m.description.touched && m.description.invalid" class="alert alert-danger">
+            <div *ngIf="m.description.errors?.required">Please provide a description</div>
+            
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="btn-edit-project-indexProject"
+        [disabled]="!projectForm.valid">Save</button>
+    <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-project-indexProject"
+        (click)="onCloseEdit()">Cancel</button>
+</form>
