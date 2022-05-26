@@ -1,0 +1,93 @@
+<div id="edit-image-container">
+    <img class="profile-image" [src]="basicInfoForm.controls['image'].value" alt="photo">
+</div>
+
+<div class="mb-4">
+    <form action="javascript:void();" [formGroup]="basicInfoForm" (ngSubmit)="onSubmit()">
+        <div class="form-row col-md-12 p-0 m-0">
+            <div class="form-group col-md-6 p-0 pr-2 ">
+                <div class="form-group">
+                    <label for="education-image-indexEducation">Profile photo</label>
+                    <input type="file" id="education-image-indexEducation" class="form-control-file"
+                        (change)="onImageUpload($event)">
+                    <input type="hidden" formControlName="image">
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-firstname">Firstname</label>
+                    <input type="text" id="input-firstname" class="form-control" formControlName="firstname">
+                    <div *ngIf="m.firstname.touched && m.firstname.invalid" class="alert alert-danger">
+                        <div *ngIf="m.firstname.errors?.required">Please provide a firstname</div>
+                        <div *ngIf="m.firstname.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-lastname">Lastname</label>
+                    <input type="text" id="input-lastname" class="form-control" formControlName="lastname">
+                    <div *ngIf="m.lastname.touched && m.lastname.invalid" class="alert alert-danger">
+                        <div *ngIf="m.lastname.errors?.required">Please provide a lastname</div>
+                        <div *ngIf="m.lastname.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-ocupation">Ocupation</label>
+                    <input type="text" id="input-ocupation" class="form-control" formControlName="ocupation">
+                    <div *ngIf="m.ocupation.touched && m.ocupation.invalid" class="alert alert-danger">
+                        <div *ngIf="m.ocupation.errors?.required">Please provide a ocupation</div>
+                        <div *ngIf="m.ocupation.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-country">Country</label>
+                    <input type="text" id="input-country" class="form-control" formControlName="country">
+                    <div *ngIf="m.country.touched && m.country.invalid" class="alert alert-danger">
+                        <div *ngIf="m.country.errors?.required">Please provide a country</div>
+                        <div *ngIf="m.country.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 p-0">
+                    <label for="input-location">State</label>
+                    <input type="text" id="input-location" class="form-control" formControlName="state">
+                    <div *ngIf="m.state.touched && m.state.invalid" class="alert alert-danger">
+                        <div *ngIf="m.state.errors?.required">Please provide a state</div>
+                        <div *ngIf="m.state.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!basicInfoForm.valid">Save</button>
+        <button type="button" class="btn btn-secondary ml-2" (click)="onCloseEdit()">Cancel</button>
+
+
+    </form>
+</div>
+
+
+
+<!-- <div id="edit-image-container">
+    
+    <img id="current-company-image" src="{{updatedPortfolio.currentCompany.image}}" alt="">
+</div> -->
+
+<!-- <div class="form-group col-md-6 p-0 pr-2">
+
+    <div class="form-group col-md-12 p-0">
+        <label for="input-company-image">Company image</label>
+        <input type="file" id="input-company-image" class="form-control-file" name="companyImage"
+            (change)="onImageCompanyUpload($event)">
+    </div>
+    <div class="form-group col-md-12 p-0">
+        <label for="input-current-company-name">Current company</label>
+        <input type="text" id="input-current-company-name" class="form-control" name="currentCompanyName"
+            #currentCompanyName="ngModel" [(ngModel)]="updatedPortfolio.currentCompany.name">
+    </div>
+    <div class="form-group col-md-12 p-0">
+        <label for="input-current-company-url">Company url</label>
+        <input type="text" id="input-current-company-url" class="form-control" name="currentCompanyUrl"
+            #currentCompanyUrl="ngModel" [(ngModel)]="updatedPortfolio.currentCompany.url">
+    </div>
+    
+
+</div> -->

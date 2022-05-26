@@ -15,11 +15,8 @@ import { Cloneable } from 'src/app/utilities/Clone';
 })
 export class ShowProfileComponent implements OnInit {
   isOnEditPortfolio: Boolean = false;
-
   isOnShowContact: Boolean;
   isOnEditContact: Boolean;
-
-
   portfolio: Portfolio;
   updatedPortfolio: Portfolio;
   skillType = SkillType
@@ -30,10 +27,8 @@ export class ShowProfileComponent implements OnInit {
     private educationService: EducationService,
     private skillService: SkillService,
     private projectService: ProjectService) {
-
     this.portfolio = new Portfolio();
     this.updatedPortfolio = new Portfolio();
-
     this.isOnShowContact = false;
     this.isOnEditContact = false;
 
@@ -78,16 +73,9 @@ export class ShowProfileComponent implements OnInit {
     })
   }
 
-
-
   onShowContact() {
     this.isOnShowContact = true;
   }
-
-
-
-
-
 
   offShowContact() {
     this.isOnShowContact = false;
@@ -97,14 +85,9 @@ export class ShowProfileComponent implements OnInit {
     this.onShowContact()
   }
 
-
-
-
-
   onEditContact() {
     this.isOnEditContact = true
   }
-
 
   getPortfolio(id: number) {
     this.portfolioService.getPortfolioById(id).subscribe((res) => {
@@ -115,16 +98,10 @@ export class ShowProfileComponent implements OnInit {
     })
   }
   ngOnInit(): void {
-
-
     this.getPortfolio(1);
-
     this.portfolioService.RefreshRequired.subscribe(() => {
       this.getPortfolio(1)
-
     })
-
-
   }
 }
 

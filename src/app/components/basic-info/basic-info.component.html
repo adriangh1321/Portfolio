@@ -1,0 +1,14 @@
+<app-basic-info-details
+*ngIf="isOnShowDetails" 
+[portfolio]="portfolio"
+(onToggleEditBasicInfo)="toggleEditBasicInfo()">
+</app-basic-info-details>
+
+
+<app-basic-info-edit
+*ngIf="!isOnShowDetails"
+[portfolio]="portfolio"
+(onShowDetails)="showDetails()">
+</app-basic-info-edit>
+
+

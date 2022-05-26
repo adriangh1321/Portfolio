@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.portfolioService.RefreshRequired.subscribe(() => this.getAboutMe(parseInt(localStorage.getItem("id_portfolio")!)))
+    this.portfolioService.AboutMeRefreshRequired.subscribe(() => this.getAboutMe(parseInt(localStorage.getItem("id_portfolio")!)))
   }
 
   getAboutMe(idPortfolio: number) {
