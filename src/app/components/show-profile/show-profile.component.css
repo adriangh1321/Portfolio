@@ -10,32 +10,13 @@
     padding: 0;
   }
   
-  #profile-background {
-    display: flex;
-  }
+ 
   
-  #profile-background img {
-    width: 100%;
-    height: 50vh;
-    border-radius: 32px 32px 0 0;
-  }
+ 
   
-  #info {
-    padding: 16px;
-    padding-bottom: 0;
-  }
+ 
   
-  .info-image {
-    display: flex;
-  }
   
-  .profile-image {
-    border-radius: 50%;
-    width: 152px;
-    height: 152px;
-    margin-top: -110px;
-    z-index: 1;
-  }
   
   #info-actions {
     display: flex;
@@ -47,43 +28,7 @@
     
   }
   
-  #info-details {
-    display: flex;
-    flex-direction: column;
   
-    right: 10px;
-    bottom: 50px;
-    list-style: none;
-  }
-  
-  #info-details img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-  
-  }
-  
-  #info-details h2 {
-    display: flex;
-    flex-wrap: wrap;
-    font-size: smaller;
-    color: black;
-  }
-  .vertical-text-center {
-    display: flex;
-    align-items:center;
-    margin:0;
-  }
-  
-  #info-details li a {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 5px;
-  
-    align-items: center;
-  
-  }
   
   .title-container {
     display: flex;
@@ -144,13 +89,6 @@
   
   }
   
-  .current-company {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
   
-    
-  }
   
   

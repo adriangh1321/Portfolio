@@ -36,6 +36,11 @@ import { ProjectEditComponent } from './components/project-edit/project-edit.com
 import { AboutComponent } from './components/about/about.component';
 import { AboutDetailsComponent } from './components/about-details/about-details.component';
 import { AboutEditComponent } from './components/about-edit/about-edit.component';
+import { BasicInfoComponent } from './components/basic-info/basic-info.component';
+import { BasicInfoDetailsComponent } from './components/basic-info-details/basic-info-details.component';
+import { BasicInfoEditComponent } from './components/basic-info-edit/basic-info-edit.component';
+import { IntroductionComponent } from './components/introduction/introduction.component';
+import { CurrentCompanyComponent } from './components/current-company/current-company.component';
 
 
 @NgModule({
@@ -71,7 +76,12 @@ import { AboutEditComponent } from './components/about-edit/about-edit.component
     ProjectEditComponent,
     AboutComponent,
     AboutDetailsComponent,
-    AboutEditComponent
+    AboutEditComponent,
+    BasicInfoComponent,
+    BasicInfoDetailsComponent,
+    BasicInfoEditComponent,
+    IntroductionComponent,
+    CurrentCompanyComponent
 
   ],
   imports: [

@@ -1,63 +1,36 @@
 <div class="card mat-card" id="first-card">
-  <div id="profile-background"><img src="./assets/img/background-header.jpg" alt=""></div>
-  <div id="info">
-    <div class="info-image" [hidden]="isOnEditPortfolio">
-      <img class="profile-image" [src]="portfolio.image" alt="">
-      <a href='javascript:void(0);' id="edit-info-data" (click)="onEditPortfolio()"><i class="fa-solid fa-pen"></i></a>
-    </div>
-    <app-edit-portfolio *ngIf="isOnEditPortfolio" [portfolio]="portfolio" (offEvent)="offEditPortfolio()">
-    </app-edit-portfolio>
-    <div class="container-fluid" [hidden]="isOnEditPortfolio">
-      <div class="row ">
-        <div class="col-md-6">
-          <div class="row">
-            <h1 class="h-50 vertical-text-center pl-0" id="full-name">{{portfolio.firstname}} {{portfolio.lastname}}
-            </h1>
-          </div>
+  
+ <app-introduction
+ [portfolio]="portfolio">
+</app-introduction>
 
-          <div class="row h-25" id="ocupation">{{portfolio.ocupation}}</div>
-          <div class="row h-25" id="info-contact">
-            <p class="pl-0">{{portfolio.state}} ({{portfolio.country}}) <span
-                [hidden]="isOnShowContact || isOnEditContact"><a href='javascript:void(0);'
-                  (click)="onShowContact()">Contact information</a></span>
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 current-company">
-          <div class="row h-50">
-            <h4 class="vertical-text-center">Work at the company:</h4>
-          </div>
-          <div class="row h-50">
-            <ul id="info-details">
-              <li><a href="//{{portfolio.currentCompany.url}}">
-                  <img src="{{portfolio.currentCompany.image}}" alt="">
-                  <h2>{{portfolio.currentCompany.name}}</h2>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-show-contact 
+  *ngIf="isOnShowContact" 
+  [portfolio]="portfolio" 
+  (offEvent)="offShowContact()"
+  (editContactEvent)="onEditContact()">
+  </app-show-contact>
 
-
-
-  <app-show-contact *ngIf="isOnShowContact" [portfolio]="portfolio" (offEvent)="offShowContact()"
-    (editContactEvent)="onEditContact()"></app-show-contact>
-  <app-edit-contact *ngIf="isOnEditContact" [portfolio]="portfolio" (offEvent)="offEditContact()"></app-edit-contact>
+  <app-edit-contact 
+  *ngIf="isOnEditContact" 
+  [portfolio]="portfolio" 
+  (offEvent)="offEditContact()">
+  </app-edit-contact>
 
   <div id="info-actions">
-    <app-collapse class="w-100" [portfolio]="portfolio"></app-collapse>
+    <app-collapse 
+    class="w-100" 
+    [portfolio]="portfolio">
+  </app-collapse>
   </div>
-
+  <!-- <span
+  [hidden]="isOnShowContact || isOnEditContact"><a href='javascript:void(0);'
+      (click)="onShowContact()">Contact information</a></span> -->
 </div>
 <div class="card mat-card">
   <div class="card-titles">
     <div class="title-container">
       <h2>About me</h2>
-      
-      
     </div>
     <app-about [aboutMe]="portfolio.aboutMe"></app-about>
   </div>

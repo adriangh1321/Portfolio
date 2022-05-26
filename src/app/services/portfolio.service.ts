@@ -12,9 +12,18 @@ export class PortfolioService {
   private apiUrl: string = "http://localhost:8080/v1/portfolios"
 
   private _refreshRequired = new Subject<void>()
+  private _aboutMeRefreshRequired = new Subject<void>()
+  private _basicInfoRefreshRequired = new Subject<void>()
 
   get RefreshRequired() {
     return this._refreshRequired;
+  }
+
+  get AboutMeRefreshRequired(){
+    return this._aboutMeRefreshRequired;
+  }
+  get BasicInfoRefreshRequired(){
+    return this._basicInfoRefreshRequired;
   }
 
   constructor(private http: HttpClient) { }
@@ -59,13 +68,27 @@ export class PortfolioService {
     const url = `${this.apiUrl}/${id}/aboutMe`
     return this.http.patch<void>(url, aboutMe).pipe(
       tap(() => {
-        this.RefreshRequired.next()
+        this.AboutMeRefreshRequired.next()
       })
     );
   }
   
   getAboutMe(id:number):Observable<any>{
     const url = `${this.apiUrl}/${id}/aboutMe`
+    return this.http.get<any>(url)
+  }
+
+  patchBasicInfo(id:number,basicInfo:any):Observable<any>{
+    const url = `${this.apiUrl}/${id}`
+    return this.http.patch<void>(url, basicInfo).pipe(
+      tap(() => {
+        this.BasicInfoRefreshRequired.next()
+      })
+    );
+  }
+
+  getBasicInfo(id:number):Observable<any>{
+    const url = `${this.apiUrl}/${id}/basicInfo`
     return this.http.get<any>(url)
   }
 
