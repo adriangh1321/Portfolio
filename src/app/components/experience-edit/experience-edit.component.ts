@@ -1,7 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dateValidator } from 'src/app/models/DateValidator';
 import { Experience } from 'src/app/models/Experience';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';

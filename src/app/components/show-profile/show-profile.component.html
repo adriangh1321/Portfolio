@@ -56,16 +56,10 @@
   <div class="card-titles">
     <div class="title-container">
       <h2>About me</h2>
-      <a href='javascript:void(0);' (click)="onEditAbout()"><i class="fa-solid fa-pen"></i>
-      </a>
-
+      
+      
     </div>
-
-    <div>
-      <p [hidden]="isOnEditAbout">{{portfolio.aboutMe}}</p>
-      <app-edit-about *ngIf="isOnEditAbout" [portfolio]="portfolio" (offEvent)="offEditAbout()"></app-edit-about>
-    </div>
-
+    <app-about [aboutMe]="portfolio.aboutMe"></app-about>
   </div>
 </div>
 
@@ -76,7 +70,6 @@
     <a href='javascript:void(0);' id="add-experience" (click)="onAddExperience()"><i class="fa-solid fa-plus"></i>
     </a>
   </div>
-
   <app-experiences [experiences]="portfolio.experiences"></app-experiences>
 </div>
 
@@ -95,10 +88,8 @@
       <h2>Hard Skills</h2>
       <a href='javascript:void(0);' (click)="onAddSkill(skillType.HARD)"><i class="fa-solid fa-plus"></i></a>
     </div>
-   <app-skills 
-   [skills]="portfolio.skills" 
-   [skillType]="skillType.HARD">
-  </app-skills>
+    <app-skills [skills]="portfolio.skills" [skillType]="skillType.HARD">
+    </app-skills>
 
   </div>
 </div>
@@ -109,10 +100,8 @@
       <h2>Soft Skills</h2>
       <a href='javascript:void(0);' (click)="onAddSkill(skillType.SOFT)"><i class="fa-solid fa-plus"></i></a>
     </div>
-   <app-skills 
-   [skills]="portfolio.skills" 
-   [skillType]="skillType.SOFT">
-  </app-skills>
+    <app-skills [skills]="portfolio.skills" [skillType]="skillType.SOFT">
+    </app-skills>
 
   </div>
 </div>

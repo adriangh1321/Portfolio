@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SkillType } from 'src/app/enums/SkillType';
 import { Portfolio } from 'src/app/models/Portfolio';
-import { Project } from 'src/app/models/Project';
 import { EducationService } from 'src/app/services/education.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
@@ -16,7 +15,7 @@ import { Cloneable } from 'src/app/utilities/Clone';
 })
 export class ShowProfileComponent implements OnInit {
   isOnEditPortfolio: Boolean = false;
-  isOnEditAbout: Boolean;
+
   isOnShowContact: Boolean;
   isOnEditContact: Boolean;
 
@@ -34,7 +33,7 @@ export class ShowProfileComponent implements OnInit {
 
     this.portfolio = new Portfolio();
     this.updatedPortfolio = new Portfolio();
-    this.isOnEditAbout = false;
+
     this.isOnShowContact = false;
     this.isOnEditContact = false;
 
@@ -79,17 +78,15 @@ export class ShowProfileComponent implements OnInit {
     })
   }
 
- 
+
 
   onShowContact() {
     this.isOnShowContact = true;
   }
 
-  
 
-  offEditAbout() {
-    this.isOnEditAbout = false;
-  }
+
+
 
 
   offShowContact() {
@@ -100,11 +97,9 @@ export class ShowProfileComponent implements OnInit {
     this.onShowContact()
   }
 
-  
 
-  onEditAbout() {
-    this.isOnEditAbout = true;
-  }
+
+
 
   onEditContact() {
     this.isOnEditContact = true
@@ -114,13 +109,7 @@ export class ShowProfileComponent implements OnInit {
   getPortfolio(id: number) {
     this.portfolioService.getPortfolioById(id).subscribe((res) => {
       this.portfolio = res
-
-
-      
       this.updatedPortfolio = Cloneable.deepCopy(this.portfolio)
-      console.log("---------------")
-      console.log(this.portfolio)
-      console.log(this.updatedPortfolio)
       localStorage.setItem("id_portfolio", this.portfolio.id.toString())
 
     })

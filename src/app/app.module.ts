@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditPortfolioComponent } from './components/edit-portfolio/edit-portfolio.component';
-import { AddExperienceComponent } from './components/add-experience/add-experience.component';
-import { EditAboutComponent } from './components/edit-about/edit-about.component';
 import { ShowContactComponent } from './components/show-contact/show-contact.component';
 import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 import { ShowProfileComponent } from './components/show-profile/show-profile.component';
@@ -35,14 +33,15 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectItemComponent } from './components/project-item/project-item.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { ProjectEditComponent } from './components/project-edit/project-edit.component';
+import { AboutComponent } from './components/about/about.component';
+import { AboutDetailsComponent } from './components/about-details/about-details.component';
+import { AboutEditComponent } from './components/about-edit/about-edit.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditPortfolioComponent,
-    AddExperienceComponent,
-    EditAboutComponent,
+    EditPortfolioComponent,  
     ShowContactComponent,
     EditContactComponent,
     ShowProfileComponent,
@@ -69,7 +68,10 @@ import { ProjectEditComponent } from './components/project-edit/project-edit.com
     ProjectsComponent,
     ProjectItemComponent,
     ProjectDetailsComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    AboutComponent,
+    AboutDetailsComponent,
+    AboutEditComponent
 
   ],
   imports: [
