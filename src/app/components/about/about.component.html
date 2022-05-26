@@ -1,0 +1,13 @@
+<app-about-details
+*ngIf="isOnShowDetails"
+[aboutMe]="aboutMe"
+(onToggleEditAboutMe)="toggleEditAboutMe()"
+></app-about-details>
+
+<app-about-edit
+*ngIf="!isOnShowDetails"
+[aboutMe]="aboutMe" 
+(onShowDetails)="showDetails()">
+></app-about-edit>
+
+

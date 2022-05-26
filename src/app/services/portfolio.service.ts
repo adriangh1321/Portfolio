@@ -55,5 +55,19 @@ export class PortfolioService {
     );
   }
 
+  updateAboutMe(id: number, aboutMe: any): Observable<void> {
+    const url = `${this.apiUrl}/${id}/aboutMe`
+    return this.http.patch<void>(url, aboutMe).pipe(
+      tap(() => {
+        this.RefreshRequired.next()
+      })
+    );
+  }
+  
+  getAboutMe(id:number):Observable<any>{
+    const url = `${this.apiUrl}/${id}/aboutMe`
+    return this.http.get<any>(url)
+  }
+
 }
 

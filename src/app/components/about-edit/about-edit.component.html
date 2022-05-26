@@ -1,0 +1,17 @@
+<form action="javascript:void(0);" [formGroup]="aboutMeForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="form-group ">
+        <label for="about-me-indexAbout">About me</label>
+        <input type="text" id="about-me-indexAbout" class="form-control" formControlName="aboutMe">
+        <div *ngIf="m.aboutMe.touched && m.aboutMe.invalid" class="alert alert-danger">
+            <div *ngIf="m.aboutMe.errors?.required">Please provide a about me</div>
+            <div *ngIf="m.aboutMe.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" id="btn-edit-about-indexAbout"
+        [disabled]="!aboutMeForm.valid">Save</button>
+    <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-about-indexAbout"
+        (click)="onCloseEdit()">Cancel</button>
+</form>
