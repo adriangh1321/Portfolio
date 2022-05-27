@@ -10,9 +10,9 @@
   (offEvent)="offShowContact()"
   (editContactEvent)="onEditContact()">
   </app-show-contact>
-  <span
+  <!-- <span
   [hidden]="isOnShowContact || isOnEditContact"><a href='javascript:void(0);'
-      (click)="onShowContact()">Contact information</a></span>
+      (click)="onShowContact()">Contact information</a></span> -->
   <app-edit-contact 
   *ngIf="isOnEditContact" 
   [portfolio]="portfolio" 
