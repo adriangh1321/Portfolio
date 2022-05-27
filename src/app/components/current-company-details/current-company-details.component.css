@@ -1,0 +1,46 @@
+.current-company {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+}
+
+#info-details {
+    display: flex;
+    flex-direction: column;
+width: fit-content;
+    right: 10px;
+    bottom: 50px;
+    list-style: none;
+}
+
+#info-details img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+
+}
+
+#info-details h2 {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: smaller;
+    color: black;
+}
+
+.vertical-text-center {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+#info-details li a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 5px;
+
+    align-items: center;
+
+}

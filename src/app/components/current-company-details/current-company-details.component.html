@@ -1,0 +1,26 @@
+<div class="col-md-12 current-company">
+    <div class="d-flex flex-row">
+        <div>
+            <div class="row h-50">
+                <h4 class="vertical-text-center">Work at the company</h4>
+            </div>
+            <div class="row h-50">
+                <ul id="info-details">
+                    <li *ngIf="currentCompany.url!==null"><a href="//{{currentCompany.url}}">
+                            <img src="{{currentCompany.image}}" alt="">
+                            <h2>{{currentCompany.name}}</h2>
+                        </a>
+                    </li>
+                    <li *ngIf="currentCompany.url==null">
+                        <img src="{{currentCompany.image}}" alt="">
+                        <h2>{{currentCompany.name}}</h2>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a class="ml-2" href='javascript:void(0);' (click)="editCurrentCompany()"><i class="fa-solid fa-pen"></i></a>
+    </div>
+
+
+</div>
