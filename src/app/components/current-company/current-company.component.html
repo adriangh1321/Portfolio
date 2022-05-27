@@ -1,21 +1,12 @@
-<div class="col-md-12 current-company">
-    <div class="d-flex flex-row">
-        <div>
-            <div class="row h-50">
-                <h4 class="vertical-text-center">Work at the company</h4>
-            </div>
-            <div class="row h-50">
-                <ul id="info-details">
-                    <li><a href="//{{portfolio.currentCompany.url}}">
-                            <img src="{{portfolio.currentCompany.image}}" alt="">
-                            <h2>{{portfolio.currentCompany.name}}</h2>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <a class="ml-2" href='javascript:void(0);'><i class="fa-solid fa-pen"></i></a>
-    </div>
+<app-current-company-details
+*ngIf="isOnShowDetails" 
+[currentCompany]="currentCompany"
+(onToggleEditCurrentCompany)="toggleEditCurrentCompany()">
+</app-current-company-details>
 
 
-</div>
+<app-current-company-edit
+*ngIf="!isOnShowDetails"
+[currentCompany]="currentCompany"
+(onShowDetails)="showDetails()">
+</app-current-company-edit>

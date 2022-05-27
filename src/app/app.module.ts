@@ -41,6 +41,8 @@ import { BasicInfoDetailsComponent } from './components/basic-info-details/basic
 import { BasicInfoEditComponent } from './components/basic-info-edit/basic-info-edit.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { CurrentCompanyComponent } from './components/current-company/current-company.component';
+import { CurrentCompanyDetailsComponent } from './components/current-company-details/current-company-details.component';
+import { CurrentCompanyEditComponent } from './components/current-company-edit/current-company-edit.component';
 
 
 @NgModule({
@@ -81,7 +83,9 @@ import { CurrentCompanyComponent } from './components/current-company/current-co
     BasicInfoDetailsComponent,
     BasicInfoEditComponent,
     IntroductionComponent,
-    CurrentCompanyComponent
+    CurrentCompanyComponent,
+    CurrentCompanyDetailsComponent,
+    CurrentCompanyEditComponent
 
   ],
   imports: [

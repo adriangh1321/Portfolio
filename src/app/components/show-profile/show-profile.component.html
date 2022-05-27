@@ -10,7 +10,9 @@
   (offEvent)="offShowContact()"
   (editContactEvent)="onEditContact()">
   </app-show-contact>
-
+  <!-- <span
+  [hidden]="isOnShowContact || isOnEditContact"><a href='javascript:void(0);'
+      (click)="onShowContact()">Contact information</a></span> -->
   <app-edit-contact 
   *ngIf="isOnEditContact" 
   [portfolio]="portfolio" 
@@ -23,9 +25,7 @@
     [portfolio]="portfolio">
   </app-collapse>
   </div>
-  <!-- <span
-  [hidden]="isOnShowContact || isOnEditContact"><a href='javascript:void(0);'
-      (click)="onShowContact()">Contact information</a></span> -->
+   
 </div>
 <div class="card mat-card">
   <div class="card-titles">

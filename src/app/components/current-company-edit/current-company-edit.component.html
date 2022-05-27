@@ -1,0 +1,39 @@
+<div id="edit-image-container">
+    <img class="profile-image" [src]="currentCompanyForm.controls['image'].value" alt="photo">
+    
+
+</div>
+
+<div class="mb-4">
+    <form action="javascript:void();" [formGroup]="currentCompanyForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="company-image">Company photo</label>
+            <input type="file" id="company-image" class="form-control-file" (change)="onImageUpload($event)" [disabled]="checkboxImage">
+            <input type="hidden" formControlName="image">
+           
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="checkImage" [checked]="checkboxImage" (change)="disableImage()">
+            <label class="form-check-label" for="checkImage">No photo</label>
+          </div>
+        <div class="form-group col-md-12 p-0">
+            <label for="company-name">Company name</label>
+            <input type="text" id="company-name" class="form-control" formControlName="name">
+            <div *ngIf="m.name.touched && m.name.invalid" class="alert alert-danger">
+                <div *ngIf="m.name.errors?.required">Please provide a name</div>
+                <div *ngIf="m.name.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
+            </div>
+        </div>
+        <div class="form-group col-md-12 p-0">
+            <label for="company-url">URL</label>
+            <input type="text" id="company-url" class="form-control" formControlName="url">
+            <div *ngIf="m.url.touched && m.url.invalid" class="alert alert-danger">
+                <div *ngIf="m.url.errors?.urlOrWhitespace">this field must be a URL</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!currentCompanyForm.valid">Save</button>
+        <button type="button" class="btn btn-secondary ml-2" (click)="onCloseEdit()">Cancel</button>
+
+
+    </form>
+</div>
