@@ -1,0 +1,18 @@
+<div class="collapse" id="collapseContactInformation">
+    <div class="card card-body">
+
+        <app-contact-info-details
+        *ngIf="isOnShowDetails" 
+        [contactInformation]="contactInformation"
+        (onToggleEditContactInformation)="toggleEditContactInformation()">
+        </app-contact-info-details>
+
+
+        <app-contact-info-edit
+        *ngIf="!isOnShowDetails"
+        [contactInformation]="contactInformation"
+        (onShowDetails)="showDetails()">
+        </app-contact-info-edit>
+
+    </div>
+</div>

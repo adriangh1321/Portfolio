@@ -4,9 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditPortfolioComponent } from './components/edit-portfolio/edit-portfolio.component';
-import { ShowContactComponent } from './components/show-contact/show-contact.component';
-import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 import { ShowProfileComponent } from './components/show-profile/show-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -43,14 +40,14 @@ import { IntroductionComponent } from './components/introduction/introduction.co
 import { CurrentCompanyComponent } from './components/current-company/current-company.component';
 import { CurrentCompanyDetailsComponent } from './components/current-company-details/current-company-details.component';
 import { CurrentCompanyEditComponent } from './components/current-company-edit/current-company-edit.component';
+import { ContactInfoDetailsComponent } from './components/contact-info-details/contact-info-details.component';
+import { ContactInfoEditComponent } from './components/contact-info-edit/contact-info-edit.component';
+import { ContactInfoComponent } from './components/contact-info/contact-info.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditPortfolioComponent,  
-    ShowContactComponent,
-    EditContactComponent,
     ShowProfileComponent,
     LoginComponent,
     HeaderComponent,
@@ -85,7 +82,10 @@ import { CurrentCompanyEditComponent } from './components/current-company-edit/c
     IntroductionComponent,
     CurrentCompanyComponent,
     CurrentCompanyDetailsComponent,
-    CurrentCompanyEditComponent
+    CurrentCompanyEditComponent,
+    ContactInfoDetailsComponent,
+    ContactInfoEditComponent,
+    ContactInfoComponent
 
   ],
   imports: [

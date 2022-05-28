@@ -1,19 +1,24 @@
 <div class="w-100">
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseInterests"
-    aria-expanded="false" aria-controls="collapseInterests">
-    My interests
-</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseContactInformation"
+        aria-expanded="false" aria-controls="collapseContactInformation">
+        Contact
+    </button>
+    <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#collapseInterests"
+        aria-expanded="false" aria-controls="collapseInterests">
+        My interests
+    </button>
 
-<button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#collapseMore"
-    aria-expanded="false" aria-controls="collapseMore">
-    More
-</button>
-<button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#collapseAddSection"
-    aria-expanded="false" aria-controls="collapseAddSection">
-    Add section
-</button>
+    <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#collapseMore"
+        aria-expanded="false" aria-controls="collapseMore">
+        More
+    </button>
+    <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#collapseAddSection"
+        aria-expanded="false" aria-controls="collapseAddSection">
+        Add section
+    </button>
 
-<app-interests [interests]="portfolio.interests"></app-interests>
-<app-more></app-more>
-<app-add-section></app-add-section>
+    <app-contact-info [contactInformation]="portfolio.contactInformation"></app-contact-info>
+    <app-interests [interests]="portfolio.interests"></app-interests>
+    <app-more></app-more>
+    <app-add-section></app-add-section>
 </div>

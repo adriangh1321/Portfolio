@@ -14,11 +14,7 @@ import { Cloneable } from 'src/app/utilities/Clone';
   styleUrls: ['./show-profile.component.css']
 })
 export class ShowProfileComponent implements OnInit {
-  isOnEditPortfolio: Boolean = false;
-  isOnShowContact: Boolean;
-  isOnEditContact: Boolean;
   portfolio: Portfolio;
-  updatedPortfolio: Portfolio;
   skillType = SkillType
 
   constructor(
@@ -28,17 +24,6 @@ export class ShowProfileComponent implements OnInit {
     private skillService: SkillService,
     private projectService: ProjectService) {
     this.portfolio = new Portfolio();
-    this.updatedPortfolio = new Portfolio();
-    this.isOnShowContact = false;
-    this.isOnEditContact = false;
-
-  }
-  onEditPortfolio() {
-    this.isOnEditPortfolio = true;
-  }
-
-  offEditPortfolio() {
-    this.isOnEditPortfolio = false;
   }
 
   onAddExperience() {
@@ -73,26 +58,11 @@ export class ShowProfileComponent implements OnInit {
     })
   }
 
-  onShowContact() {
-    this.isOnShowContact = true;
-  }
 
-  offShowContact() {
-    this.isOnShowContact = false;
-  }
-  offEditContact() {
-    this.isOnEditContact = false;
-    this.onShowContact()
-  }
-
-  onEditContact() {
-    this.isOnEditContact = true
-  }
 
   getPortfolio(id: number) {
     this.portfolioService.getPortfolioById(id).subscribe((res) => {
       this.portfolio = res
-      this.updatedPortfolio = Cloneable.deepCopy(this.portfolio)
       localStorage.setItem("id_portfolio", this.portfolio.id.toString())
 
     })
