@@ -4,20 +4,6 @@
  [portfolio]="portfolio">
 </app-introduction>
 
-  <app-show-contact 
-  *ngIf="isOnShowContact" 
-  [portfolio]="portfolio" 
-  (offEvent)="offShowContact()"
-  (editContactEvent)="onEditContact()">
-  </app-show-contact>
-  <!-- <span
-  [hidden]="isOnShowContact || isOnEditContact"><a href='javascript:void(0);'
-      (click)="onShowContact()">Contact information</a></span> -->
-  <app-edit-contact 
-  *ngIf="isOnEditContact" 
-  [portfolio]="portfolio" 
-  (offEvent)="offEditContact()">
-  </app-edit-contact>
 
   <div id="info-actions">
     <app-collapse 

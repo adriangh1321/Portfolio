@@ -35,7 +35,7 @@ width: fit-content;
     margin: 0;
 }
 
-#info-details li a {
+#info-details li a ,#info-details li {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -44,3 +44,25 @@ width: fit-content;
     align-items: center;
 
 }
+
+.url{
+    text-decoration: none;
+    color:black;
+    display: block;
+    width: 100%;
+    
+ 
+    
+}
+.url:hover {
+    background-color: gray;
+    border-radius: 5%;
+    
+}
+.url:hover h2{
+    
+    color: white!important;
+    border-radius: 5%;
+    
+}
+

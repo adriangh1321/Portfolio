@@ -1,0 +1,17 @@
+<div class="info-contact">
+    <h4>Contact information</h4>
+    <a href='javascript:void(0);' id="edit-contact" (click)="editContactInformation()"><i
+            class="fa-solid fa-pen"></i></a>
+</div>
+
+<div class="card">
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item p-0"><a class="url p-2" href='javascript:void(0);'><i class="fa-solid fa-phone"></i> {{contactInformation.phone}}</a></li>
+        <li class="list-group-item p-0"><a class="url p-2" href='javascript:void(0);'><i class="fa-solid fa-envelope"></i> {{contactInformation.email}}</a></li>
+        <li *ngIf="contactInformation.linkedIn!==null"class="list-group-item p-0"><a class="url p-2" href="//{{contactInformation.linkedIn}}"><i
+                    class="fa-brands fa-linkedin"></i> {{contactInformation.linkedIn}}</a></li>
+        <li *ngIf="contactInformation.remoteRepository!==null"class="list-group-item p-0"><a class="url p-2" href="//{{contactInformation.remoteRepository}}"><i
+                    class="fa-brands fa-git-square"></i> {{contactInformation.remoteRepository}}</a></li>
+    </ul>
+</div>

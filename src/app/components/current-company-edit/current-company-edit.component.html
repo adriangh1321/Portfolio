@@ -28,7 +28,7 @@
             <label for="company-url">URL</label>
             <input type="text" id="company-url" class="form-control" formControlName="url">
             <div *ngIf="m.url.touched && m.url.invalid" class="alert alert-danger">
-                <div *ngIf="m.url.errors?.urlOrWhitespace">this field must be a URL</div>
+                <div *ngIf="m.url.errors?.urlOrWhitespace">This field must be a URL</div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="!currentCompanyForm.valid">Save</button>

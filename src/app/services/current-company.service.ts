@@ -22,12 +22,7 @@ export class CurrentCompanyService {
     const url = `${this.apiUrl}/${id}`
     return this.http.get<CurrentCompany>(url);
   }
-
-  // getCurrentCompanyByPortfolioId(idPortfolio: number): Observable<CurrentCompany> {
-  //   let params = new HttpParams().set('portfolioId', idPortfolio)
-  //   return this.http.get<CurrentCompany>(this.apiUrl, { params: params })
-  // }
-
+  
   updateCurrentCompany(id: number, currentCompany: CurrentCompany): Observable<void> {
     const url = `${this.apiUrl}/${id}`
     return this.http.put<void>(url, currentCompany).pipe(

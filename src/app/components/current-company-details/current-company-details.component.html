@@ -6,15 +6,14 @@
             </div>
             <div class="row h-50">
                 <ul id="info-details">
-                    <li *ngIf="currentCompany.url!==null"><a href="//{{currentCompany.url}}">
+                    <li *ngIf="currentCompany.url!==null"><a class="url p-1" href="//{{currentCompany.url}}">
                             <img src="{{currentCompany.image}}" alt="">
                             <h2>{{currentCompany.name}}</h2>
                         </a>
                     </li>
-                    <li *ngIf="currentCompany.url==null">
+                    <li class="p-1" *ngIf="currentCompany.url==null">
                         <img src="{{currentCompany.image}}" alt="">
                         <h2>{{currentCompany.name}}</h2>
-
                     </li>
                 </ul>
             </div>
