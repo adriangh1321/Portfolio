@@ -43,6 +43,8 @@ import { CurrentCompanyEditComponent } from './components/current-company-edit/c
 import { ContactInfoDetailsComponent } from './components/contact-info-details/contact-info-details.component';
 import { ContactInfoEditComponent } from './components/contact-info-edit/contact-info-edit.component';
 import { ContactInfoComponent } from './components/contact-info/contact-info.component';
+import { InterestItemComponent } from './components/interest-item/interest-item.component';
+import { InterestEditComponent } from './components/interest-edit/interest-edit.component';
 
 
 @NgModule({
@@ -85,7 +87,9 @@ import { ContactInfoComponent } from './components/contact-info/contact-info.com
     CurrentCompanyEditComponent,
     ContactInfoDetailsComponent,
     ContactInfoEditComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    InterestItemComponent,
+    InterestEditComponent
 
   ],
   imports: [

@@ -1,0 +1,13 @@
+
+        <app-interest-details
+        *ngIf="isOnShowDetails"
+        [interest]="interest"
+        (onToggleEditInterest)="toggleEditInterest()">
+        </app-interest-details>
+
+        <app-interest-edit
+        *ngIf="!isOnShowDetails"
+        [interest]="interest"
+        (onShowDetails)="showDetails()">
+        </app-interest-edit>
+
