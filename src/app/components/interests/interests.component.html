@@ -1,14 +1,16 @@
 <div class="collapse" id="collapseInterests">
-    <div class="card card-body d-flex flex-column p-0">
+    
+    <div class="card card-body w-100">
         <div class="d-flex align-items-end flex-column ">
-            <a href='javascript:void(0);'  ><i class="fa-solid fa-plus"></i></a>
+            <a href='javascript:void(0);' (click)="addInterest()"><i class="fa-solid fa-plus"></i></a>
+        </div>
 
+
+        <div class="interest-container">
+            <div *ngFor="let interest of interests">
+                <app-interest-item [interest]="interest"></app-interest-item>
+            </div>
         </div>
-        <div class="d-flex flex-row"> 
-           <div *ngFor="let interest of interests" class="card" style="width: 7rem;">
-            <app-interest-details [interest]="interest"></app-interest-details>
-        </div>  
-        </div>
-       
+
     </div>
 </div>
