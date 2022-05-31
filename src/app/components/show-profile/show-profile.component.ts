@@ -15,7 +15,8 @@ import { Cloneable } from 'src/app/utilities/Clone';
 })
 export class ShowProfileComponent implements OnInit {
   portfolio: Portfolio;
-  skillType = SkillType
+  skillType = SkillType;
+
 
   constructor(
     private portfolioService: PortfolioService,
@@ -25,6 +26,12 @@ export class ShowProfileComponent implements OnInit {
     private projectService: ProjectService) {
     this.portfolio = new Portfolio();
   }
+
+  ngOnInit(): void {
+    this.portfolioService.getMeByToken().subscribe((res) => {
+      this.portfolio = res
+    }) 
+  } 
 
   onAddExperience() {
     const newExperience: any = { position: "Position", company: "Company", description: "Description", image: "./assets/img/add-image.png", state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
@@ -59,20 +66,6 @@ export class ShowProfileComponent implements OnInit {
   }
 
 
-
-  getPortfolio(id: number) {
-    this.portfolioService.getPortfolioById(id).subscribe((res) => {
-      this.portfolio = res
-      localStorage.setItem("id_portfolio", this.portfolio.id.toString())
-
-    })
-  }
-  ngOnInit(): void {
-    this.getPortfolio(1);
-    this.portfolioService.RefreshRequired.subscribe(() => {
-      this.getPortfolio(1)
-    })
-  }
 }
 
 
