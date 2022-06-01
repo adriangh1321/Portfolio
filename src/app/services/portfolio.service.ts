@@ -9,8 +9,7 @@ import * as moment from 'moment';
 })
 export class PortfolioService {
   private apiUrl: string = "http://localhost:8080/v1/portfolios"
-  private token:string=localStorage.getItem('auth_token')!
-
+  
   // private _refreshRequired = new Subject<void>()
   private _aboutMeRefreshRequired = new Subject<void>()
   private _basicInfoRefreshRequired = new Subject<void>()
@@ -30,11 +29,7 @@ export class PortfolioService {
 
   getMeByToken(): Observable<Portfolio> {
     const url = `${this.apiUrl}/me`
-    let header = new HttpHeaders().set(
-      "Authorization",
-    `Bearer ${this.token}`
-    );
-    return this.http.get<Portfolio>(url,{headers:header}).pipe(
+    return this.http.get<Portfolio>(url).pipe(
       map(response => {
         response.experiences.forEach(experience => {
           if (experience.startDate !== null) {
