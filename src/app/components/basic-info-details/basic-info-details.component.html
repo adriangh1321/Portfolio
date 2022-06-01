@@ -1,17 +1,17 @@
 <div class="info-image">
-    <img class="profile-image" [src]="portfolio.image" alt="">
+    <img class="profile-image" [src]="portfolio.image || './assets/img/default-profile.png'" alt="">
     <a href='javascript:void(0);' (click)="editBasicInfo()"><i class="fa-solid fa-pen"></i></a>
 </div>
 
 <div class="col-md-12">
     <div class="row">
-        <h1 class="h-50 vertical-text-center pl-0" id="full-name">{{portfolio.firstname}}
-            {{portfolio.lastname}}
+        <h1 class="h-50 vertical-text-center pl-0" id="full-name">{{portfolio.firstname || 'My Name'}}
+            {{portfolio.lastname || ''}}
         </h1>
     </div>
 
-    <div class="row h-25" id="ocupation">{{portfolio.ocupation}}</div>
+    <div class="row h-25" id="ocupation">{{portfolio.ocupation || 'My ocupation'}}</div>
     <div class="row h-25" id="info-contact">
-        <p class="pl-0">{{portfolio.state}} ({{portfolio.country}})</p>
+        <p class="pl-0">{{portfolio.state || 'My State'}} ({{portfolio.country || 'My country'}})</p>
     </div>
 </div>

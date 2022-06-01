@@ -31,8 +31,11 @@ export class AuthService {
     return localStorage.getItem('auth_token')!;
   }
 
-  isLoggedIn():boolean {
+  isLoggedIn(): boolean {
     const token = this.getAuthorizationToken(); // get token from local storage
+    if (token == null) {
+      return false;
+    }
     const payload = atob(token.split('.')[1]); // decode payload of token
     const parsedPayload = JSON.parse(payload); // convert payload into an Object
 
@@ -40,5 +43,26 @@ export class AuthService {
 
   }
 
- 
+  register(register: any) {
+    const url = `${this.apiUrl}/register`
+    return this.http.post<any>(url, register).subscribe({
+      next: resp => {
+        this.router.navigate(['profile'])
+        localStorage.setItem('auth_token', resp.jwt);
+
+      },
+      error: error => {
+        alert("There was an errror while registering the user");
+        console.log(error)
+      }
+    })
+  }
+
+  logout() {
+    localStorage.removeItem('auth_token')
+    this.router.navigate(['login'])
+
+  }
+
+
 }

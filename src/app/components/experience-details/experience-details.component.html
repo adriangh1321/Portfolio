@@ -1,5 +1,5 @@
 <div class="new-item-container" >
-    <img src="{{experience.image}}" alt="Add new image">
+    <img [src]="experience.image || './assets/img/default-experience.png'" alt="Add new image">
     <div class="item-text">
       <div class="item-title-edit">
         <h4>{{experience.position}}</h4>

@@ -34,7 +34,7 @@ export class ShowProfileComponent implements OnInit {
   } 
 
   onAddExperience() {
-    const newExperience: any = { position: "Position", company: "Company", description: "Description", image: "./assets/img/add-image.png", state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
+    const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
     this.experienceService.addExperience(newExperience).subscribe({
       next: data => { alert("The experience was added successfull!") },
       error: error => { alert("There was a error"); console.log(error) }
@@ -42,7 +42,7 @@ export class ShowProfileComponent implements OnInit {
   }
 
   onAddEducation() {
-    const newEducation: any = { title: "Title", institute: "Institute", image: "./assets/img/add-image.png", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
+    const newEducation: any = { title: "Title", institute: "Institute", image: null, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
     this.educationService.addEducation(newEducation).subscribe({
       next: data => { alert("The education was added successfull!") },
       error: error => { alert("There was a error"); console.log(error) }

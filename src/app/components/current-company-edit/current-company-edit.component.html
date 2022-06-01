@@ -1,5 +1,5 @@
 <div id="edit-image-container">
-    <img class="profile-image" [src]="currentCompanyForm.controls['image'].value" alt="photo">
+    <img class="profile-image" [src]="currentCompanyForm.controls['image'].value || './assets/img/default-current-company.png'" alt="photo">
     
 
 </div>

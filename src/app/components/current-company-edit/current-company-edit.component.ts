@@ -71,7 +71,7 @@ export class CurrentCompanyEditComponent implements OnInit {
   disableImage(){
     this.checkboxImage=!this.checkboxImage;
     this.currentCompanyForm.patchValue({
-      image: "./assets/img/current-company.png"
+      image: null
     })
   }
 

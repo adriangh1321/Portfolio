@@ -1,4 +1,9 @@
-.my-container{
-    height: 100%;
+#register{
+text-decoration: none;
+color: royalblue;
+}
+
+#register:hover{
+    color: blue;
     
 }

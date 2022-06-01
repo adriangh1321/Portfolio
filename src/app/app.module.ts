@@ -46,6 +46,7 @@ import { ContactInfoComponent } from './components/contact-info/contact-info.com
 import { InterestItemComponent } from './components/interest-item/interest-item.component';
 import { InterestEditComponent } from './components/interest-edit/interest-edit.component';
 import { AuthInterceptor } from './http-interceptors/auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { AuthInterceptor } from './http-interceptors/auth.interceptor';
     ContactInfoEditComponent,
     ContactInfoComponent,
     InterestItemComponent,
-    InterestEditComponent
+    InterestEditComponent,
+    RegisterComponent
 
   ],
   imports: [

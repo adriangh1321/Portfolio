@@ -23,7 +23,7 @@ export class AboutEditComponent implements OnInit {
   ngOnInit(): void {
     this.idPortfolio=parseInt(localStorage.getItem("id_portfolio")!)
     this.aboutMeForm = this.formBuilder.group({
-      aboutMe: [this.aboutMe, [Validators.required,onlyWhitespace()]],        
+      aboutMe: [this.aboutMe==null?'':this.aboutMe, [Validators.required,onlyWhitespace()]],        
     })
   }
   onSubmit() {
