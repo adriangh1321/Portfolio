@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, Subject, tap } from 'rxjs';
 import { Portfolio } from '../models/Portfolio';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Experience } from '../models/Experience';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
 
 @Injectable({
@@ -10,14 +9,14 @@ import * as moment from 'moment';
 })
 export class PortfolioService {
   private apiUrl: string = "http://localhost:8080/v1/portfolios"
-
-  private _refreshRequired = new Subject<void>()
+  
+  // private _refreshRequired = new Subject<void>()
   private _aboutMeRefreshRequired = new Subject<void>()
   private _basicInfoRefreshRequired = new Subject<void>()
 
-  get RefreshRequired() {
-    return this._refreshRequired;
-  }
+  // get RefreshRequired() {
+  //   return this._refreshRequired;
+  // }
 
   get AboutMeRefreshRequired(){
     return this._aboutMeRefreshRequired;
@@ -28,8 +27,8 @@ export class PortfolioService {
 
   constructor(private http: HttpClient) { }
 
-  getPortfolioById(id: number): Observable<Portfolio> {
-    const url = `${this.apiUrl}/${id}`
+  getMeByToken(): Observable<Portfolio> {
+    const url = `${this.apiUrl}/me`
     return this.http.get<Portfolio>(url).pipe(
       map(response => {
         response.experiences.forEach(experience => {
@@ -50,19 +49,47 @@ export class PortfolioService {
             education.endDate = moment(education.endDate, 'YYYY-MM-DD').toDate()
           }
         })
+        localStorage.setItem("id_portfolio", response.id.toString())
 
         return response
       }))
   }
 
-  updatePortfolio(id: number, portfolio: Portfolio): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
-    return this.http.put<void>(url, portfolio).pipe(
-      tap(() => {
-        this.RefreshRequired.next()
-      })
-    );
-  }
+  // getPortfolioById(id: number): Observable<Portfolio> {
+  //   const url = `${this.apiUrl}/${id}`
+  //   return this.http.get<Portfolio>(url).pipe(
+  //     map(response => {
+  //       response.experiences.forEach(experience => {
+  //         if (experience.startDate !== null) {
+  //           experience.startDate = moment(experience.startDate, 'YYYY-MM-DD').toDate()
+  //         }
+
+  //         if (experience.endDate !== null) {
+  //           experience.endDate = moment(experience.endDate, 'YYYY-MM-DD').toDate()
+  //         }
+  //       })
+  //       response.educations.forEach(education => {
+  //         if (education.startDate !== null) {
+  //           education.startDate = moment(education.startDate, 'YYYY-MM-DD').toDate()
+  //         }
+
+  //         if (education.endDate !== null) {
+  //           education.endDate = moment(education.endDate, 'YYYY-MM-DD').toDate()
+  //         }
+  //       })
+
+  //       return response
+  //     }))
+  // }
+
+  // updatePortfolio(id: number, portfolio: Portfolio): Observable<void> {
+  //   const url = `${this.apiUrl}/${id}`
+  //   return this.http.put<void>(url, portfolio).pipe(
+  //     tap(() => {
+  //       this.RefreshRequired.next()
+  //     })
+  //   );
+  // }
 
   updateAboutMe(id: number, aboutMe: any): Observable<void> {
     const url = `${this.apiUrl}/${id}/aboutMe`

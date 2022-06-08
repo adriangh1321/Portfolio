@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +45,8 @@ import { ContactInfoEditComponent } from './components/contact-info-edit/contact
 import { ContactInfoComponent } from './components/contact-info/contact-info.component';
 import { InterestItemComponent } from './components/interest-item/interest-item.component';
 import { InterestEditComponent } from './components/interest-edit/interest-edit.component';
+import { AuthInterceptor } from './http-interceptors/auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -89,7 +91,8 @@ import { InterestEditComponent } from './components/interest-edit/interest-edit.
     ContactInfoEditComponent,
     ContactInfoComponent,
     InterestItemComponent,
-    InterestEditComponent
+    InterestEditComponent,
+    RegisterComponent
 
   ],
   imports: [
@@ -100,7 +103,11 @@ import { InterestEditComponent } from './components/interest-edit/interest-edit.
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

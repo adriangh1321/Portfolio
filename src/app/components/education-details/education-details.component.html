@@ -1,5 +1,5 @@
 <div class="new-item-container">
-    <img src="{{education.image}}" alt="Add new image">
+    <img [src]="education.image || './assets/img/default-education.png'" alt="Add new image">
     <div class="item-text">
         <div class="item-title-edit">
             <h4>{{education.title}}</h4>

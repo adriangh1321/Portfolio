@@ -5,32 +5,39 @@
 </div> -->
 
 
-  <div class="row d-flex justify-content-center align-items-center h-100 w-100">
-    <div class="bg-light rounded p-4 w-50">
-      <form>
-      
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-2 col-form-label mr-2">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3">
+<div class="row d-flex justify-content-center align-items-center h-100 w-100">
+  <div class="bg-light rounded p-4 w-50">
+    <form action="javascript:void(0);" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <h3>Login</h3>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label mr-2">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="inputEmail3" formControlName="email">
+          <div *ngIf="m.email.touched && m.email.invalid" class="alert alert-danger">
+            <div *ngIf="m.email.errors?.required">Please provide a email</div>
+            <div *ngIf="m.email.errors?.email">This field must be a email</div>
           </div>
         </div>
-  
-        <div class="form-group row">
-          <label for="inputPassword3" class="col-sm-2 col-form-label mr-2">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3">
-          </div>
-        </div>
-  
-  
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </div>
-        </div>
-      </form>
+      </div>
 
-    </div>
-    
+      <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-2 col-form-label mr-2">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="inputPassword3" formControlName="password">
+          <div *ngIf="m.password.touched && m.password.invalid" class="alert alert-danger">
+            <div *ngIf="m.password.errors?.required">Please provide a password</div>
+          </div>
+        </div>
+      </div>
+
+      <p>Don't have a user yet? <span><a id="register" routerLink="/register" routerLinkActive="active">Register here</a></span></p>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Sign in</button>
+        </div>
+      </div>
+    </form>
+
   </div>
+
+</div>

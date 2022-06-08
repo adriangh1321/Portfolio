@@ -17,11 +17,11 @@ export class BasicInfoEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.basicInfoForm = this.formBuilder.group({
-      firstname: [this.portfolio.firstname, [Validators.required, onlyWhitespace()]],
-      lastname: [this.portfolio.lastname, [Validators.required, onlyWhitespace()]],
-      ocupation: [this.portfolio.ocupation, [Validators.required, onlyWhitespace()]],
-      country: [this.portfolio.country, [Validators.required, onlyWhitespace()]],
-      state: [this.portfolio.state, [Validators.required, onlyWhitespace()]],
+      firstname: [this.portfolio.firstname==null?'':this.portfolio.firstname, [Validators.required, onlyWhitespace()]],
+      lastname: [this.portfolio.lastname==null?'':this.portfolio.lastname, [Validators.required, onlyWhitespace()]],
+      ocupation: [this.portfolio.ocupation==null?'':this.portfolio.ocupation, [Validators.required, onlyWhitespace()]],
+      country: [this.portfolio.country==null?'':this.portfolio.country, [Validators.required, onlyWhitespace()]],
+      state: [this.portfolio.state==null?'':this.portfolio.state, [Validators.required, onlyWhitespace()]],
       image: [this.portfolio.image, []]
     })
   }

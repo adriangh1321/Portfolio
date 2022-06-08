@@ -7,13 +7,13 @@
             <div class="row h-50">
                 <ul id="info-details">
                     <li *ngIf="currentCompany.url!==null"><a class="url p-1" href="//{{currentCompany.url}}">
-                            <img src="{{currentCompany.image}}" alt="">
-                            <h2>{{currentCompany.name}}</h2>
+                            <img [src]="currentCompany.image || './assets/img/default-current-company.png'" alt="">
+                            <h2>{{currentCompany.name || 'My company'}}</h2>
                         </a>
                     </li>
                     <li class="p-1" *ngIf="currentCompany.url==null">
-                        <img src="{{currentCompany.image}}" alt="">
-                        <h2>{{currentCompany.name}}</h2>
+                        <img [src]="currentCompany.image || './assets/img/default-current-company.png'" alt="">
+                        <h2>{{currentCompany.name || 'My Company'}}</h2>
                     </li>
                 </ul>
             </div>
