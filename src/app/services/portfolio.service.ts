@@ -8,7 +8,7 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class PortfolioService {
-  private apiUrl: string = "http://localhost:8080/v1/portfolios"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/portfolios"
   
   // private _refreshRequired = new Subject<void>()
   private _aboutMeRefreshRequired = new Subject<void>()

@@ -9,7 +9,7 @@ import { Education } from '../models/Education';
 })
 export class EducationService {
 
-  private apiUrl: string = "http://localhost:8080/v1/educations"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/educations"
 
   private _refreshRequired = new Subject<void>()
 

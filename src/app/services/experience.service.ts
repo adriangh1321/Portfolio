@@ -10,7 +10,7 @@ import { Experience } from '../models/Experience';
 export class ExperienceService {
 
 
-  private apiUrl: string = "http://localhost:8080/v1/experiences"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/experiences"
 
   private _refreshRequired = new Subject<void>()
 

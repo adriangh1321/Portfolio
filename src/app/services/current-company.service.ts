@@ -8,7 +8,7 @@ import { CurrentCompany } from '../models/CurrentCompany';
 })
 export class CurrentCompanyService {
 
-  private apiUrl: string = "http://localhost:8080/v1/currentCompanies"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/currentCompanies"
 
   private _currentCompanyRefreshRequired = new Subject<number>()
 

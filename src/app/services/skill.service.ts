@@ -8,7 +8,7 @@ import { Skill } from '../models/Skill';
 })
 export class SkillService {
 
-  private apiUrl: string = "http://localhost:8080/v1/skills"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/skills"
 
   private _refreshRequired = new Subject<void>()
 

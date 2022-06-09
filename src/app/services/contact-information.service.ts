@@ -8,7 +8,7 @@ import { ContactInformation } from '../models/ContactInformation';
 })
 export class ContactInformationService {
 
-  private apiUrl: string = "http://localhost:8080/v1/contactInformations"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/contactInformations"
 
   private _contactInformationRefreshRequired = new Subject<number>()
 

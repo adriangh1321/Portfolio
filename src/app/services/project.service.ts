@@ -8,7 +8,7 @@ import { Project } from '../models/Project';
 })
 export class ProjectService {
 
-  private apiUrl: string = "http://localhost:8080/v1/projects"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/projects"
 
   private _refreshRequired = new Subject<void>()
 

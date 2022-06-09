@@ -8,7 +8,7 @@ import { Interest } from '../models/Interest';
 })
 export class InterestService {
 
-  private apiUrl: string = "http://localhost:8080/v1/interests"
+  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/interests"
 
   private _interestsRefreshRequired = new Subject<void>()
 
