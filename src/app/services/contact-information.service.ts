@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ContactInformation } from '../models/ContactInformation';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { ContactInformation } from '../models/ContactInformation';
 })
 export class ContactInformationService {
 
-  private apiUrl: string = "http://localhost:8080/v1/contactInformations"
+  private apiUrl: string = `${environment.baseUrl}/v1/contactInformations`
 
   private _contactInformationRefreshRequired = new Subject<number>()
 

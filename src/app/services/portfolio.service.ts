@@ -3,12 +3,13 @@ import { map, Observable, Subject, tap } from 'rxjs';
 import { Portfolio } from '../models/Portfolio';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
-  private apiUrl: string = "http://localhost:8080/v1/portfolios"
+  private apiUrl: string = `${environment.baseUrl}/v1/portfolios`
   
   // private _refreshRequired = new Subject<void>()
   private _aboutMeRefreshRequired = new Subject<void>()

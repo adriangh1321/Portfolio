@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Interest } from '../models/Interest';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Interest } from '../models/Interest';
 })
 export class InterestService {
 
-  private apiUrl: string = "http://localhost:8080/v1/interests"
+  private apiUrl: string = `${environment.baseUrl}/v1/interests`
 
   private _interestsRefreshRequired = new Subject<void>()
 

@@ -1,13 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = "http://localhost:8080/v1/auth"
+  private apiUrl: string = `${environment.baseUrl}/v1/auth`
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -44,8 +45,12 @@ export class AuthService {
   }
 
   register(register: any) {
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json')
+    
+
     const url = `${this.apiUrl}/register`
-    return this.http.post<any>(url, register).subscribe({
+    return this.http.post<any>(url, register,{headers}).subscribe({
       next: resp => {
         this.router.navigate(['profile'])
         localStorage.setItem('auth_token', resp.jwt);
