@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, Subject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Project } from '../models/Project';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Project } from '../models/Project';
 })
 export class ProjectService {
 
-  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/projects"
+  private apiUrl: string = `${environment.baseUrl}/v1/projects`
 
   private _refreshRequired = new Subject<void>()
 

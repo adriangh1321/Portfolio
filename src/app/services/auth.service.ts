@@ -1,13 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = "https://portfolio-argprograma.herokuapp.com/v1/auth"
+  private apiUrl: string = `${environment.baseUrl}/v1/auth`
 
   constructor(private http: HttpClient, private router: Router) { }
 
