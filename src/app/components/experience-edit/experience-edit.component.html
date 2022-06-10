@@ -1,5 +1,5 @@
 <div class="experience-container">
-    <img [src]="experienceForm.controls['image'].value" alt="Add new image">
+    <img [src]="experienceForm.controls['image'].value || './assets/img/default-experience.png'" alt="Add new image">
 
     <div class="col pr-2">
         <form action="javascript:void(0);" [formGroup]="experienceForm" (ngSubmit)="onSubmit()" novalidate>
