@@ -8,27 +8,27 @@ import { filter } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isLoader:boolean;
+  isLoading:boolean;
   
   constructor(public router: Router) {
-    this.isLoader=false;
+    this.isLoading=false;
     router.events.pipe(
        filter((e: Event): e is RouterEvent => e instanceof RouterEvent)
     ).subscribe((e: RouterEvent) => {
       switch (true) {
         case e instanceof NavigationStart: {
-          this.isLoader = true;
+          this.isLoading = true;
           break;
         }
         case e instanceof NavigationEnd: {
-          this.isLoader = false;
+          this.isLoading = false;
           break;
         }
       }
     });
   }
 
-  showLoading(){
-    this.isLoader=true;
+  switchLoader(event:boolean){
+    this.isLoading=event;
   }
 }

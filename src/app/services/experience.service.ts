@@ -14,14 +14,19 @@ export class ExperienceService {
   private apiUrl: string = `${environment.baseUrl}/v1/experiences`
 
   private _refreshRequired = new Subject<void>()
+  private _showLoading=new Subject<boolean>()
 
   get RefreshRequired() {
     return this._refreshRequired;
+  }
+  get ShowLoading(){
+    return this._showLoading;
   }
 
   constructor(private http: HttpClient) { }
 
   updateExperience(id: number, experience: Experience): Observable<void> {
+    
     const url = `${this.apiUrl}/${id}`
     return this.http.put<void>(url, experience).pipe(
       tap(() => {
@@ -45,11 +50,13 @@ export class ExperienceService {
           }
 
         })
+        this.ShowLoading.next(false)
         return response
       }))
   }
 
   addExperience(experience: any): Observable<void> {
+    this.ShowLoading.next(true)
     return this.http.post<void>(this.apiUrl, experience).pipe(
       tap(() => {
         this.RefreshRequired.next()

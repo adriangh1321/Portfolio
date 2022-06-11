@@ -14,7 +14,14 @@ export class ExperiencesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.experienceService.RefreshRequired.subscribe(()=>this.getExperiences(parseInt(localStorage.getItem("id_portfolio")!)))
+    this.experienceService.RefreshRequired.subscribe({
+      next: data => {this.getExperiences(parseInt(localStorage.getItem("id_portfolio")!))
+    },
+      error: error => alert('There was an error loading the experiences')
+    })
+    
+    
+    
   }
 
   getExperiences(idPortfolio:number){

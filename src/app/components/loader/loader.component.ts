@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
   selector: 'app-loader',
@@ -7,12 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./loader.component.css']
 })
 export class LoaderComponent implements OnInit {
-  @Output() onLoader=new EventEmitter<boolean>();
+  @Output() toggleLoader=new EventEmitter<boolean>();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private experienceService:ExperienceService) { }
 
   ngOnInit(): void {
-   this.authService.ShowLoading.subscribe(()=>this.onLoader.emit())
+   this.authService.ShowLoading.subscribe(()=>this.toggleLoader.emit())
+   this.experienceService.ShowLoading.subscribe((res)=>this.toggleLoader.emit(res))
   }
   
 
