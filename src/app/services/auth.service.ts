@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PortfolioService } from './portfolio.service';
 
 
 @Injectable({
@@ -9,21 +11,28 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   private apiUrl: string = `${environment.baseUrl}/v1/auth`
+  private showLoading=new Subject<void>()
 
-  constructor(private http: HttpClient, private router: Router) { }
+  get ShowLoading(){
+    return this.showLoading;
+  }
+
+  constructor(private http: HttpClient, private router: Router, private portfolioService: PortfolioService) { }
 
   login(login: any) {
+    this.showLoading.next();
     const url = `${this.apiUrl}/login`
     return this.http.post<any>(url, login).subscribe({
       next: resp => {
-        this.router.navigate(['profile'])
         localStorage.setItem('auth_token', resp.jwt);
-
+        this.router.navigate(['profile'])
       },
       error: error => {
         alert("Incorrect user/password");
         console.log(error)
       }
+
+
     })
 
   }
@@ -45,12 +54,13 @@ export class AuthService {
   }
 
   register(register: any) {
+    this.router.navigate(['#'])
     const headers = new HttpHeaders()
-    .append('Content-Type', 'application/json')
-    
+      .append('Content-Type', 'application/json')
+
 
     const url = `${this.apiUrl}/register`
-    return this.http.post<any>(url, register,{headers}).subscribe({
+    return this.http.post<any>(url, register, { headers }).subscribe({
       next: resp => {
         this.router.navigate(['profile'])
         localStorage.setItem('auth_token', resp.jwt);

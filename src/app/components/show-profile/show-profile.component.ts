@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SkillType } from 'src/app/enums/SkillType';
 import { Portfolio } from 'src/app/models/Portfolio';
+import { AuthService } from 'src/app/services/auth.service';
 import { EducationService } from 'src/app/services/education.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
@@ -19,19 +21,24 @@ export class ShowProfileComponent implements OnInit {
 
 
   constructor(
+    private authService:AuthService,
     private portfolioService: PortfolioService,
     private experienceService: ExperienceService,
     private educationService: EducationService,
     private skillService: SkillService,
-    private projectService: ProjectService) {
+    private projectService: ProjectService,
+    private route:ActivatedRoute) {
     this.portfolio = new Portfolio();
   }
 
   ngOnInit(): void {
-    this.portfolioService.getMeByToken().subscribe((res) => {
-      this.portfolio = res
-    }) 
+    this.portfolio=this.route.snapshot.data["portfolio"]
+    // this.portfolioService.getMeByToken().subscribe((res) => {
+    //   this.portfolio = res
+    // }) 
   } 
+
+
 
   onAddExperience() {
     const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }

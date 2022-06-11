@@ -1,0 +1,8 @@
+.btn-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    row-gap: 5px;
+    flex-wrap: wrap;
+    column-gap: 5px;
+}

@@ -47,6 +47,7 @@ import { InterestItemComponent } from './components/interest-item/interest-item.
 import { InterestEditComponent } from './components/interest-edit/interest-edit.component';
 import { AuthInterceptor } from './http-interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { RegisterComponent } from './components/register/register.component';
     ContactInfoComponent,
     InterestItemComponent,
     InterestEditComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoaderComponent
 
   ],
   imports: [
