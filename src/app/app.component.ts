@@ -1,15 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent,Event } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  constructor( private router:Router){}
+export class AppComponent {
+  isLoader:boolean;
+  
+  constructor(public router: Router) {
+    this.isLoader=false;
+    router.events.pipe(
+       filter((e: Event): e is RouterEvent => e instanceof RouterEvent)
+    ).subscribe((e: RouterEvent) => {
+      switch (true) {
+        case e instanceof NavigationStart: {
+          this.isLoader = true;
+          break;
+        }
+        case e instanceof NavigationEnd: {
+          this.isLoader = false;
+          break;
+        }
+      }
+    });
+  }
 
-  ngOnInit(): void {
-    
+  showLoading(){
+    this.isLoader=true;
   }
 }

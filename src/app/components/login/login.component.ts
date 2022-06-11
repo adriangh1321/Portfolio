@@ -10,8 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  isLoading:boolean;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
+    this.isLoading=false;
+   }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -31,6 +34,10 @@ export class LoginComponent implements OnInit {
 
   get m() {
     return this.loginForm.controls;
+  }
+
+  showLoader(event:boolean){
+    this.isLoading=event;
   }
 
 }

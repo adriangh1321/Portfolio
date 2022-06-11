@@ -30,30 +30,7 @@ export class PortfolioService {
 
   getMeByToken(): Observable<Portfolio> {
     const url = `${this.apiUrl}/me`
-    return this.http.get<Portfolio>(url).pipe(
-      map(response => {
-        response.experiences.forEach(experience => {
-          if (experience.startDate !== null) {
-            experience.startDate = moment(experience.startDate, 'YYYY-MM-DD').toDate()
-          }
-
-          if (experience.endDate !== null) {
-            experience.endDate = moment(experience.endDate, 'YYYY-MM-DD').toDate()
-          }
-        })
-        response.educations.forEach(education => {
-          if (education.startDate !== null) {
-            education.startDate = moment(education.startDate, 'YYYY-MM-DD').toDate()
-          }
-
-          if (education.endDate !== null) {
-            education.endDate = moment(education.endDate, 'YYYY-MM-DD').toDate()
-          }
-        })
-        localStorage.setItem("id_portfolio", response.id.toString())
-
-        return response
-      }))
+    return this.http.get<Portfolio>(url)
   }
 
   // getPortfolioById(id: number): Observable<Portfolio> {
