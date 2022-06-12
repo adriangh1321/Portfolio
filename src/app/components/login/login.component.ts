@@ -2,6 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, MaxLengthValidator, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading:boolean;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
     this.isLoading=false;
    }
 
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       alert('Error: Invalid input')
     }
-
+    this.loaderService.showLoading()
     this.authService.login(this.loginForm.getRawValue())
   }
   

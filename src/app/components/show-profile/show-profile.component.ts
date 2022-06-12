@@ -5,6 +5,7 @@ import { Portfolio } from 'src/app/models/Portfolio';
 import { AuthService } from 'src/app/services/auth.service';
 import { EducationService } from 'src/app/services/education.service';
 import { ExperienceService } from 'src/app/services/experience.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { SkillService } from 'src/app/services/skill.service';
@@ -27,7 +28,8 @@ export class ShowProfileComponent implements OnInit {
     private educationService: EducationService,
     private skillService: SkillService,
     private projectService: ProjectService,
-    private route:ActivatedRoute) {
+    private route:ActivatedRoute,
+    private loaderService:LoaderService) {
     this.portfolio = new Portfolio();
   }
 
@@ -41,9 +43,13 @@ export class ShowProfileComponent implements OnInit {
 
 
   onAddExperience() {
+    this.loaderService.showLoading()
     const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
     this.experienceService.addExperience(newExperience).subscribe({
-      next: data => { alert("The experience was added successfull!") },
+      next: data => { 
+        // this.loaderService.hideLoading()
+        // alert("The experience was added successfull!")
+       },
       error: error => { alert("There was a error"); console.log(error) }
     })
   }

@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { map, Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Experience } from '../models/Experience';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,12 @@ export class ExperienceService {
   private apiUrl: string = `${environment.baseUrl}/v1/experiences`
 
   private _refreshRequired = new Subject<void>()
-  private _showLoading=new Subject<boolean>()
+ 
 
   get RefreshRequired() {
     return this._refreshRequired;
   }
-  get ShowLoading(){
-    return this._showLoading;
-  }
+  
 
   constructor(private http: HttpClient) { }
 
@@ -37,6 +36,7 @@ export class ExperienceService {
   }
 
   getExperiencesByPortfolioId(idPortfolio: number): Observable<Experience[]> {
+    
     let params = new HttpParams().set('portfolioId', idPortfolio)
     return this.http.get<Experience[]>(this.apiUrl, { params: params }).pipe(
       map(response => {
@@ -50,13 +50,12 @@ export class ExperienceService {
           }
 
         })
-        this.ShowLoading.next(false)
+        
         return response
       }))
   }
 
   addExperience(experience: any): Observable<void> {
-    this.ShowLoading.next(true)
     return this.http.post<void>(this.apiUrl, experience).pipe(
       tap(() => {
         this.RefreshRequired.next()
