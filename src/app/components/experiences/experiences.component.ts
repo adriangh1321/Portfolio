@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NotificationType } from 'src/app/enums/NotificationType';
 import { Experience } from 'src/app/models/Experience';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-experiences',
@@ -10,7 +12,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class ExperiencesComponent implements OnInit {
   @Input() experiences: Experience[];
-  constructor(private experienceService: ExperienceService, private loaderService: LoaderService) {
+  constructor(private experienceService: ExperienceService, private loaderService: LoaderService,private notificationService:NotificationService) {
     this.experiences = []
   }
 
@@ -20,15 +22,17 @@ export class ExperiencesComponent implements OnInit {
 
   getExperiences(idPortfolio: number) {
     this.loaderService.showLoading()
-    this.experienceService.getExperiencesByPortfolioId(idPortfolio).subscribe({
-      next: experiences => {
-        this.experiences = experiences
+    this.experienceService.getExperiencesByPortfolioId(idPortfolio)
+    .subscribe({
+      next: experiences => { 
+        this.experiences=experiences
         this.loaderService.hideLoading()
-      },
-      error: error => {
+       
+       },
+      error: error => { 
         this.loaderService.hideLoading()
-        alert('There was an error loading the experiences')
-      },
+        this.notificationService.showNotification({type:NotificationType.ERROR,message:"There was an error loading the experiences"})
+        console.log(error) }
     })
 
   }

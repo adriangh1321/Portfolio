@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationType } from 'src/app/enums/NotificationType';
 import { SkillType } from 'src/app/enums/SkillType';
 import { Portfolio } from 'src/app/models/Portfolio';
 import { AuthService } from 'src/app/services/auth.service';
 import { EducationService } from 'src/app/services/education.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { SkillService } from 'src/app/services/skill.service';
@@ -29,7 +31,8 @@ export class ShowProfileComponent implements OnInit {
     private skillService: SkillService,
     private projectService: ProjectService,
     private route:ActivatedRoute,
-    private loaderService:LoaderService) {
+    private loaderService:LoaderService,
+    private notificationService:NotificationService) {
     this.portfolio = new Portfolio();
   }
 
@@ -47,10 +50,15 @@ export class ShowProfileComponent implements OnInit {
     const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
     this.experienceService.addExperience(newExperience).subscribe({
       next: data => { 
-        // this.loaderService.hideLoading()
-        // alert("The experience was added successfull!")
+        this.loaderService.hideLoading()
+        this.notificationService.showNotification({type:NotificationType.SUCCESS,message:"The experience was added successfull!"})
        },
-      error: error => { alert("There was a error"); console.log(error) }
+      error: error => { 
+        this.loaderService.hideLoading()
+        throw error
+        // throw new Error("There was an error adding the experience");
+        // this.notificationService.showNotification({type:NotificationType.ERROR,message:"There was an error adding the experience"})
+        }
     })
   }
 

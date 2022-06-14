@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent,Event } from '@angular/router';
 import { filter } from 'rxjs';
+import { NotificationType } from './enums/NotificationType';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { filter } from 'rxjs';
 })
 export class AppComponent {
   isLoading:boolean;
+ 
   
   constructor(public router: Router) {
     this.isLoading=false;

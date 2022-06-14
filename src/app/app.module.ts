@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +48,8 @@ import { InterestEditComponent } from './components/interest-edit/interest-edit.
 import { AuthInterceptor } from './http-interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { GlobalErrorHandler } from './errors/global-error-handler';
 
 
 @NgModule({
@@ -94,7 +96,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     InterestItemComponent,
     InterestEditComponent,
     RegisterComponent,
-    LoaderComponent
+    LoaderComponent,
+    NotificationComponent
 
   ],
   imports: [
@@ -105,11 +108,14 @@ import { LoaderComponent } from './components/loader/loader.component';
     HttpClientModule,
     NgbModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

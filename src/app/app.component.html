@@ -1,6 +1,7 @@
 <app-header></app-header>
 <div id="router-outlet">
   <app-loader [hidden]="!isLoading" (toggleLoader)=switchLoader($event)></app-loader>
+  <app-notification></app-notification>
   <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

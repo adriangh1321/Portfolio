@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { map, Observable, Subject, tap } from 'rxjs';
+import { catchError, map, Observable, Subject, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Experience } from '../models/Experience';
 import { LoaderService } from './loader.service';
@@ -56,10 +56,13 @@ export class ExperienceService {
   }
 
   addExperience(experience: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, experience).pipe(
+    return this.http.post<void>(this.apiUrl+"fff", experience).pipe(
+      
       tap(() => {
         this.RefreshRequired.next()
-      })
+      }),
+      
+      
     );
   }
 
