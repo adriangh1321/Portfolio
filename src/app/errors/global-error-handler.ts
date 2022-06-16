@@ -21,6 +21,8 @@ export class GlobalErrorHandler implements ErrorHandler {
         let message;
         let stackTrace;
 
+
+
         if (error instanceof HttpErrorResponse) {
             // Server Error
             message = errorService.getServerMessage(error);

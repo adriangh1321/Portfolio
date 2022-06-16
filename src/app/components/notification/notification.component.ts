@@ -15,10 +15,11 @@ export class NotificationComponent implements OnInit {
   notificationType=NotificationType
 
   constructor(private notificationService:NotificationService) { }
-
+  
   ngOnInit(): void {
     
    this.notification$.subscribe((notification)=> {
+    console.log("este es el notificador")
     console.log(notification)
     setTimeout(() => {
     this.notification$=this.notificationService.notification$()

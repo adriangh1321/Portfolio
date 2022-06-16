@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import isOnline from 'is-online';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,15 +10,18 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
+  networkStatus: boolean = false;
 
   ngOnInit(): void {
+    (async () => {
+      this.networkStatus = await isOnline();
+    })();
   }
-
   logout() {
     this.authService.logout()
   }
 
-  isLoggedIn():boolean{
+  isLoggedIn(): boolean {
     return this.authService.isLoggedIn()
   }
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
+
 import { map, Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Education } from '../models/Education';

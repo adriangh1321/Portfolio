@@ -6,16 +6,24 @@ import { Notification } from '../models/Notification';
   providedIn: 'root'
 })
 export class NotificationService {
-  private readonly notificationSubject$ = new Subject<Notification>()
+  private readonly _notificationSubject$ = new Subject<Notification>()
+  private readonly _requestNotificacion$ = new Subject<Notification>()
   constructor(readonly zone: NgZone) { }
 
   notification$() {
-    return this.notificationSubject$.asObservable();
+    return this._notificationSubject$.asObservable();
+  }
+  get RequestNotification() {
+    return this._requestNotificacion$
   }
 
   showNotification(notification: Notification) {
-    this.zone.run(()=>this.notificationSubject$.next(notification))
-    
+    this.zone.run(()=>this._notificationSubject$.next(notification))
   }
+  requestNotification(notification: Notification) {
+    this._requestNotificacion$.next(notification)
+  }
+
+
 
 }

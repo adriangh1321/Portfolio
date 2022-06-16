@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { SkillType } from 'src/app/enums/SkillType';
 import { Portfolio } from 'src/app/models/Portfolio';
@@ -11,7 +12,6 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { SkillService } from 'src/app/services/skill.service';
-import { Cloneable } from 'src/app/utilities/Clone';
 
 @Component({
   selector: 'app-show-profile',
@@ -21,7 +21,7 @@ import { Cloneable } from 'src/app/utilities/Clone';
 export class ShowProfileComponent implements OnInit {
   portfolio: Portfolio;
   skillType = SkillType;
-
+  
 
   constructor(
     private authService:AuthService,
@@ -32,8 +32,12 @@ export class ShowProfileComponent implements OnInit {
     private projectService: ProjectService,
     private route:ActivatedRoute,
     private loaderService:LoaderService,
-    private notificationService:NotificationService) {
+    private notificationService:NotificationService,
+    
+    ) {
     this.portfolio = new Portfolio();
+    
+    
   }
 
   ngOnInit(): void {
@@ -50,14 +54,11 @@ export class ShowProfileComponent implements OnInit {
     const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
     this.experienceService.addExperience(newExperience).subscribe({
       next: data => { 
-        this.loaderService.hideLoading()
-        this.notificationService.showNotification({type:NotificationType.SUCCESS,message:"The experience was added successfull!"})
+       this.notificationService.requestNotification({type:NotificationType.SUCCESS,message:NotificationMessage.EXP_ADD})
        },
       error: error => { 
         this.loaderService.hideLoading()
         throw error
-        // throw new Error("There was an error adding the experience");
-        // this.notificationService.showNotification({type:NotificationType.ERROR,message:"There was an error adding the experience"})
         }
     })
   }
