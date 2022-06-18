@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotificationMessage } from 'src/app/enums/NotificationMessage';
+import { NotificationType } from 'src/app/enums/NotificationType';
+import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { onlyWhitespace } from 'src/app/validators/WhitespaceValidatorDirective';
 
@@ -13,17 +17,20 @@ export class AboutEditComponent implements OnInit {
   aboutMeForm!: FormGroup;
   @Output() onShowDetails = new EventEmitter()
   @Input() aboutMe!: String;
-  idPortfolio!:number;
+  idPortfolio!: number;
 
 
-  constructor(private portfolioService: PortfolioService, private formBuilder: FormBuilder) {
-       
+  constructor(
+    private portfolioService: PortfolioService,
+    private formBuilder: FormBuilder,
+    private loaderService: LoaderService) {
+
   }
 
   ngOnInit(): void {
-    this.idPortfolio=parseInt(localStorage.getItem("id_portfolio")!)
+    this.idPortfolio = parseInt(localStorage.getItem("id_portfolio")!)
     this.aboutMeForm = this.formBuilder.group({
-      aboutMe: [this.aboutMe==null?'':this.aboutMe, [Validators.required,onlyWhitespace()]],        
+      aboutMe: [this.aboutMe == null ? '' : this.aboutMe, [Validators.required, onlyWhitespace()]],
     })
   }
   onSubmit() {
@@ -32,11 +39,14 @@ export class AboutEditComponent implements OnInit {
       alert('Invalid input');
       return;
     }
-    
 
+    this.loaderService.showLoading()
     this.portfolioService.updateAboutMe(this.idPortfolio, this.aboutMeForm.getRawValue()).subscribe({
-      next: data => { alert("The about me was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => {},
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
 
     this.onCloseEdit()
@@ -45,7 +55,7 @@ export class AboutEditComponent implements OnInit {
     this.onShowDetails.emit()
   }
 
-  
+
   get m() {
     return this.aboutMeForm!.controls;
   }
