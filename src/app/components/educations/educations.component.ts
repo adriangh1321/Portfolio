@@ -31,7 +31,10 @@ export class EducationsComponent implements OnInit {
         this.loaderService.hideLoading()
         this.notificationService.showNotification(this.notification)
       },
-      error: error => { }
+      error: error => { 
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
   }
 }

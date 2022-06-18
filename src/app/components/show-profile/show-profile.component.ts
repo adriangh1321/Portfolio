@@ -86,10 +86,20 @@ export class ShowProfileComponent implements OnInit {
   }
 
   onAddSkill(type: SkillType) {
+    this.loaderService.showLoading()
     const newSkill: any = { type: type, name: "Skill", percent: 1, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
     this.skillService.addSkill(newSkill).subscribe({
-      next: data => { alert("The skill was added successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => {
+        this.notificationService.requestNotification(
+          {
+            type: NotificationType.SUCCESS,
+            message: NotificationMessage.SKILL_ADD
+          })
+      },
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
   }
 

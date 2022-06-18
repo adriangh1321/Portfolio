@@ -37,8 +37,8 @@ export class ExperiencesComponent implements OnInit {
        },
       error: error => { 
         this.loaderService.hideLoading()
-        this.notificationService.showNotification({type:NotificationType.ERROR,message:"There was an error loading the experiences"})
-        console.log(error) }
+        throw error
+         }
     })
     
   }
