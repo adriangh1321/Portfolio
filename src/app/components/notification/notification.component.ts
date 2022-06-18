@@ -18,9 +18,7 @@ export class NotificationComponent implements OnInit {
   
   ngOnInit(): void {
     
-   this.notification$.subscribe((notification)=> {
-    console.log("este es el notificador")
-    console.log(notification)
+   this.notification$.subscribe(()=> {
     setTimeout(() => {
     this.notification$=this.notificationService.notification$()
   }, 3000)})

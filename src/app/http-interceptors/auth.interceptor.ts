@@ -14,14 +14,10 @@ import { EMPTY } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    private networkStatus: boolean = false;
+   
     constructor(private auth: AuthService, private router: Router, private zone: NgZone,private http:HttpClient) { }
 
-    // checkStatus(): Observable<boolean> {
-    //     return from((async () => {
-    //         return await isOnline();
-    //     })())
-    // }
+  
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 

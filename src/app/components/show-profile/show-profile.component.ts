@@ -85,23 +85,7 @@ export class ShowProfileComponent implements OnInit {
     })
   }
 
-  onAddSkill(type: SkillType) {
-    this.loaderService.showLoading()
-    const newSkill: any = { type: type, name: "Skill", percent: 1, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
-    this.skillService.addSkill(newSkill).subscribe({
-      next: data => {
-        this.notificationService.requestNotification(
-          {
-            type: NotificationType.SUCCESS,
-            message: NotificationMessage.SKILL_ADD
-          })
-      },
-      error: error => {
-        this.loaderService.hideLoading()
-        throw error
-      }
-    })
-  }
+  
 
   onAddProject() {
     const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
