@@ -85,13 +85,23 @@ export class ShowProfileComponent implements OnInit {
     })
   }
 
-  
+
 
   onAddProject() {
+    this.loaderService.showLoading()
     const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
     this.projectService.addProject(newProject).subscribe({
-      next: data => { alert("The project was added successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => {
+        this.notificationService.requestNotification(
+          {
+            type: NotificationType.SUCCESS,
+            message: NotificationMessage.PROJ_ADD
+          })
+      },
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
   }
 

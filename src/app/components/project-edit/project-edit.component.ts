@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationMessage } from 'src/app/enums/NotificationMessage';
+import { NotificationType } from 'src/app/enums/NotificationType';
 import { Project } from 'src/app/models/Project';
+import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -16,7 +20,12 @@ export class ProjectEditComponent implements OnInit {
   @Input() project: Project;
 
 
-  constructor(private projectService: ProjectService, private formBuilder: FormBuilder, private parserFormatter: NgbDateParserFormatter) {
+  constructor(
+    private projectService: ProjectService,
+    private formBuilder: FormBuilder,
+    private parserFormatter: NgbDateParserFormatter,
+    private loaderService: LoaderService,
+    private notificationService: NotificationService) {
     this.project = new Project()
   }
 
@@ -35,10 +44,18 @@ export class ProjectEditComponent implements OnInit {
       alert('Invalid input');
       return;
     }
-
+    this.loaderService.showLoading()
     this.projectService.updateProject(this.project.id, this.projectForm.getRawValue()).subscribe({
-      next: data => { alert("The project was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => {
+        this.notificationService.requestNotification({
+          type: NotificationType.SUCCESS,
+          message: NotificationMessage.PROJ_UPDATE
+        })
+      },
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
 
     this.onCloseEdit()
