@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Portfolio } from 'src/app/models/Portfolio';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { onlyWhitespace } from 'src/app/validators/WhitespaceValidatorDirective';
 
@@ -13,15 +14,18 @@ export class BasicInfoEditComponent implements OnInit {
   @Input() portfolio!: Portfolio;
   @Output() onShowDetails = new EventEmitter()
   basicInfoForm!: FormGroup
-  constructor(private formBuilder: FormBuilder, private portfolioService: PortfolioService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private portfolioService: PortfolioService,
+    private loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.basicInfoForm = this.formBuilder.group({
-      firstname: [this.portfolio.firstname==null?'':this.portfolio.firstname, [Validators.required, onlyWhitespace()]],
-      lastname: [this.portfolio.lastname==null?'':this.portfolio.lastname, [Validators.required, onlyWhitespace()]],
-      ocupation: [this.portfolio.ocupation==null?'':this.portfolio.ocupation, [Validators.required, onlyWhitespace()]],
-      country: [this.portfolio.country==null?'':this.portfolio.country, [Validators.required, onlyWhitespace()]],
-      state: [this.portfolio.state==null?'':this.portfolio.state, [Validators.required, onlyWhitespace()]],
+      firstname: [this.portfolio.firstname == null ? '' : this.portfolio.firstname, [Validators.required, onlyWhitespace()]],
+      lastname: [this.portfolio.lastname == null ? '' : this.portfolio.lastname, [Validators.required, onlyWhitespace()]],
+      ocupation: [this.portfolio.ocupation == null ? '' : this.portfolio.ocupation, [Validators.required, onlyWhitespace()]],
+      country: [this.portfolio.country == null ? '' : this.portfolio.country, [Validators.required, onlyWhitespace()]],
+      state: [this.portfolio.state == null ? '' : this.portfolio.state, [Validators.required, onlyWhitespace()]],
       image: [this.portfolio.image, []]
     })
   }
@@ -43,9 +47,13 @@ export class BasicInfoEditComponent implements OnInit {
       alert('Invalid input');
       return;
     }
+    this.loaderService.showLoading()
     this.portfolioService.patchBasicInfo(this.portfolio.id, this.basicInfoForm.getRawValue()).subscribe({
-      next: data => { alert("The basic info was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => {},
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
     this.onCloseEdit()
   }
@@ -53,7 +61,7 @@ export class BasicInfoEditComponent implements OnInit {
     this.onShowDetails.emit()
   }
 
-  get m(){
+  get m() {
     return this.basicInfoForm.controls;
   }
 

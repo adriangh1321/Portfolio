@@ -15,7 +15,9 @@ export enum NotificationMessage{
     PROJ_UPDATE="The project was updated",
     PROJ_DELETE="The project was deleted",
 
-    ABOUT_EDIT="About me was updated"
+    ABOUT_EDIT="About me was updated",
+
+    BASIC_EDIT="Basic info was updated"
 
     
 
