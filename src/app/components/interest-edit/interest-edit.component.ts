@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotificationMessage } from 'src/app/enums/NotificationMessage';
+import { NotificationType } from 'src/app/enums/NotificationType';
 import { Interest } from 'src/app/models/Interest';
 import { InterestService } from 'src/app/services/interest.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { onlyWhitespace } from 'src/app/validators/WhitespaceValidatorDirective';
 
 @Component({
@@ -15,13 +19,17 @@ export class InterestEditComponent implements OnInit {
   @Input() interest: Interest;
 
 
-  constructor(private interestService: InterestService, private formBuilder: FormBuilder) {
+  constructor(
+    private interestService: InterestService,
+    private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
+    private notificationService: NotificationService) {
     this.interest = new Interest()
   }
 
   ngOnInit(): void {
     this.interestForm = this.formBuilder.group({
-      name: [this.interest.name, [Validators.required,onlyWhitespace()]],
+      name: [this.interest.name, [Validators.required, onlyWhitespace()]],
       image: [this.interest.image, []]
     })
   }
@@ -32,12 +40,18 @@ export class InterestEditComponent implements OnInit {
       alert('Invalid input');
       return;
     }
-    
-    
 
+
+    this.loaderService.showLoading()
     this.interestService.updateInterest(this.interest.id, this.interestForm.getRawValue()).subscribe({
-      next: data => { alert("The interest was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => { this.notificationService.requestNotification({
+        type:NotificationType.SUCCESS,
+        message:NotificationMessage.INTER_UPDATE
+      }) },
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
 
     this.onCloseEdit()
