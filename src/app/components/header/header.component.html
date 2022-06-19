@@ -3,5 +3,9 @@
       <i class="fa-solid fa-briefcase"></i>
       My portfolio
     </a>
+    <!-- <p class="text-white">
+      Internet Connection Status:
+      {{ networkStatus ? "IS CONNECTED" : "NOT CONNECTED" }}
+    </p> -->
     <a class="btn btn-danger" href='javascript:void(0);' (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
   </nav>

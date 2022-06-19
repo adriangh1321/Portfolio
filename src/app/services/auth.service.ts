@@ -11,16 +11,11 @@ import { PortfolioService } from './portfolio.service';
 })
 export class AuthService {
   private apiUrl: string = `${environment.baseUrl}/v1/auth`
-  private showLoading=new Subject<void>()
-
-  get ShowLoading(){
-    return this.showLoading;
-  }
 
   constructor(private http: HttpClient, private router: Router, private portfolioService: PortfolioService) { }
 
   login(login: any) {
-    this.showLoading.next();
+    
     const url = `${this.apiUrl}/login`
     return this.http.post<any>(url, login).subscribe({
       next: resp => {

@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationMessage } from 'src/app/enums/NotificationMessage';
+import { NotificationType } from 'src/app/enums/NotificationType';
 import { Skill } from 'src/app/models/Skill';
+import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { SkillService } from 'src/app/services/skill.service';
 
 @Component({
@@ -15,7 +19,12 @@ export class SkillEditComponent implements OnInit {
   @Input() skill: Skill;
 
 
-  constructor(private skillService: SkillService, private formBuilder: FormBuilder, private parserFormatter: NgbDateParserFormatter) {
+  constructor(
+    private skillService: SkillService,
+    private formBuilder: FormBuilder,
+    private parserFormatter: NgbDateParserFormatter,
+    private loaderService: LoaderService,
+    private notificationService: NotificationService) {
     this.skill = new Skill()
   }
 
@@ -34,11 +43,19 @@ export class SkillEditComponent implements OnInit {
       alert('Invalid input');
       return;
     }
-    
 
+    this.loaderService.showLoading()
     this.skillService.updateSkill(this.skill.id, this.skillForm.getRawValue()).subscribe({
-      next: data => { alert("The skill was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => {
+        this.notificationService.requestNotification({
+          type: NotificationType.SUCCESS,
+          message: NotificationMessage.SKILL_UPDATE
+        })
+      },
+      error: error => { 
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
 
     this.onCloseEdit()
@@ -49,8 +66,8 @@ export class SkillEditComponent implements OnInit {
 
 
 
-  
-  
+
+
 
   get m() {
     return this.skillForm!.controls;

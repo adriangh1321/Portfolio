@@ -41,30 +41,7 @@
 
 </div>
 
-<div class="card mat-card">
-  <div class="card-titles">
-    <div class="title-container">
-      <h2>Hard Skills</h2>
-      <a href='javascript:void(0);' (click)="onAddSkill(skillType.HARD)"><i class="fa-solid fa-plus"></i></a>
-    </div>
-    <app-skills [skills]="portfolio.skills" [skillType]="skillType.HARD">
-    </app-skills>
-
-  </div>
-</div>
-
-<div class="card mat-card">
-  <div class="card-titles">
-    <div class="title-container">
-      <h2>Soft Skills</h2>
-      <a href='javascript:void(0);' (click)="onAddSkill(skillType.SOFT)"><i class="fa-solid fa-plus"></i></a>
-    </div>
-    <app-skills [skills]="portfolio.skills" [skillType]="skillType.SOFT">
-    </app-skills>
-
-  </div>
-</div>
-
+<app-skills [skills]="portfolio.skills"></app-skills>
 
 <div class="card mat-card">
   <div class="card-titles">

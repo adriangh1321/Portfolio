@@ -4,6 +4,7 @@ import { Portfolio } from '../models/Portfolio';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { AboutMe } from '../models/AboutMe';
 
 @Injectable({
   providedIn: 'root'
@@ -78,9 +79,9 @@ export class PortfolioService {
     );
   }
   
-  getAboutMe(id:number):Observable<any>{
+  getAboutMe(id:number):Observable<AboutMe>{
     const url = `${this.apiUrl}/${id}/aboutMe`
-    return this.http.get<any>(url)
+    return this.http.get<AboutMe>(url)
   }
 
   patchBasicInfo(id:number,basicInfo:any):Observable<any>{

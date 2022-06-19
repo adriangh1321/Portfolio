@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationMessage } from 'src/app/enums/NotificationMessage';
+import { NotificationType } from 'src/app/enums/NotificationType';
 import { Education } from 'src/app/models/Education';
 import { EducationService } from 'src/app/services/education.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-education-edit',
@@ -15,7 +19,12 @@ export class EducationEditComponent implements OnInit {
   @Input() education: Education;
 
 
-  constructor(private educationService: EducationService, private formBuilder: FormBuilder, private parserFormatter: NgbDateParserFormatter) {
+  constructor(
+    private educationService: EducationService,
+    private formBuilder: FormBuilder,
+    private parserFormatter: NgbDateParserFormatter,
+    private loaderService: LoaderService,
+    private notificationService: NotificationService) {
     this.education = new Education()
   }
 
@@ -53,10 +62,19 @@ export class EducationEditComponent implements OnInit {
       startDate: this.parserFormatter.format(this.educationForm.get("startDate")!.value),
 
     })
-
+    this.loaderService.showLoading()
     this.educationService.updateEducation(this.education.id, this.educationForm.getRawValue()).subscribe({
-      next: data => { alert("The experience was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => {
+        this.notificationService.requestNotification(
+          {
+            type: NotificationType.SUCCESS,
+            message: NotificationMessage.EDU_UPDATE
+          })
+      },
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
 
     this.onCloseEdit()

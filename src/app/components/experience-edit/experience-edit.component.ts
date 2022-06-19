@@ -4,6 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Experience } from 'src/app/models/Experience';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import { NotificationType } from 'src/app/enums/NotificationType';
+import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 
 @Component({
   selector: 'app-experience-edit',
@@ -16,7 +20,12 @@ export class ExperienceEditComponent implements OnInit {
   @Input() experience: Experience;
 
 
-  constructor(private experienceService: ExperienceService, private formBuilder: FormBuilder, private parserFormatter: NgbDateParserFormatter) {
+  constructor(
+    private experienceService: ExperienceService,
+    private formBuilder: FormBuilder,
+    private parserFormatter: NgbDateParserFormatter,
+    private loaderService: LoaderService,
+    private notificationService: NotificationService) {
     this.experience = new Experience()
   }
 
@@ -58,9 +67,13 @@ export class ExperienceEditComponent implements OnInit {
 
     })
 
+    this.loaderService.showLoading()
     this.experienceService.updateExperience(this.experience.id, this.experienceForm.getRawValue()).subscribe({
-      next: data => { alert("The experience was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => this.notificationService.requestNotification({ type: NotificationType.SUCCESS, message: NotificationMessage.EXP_UPDATE }),
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
 
     this.onCloseEdit()

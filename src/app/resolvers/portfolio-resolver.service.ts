@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
+
+
 import { catchError, map, Observable } from 'rxjs';
 import { Portfolio } from '../models/Portfolio';
 import { PortfolioService } from '../services/portfolio.service';
