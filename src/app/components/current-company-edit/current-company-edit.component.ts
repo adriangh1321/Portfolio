@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { CurrentCompany } from 'src/app/models/CurrentCompany';
 import { CurrentCompanyService } from 'src/app/services/current-company.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { urlOrWhitespace } from 'src/app/validators/UrlOrWhitespace';
 
 @Component({
@@ -14,10 +16,13 @@ export class CurrentCompanyEditComponent implements OnInit {
   @Input() currentCompany!: CurrentCompany;
   @Output() onShowDetails = new EventEmitter()
   currentCompanyForm!: FormGroup
-  checkboxImage:boolean;
-  constructor(private formBuilder: FormBuilder, private currentCompanyService: CurrentCompanyService) {
-    this.checkboxImage=false;
-   }
+  checkboxImage: boolean;
+  constructor(
+    private formBuilder: FormBuilder,
+    private currentCompanyService: CurrentCompanyService,
+    private loaderService: LoaderService) {
+    this.checkboxImage = false;
+  }
 
   ngOnInit(): void {
     this.currentCompanyForm = this.formBuilder.group({
@@ -54,9 +59,13 @@ export class CurrentCompanyEditComponent implements OnInit {
         url: null
       })
     }
+    this.loaderService.showLoading()
     this.currentCompanyService.updateCurrentCompany(this.currentCompany.id, this.currentCompanyForm.getRawValue()).subscribe({
-      next: data => { alert("The current company was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => { },
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
     this.onCloseEdit()
   }
@@ -68,8 +77,8 @@ export class CurrentCompanyEditComponent implements OnInit {
     return this.currentCompanyForm.controls;
   }
 
-  disableImage(){
-    this.checkboxImage=!this.checkboxImage;
+  disableImage() {
+    this.checkboxImage = !this.checkboxImage;
     this.currentCompanyForm.patchValue({
       image: null
     })

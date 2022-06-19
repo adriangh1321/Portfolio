@@ -17,7 +17,9 @@ export enum NotificationMessage{
 
     ABOUT_EDIT="About me was updated",
 
-    BASIC_EDIT="Basic info was updated"
+    BASIC_EDIT="Basic info was updated",
+
+    COMPANY_EDIT="Current company was updated"
 
     
 
