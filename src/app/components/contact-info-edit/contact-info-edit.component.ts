@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactInformation } from 'src/app/models/ContactInformation';
 import { ContactInformationService } from 'src/app/services/contact-information.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { urlOrWhitespace } from 'src/app/validators/UrlOrWhitespace';
 
 @Component({
@@ -14,7 +16,11 @@ export class ContactInfoEditComponent implements OnInit {
   @Output() onShowDetails = new EventEmitter()
   contactInformationForm!: FormGroup
 
-  constructor(private formBuilder: FormBuilder, private contactInformationService: ContactInformationService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private contactInformationService: ContactInformationService,
+    private loaderService: LoaderService,
+    private notificationService: NotificationService) {
 
   }
 
@@ -44,9 +50,13 @@ export class ContactInfoEditComponent implements OnInit {
         remoteRepository: null
       })
     }
+    this.loaderService.showLoading()
     this.contactInformationService.updateContactInformation(this.contactInformation.id, this.contactInformationForm.getRawValue()).subscribe({
-      next: data => { alert("The contact information was updated successfull!") },
-      error: error => { alert("There was a error"); console.log(error) }
+      next: data => { },
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
     })
     this.onCloseEdit()
   }
