@@ -11,4 +11,26 @@
 #info {
     padding: 16px;
     padding-bottom: 0;
-  }
+}
+
+.company-container {
+    padding-top: 60px;
+    width: fit-content;
+    margin-bottom: 16px;
+
+}
+
+.basic-container {
+    min-width: 200px;
+    max-width: 550px;
+}
+
+@media (max-width: 793px) {
+    .company-container {
+        padding-top: 0;
+        min-width: 220px;
+        width: fit-content;
+        margin-bottom: 16px;
+
+    }
+}

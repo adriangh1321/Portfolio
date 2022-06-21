@@ -13,7 +13,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="toast-body"[ngClass]="{
+        <div class="toast-body bg-light"[ngClass]="{
             'text-success': notificationType.SUCCESS === notification.type,
             'text-danger' : notificationType.ERROR === notification.type }">
             {{notification.message}}
