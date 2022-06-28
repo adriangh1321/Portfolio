@@ -1,11 +1,54 @@
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-      <i class="fa-solid fa-briefcase"></i>
-      My portfolio
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <div class="d-flex align-items-center">
+    <a class="navbar-brand" href="https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa">
+      <img id="logo-argprograma" [src]="'./assets/img/argentina-programa-logo.png'">
+      <small class="text-small">#YoProgramo</small>
+
     </a>
-    <!-- <p class="text-white">
+  </div>
+
+
+
+  <!-- <p class="text-white">
       Internet Connection Status:
       {{ networkStatus ? "IS CONNECTED" : "NOT CONNECTED" }}
     </p> -->
-    <a class="btn btn-danger" href='javascript:void(0);' (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
-  </nav>
+  <div class="d-flex align-items-center">
+    <a class="navbar-brand" href="" *ngIf="isLoggedIn()"><small>My portfolio</small></a>
+  </div>
+
+
+  <div class="d-flex align-items-center justify-content-end grow">
+
+    <div class="d-flex align-items-center social-networks">
+      <ng-container *ngIf="(contactInformation$ |async) as contactInformation">
+        <a class="navbar-brand" href="//{{contactInformation.linkedIn}}"
+          *ngIf="isLoggedIn() && contactInformation.linkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a class="navbar-brand" href="//{{contactInformation.facebook}}"
+          *ngIf="isLoggedIn() && contactInformation.facebook"><i class="fa-brands fa-facebook-square"></i></a>
+        <a class="navbar-brand" href="//{{contactInformation.twitter}}"
+          *ngIf="isLoggedIn() && contactInformation.twitter"><i class="fa-brands fa-twitter-square"></i></a>
+        <a class="navbar-brand" href="//{{contactInformation.instagram}}"
+          *ngIf="isLoggedIn() && contactInformation.instagram"><i class="fa-brands fa-instagram-square"></i></a>
+        <a class="navbar-brand" href="//{{contactInformation.remoteRepository}}"
+          *ngIf="isLoggedIn() && contactInformation.remoteRepository"><i class="fa-brands fa-git-square"></i></a>
+      </ng-container>
+    </div>
+  
+    <div class="d-flex align-items-center justify-content-end">
+      <a class="btn btn-danger" href='javascript:void(0);' (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
+      <a class="btn btn-success" routerLink="/login" routerLinkActive="active" (click)="logout()"
+        *ngIf="!isLoggedIn()">Log
+        In</a>
+    </div>
+
+  </div>
+  
+
+  
+
+
+
+
+
+</nav>

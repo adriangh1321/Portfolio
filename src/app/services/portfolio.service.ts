@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { AboutMe } from '../models/AboutMe';
+import { ContactInformation } from '../models/ContactInformation';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class PortfolioService {
   // private _refreshRequired = new Subject<void>()
   private _aboutMeRefreshRequired = new Subject<void>()
   private _basicInfoRefreshRequired = new Subject<void>()
+  private _portfolioRequired=new Subject<Portfolio>()
 
   // get RefreshRequired() {
   //   return this._refreshRequired;
@@ -26,12 +28,16 @@ export class PortfolioService {
   get BasicInfoRefreshRequired(){
     return this._basicInfoRefreshRequired;
   }
+  get PortfolioRequired(){
+    return this._portfolioRequired
+  }
 
   constructor(private http: HttpClient) { }
 
   getMeByToken(): Observable<Portfolio> {
     const url = `${this.apiUrl}/me`
-    return this.http.get<Portfolio>(url)
+    return this.http.get<Portfolio>(url).pipe(
+      tap((portfolio)=>this._portfolioRequired.next(portfolio)))
   }
 
   // getPortfolioById(id: number): Observable<Portfolio> {
