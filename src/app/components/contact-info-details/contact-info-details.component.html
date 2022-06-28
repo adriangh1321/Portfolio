@@ -7,11 +7,28 @@
 <div class="card">
 
     <ul class="list-group list-group-flush">
-        <li *ngIf="contactInformation.phone" class="list-group-item p-0"><a class="url p-2" href='javascript:void(0);'><i class="fa-solid fa-phone"></i> {{contactInformation.phone}}</a></li>
-        <li *ngIf="contactInformation.email" class="list-group-item p-0"><a class="url p-2" href='javascript:void(0);'><i class="fa-solid fa-envelope"></i> {{contactInformation.email}}</a></li>
-        <li *ngIf="contactInformation.linkedIn"class="list-group-item p-0"><a class="url p-2" href="//{{contactInformation.linkedIn}}"><i
-                    class="fa-brands fa-linkedin"></i> {{contactInformation.linkedIn}}</a></li>
-        <li *ngIf="contactInformation.remoteRepository"class="list-group-item p-0"><a class="url p-2" href="//{{contactInformation.remoteRepository}}"><i
-                    class="fa-brands fa-git-square"></i> {{contactInformation.remoteRepository}}</a></li>
+        <li *ngIf="contactInformation.phone" class="list-group-item p-0"><a class="url p-2"
+                href='javascript:void(0);'><i class="fa-solid fa-phone"></i> {{contactInformation.phone}}</a></li>
+        <li *ngIf="contactInformation.email" class="list-group-item p-0"><a class="url p-2"
+                href='javascript:void(0);'><i class="fa-solid fa-envelope"></i> {{contactInformation.email}}</a></li>
+        <li *ngIf="contactInformation.linkedIn" class="list-group-item p-0"><a class="url p-2"
+                href="//{{contactInformation.linkedIn}}"><i class="fa-brands fa-linkedin"></i>
+                {{contactInformation.linkedIn}}</a></li>
+
+        <li *ngIf="contactInformation.facebook" class="list-group-item p-0"><a class="url p-2"
+                href="//{{contactInformation.facebook}}"><i class="fa-brands fa-facebook-square"></i>
+                {{contactInformation.facebook}}</a></li>
+        <li *ngIf="contactInformation.twitter" class="list-group-item p-0"><a class="url p-2"
+                href="//{{contactInformation.twitter}}"><i class="fa-brands fa-twitter-square"></i>
+                {{contactInformation.twitter}}</a></li>
+
+        <li *ngIf="contactInformation.instagram" class="list-group-item p-0"><a class="url p-2"
+                href="//{{contactInformation.instagram}}"><i class="fa-brands fa-instagram-square"></i>
+                {{contactInformation.instagram}}</a></li>
+
+
+        <li *ngIf="contactInformation.remoteRepository" class="list-group-item p-0"><a class="url p-2"
+                href="//{{contactInformation.remoteRepository}}"><i class="fa-brands fa-git-square"></i>
+                {{contactInformation.remoteRepository}}</a></li>
     </ul>
 </div>

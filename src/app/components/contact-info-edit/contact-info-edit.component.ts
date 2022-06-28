@@ -29,7 +29,10 @@ export class ContactInfoEditComponent implements OnInit {
       phone: [this.contactInformation.phone, [Validators.required, Validators.pattern("^[(]{1}[0-9]+[)]{1}[0-9]+$")]],
       email: [this.contactInformation.email, [Validators.required, Validators.email]],
       linkedIn: [this.contactInformation.linkedIn == null ? "" : this.contactInformation.linkedIn, [urlOrWhitespace()]],
-      remoteRepository: [this.contactInformation.remoteRepository == null ? "" : this.contactInformation.remoteRepository, [urlOrWhitespace()]]
+      remoteRepository: [this.contactInformation.remoteRepository == null ? "" : this.contactInformation.remoteRepository, [urlOrWhitespace()]],
+      facebook:[this.contactInformation.facebook==null?"":this.contactInformation.facebook,[urlOrWhitespace()]],
+      twitter: [this.contactInformation.twitter == null ? "" : this.contactInformation.twitter, [urlOrWhitespace()]],
+      instagram: [this.contactInformation.instagram == null ? "" : this.contactInformation.instagram, [urlOrWhitespace()]]
 
     })
   }
@@ -48,6 +51,21 @@ export class ContactInfoEditComponent implements OnInit {
     if ((this.contactInformationForm.get('remoteRepository')?.value as string).trim().length == 0) {
       this.contactInformationForm.patchValue({
         remoteRepository: null
+      })
+    }
+    if ((this.contactInformationForm.get('facebook')?.value as string).trim().length == 0) {
+      this.contactInformationForm.patchValue({
+        facebook: null
+      })
+    }
+    if ((this.contactInformationForm.get('twitter')?.value as string).trim().length == 0) {
+      this.contactInformationForm.patchValue({
+        twitter: null
+      })
+    }
+    if ((this.contactInformationForm.get('instagram')?.value as string).trim().length == 0) {
+      this.contactInformationForm.patchValue({
+        instagram: null
       })
     }
     this.loaderService.showLoading()

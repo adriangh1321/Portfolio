@@ -1,0 +1,16 @@
+#logo-argprograma{
+    width: 100px;
+    height: auto;
+}
+.social-networks{
+    flex-wrap: wrap;
+}
+
+.text-small{
+    font-size: x-small;
+}
+
+.grow{
+    flex-grow: 1;
+}
+

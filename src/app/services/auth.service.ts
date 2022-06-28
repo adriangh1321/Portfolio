@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   register(register: any) {
-    this.router.navigate(['#'])
+    // this.router.navigate(['#'])
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json')
 

@@ -4,6 +4,38 @@ export class ContactInformation {
     private _email: string;
     private _linkedIn: string;
     private _remoteRepository: string;
+    private _facebook:string;
+    private _twitter:string;
+    private _instagram:string;
+
+    public get facebook(): string
+ {
+        return this._facebook;
+    }
+
+    public set facebook(facebook: string
+) {
+        this._facebook = facebook;
+    }
+
+    public get twitter(): string
+ {
+        return this._twitter;
+    }
+
+    public set twitter(twitter: string
+) {
+        this._twitter = twitter;
+    }
+
+    public get instagram(): string {
+        return this._instagram;
+    }
+
+    public set instagram(instagram: string) {
+        this._instagram = instagram;
+    }
+
 
     public get id(): number {
         return this._id;
@@ -58,14 +90,20 @@ export class ContactInformation {
     this._email = ""
     this._linkedIn = ""
     this._remoteRepository = ""
+    this._facebook=""
+    this._twitter=""
+    this._instagram=""
   }
 
-  public static factoryAllProperties(phone:string,email:string,linkedIn:string,remoteRepository:string):ContactInformation{
+  public static factoryAllProperties(phone:string,email:string,linkedIn:string,remoteRepository:string,facebook:string,twitter:string,instagram:string):ContactInformation{
       const contactInformation:ContactInformation=new ContactInformation();
       contactInformation.phone=phone;
       contactInformation.email=email;
       contactInformation.linkedIn=linkedIn;
       contactInformation.remoteRepository=remoteRepository;
+      contactInformation.facebook=facebook
+      contactInformation.twitter=twitter
+      contactInformation.instagram=instagram
       return contactInformation;
   }
 
