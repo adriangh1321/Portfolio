@@ -1,0 +1,26 @@
+<div id="profile-background">
+    <img class="profile-image" [src]="bannerForm.controls['banner'].value || './assets/img/default-banner.jpg'"
+        alt="photo">
+    <div class="edit-banner">
+        <form action="javascript:void();" [formGroup]="bannerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="banner-image" class="custom-file-upload btn btn-light w-100">
+                    <input type="file" class="btn btn-secondary" id="banner-image" class="form-control-file"
+                        (change)="onImageUpload($event)">Upload banner
+                </label>
+                <input type="hidden" formControlName="banner">
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" [disabled]="!bannerForm.valid">Save</button>
+            <button type="button" class="btn btn-secondary ml-2" (click)="onCloseEdit()">Cancel</button>
+            </div>
+            
+
+
+        </form>
+
+    </div>
+
+
+
+</div>
