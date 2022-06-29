@@ -1,0 +1,12 @@
+<app-banner-details
+*ngIf="isOnShowDetails" 
+[banner]="banner"
+(onToggleEditBanner)="toggleEditBanner()">
+</app-banner-details>
+
+
+<app-banner-edit
+*ngIf="!isOnShowDetails"
+[banner]="banner"
+(onShowDetails)="showDetails()">
+</app-banner-edit>

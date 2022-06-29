@@ -25,7 +25,9 @@ export enum NotificationMessage{
 
     COMPANY_EDIT="Current company was updated",
 
-    CONTACT_EDIT="Contact information was updated"
+    CONTACT_EDIT="Contact information was updated",
+
+    BANNER_EDIT="Banner was updated"
 
     
 

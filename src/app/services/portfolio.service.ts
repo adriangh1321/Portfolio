@@ -17,6 +17,7 @@ export class PortfolioService {
   private _aboutMeRefreshRequired = new Subject<void>()
   private _basicInfoRefreshRequired = new Subject<void>()
   private _portfolioRequired=new Subject<Portfolio>()
+  private _bannerRefreshRequired=new Subject<void>()
 
   // get RefreshRequired() {
   //   return this._refreshRequired;
@@ -30,6 +31,9 @@ export class PortfolioService {
   }
   get PortfolioRequired(){
     return this._portfolioRequired
+  }
+  get BannerRefreshRequired(){
+    return this._bannerRefreshRequired
   }
 
   constructor(private http: HttpClient) { }
@@ -97,6 +101,20 @@ export class PortfolioService {
         this.BasicInfoRefreshRequired.next()
       })
     );
+  }
+
+  patchBanner(banner:any):Observable<any>{
+    const url = `${this.apiUrl}/me/banner`
+    return this.http.patch<void>(url, banner).pipe(
+      tap(() => {
+        this.BannerRefreshRequired.next()
+      })
+    );
+  }
+
+  getBanner():Observable<any>{
+    const url = `${this.apiUrl}/me/banner`
+    return this.http.get<any>(url)
   }
 
   getBasicInfo(id:number):Observable<any>{

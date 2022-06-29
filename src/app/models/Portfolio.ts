@@ -16,6 +16,7 @@ export class Portfolio {
     private _country: string;
     private _state: string;
     private _image: string;
+    private _banner: string;
     private _aboutMe: string;
     private _experiences: Experience[];
     private _educations: Education[];
@@ -127,6 +128,13 @@ export class Portfolio {
         this._image = image;
     }
 
+    public get banner(): string {
+        return this._banner;
+    }
+    public set banner(value: string) {
+        this._banner = value;
+    }
+
     public get aboutMe(): string {
         return this._aboutMe;
     }
@@ -164,6 +172,7 @@ export class Portfolio {
         this._country = "country"
         this._state = "state"
         this._image = ""
+        this._banner=""
         this._aboutMe = "aboutMe"
         this._experiences = [];
         this._educations = [];

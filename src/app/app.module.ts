@@ -50,6 +50,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { GlobalErrorHandler } from './errors/global-error-handler';
+import { BannerComponent } from './components/banner/banner.component';
+import { BannerDetailsComponent } from './components/banner-details/banner-details.component';
+import { BannerEditComponent } from './components/banner-edit/banner-edit.component';
 
 
 @NgModule({
@@ -97,7 +100,10 @@ import { GlobalErrorHandler } from './errors/global-error-handler';
     InterestEditComponent,
     RegisterComponent,
     LoaderComponent,
-    NotificationComponent
+    NotificationComponent,
+    BannerComponent,
+    BannerDetailsComponent,
+    BannerEditComponent
 
   ],
   imports: [
