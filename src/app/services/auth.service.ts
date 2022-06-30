@@ -15,24 +15,8 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private portfolioService: PortfolioService) { }
 
   login(login: any) {
-    
     const url = `${this.apiUrl}/login`
     return this.http.post<any>(url, login).pipe(map((resp)=>localStorage.setItem('auth_token', resp.jwt)))
-    
-    
-    // subscribe({
-    //   next: resp => {
-    //     localStorage.setItem('auth_token', resp.jwt);
-    //     this.router.navigate(['profile'])
-    //   },
-    //   error: error => {
-    //     alert("Incorrect user/password");
-    //     console.log(error)
-    //   }
-
-
-    // })
-
   }
 
   getAuthorizationToken(): string {
@@ -52,23 +36,11 @@ export class AuthService {
   }
 
   register(register: any) {
-    // this.router.navigate(['#'])
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json')
 
-
     const url = `${this.apiUrl}/register`
-    return this.http.post<any>(url, register, { headers }).subscribe({
-      next: resp => {
-        this.router.navigate(['profile'])
-        localStorage.setItem('auth_token', resp.jwt);
-
-      },
-      error: error => {
-        alert("There was an errror while registering the user");
-        console.log(error)
-      }
-    })
+    return this.http.post<any>(url, register, { headers }).pipe(map((resp)=>localStorage.setItem('auth_token', resp.jwt)))
   }
 
   logout() {
