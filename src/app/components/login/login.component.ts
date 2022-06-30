@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, MaxLengthValidator, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -11,11 +12,15 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  isLoading:boolean;
+  isLoading: boolean;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
-    this.isLoading=false;
-   }
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
+    private router: Router) {
+    this.isLoading = false;
+  }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -29,16 +34,24 @@ export class LoginComponent implements OnInit {
       alert('Error: Invalid input')
     }
     this.loaderService.showLoading()
-    this.authService.login(this.loginForm.getRawValue())
+    this.authService.login(this.loginForm.getRawValue()).subscribe({
+      next: resp => this.router.navigate(['profile']),
+      error: error => {
+        this.loaderService.hideLoading()
+        throw error
+      }
+    }
+      
+    )
   }
-  
+
 
   get m() {
     return this.loginForm.controls;
   }
 
-  showLoader(event:boolean){
-    this.isLoading=event;
+  showLoader(event: boolean) {
+    this.isLoading = event;
   }
 
 }

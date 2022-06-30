@@ -1,10 +1,10 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable, NgZone } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import isOnline from "is-online";
 
-import { from, Observable, mergeMap, Subject } from "rxjs";
+import { from, Observable, mergeMap } from "rxjs";
 import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/operators";
 

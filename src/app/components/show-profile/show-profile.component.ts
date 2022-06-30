@@ -4,14 +4,11 @@ import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { SkillType } from 'src/app/enums/SkillType';
 import { Portfolio } from 'src/app/models/Portfolio';
-import { AuthService } from 'src/app/services/auth.service';
 import { EducationService } from 'src/app/services/education.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { SkillService } from 'src/app/services/skill.service';
 
 @Component({
   selector: 'app-show-profile',
@@ -24,11 +21,8 @@ export class ShowProfileComponent implements OnInit {
 
 
   constructor(
-    private authService: AuthService,
-    private portfolioService: PortfolioService,
     private experienceService: ExperienceService,
     private educationService: EducationService,
-    private skillService: SkillService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private loaderService: LoaderService,
@@ -53,7 +47,7 @@ export class ShowProfileComponent implements OnInit {
     this.loaderService.showLoading()
     const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
     this.experienceService.addExperience(newExperience).subscribe({
-      next: data => {
+      next: () => {
         this.notificationService.requestNotification(
           {
             type: NotificationType.SUCCESS,
@@ -71,7 +65,7 @@ export class ShowProfileComponent implements OnInit {
     this.loaderService.showLoading()
     const newEducation: any = { title: "Title", institute: "Institute", image: null, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
     this.educationService.addEducation(newEducation).subscribe({
-      next: data => {
+      next: () => {
         this.notificationService.requestNotification(
           {
             type: NotificationType.SUCCESS,
@@ -91,7 +85,7 @@ export class ShowProfileComponent implements OnInit {
     this.loaderService.showLoading()
     const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
     this.projectService.addProject(newProject).subscribe({
-      next: data => {
+      next: () => {
         this.notificationService.requestNotification(
           {
             type: NotificationType.SUCCESS,

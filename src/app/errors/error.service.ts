@@ -18,7 +18,7 @@ getClientStack(error: Error): string | undefined {
 }
 
 getServerMessage(error: HttpErrorResponse): string {
-    return error.message;
+    return error.error['description'] || error.message;
 }
 
 getServerStack(error: HttpErrorResponse): string {
