@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PortfolioService } from './portfolio.service';
 
@@ -17,18 +17,21 @@ export class AuthService {
   login(login: any) {
     
     const url = `${this.apiUrl}/login`
-    return this.http.post<any>(url, login).subscribe({
-      next: resp => {
-        localStorage.setItem('auth_token', resp.jwt);
-        this.router.navigate(['profile'])
-      },
-      error: error => {
-        alert("Incorrect user/password");
-        console.log(error)
-      }
+    return this.http.post<any>(url, login).pipe(map((resp)=>localStorage.setItem('auth_token', resp.jwt)))
+    
+    
+    // subscribe({
+    //   next: resp => {
+    //     localStorage.setItem('auth_token', resp.jwt);
+    //     this.router.navigate(['profile'])
+    //   },
+    //   error: error => {
+    //     alert("Incorrect user/password");
+    //     console.log(error)
+    //   }
 
 
-    })
+    // })
 
   }
 
