@@ -1,0 +1,18 @@
+.text-card{
+    font-size: 0.7rem!important;
+}
+
+.card-custom{
+    height: 100%;
+}
+
+.img-custom{
+    height: 60%;
+}
+
+.card-body-custom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

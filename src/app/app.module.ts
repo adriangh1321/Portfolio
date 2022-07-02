@@ -53,6 +53,8 @@ import { GlobalErrorHandler } from './errors/global-error-handler';
 import { BannerComponent } from './components/banner/banner.component';
 import { BannerDetailsComponent } from './components/banner-details/banner-details.component';
 import { BannerEditComponent } from './components/banner-edit/banner-edit.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileItemComponent } from './components/profile-item/profile-item.component';
 
 
 @NgModule({
@@ -103,7 +105,9 @@ import { BannerEditComponent } from './components/banner-edit/banner-edit.compon
     NotificationComponent,
     BannerComponent,
     BannerDetailsComponent,
-    BannerEditComponent
+    BannerEditComponent,
+    HomeComponent,
+    ProfileItemComponent
 
   ],
   imports: [

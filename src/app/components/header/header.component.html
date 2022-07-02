@@ -14,6 +14,7 @@
       {{ networkStatus ? "IS CONNECTED" : "NOT CONNECTED" }}
     </p> -->
   <div class="d-flex align-items-center">
+    <a class="navbar-brand" routerLink="/home" routerLinkActive="active"><small>Home</small></a>
     <a class="navbar-brand" href="" *ngIf="isLoggedIn()"><small>My portfolio</small></a>
   </div>
 

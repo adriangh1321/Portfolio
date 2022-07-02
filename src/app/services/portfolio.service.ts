@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { AboutMe } from '../models/AboutMe';
 import { ContactInformation } from '../models/ContactInformation';
+import { Profile } from '../models/Profile';
 
 @Injectable({
   providedIn: 'root'
@@ -122,5 +123,10 @@ export class PortfolioService {
     return this.http.get<any>(url)
   }
 
+
+
+  getProfiles():Observable<Profile[]>{
+    return this.http.get<Profile[]>(this.apiUrl)
+  }
 }
 
