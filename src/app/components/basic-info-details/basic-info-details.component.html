@@ -1,6 +1,6 @@
 <div class="info-image">
     <img class="profile-image" [src]="portfolio.image || './assets/img/default-profile.png'" alt="">
-    <a href='javascript:void(0);' (click)="editBasicInfo()"><i class="fa-solid fa-pen"></i></a>
+    <app-button [type]="'edit'" (onButtonAction)="editBasicInfo()"></app-button>
 </div>
 
 <div class="col-md-12">

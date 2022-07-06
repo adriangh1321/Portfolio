@@ -1,4 +1,4 @@
 <div class="item-title-edit">
     <p>{{aboutMe}}</p>
-    <a href='javascript:void(0);' (click)="editAboutMe()"><i class="fa-solid fa-pen"></i></a>
+    <app-button [type]="'edit'" (onButtonAction)="editAboutMe()"></app-button>
 </div>

@@ -4,8 +4,8 @@
         <div class="item-title-edit">
             <h4>{{education.title}}</h4>
             <div>
-                <a href='javascript:void(0);' (click)="editEducation()"><i class="fa-solid fa-pen"></i> </a>
-                <a href='javascript:void(0);' (click)="removeEducation()"><i class="fa-solid fa-trash"></i> </a>
+                <app-button [type]="'edit'" (onButtonAction)="editEducation()"></app-button>
+                <app-button [type]="'delete'" (onButtonAction)="removeEducation()"></app-button>
             </div>
         </div>
         <p class="font-weight-bold mb-1">{{education.institute}}</p>
@@ -14,4 +14,3 @@
                 date:'dd-MM-yyyy'):'-'}}</span> </p>
     </div>
 </div>
-
