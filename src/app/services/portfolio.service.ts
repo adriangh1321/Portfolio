@@ -128,5 +128,12 @@ export class PortfolioService {
   getProfiles():Observable<Profile[]>{
     return this.http.get<Profile[]>(this.apiUrl)
   }
+
+  getByUserNickname(nickname:string):Observable<Portfolio>{
+    const url = `${this.apiUrl}/user/${nickname}`
+    return this.http.get<Portfolio>(url).pipe(
+      tap((portfolio)=>this._portfolioRequired.next(portfolio)))
+  
+  }
 }
 

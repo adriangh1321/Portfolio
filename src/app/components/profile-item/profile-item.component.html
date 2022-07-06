@@ -1,8 +1,13 @@
-<div class="card card-custom" style="width: 8rem;">
-    <img class="card-img-top img-custom" [src]="profile.image || './assets/img/default-profile.png'" alt="Card image cap">
-    <div class="card-body card-body-custom">
+<div class="card card-custom" (click)="navigate()"style="width: 8rem;">
+  <img class="card-img-top img-custom" [src]="profile.image || './assets/img/default-profile.png'" alt="Card image cap">
+  <div class="card-body card-body-custom">
+    <div *ngIf="profile.firstname && profile.lastname">
       <h5 class="card-title text-card">{{profile.firstname}}</h5>
       <h5 class="card-title text-card">{{profile.lastname}}</h5>
-      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
     </div>
+      <h5 class="card-title text-card" *ngIf="!profile.firstname && !profile.lastname">{{profile.nickname}}</h5>
+
+
+    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
   </div>
+</div>

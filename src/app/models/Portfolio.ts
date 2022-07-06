@@ -5,14 +5,15 @@ import { Experience } from "./Experience";
 import { Interest } from "./Interest";
 import { Project } from "./Project";
 import { Skill } from "./Skill";
+import { User } from "./User";
 
 
 export class Portfolio {
-    private _id:number;
+    private _id: number;
     private _firstname: string;
     private _lastname: string;
     private _ocupation: string;
-    private _currentCompany: CurrentCompany;  
+    private _currentCompany: CurrentCompany;
     private _country: string;
     private _state: string;
     private _image: string;
@@ -21,9 +22,13 @@ export class Portfolio {
     private _experiences: Experience[];
     private _educations: Education[];
     private _contactInformation: ContactInformation;
-    private _skills:Skill[]
-    private _projects:Project[]
-    private _interests:Interest[];
+    private _skills: Skill[]
+    private _projects: Project[]
+    private _interests: Interest[];
+    
+
+    
+
 
     public get interests(): Interest[] {
         return this._interests;
@@ -41,7 +46,7 @@ export class Portfolio {
     public set id(id: number) {
         this._id = id;
     }
-    
+
     public get projects(): Project[] {
         return this._projects;
     }
@@ -57,7 +62,7 @@ export class Portfolio {
     public set skills(skills: Skill[]) {
         this._skills = skills;
     }
-    
+
     public get currentCompany(): CurrentCompany {
         return this._currentCompany;
     }
@@ -164,7 +169,7 @@ export class Portfolio {
 
 
     constructor() {
-        this._id=0;
+        this._id = 0;
         this._firstname = "firstname"
         this._lastname = "lastname"
         this._ocupation = "ocupation"
@@ -172,15 +177,16 @@ export class Portfolio {
         this._country = "country"
         this._state = "state"
         this._image = ""
-        this._banner=""
+        this._banner = ""
         this._aboutMe = "aboutMe"
         this._experiences = [];
         this._educations = [];
         this._contactInformation = new ContactInformation();
-        this._skills=[]
-        this._projects=[]
-        this._interests=[]
-    
+        this._skills = []
+        this._projects = []
+        this._interests = []
+        
+
     }
 
 

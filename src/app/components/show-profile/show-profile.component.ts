@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { SkillType } from 'src/app/enums/SkillType';
@@ -17,6 +17,7 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ShowProfileComponent implements OnInit {
   portfolio: Portfolio;
+  
   skillType = SkillType;
 
 
@@ -35,10 +36,9 @@ export class ShowProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.portfolio = this.route.snapshot.data["portfolio"]
-    // this.portfolioService.getMeByToken().subscribe((res) => {
-    //   this.portfolio = res
-    // }) 
+
   }
 
 

@@ -33,7 +33,8 @@ export class RegisterComponent implements OnInit {
     }
     this.loaderService.showLoading()
     this.authService.register(this.registerForm.getRawValue()).subscribe({
-      next:resp=>this.router.navigate(['profile']),
+      next: (resp) => {
+        this.router.navigate(['profile',resp.user.nickname])},
       error:error=>{
         this.loaderService.hideLoading()
         throw error}

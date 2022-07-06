@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/Profile';
 
 @Component({
@@ -8,9 +9,13 @@ import { Profile } from 'src/app/models/Profile';
 })
 export class ProfileItemComponent implements OnInit {
   @Input() profile!:Profile
-  constructor() { }
+  constructor(private route:Router) { }
 
   ngOnInit(): void {
+  }
+
+  navigate(){
+    this.route.navigate(['profile',this.profile.nickname])
   }
 
 }

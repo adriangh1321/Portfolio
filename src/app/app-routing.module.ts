@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   {
-    path: "profile",
+    path: "profile/:nickname",
     component: ShowProfileComponent, canActivate: [AuthGuard],
     resolve: {
       portfolio: PortfolioResolverService

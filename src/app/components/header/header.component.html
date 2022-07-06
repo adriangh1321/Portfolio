@@ -15,7 +15,9 @@
     </p> -->
   <div class="d-flex align-items-center">
     <a class="navbar-brand" routerLink="/home" routerLinkActive="active"><small>Home</small></a>
-    <a class="navbar-brand" href="" *ngIf="isLoggedIn()"><small>My portfolio</small></a>
+    <ng-container *ngIf="(user$ | async) as user">
+      <a class="navbar-brand" [routerLink]="['/profile', user.nickname]" *ngIf="isLoggedIn()"><small>My portfolio</small></a>
+    </ng-container>
   </div>
 
 

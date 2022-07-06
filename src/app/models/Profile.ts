@@ -1,6 +1,6 @@
 export interface Profile{
     firstname:string
     lastname:string
-    alias:string
+    nickname:string
     image:string
 }

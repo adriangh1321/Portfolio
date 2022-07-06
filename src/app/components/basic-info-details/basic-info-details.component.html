@@ -5,8 +5,10 @@
 
 <div class="col-md-12">
     <div class="row">
-        <h1 class="h-50 vertical-text-center pl-0" id="full-name">{{portfolio.firstname || 'My Name'}}
-            {{portfolio.lastname || ''}}
+        <h1 class="h-50 vertical-text-center pl-0" id="full-name" *ngIf="portfolio.firstname && portfolio.lastname">{{portfolio.firstname}}
+            {{portfolio.lastname}}
+        </h1>
+        <h1 class="h-50 vertical-text-center pl-0" id="full-name" *ngIf="!portfolio.firstname && !portfolio.lastname">{{nickname}}
         </h1>
     </div>
 
