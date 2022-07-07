@@ -9,12 +9,13 @@ import { PortfolioResolverService } from './resolvers/portfolio-resolver.service
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/profile', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   {
     path: "profile/:nickname",
+    runGuardsAndResolvers: "always",
     component: ShowProfileComponent, canActivate: [AuthGuard],
     resolve: {
       portfolio: PortfolioResolverService

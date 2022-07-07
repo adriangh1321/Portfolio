@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ButtonService } from 'src/app/services/button.service';
 
 @Component({
   selector: 'app-button',
@@ -7,20 +9,25 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
   @Input() type!: string
-  @Output()onButtonAction=new EventEmitter<string>()
+  isActive!:boolean
+  @Output() onButtonAction = new EventEmitter()
   @Input('class')
   klass!: string
   @Input()
   ngClass!: string | string[] | Set<string> | { [klass: string]: any; }
 
-  constructor() {
+  constructor(private buttonService:ButtonService) {
+    
   }
 
   ngOnInit(): void {
+    this.buttonService.buttonRequired$().subscribe(resp=> {
+      this.isActive=resp
+      })
   }
-  
-  buttonAction(){
-    this.onButtonAction.emit(this.type)
+
+  buttonAction() {
+    this.onButtonAction.emit()
   }
 
 }

@@ -28,7 +28,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(url, login).pipe(
       map((resp) => {
         localStorage.setItem('auth_token', resp.jwt)
-        localStorage.setItem('nickname',resp.user.nickname)
+        localStorage.setItem('nickname', resp.user.nickname)
         return resp
       }),
       tap(resp => this._userRequest.next(resp.user))
@@ -58,11 +58,11 @@ export class AuthService {
     const url = `${this.apiUrl}/register`
     return this.http.post<LoginResponse>(url, register, { headers }).pipe(
       map((resp) => {
-      localStorage.setItem('auth_token', resp.jwt)
-      localStorage.setItem('nickname',resp.user.nickname)
-      return resp
-    }),
-    tap(resp => this._userRequest.next(resp.user)))
+        localStorage.setItem('auth_token', resp.jwt)
+        localStorage.setItem('nickname', resp.user.nickname)
+        return resp
+      }),
+      tap(resp => this._userRequest.next(resp.user)))
   }
 
   logout() {
@@ -71,6 +71,11 @@ export class AuthService {
     localStorage.removeItem('id_portfolio')
     this.router.navigate(['login'])
 
+  }
+
+  getMeUser():Observable<User>{
+    const url = `${this.apiUrl}/me`
+    return this.http.get<User>(url)
   }
 
 

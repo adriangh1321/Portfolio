@@ -35,6 +35,10 @@ export class HeaderComponent implements OnInit {
     this.portfolioService.PortfolioRequired.subscribe((portfolio) => this.contactInformationService.emitContactInformation(portfolio.contactInformation))
 
     this.user$=this.authService.userRequired$()
+    if(this.isLoggedIn()){
+      this.user$=this.authService.getMeUser()
+      this.contactInformation$=this.contactInformationService.getMeByToken()
+    }
   }
 
   logout() {

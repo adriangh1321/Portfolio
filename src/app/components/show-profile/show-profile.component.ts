@@ -37,7 +37,7 @@ export class ShowProfileComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.portfolio = this.route.snapshot.data["portfolio"]
+    this.route.params.subscribe(data=>this.portfolio = this.route.snapshot.data["portfolio"])
 
   }
 
