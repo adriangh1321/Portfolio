@@ -47,7 +47,9 @@ export class PortfolioResolverService {
           this.buttonService.activateButton()
           return response
         }),
-        tap((resp)=>this.buttonService.activateButton())
+        tap((resp)=>{
+          this.portfolioService.emitPortfolio(resp)
+          this.buttonService.activateButton()})
       )
     }
     return this.portfolioService.getByUserNickname(paramNickname).pipe(

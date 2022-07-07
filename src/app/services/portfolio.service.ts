@@ -41,8 +41,7 @@ export class PortfolioService {
 
   getMeByToken(): Observable<Portfolio> {
     const url = `${this.apiUrl}/me`
-    return this.http.get<Portfolio>(url).pipe(
-      tap((portfolio)=>this._portfolioRequired.next(portfolio)))
+    return this.http.get<Portfolio>(url)
   }
 
   // getPortfolioById(id: number): Observable<Portfolio> {
@@ -131,9 +130,12 @@ export class PortfolioService {
 
   getByUserNickname(nickname:string):Observable<Portfolio>{
     const url = `${this.apiUrl}/user/${nickname}`
-    return this.http.get<Portfolio>(url).pipe(
-      tap((portfolio)=>this._portfolioRequired.next(portfolio)))
+    return this.http.get<Portfolio>(url)
   
+  }
+
+  emitPortfolio(portfolio:Portfolio){
+    this._portfolioRequired.next(portfolio)
   }
 }
 

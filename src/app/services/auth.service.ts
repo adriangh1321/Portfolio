@@ -39,6 +39,10 @@ export class AuthService {
     return localStorage.getItem('auth_token')!;
   }
 
+  getNickname(): string {
+    return localStorage.getItem('nickname')!;
+  }
+
   isLoggedIn(): boolean {
     const token = this.getAuthorizationToken(); // get token from local storage
     if (token == null) {
@@ -76,6 +80,10 @@ export class AuthService {
   getMeUser():Observable<User>{
     const url = `${this.apiUrl}/me`
     return this.http.get<User>(url)
+  }
+
+  emitUser(user:User){
+    this._userRequest.next(user)
   }
 
 

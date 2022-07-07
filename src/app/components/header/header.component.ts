@@ -36,8 +36,8 @@ export class HeaderComponent implements OnInit {
 
     this.user$=this.authService.userRequired$()
     if(this.isLoggedIn()){
-      this.user$=this.authService.getMeUser()
-      this.contactInformation$=this.contactInformationService.getMeByToken()
+      this.authService.getMeUser().subscribe(user=>this.authService.emitUser(user))
+      this.contactInformationService.getMeByToken().subscribe(resp=>this.contactInformationService.emitContactInformation(resp))
     }
   }
 
