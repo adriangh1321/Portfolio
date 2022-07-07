@@ -2,7 +2,8 @@
     <div class="card-titles">
         <div class="title-container">
             <h2>Hard Skills</h2>
-            <a href='javascript:void(0);' (click)="onAddSkill(skillType.HARD)"><i class="fa-solid fa-plus"></i></a>
+            <app-button [type]="'add'" (onButtonAction)="onAddSkill(skillType.HARD)"></app-button>
+            <!-- <a href='javascript:void(0);' (click)="onAddSkill(skillType.HARD)"><i class="fa-solid fa-plus"></i></a> -->
         </div>
         <div class="d-flex justify-content-center">
             <ul class="item-list text-center w-75 ">
@@ -18,7 +19,8 @@
     <div class="card-titles">
         <div class="title-container">
             <h2>Soft Skills</h2>
-            <a href='javascript:void(0);' (click)="onAddSkill(skillType.SOFT)"><i class="fa-solid fa-plus"></i></a>
+            <app-button [type]="'add'" (onButtonAction)="onAddSkill(skillType.SOFT)"></app-button>
+            <!-- <a href='javascript:void(0);' (click)="onAddSkill(skillType.SOFT)"><i class="fa-solid fa-plus"></i></a> -->
         </div>
         <div class="d-flex justify-content-center">
             <ul class="item-list text-center w-75 ">

@@ -1,0 +1,9 @@
+.profiles-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+.profiles-list li{
+    list-style: none;
+}

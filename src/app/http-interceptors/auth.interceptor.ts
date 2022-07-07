@@ -57,10 +57,14 @@ export class AuthInterceptor implements HttpInterceptor {
                     catchError((err: HttpErrorResponse) => {
     
                         if (err.status === 401) {
+                            
+                            this.zone.runGuarded(()=>{throw err});
                             this.router.navigateByUrl('/login');
+                            
+                            
                         }
     
-                        return throwError(() => err);
+                        return throwError(()=>err)
     
                     })
                 );

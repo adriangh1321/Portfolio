@@ -1,2 +1,3 @@
 <div id="profile-background"><img [src]="banner ||'./assets/img/default-banner.jpg'" alt=""></div>
-<a href='javascript:void(0);' id="btn-edit-banner" (click)="editBanner()"><i class="fa-solid fa-pen"></i></a>
+<app-button [type]="'edit'" id="btn-edit-banner" (onButtonAction)="editBanner()"></app-button>
+

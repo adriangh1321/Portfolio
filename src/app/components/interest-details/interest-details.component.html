@@ -1,7 +1,7 @@
 <div class="card" style="width: 10rem; height: 14rem!important;">
     <div>
-        <a href='javascript:void(0);' (click)="editInterest()"><i class="fa-solid fa-pen"></i> </a>
-        <a href='javascript:void(0);' (click)="removeInterest()"><i class="fa-solid fa-trash"></i> </a>
+        <app-button [type]="'edit'" (onButtonAction)="editInterest()"></app-button>
+        <app-button [type]="'delete'" (onButtonAction)="removeInterest()"></app-button>
     </div>
     <img class="card-img-top" style="height: 60% ;"  [src]="interest.image" alt="Card image cap">
     <div class="card-body">

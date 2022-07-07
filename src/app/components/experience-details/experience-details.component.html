@@ -4,8 +4,8 @@
       <div class="item-title-edit">
         <h4>{{experience.position}}</h4>
         <div>
-          <a href='javascript:void(0);' (click)="editExperience()"><i class="fa-solid fa-pen"></i> </a>
-          <a href='javascript:void(0);' (click)="removeExperience()"><i class="fa-solid fa-trash"></i> </a>
+          <app-button [type]="'edit'" (onButtonAction)="editExperience()"></app-button>
+          <app-button [type]="'delete'" (onButtonAction)="removeExperience()"></app-button>
         </div>
       </div>
       <p class="font-weight-bold mb-1">{{experience.company}}</p>

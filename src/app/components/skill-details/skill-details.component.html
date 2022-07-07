@@ -1,8 +1,8 @@
 <div class="item-title-edit">
     <p class="mb-0 d-flex justify-content-center w-100">{{skill.name}}</p>
     <div>
-        <a href='javascript:void(0);' (click)="editSkill()"><i class="fa-solid fa-pen"></i> </a>
-        <a href='javascript:void(0);' (click)="removeSkill()"><i class="fa-solid fa-trash"></i> </a>
+        <app-button [type]="'edit'" (onButtonAction)="editSkill()"></app-button>
+        <app-button [type]="'delete'" (onButtonAction)="removeSkill()"></app-button>
     </div>
 </div>
 

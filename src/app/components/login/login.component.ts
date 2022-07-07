@@ -2,6 +2,8 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, MaxLengthValidator, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginResponse } from 'src/app/models/LoginResponse';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -35,7 +37,8 @@ export class LoginComponent implements OnInit {
     }
     this.loaderService.showLoading()
     this.authService.login(this.loginForm.getRawValue()).subscribe({
-      next: resp => this.router.navigate(['profile']),
+      next: (resp) => {
+        this.router.navigate(['profile',resp.user.nickname])},
       error: error => {
         this.loaderService.hideLoading()
         throw error

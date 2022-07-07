@@ -3,7 +3,8 @@
     <div class="card card-body w-100 bg-secondary">
         <div class="d-flex flex-row justify-content-between">
             <h4 class="text-light">Interests</h4>
-            <a href='javascript:void(0);' (click)="addInterest()"><i class="fa-solid fa-plus text-light"></i></a>
+            <app-button [type]="'add'" (onButtonAction)="addInterest()"></app-button>
+            <!-- <a href='javascript:void(0);' (click)="addInterest()"><i class="fa-solid fa-plus text-light"></i></a> -->
         </div>
 
 

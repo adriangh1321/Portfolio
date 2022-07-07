@@ -23,13 +23,19 @@ export class ContactInformationService {
   }
 
   constructor(private http: HttpClient) { }
-
-  getById(id:number):Observable<ContactInformation>{
-    const url = `${this.apiUrl}/${id}`
+  getMeByToken():Observable<ContactInformation>{
+    const url = `${this.apiUrl}/me`
     return this.http.get<ContactInformation>(url).pipe(
       tap((contactInformation)=>this.emitContactInformation(contactInformation))
     );
   }
+
+  // getById(id:number):Observable<ContactInformation>{
+  //   const url = `${this.apiUrl}/${id}`
+  //   return this.http.get<ContactInformation>(url).pipe(
+  //     tap((contactInformation)=>this.emitContactInformation(contactInformation))
+  //   );
+  // }
   
   updateContactInformation(id: number, contactInformation: ContactInformation): Observable<void> {
     const url = `${this.apiUrl}/${id}`

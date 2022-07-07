@@ -23,7 +23,7 @@ export class ContactInfoComponent implements OnInit {
     this.contactInformationService.ContactInformationRefreshRequired.subscribe((id) => this.getContactInformation(id))
   }
   getContactInformation(id: number) {
-    this.contactInformationService.getById(id).subscribe({
+    this.contactInformationService.getMeByToken().subscribe({
       next: response => {
         this.contactInformation = response
         this.loaderService.hideLoading()

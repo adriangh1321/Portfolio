@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { AboutMe } from '../models/AboutMe';
 import { ContactInformation } from '../models/ContactInformation';
+import { Profile } from '../models/Profile';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +41,7 @@ export class PortfolioService {
 
   getMeByToken(): Observable<Portfolio> {
     const url = `${this.apiUrl}/me`
-    return this.http.get<Portfolio>(url).pipe(
-      tap((portfolio)=>this._portfolioRequired.next(portfolio)))
+    return this.http.get<Portfolio>(url)
   }
 
   // getPortfolioById(id: number): Observable<Portfolio> {
@@ -122,5 +122,20 @@ export class PortfolioService {
     return this.http.get<any>(url)
   }
 
+
+
+  getProfiles():Observable<Profile[]>{
+    return this.http.get<Profile[]>(this.apiUrl)
+  }
+
+  getByUserNickname(nickname:string):Observable<Portfolio>{
+    const url = `${this.apiUrl}/user/${nickname}`
+    return this.http.get<Portfolio>(url)
+  
+  }
+
+  emitPortfolio(portfolio:Portfolio){
+    this._portfolioRequired.next(portfolio)
+  }
 }
 

@@ -1,12 +1,14 @@
 <div class="info-image">
     <img class="profile-image" [src]="portfolio.image || './assets/img/default-profile.png'" alt="">
-    <a href='javascript:void(0);' (click)="editBasicInfo()"><i class="fa-solid fa-pen"></i></a>
+    <app-button [type]="'edit'" (onButtonAction)="editBasicInfo()"></app-button>
 </div>
 
 <div class="col-md-12">
     <div class="row">
-        <h1 class="h-50 vertical-text-center pl-0" id="full-name">{{portfolio.firstname || 'My Name'}}
-            {{portfolio.lastname || ''}}
+        <h1 class="h-50 vertical-text-center pl-0" id="full-name" *ngIf="portfolio.firstname && portfolio.lastname">{{portfolio.firstname}}
+            {{portfolio.lastname}}
+        </h1>
+        <h1 class="h-50 vertical-text-center pl-0" id="full-name" *ngIf="!portfolio.firstname && !portfolio.lastname">{{nickname}}
         </h1>
     </div>
 
