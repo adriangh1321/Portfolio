@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center">
     <a class="navbar-brand" href="https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa">
       <img id="logo-argprograma" [src]="'./assets/img/argentina-programa-logo.png'">
-      <small class="text-small">#YoProgramo</small>
+      <!-- <small class="text-small">#YoProgramo</small> -->
 
     </a>
   </div>
@@ -15,6 +15,7 @@
     </p> -->
   <div class="d-flex align-items-center">
     <a class="navbar-brand" routerLink="/home" routerLinkActive="active"><small>Home</small></a>
+    <a class="navbar-brand" routerLink="/register" routerLinkActive="active" *ngIf="!isLoggedIn()"><small>Register</small></a>
     <ng-container *ngIf="(user$ | async) as user">
       <a class="navbar-brand" [routerLink]="['/profile', user.nickname]" *ngIf="isLoggedIn()"><small>My portfolio</small></a>
     </ng-container>
