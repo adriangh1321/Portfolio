@@ -7,6 +7,7 @@ import { ShowProfileComponent } from './components/show-profile/show-profile.com
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { RegisterGuard } from './guards/register.guard';
+import { HomeResolverService } from './resolvers/home-resolver.service';
 import { PortfolioResolverService } from './resolvers/portfolio-resolver.service';
 
 
@@ -14,7 +15,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent ,canActivate: [LoginGuard]},
   { path: 'register', component: RegisterComponent,canActivate: [RegisterGuard] },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent,
+    resolve: {
+    profiles: HomeResolverService
+  } },
   {
     path: "profile/:nickname",
     runGuardsAndResolvers: "always",

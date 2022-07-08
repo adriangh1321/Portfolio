@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Profile } from 'src/app/models/Profile';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 
@@ -9,15 +10,18 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 })
 export class HomeComponent implements OnInit {
   profiles:Profile[]
-  constructor(private portfolioService:PortfolioService) { 
+  constructor(private portfolioService:PortfolioService,
+    private route: ActivatedRoute,) { 
     this.profiles=[]
   }
 
   ngOnInit(): void {
-    this.portfolioService.getProfiles().subscribe({
-      next:profiles=>this.profiles=profiles,
-      error:error=>{throw error}
-    })
+    this.route.params.subscribe(data=>this.profiles = this.route.snapshot.data["profiles"])
+
+    // this.portfolioService.getProfiles().subscribe({
+    //   next:profiles=>this.profiles=profiles,
+    //   error:error=>{throw error}
+    // })
   }
 
 }
