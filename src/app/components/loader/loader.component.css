@@ -3,12 +3,12 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    
+
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.8);
+    /* background: rgba(0, 0, 0, 0.8); */
     z-index: 2;
 }
 
@@ -22,14 +22,28 @@
     height: 25%;
 
     text-align: center;
-    background: white;
+    /* background: white; */
 }
 
 .popup h3 {
     font-size: 15px;
     height: 50px;
     line-height: 50px;
-    color: black;
+    color: rgb(102, 102, 102);
+    animation: loading 1s linear;
+    animation-iteration-count: infinite;
+}
+@keyframes loading {
+    0% {
+        color: rgb(102, 102, 102);
+    }
+
+    50% {
+        color: rgb(0, 0, 0);
+        font-weight: bolder;
+    }
+
+   
 }
 
 
@@ -38,7 +52,9 @@
 
 
 .ring {
-    border: 5px solid transparent;
+    /* border: 5px solid rgb(255, 246, 114); */
+    border: 5px solid rgb(216, 216, 216);
+    outline: 1px solid rgb(85, 85, 85);
     box-sizing: border-box;
     border-radius: 100%;
     width: 40px;
@@ -53,11 +69,14 @@
 
 @keyframes ring {
     0% {
-        border: 5px solid transparent;
+        /* border: 5px solid rgb(255, 246, 114); */
+        border: 5px solid rgb(216, 216, 216);
+        outline: 1px solid rgb(141, 141, 141);
     }
 
     25% {
         border-top: 5px solid green;
+
     }
 
     50% {
@@ -67,6 +86,7 @@
     75% {
         border-bottom: 5px solid green;
     }
+
     100% {
         border-left: 5px solid green;
     }

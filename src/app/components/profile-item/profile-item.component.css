@@ -3,7 +3,7 @@
 }
 
 .card-custom{
-    height: 100%;
+    height: 287px;
 }
 
 .img-custom{
@@ -16,3 +16,24 @@
     justify-content: center;
     align-items: center;
 }
+
+.floating:hover {
+    cursor: pointer;
+    box-shadow: 0px 10px 10px black  ;
+    animation-name: floating;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    
+}
+
+@keyframes floating {
+    from { transform: translate(0,  0px); }
+    65%  { transform: translate(0, 15px); }
+    to   { transform: translate(0, -0px); }    
+}
+
+.floating:active {
+    box-shadow: 0px 10px 10px rgb(255, 251, 210)  ;   
+}
+

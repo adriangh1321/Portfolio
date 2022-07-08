@@ -7,3 +7,10 @@ color: royalblue;
     color: blue;
     
 }
+
+@media (max-width: 850px) {
+    .custom-form{
+        width: 100%!important;
+        
+    }
+}
