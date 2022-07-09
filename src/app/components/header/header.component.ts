@@ -17,40 +17,51 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 })
 export class HeaderComponent implements OnInit {
   contactInformation$!: Observable<ContactInformation>
-  portfolio$!: Observable<Portfolio>
-  portfolioImage$!:Observable<string>
-  user$!:Observable<User>
-  showNetworks:boolean
-  
+  portfolioImage$!: Observable<string>
+  user$!: Observable<User>
+  showNetworks: boolean
+
 
   constructor(
     private authService: AuthService,
     private portfolioService: PortfolioService,
     private contactInformationService: ContactInformationService) {
-      this.showNetworks=false
+    this.showNetworks = false
   }
   networkStatus: boolean = false;
 
 
   ngOnInit(): void {
-    
+
     this.contactInformation$ = this.contactInformationService.contactInformationRequired$()
-    this.portfolio$=this.portfolioService.PortfolioRequired
-    this.portfolioImage$=this.portfolioService.ImageRequired
+    this.portfolioImage$ = this.portfolioService.ImageRequired
     this.portfolioService.PortfolioRequired.subscribe((portfolio) => {
       this.contactInformationService.emitContactInformation(portfolio.contactInformation)
       this.portfolioService.emitImage(portfolio.image)
     })
-    this.portfolioService.BasicInfoRequired.subscribe(resp=>this.portfolioService.emitImage(resp.image))
+    this.portfolioService.BasicInfoRequired.subscribe(resp => this.portfolioService.emitImage(resp.image))
 
-    this.user$=this.authService.userRequired$()
-    if(this.isLoggedIn()){
-      this.authService.getMeUser().subscribe(user=>this.authService.emitUser(user))
-      this.contactInformationService.getMeByToken().subscribe(resp=>this.contactInformationService.emitContactInformation(resp))
-      this.portfolioService.getImage().subscribe(resp=>{
+    this.user$ = this.authService.userRequired$()
+    if (this.isLoggedIn()) {
+      this.authService.getMeUser().subscribe(user => this.authService.emitUser(user))
+      this.contactInformationService.getMeByToken().subscribe(resp => this.contactInformationService.emitContactInformation(resp))
+      this.portfolioService.getImage().subscribe(resp => {
         console.log(resp)
-        this.portfolioService.emitImage(resp.image)})
+        this.portfolioService.emitImage(resp.image)
+      })
     }
+
+    this.authService.LogoutRequired.subscribe(() => {
+      this.contactInformation$ = this.contactInformationService.contactInformationRequired$()
+      this.portfolioImage$ = this.portfolioService.ImageRequired
+      this.portfolioService.PortfolioRequired.subscribe((portfolio) => {
+        this.contactInformationService.emitContactInformation(portfolio.contactInformation)
+        this.portfolioService.emitImage(portfolio.image)
+      })
+      this.portfolioService.BasicInfoRequired.subscribe(resp => this.portfolioService.emitImage(resp.image))
+
+
+    })
   }
 
   logout() {
@@ -61,9 +72,9 @@ export class HeaderComponent implements OnInit {
     return this.authService.isLoggedIn()
   }
 
-  toggleShowNetworks(e:Event){
+  toggleShowNetworks(e: Event) {
     e.stopPropagation();
-    this.showNetworks=!this.showNetworks
+    this.showNetworks = !this.showNetworks
   }
 
 }
