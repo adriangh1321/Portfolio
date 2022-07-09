@@ -15,16 +15,22 @@
     </p> -->
   <div class="d-flex align-items-center">
     <a class="navbar-brand" routerLink="/home" routerLinkActive="active"><small>Home</small></a>
-    <a class="navbar-brand" routerLink="/register" routerLinkActive="active" *ngIf="!isLoggedIn()"><small>Register</small></a>
-    <ng-container *ngIf="(user$ | async) as user">
-      <a class="navbar-brand" [routerLink]="['/profile', user.nickname]" *ngIf="isLoggedIn()"><small>My portfolio</small></a>
-    </ng-container>
+    <a class="navbar-brand" routerLink="/register" routerLinkActive="active"
+      *ngIf="!isLoggedIn()"><small>Register</small></a>
+    <!-- <ng-container *ngIf="(user$ | async) as user ">
+      <div *ngIf="(portfolio$ | async) as portfolio class" id="my-profile-container">
+        <img [src]=portfolio.image id="profile-image">
+        <a class="navbar-brand" [routerLink]="['/profile', user.nickname]" *ngIf="isLoggedIn()"><small>My
+            portfolio</small></a>
+      </div>
+
+    </ng-container> -->
   </div>
 
 
   <div class="d-flex align-items-center justify-content-end grow">
 
-    <div class="d-flex align-items-center social-networks">
+    <div class="d-flex align-items-center networks-buttons">
       <ng-container *ngIf="(contactInformation$ |async) as contactInformation">
         <a class="navbar-brand" href="//{{contactInformation.linkedIn}}"
           *ngIf="isLoggedIn() && contactInformation.linkedIn"><i class="fa-brands fa-linkedin"></i></a>
@@ -38,18 +44,113 @@
           *ngIf="isLoggedIn() && contactInformation.remoteRepository"><i class="fa-brands fa-git-square"></i></a>
       </ng-container>
     </div>
-  
+
     <div class="d-flex align-items-center justify-content-end">
-      <a class="btn btn-danger" href='javascript:void(0);' (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
+      <!-- <a class="btn btn-danger" href='javascript:void(0);' (click)="logout()" *ngIf="isLoggedIn()">Logout</a> -->
       <a class="btn btn-success" routerLink="/login" routerLinkActive="active" (click)="logout()"
         *ngIf="!isLoggedIn()">Log
         In</a>
     </div>
 
   </div>
-  
 
-  
+
+
+  <ng-container *ngIf="{
+    user:user$ | async,
+    image:portfolioImage$ | async,
+    contactInformation:contactInformation$ | async
+  } as data">
+    <div *ngIf="data.user && data.image && data.contactInformation">
+
+
+      <div class="nav-item dropdown" *ngIf="isLoggedIn()">
+        <a class="nav-link pl-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+
+          <img [src]="data.image || './assets/img/default-profile.png'" id="profile-image">
+
+        </a>
+        <div class="dropdown-menu custom-dropdown bg-secondary" aria-labelledby="navbarDropdownMenuLink">
+
+
+          <a class="dropdown-item text-light" [routerLink]="['/profile', data.user.nickname]"><i
+              class="fa-solid fa-briefcase mr-2"></i>My
+            portfolio</a>
+
+          <a class="dropdown-item text-light networks-menu" (click)="toggleShowNetworks($event)"><i
+              class="fa-solid fa-share-nodes mr-2"></i>Social Networks
+            <div [hidden]="!showNetworks">
+              <a class="dropdown-item submenu-item" href="//{{data.contactInformation.linkedIn}}"
+                *ngIf="isLoggedIn() && data.contactInformation.linkedIn"><i
+                  class="fa-brands fa-linkedin mr-2"></i>LinkedIn</a>
+              <a class="dropdown-item submenu-item" href="//{{data.contactInformation.facebook}}"
+                *ngIf="isLoggedIn() && data.contactInformation.facebook"><i
+                  class="fa-brands fa-facebook-square mr-2"></i>Facebook</a>
+              <a class="dropdown-item submenu-item" href="//{{data.contactInformation.twitter}}"
+                *ngIf="isLoggedIn() && data.contactInformation.twitter"><i
+                  class="fa-brands fa-twitter-square mr-2"></i>Twitter</a>
+              <a class="dropdown-item submenu-item" href="//{{data.contactInformation.instagram}}"
+                *ngIf="isLoggedIn() && data.contactInformation.instagram"><i
+                  class="fa-brands fa-instagram-square mr-2"></i>Instagram</a>
+              <a class="dropdown-item submenu-item" href="//{{data.contactInformation.remoteRepository}}"
+                *ngIf="isLoggedIn() && data.contactInformation.remoteRepository"><i
+                  class="fa-brands fa-git-square mr-2"></i>Git</a>
+              <a class="dropdown-item"
+                *ngIf="!data.contactInformation.linkedIn && 
+                !data.contactInformation.facebook && 
+                !data.contactInformation.twitter && 
+                !data.contactInformation.instagram && 
+                !data.contactInformation.remoteRepository">No networks</a>
+                
+            </div>
+
+          </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <a class="dropdown-item text-light" href='javascript:void(0);' (click)="logout()"><i
+              class="fa-solid fa-power-off text-danger mr-2"></i>Logout</a>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+
+
+
 
 
 
