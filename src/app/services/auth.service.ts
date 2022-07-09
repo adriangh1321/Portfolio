@@ -14,9 +14,13 @@ import { PortfolioService } from './portfolio.service';
 export class AuthService {
   private apiUrl: string = `${environment.baseUrl}/v1/auth`
   private _userRequest = new Subject<User>()
+  private _logoutRequired=new Subject<void>()
 
   constructor(private http: HttpClient, private router: Router, private portfolioService: PortfolioService) { }
 
+  get LogoutRequired(){
+    return this._logoutRequired
+  }
 
   public userRequired$() {
     return this._userRequest.asObservable()
@@ -73,6 +77,7 @@ export class AuthService {
     localStorage.removeItem('auth_token')
     localStorage.removeItem('nickname')
     localStorage.removeItem('id_portfolio')
+    this.emitLogout()
     this.router.navigate(['login'])
 
   }
@@ -84,6 +89,10 @@ export class AuthService {
 
   emitUser(user:User){
     this._userRequest.next(user)
+  }
+
+  emitLogout(){
+    this._logoutRequired.next()
   }
 
 

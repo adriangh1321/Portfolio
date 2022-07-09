@@ -29,11 +29,6 @@
     border-radius: 50%;
 }
 
-.custom-dropdown{
-    position: absolute!important;
-    left: -165px!important;
-    
-}
 
 .networks-menu{
     display: none;
