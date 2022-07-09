@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 import { AboutMe } from '../models/AboutMe';
 import { ContactInformation } from '../models/ContactInformation';
 import { Profile } from '../models/Profile';
+import { PortfolioImage } from '../models/PortfolioImage';
+import { PortfolioBasicInfo } from '../models/PortfolioBasicInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,8 @@ export class PortfolioService {
   private _basicInfoRefreshRequired = new Subject<void>()
   private _portfolioRequired=new Subject<Portfolio>()
   private _bannerRefreshRequired=new Subject<void>()
+  private _imageRequired=new Subject<string>()
+  private _basicInfoRequired=new Subject<PortfolioBasicInfo>()
 
   // get RefreshRequired() {
   //   return this._refreshRequired;
@@ -35,6 +39,13 @@ export class PortfolioService {
   }
   get BannerRefreshRequired(){
     return this._bannerRefreshRequired
+  }
+  get ImageRequired(){
+    return this._imageRequired
+  }
+
+  get BasicInfoRequired(){
+    return this._basicInfoRequired
   }
 
   constructor(private http: HttpClient) { }
@@ -99,6 +110,7 @@ export class PortfolioService {
     return this.http.patch<void>(url, basicInfo).pipe(
       tap(() => {
         this.BasicInfoRefreshRequired.next()
+        
       })
     );
   }
@@ -119,7 +131,7 @@ export class PortfolioService {
 
   getBasicInfo(id:number):Observable<any>{
     const url = `${this.apiUrl}/${id}/basicInfo`
-    return this.http.get<any>(url)
+    return this.http.get<any>(url).pipe(tap(resp=>this.emitBasicInfo(resp)))
   }
 
 
@@ -134,8 +146,34 @@ export class PortfolioService {
   
   }
 
+  getImage():Observable<PortfolioImage>{
+    const url = `${this.apiUrl}/me/image`
+    return this.http.get<PortfolioImage>(url).pipe(map(resp=>{
+      if(resp.image===null){
+        resp.image="./assets/img/default-profile.png"
+        return resp
+      }
+      
+      return resp
+    }))
+  }
+
   emitPortfolio(portfolio:Portfolio){
     this._portfolioRequired.next(portfolio)
   }
+
+  emitImage(image:string){
+    if(image===null){
+      image="./assets/img/default-profile.png"
+    }
+    this._imageRequired.next(image)
+  }
+
+  emitBasicInfo(basicInfo:PortfolioBasicInfo){
+    
+   this._basicInfoRequired.next(basicInfo)
+  }
+
+  
 }
 
