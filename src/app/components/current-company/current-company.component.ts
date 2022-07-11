@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { CurrentCompany } from 'src/app/models/CurrentCompany';
@@ -12,19 +13,26 @@ import { NotificationService } from 'src/app/services/notification.service';
   templateUrl: './current-company.component.html',
   styleUrls: ['./current-company.component.css']
 })
-export class CurrentCompanyComponent implements OnInit {
+export class CurrentCompanyComponent implements OnInit,OnDestroy {
   @Input() currentCompany!: CurrentCompany;
   isOnShowDetails: Boolean
+  subscription:Subscription=new Subscription
+
   constructor(
     private currentCompanyService: CurrentCompanyService,
     private loaderService: LoaderService,
     private notificationService: NotificationService) { this.isOnShowDetails = true }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit(): void {
-    this.currentCompanyService.CurrentCompanyRefreshRequired.subscribe((id) => this.getCurrentCompany(id))
+    const s1$=this.currentCompanyService.CurrentCompanyRefreshRequired.subscribe((id) => this.getCurrentCompany(id))
+    this.subscription.add(s1$)
   }
   getCurrentCompany(id: number) {
-    this.currentCompanyService.getById(id).subscribe({
+    const s2$=this.currentCompanyService.getById(id).subscribe({
       next: response => {
         this.currentCompany = response
         this.loaderService.hideLoading()
@@ -38,6 +46,7 @@ export class CurrentCompanyComponent implements OnInit {
         throw error
       }
     })
+    this.subscription.add(s2$)
   }
   toggleEditCurrentCompany() {
     this.isOnShowDetails = false;

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -10,9 +11,10 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit,OnDestroy {
   @Input() aboutMe: string;
   isOnShowDetails: boolean = true
+  subscription:Subscription=new Subscription
 
   constructor(
     private portfolioService: PortfolioService,
@@ -20,13 +22,17 @@ export class AboutComponent implements OnInit {
     private notificationService: NotificationService) {
     this.aboutMe = ''
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.portfolioService.AboutMeRefreshRequired.subscribe(() => this.getAboutMe(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$=this.portfolioService.AboutMeRefreshRequired.subscribe(() => this.getAboutMe(parseInt(localStorage.getItem("id_portfolio")!)))
+    this.subscription.add(s1$)
   }
 
   getAboutMe(idPortfolio: number) {
-    this.portfolioService.getAboutMe(idPortfolio).subscribe({
+    const s2$=this.portfolioService.getAboutMe(idPortfolio).subscribe({
       next: data => {
         this.aboutMe = data.aboutMe
         this.loaderService.hideLoading()
@@ -40,6 +46,7 @@ export class AboutComponent implements OnInit {
         throw error
       }
     })
+    this.subscription.add(s2$)
   }
 
   showDetails() {

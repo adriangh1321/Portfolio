@@ -1,4 +1,5 @@
-import { Component, Inject, Input, NgZone, OnInit } from '@angular/core';
+import { Component, Inject, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { Experience } from 'src/app/models/Experience';
 import { ExperienceService } from 'src/app/services/experience.service';
@@ -11,22 +12,29 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./experiences.component.css']
 })
 
-export class ExperiencesComponent implements OnInit {
+export class ExperiencesComponent implements OnInit,OnDestroy {
   @Input() experiences: Experience[];
   notification!:any;
+  subscription: Subscription = new Subscription;
   constructor(private experienceService: ExperienceService, private loaderService: LoaderService,private notificationService:NotificationService) {
     this.experiences = []
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  
+  }
 
   ngOnInit(): void {
-    this.experienceService.RefreshRequired.subscribe(() => this.getExperiences(parseInt(localStorage.getItem("id_portfolio")!)))
-    this.notificationService.RequestNotification.subscribe((notification)=>this.notification=notification)
+    const s1$=this.experienceService.RefreshRequired.subscribe(() => this.getExperiences(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s2$=this.notificationService.RequestNotification.subscribe((notification)=>this.notification=notification)
+    this.subscription.add(s1$)
+    this.subscription.add(s2$)
   }
 
   getExperiences(idPortfolio: number) {
     
     
-    this.experienceService.getExperiencesByPortfolioId(idPortfolio)
+    const s3$=this.experienceService.getExperiencesByPortfolioId(idPortfolio)
     .subscribe({
       next: experiences => { 
         this.experiences=experiences
@@ -40,6 +48,6 @@ export class ExperiencesComponent implements OnInit {
         throw error
          }
     })
-    
+    this.subscription.add(s3$)
   }
 }

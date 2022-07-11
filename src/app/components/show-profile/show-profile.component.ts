@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { SkillType } from 'src/app/enums/SkillType';
@@ -15,10 +16,10 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './show-profile.component.html',
   styleUrls: ['./show-profile.component.css']
 })
-export class ShowProfileComponent implements OnInit {
+export class ShowProfileComponent implements OnInit,OnDestroy {
   portfolio: Portfolio;
-  
   skillType = SkillType;
+  subscription: Subscription = new Subscription;
 
 
   constructor(
@@ -34,10 +35,14 @@ export class ShowProfileComponent implements OnInit {
 
 
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     
-    this.route.params.subscribe(data=>this.portfolio = this.route.snapshot.data["portfolio"])
+    const s1$=this.route.params.subscribe(data=>this.portfolio = this.route.snapshot.data["portfolio"])
+    this.subscription.add(s1$)
 
   }
 
@@ -46,7 +51,7 @@ export class ShowProfileComponent implements OnInit {
   onAddExperience() {
     this.loaderService.showLoading()
     const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
-    this.experienceService.addExperience(newExperience).subscribe({
+    const s2$=this.experienceService.addExperience(newExperience).subscribe({
       next: () => {
         this.notificationService.requestNotification(
           {
@@ -59,12 +64,13 @@ export class ShowProfileComponent implements OnInit {
         throw error
       }
     })
+    this.subscription.add(s2$)
   }
 
   onAddEducation() {
     this.loaderService.showLoading()
     const newEducation: any = { title: "Title", institute: "Institute", image: null, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
-    this.educationService.addEducation(newEducation).subscribe({
+    const s3$= this.educationService.addEducation(newEducation).subscribe({
       next: () => {
         this.notificationService.requestNotification(
           {
@@ -77,6 +83,7 @@ export class ShowProfileComponent implements OnInit {
         throw error
       }
     })
+    this.subscription.add(s3$)
   }
 
 
@@ -84,7 +91,7 @@ export class ShowProfileComponent implements OnInit {
   onAddProject() {
     this.loaderService.showLoading()
     const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
-    this.projectService.addProject(newProject).subscribe({
+    const s4$=this.projectService.addProject(newProject).subscribe({
       next: () => {
         this.notificationService.requestNotification(
           {
@@ -97,6 +104,7 @@ export class ShowProfileComponent implements OnInit {
         throw error
       }
     })
+    this.subscription.add(s4$)
   }
 
 
