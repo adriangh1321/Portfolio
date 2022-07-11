@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { SkillType } from 'src/app/enums/SkillType';
@@ -12,10 +13,11 @@ import { SkillService } from 'src/app/services/skill.service';
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.css']
 })
-export class SkillsComponent implements OnInit {
+export class SkillsComponent implements OnInit, OnDestroy {
   @Input() skills: Skill[];
   skillType;
   notification: any
+  subscription: Subscription = new Subscription
   constructor(
     private skillService: SkillService,
     private loaderService: LoaderService,
@@ -23,30 +25,37 @@ export class SkillsComponent implements OnInit {
     this.skills = []
     this.skillType = SkillType;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.skillService.RefreshRequired.subscribe(() => this.getSkills(parseInt(localStorage.getItem("id_portfolio")!)))
-    this.notificationService.RequestNotification.subscribe((notification)=>this.notification=notification)
+    const s1$ = this.skillService.RefreshRequired.subscribe(() => this.getSkills(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s2$ = this.notificationService.RequestNotification.subscribe((notification) => this.notification = notification)
+    this.subscription.add(s1$)
+    this.subscription.add(s2$)
   }
 
   getSkills(idPortfolio: number) {
-    this.skillService.getSkillsByPortfolioId(idPortfolio).subscribe({
-      next: skills => { 
-        this.skills=skills
+    const s3$ = this.skillService.getSkillsByPortfolioId(idPortfolio).subscribe({
+      next: skills => {
+        this.skills = skills
         this.loaderService.hideLoading()
         this.notificationService.showNotification(this.notification)
-       },
-      error: error => { 
+      },
+      error: error => {
         this.loaderService.hideLoading()
-        throw error }
+        throw error
+      }
 
     })
+    this.subscription.add(s3$)
   }
 
   onAddSkill(type: SkillType) {
     this.loaderService.showLoading()
     const newSkill: any = { type: type, name: "Skill", percent: 1, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
-    this.skillService.addSkill(newSkill).subscribe({
+    const s4$ = this.skillService.addSkill(newSkill).subscribe({
       next: data => {
         this.notificationService.requestNotification(
           {
@@ -59,6 +68,7 @@ export class SkillsComponent implements OnInit {
         throw error
       }
     })
+    this.subscription.add(s4$)
   }
 
 }
