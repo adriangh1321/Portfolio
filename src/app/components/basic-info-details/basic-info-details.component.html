@@ -1,5 +1,8 @@
 <div class="info-image">
-    <img class="profile-image" [src]="portfolio.image || './assets/img/default-profile.png'" alt="">
+    <div class="container-profile-img">
+        <img class="profile-image" [src]="portfolio.image || './assets/img/default-profile.png'" alt="">
+    </div>
+    
     <app-button [type]="'edit'" (onButtonAction)="editBasicInfo()"></app-button>
 </div>
 

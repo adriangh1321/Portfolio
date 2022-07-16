@@ -1,30 +1,37 @@
 .info-image {
-    display: flex;
-  }
-  
-  .profile-image {
-    border-radius: 50%;
-    width: 152px;
-    height: 152px;
-    margin-top: -110px;
-    z-index: 1;
-  }
-  
-  .info-company-image {
-    display: block;
-    
-  }
-  
-  #current-company-image {
-    display: block;
-    border-radius: 50%;
-    width: 152px;
-    height: 152px;
-    margin-top: -110px;
-  
-  }
-  
-  #edit-image-container{
-    display: flex;
-    justify-content: space-between;
-  }
+  display: flex;
+}
+
+.container-profile-img {
+  width: 152px;
+  height: 152px;
+  margin-top: -110px;
+  z-index: 1;
+}
+
+.profile-image {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+
+.info-company-image {
+  display: block;
+
+}
+
+#current-company-image {
+  display: block;
+  border-radius: 50%;
+  width: 152px;
+  height: 152px;
+  margin-top: -110px;
+
+}
+
+#edit-image-container {
+  display: flex;
+  justify-content: space-between;
+}
