@@ -2,34 +2,17 @@
   <div class="d-flex align-items-center">
     <a class="navbar-brand" href="https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa">
       <img id="logo-argprograma" [src]="'./assets/img/argentina-programa-logo.png'">
-      <!-- <small class="text-small">#YoProgramo</small> -->
-
     </a>
   </div>
 
-
-
-  <!-- <p class="text-white">
-      Internet Connection Status:
-      {{ networkStatus ? "IS CONNECTED" : "NOT CONNECTED" }}
-    </p> -->
   <div class="d-flex align-items-center">
     <a class="navbar-brand" routerLink="/home" routerLinkActive="active"><small>Home</small></a>
     <a class="navbar-brand" routerLink="/register" routerLinkActive="active"
       *ngIf="!isLoggedIn()"><small>Register</small></a>
-    <!-- <ng-container *ngIf="(user$ | async) as user ">
-      <div *ngIf="(portfolio$ | async) as portfolio class" id="my-profile-container">
-        <img [src]=portfolio.image id="profile-image">
-        <a class="navbar-brand" [routerLink]="['/profile', user.nickname]" *ngIf="isLoggedIn()"><small>My
-            portfolio</small></a>
-      </div>
-
-    </ng-container> -->
   </div>
 
 
   <div class="d-flex align-items-center justify-content-end grow">
-
     <div class="d-flex align-items-center networks-buttons">
       <ng-container *ngIf="(contactInformation$ |async) as contactInformation">
         <a class="navbar-brand" href="//{{contactInformation.linkedIn}}"
@@ -46,30 +29,12 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-end">
-      <!-- <a class="btn btn-danger" href='javascript:void(0);' (click)="logout()" *ngIf="isLoggedIn()">Logout</a> -->
       <a class="btn btn-success" routerLink="/login" routerLinkActive="active" (click)="logout()"
         *ngIf="!isLoggedIn()">Log
         In</a>
     </div>
 
   </div>
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
 
   <ng-container *ngIf="{
     user:user$ | async,
@@ -82,12 +47,13 @@
       <div class="nav-item dropdown" *ngIf="isLoggedIn()">
         <a class="nav-link pl-0 pr-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
+          <div class="container-profile-image">
+            <img [src]="data.image || './assets/img/default-profile.png'" id="profile-image">
+          </div>
 
-          <img [src]="data.image || './assets/img/default-profile.png'" id="profile-image">
 
         </a>
         <div class="dropdown-menu dropdown-menu-right bg-secondary" aria-labelledby="navbarDropdownMenuLink">
-
 
           <a class="dropdown-item text-light" [routerLink]="['/profile', data.user.nickname]"><i
               class="fa-solid fa-briefcase mr-2"></i>My
@@ -116,43 +82,8 @@
                 !data.contactInformation.twitter && 
                 !data.contactInformation.instagram && 
                 !data.contactInformation.remoteRepository">No networks</a>
-
             </div>
-
           </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           <a class="dropdown-item text-light" href='javascript:void(0);' (click)="logout()"><i
               class="fa-solid fa-power-off text-danger mr-2"></i>Logout</a>
@@ -161,13 +92,5 @@
     </div>
 
   </ng-container>
-
-
-
-
-
-
-
-
 
 </nav>

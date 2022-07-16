@@ -23,9 +23,15 @@
 #my-profile-container{
     height: auto;
 }
-#profile-image{
+
+.container-profile-image{
     height: 35px;
     width: 35px;
+}
+#profile-image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
     border-radius: 50%;
 }
 
