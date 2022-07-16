@@ -9,8 +9,15 @@
             </div>
         </div>
         <p class="font-weight-bold mb-1">{{education.institute}}</p>
-        <p class="font-weight-light mb-1">From <span>{{education.startDate? (education.startDate |
-                date:'dd-MM-yyyy'):'-'}}</span> to <span>{{education.endDate? (education.endDate |
-                date:'dd-MM-yyyy'):'-'}}</span> </p>
+        <p class="font-weight-light mb-1">
+            <span class="date">
+                <span class="text-muted font-weight-bold">From </span>{{education.startDate? (education.startDate |
+                date:'dd-MM-yyyy'):'-'}}&nbsp;
+            </span>
+            <span class="date">
+                <span class="text-muted font-weight-bold">To </span>{{education.endDate? (education.endDate |
+                date:'dd-MM-yyyy'):'-'}}
+            </span>
+        </p>
     </div>
 </div>

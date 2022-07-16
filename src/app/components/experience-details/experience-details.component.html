@@ -1,17 +1,27 @@
-<div class="new-item-container" >
-    <img [src]="experience.image || './assets/img/default-experience.png'" alt="Add new image">
-    <div class="item-text">
-      <div class="item-title-edit">
-        <h4>{{experience.position}}</h4>
-        <div>
-          <app-button [type]="'edit'" (onButtonAction)="editExperience()"></app-button>
-          <app-button [type]="'delete'" (onButtonAction)="removeExperience()"></app-button>
-        </div>
+<div class="new-item-container">
+  <img [src]="experience.image || './assets/img/default-experience.png'" alt="Add new image">
+  <div class="item-text">
+    <div class="item-title-edit">
+      <h4>{{experience.position}}</h4>
+      <div>
+        <app-button [type]="'edit'" (onButtonAction)="editExperience()"></app-button>
+        <app-button [type]="'delete'" (onButtonAction)="removeExperience()"></app-button>
       </div>
-      <p class="font-weight-bold mb-1">{{experience.company}}</p>
-      <p class="mb-1" id="job-description">{{experience.description}}</p>
-      <p class="font-weight-light mb-1">From <span>{{experience.startDate? (experience.startDate |
-          date:'dd-MM-yyyy'):'-'}}</span> to <span>{{experience.endDate? (experience.endDate |
-          date:'dd-MM-yyyy'):'-'}}</span> {{experience.state}} ({{experience.country}})</p>
     </div>
+    <p class="font-weight-bold mb-1">{{experience.company}}</p>
+    <p class="mb-1 text-left" id="job-description">{{experience.description}}</p>
+    <p class="font-weight-light mb-1">
+      <span class="date">
+        <span class="text-muted font-weight-bold">From </span>{{experience.startDate?
+        (experience.startDate |
+        date:'dd-MM-yyyy'):'-'}}&nbsp;
+      </span>
+      <span class="date">
+        <span class="text-muted font-weight-bold">To
+        </span>{{experience.endDate? (experience.endDate |
+        date:'dd-MM-yyyy'):'-'}}
+      </span>
+    </p>
+    <p>{{experience.state}} ({{experience.country}})</p>
   </div>
+</div>
