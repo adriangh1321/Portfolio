@@ -15,8 +15,10 @@ export class ButtonComponent implements OnInit {
   klass!: string
   @Input()
   ngClass!: string | string[] | Set<string> | { [klass: string]: any; }
+  @Input()color:string;
 
   constructor(private buttonService:ButtonService) {
+    this.color="dodgerblue";
     
   }
 

@@ -1,0 +1,16 @@
+.project-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 3%;
+    gap: 15px;
+}
+
+.project-container div {
+    flex: 1;
+}
+
+.project-container img {
+    width: 100px;
+    height: 100px;
+}

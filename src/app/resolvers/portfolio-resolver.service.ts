@@ -43,6 +43,15 @@ export class PortfolioResolverService {
               education.endDate = moment(education.endDate, 'YYYY-MM-DD').toDate()
             }
           })
+          response.projects.forEach(project => {
+            if (project.startDate !== null) {
+              project.startDate = moment(project.startDate, 'YYYY-MM-DD').toDate()
+            }
+  
+            if (project.endDate !== null) {
+              project.endDate = moment(project.endDate, 'YYYY-MM-DD').toDate()
+            }
+          })
           localStorage.setItem("id_portfolio", response.id.toString())
           this.buttonService.activateButton()
           return response

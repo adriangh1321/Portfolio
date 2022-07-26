@@ -8,3 +8,12 @@
 
 }
 
+.custom-body{
+    background-color: gainsboro;
+    border: 1px solid gray;
+}
+
+.custom-text{
+    color:rgb(85, 85, 85)
+}
+

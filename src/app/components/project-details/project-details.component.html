@@ -1,10 +1,27 @@
 <div class="item-title-edit">
-    <h4>{{project.name}}</h4>
+    <h4 class="mb-0 pb-0">{{project.name}}</h4>
     <div>
-        <app-button [type]="'edit'" (onButtonAction)="editProject()"></app-button>
-        <app-button [type]="'delete'" (onButtonAction)="removeProject()"></app-button>
+        <app-button [type]="'edit'" [color]="'white'" (onButtonAction)="editProject()"></app-button>
+        <app-button [type]="'delete'" [color]="'white'" (onButtonAction)="removeProject()"></app-button>
     </div>
 </div>
-
-
-<p class="small">{{project.description}}</p>
+<div class="body-container">
+    <p class="small font-weight-light">
+        <span class="date">
+            <span class="text-muted font-weight-bold">From </span>{{project.startDate?
+            (project.startDate |
+            date:'dd-MM-yyyy'):'-'}}&nbsp;
+        </span>
+        <span class="date">
+            <span class="text-muted font-weight-bold">To
+            </span>{{project.endDate? (project.endDate |
+            date:'dd-MM-yyyy'):'-'}}
+        </span>
+    </p>
+    <p class="small">{{project.description}}</p>
+    
+    <div class="image-container">
+        <img *ngIf="project.image" class="project-image" [src]="project.image" onerror="this.src='./assets/img/img-not-found.png';">
+        <a *ngIf="project.url" [ngClass]="{'custom-btn':project.image}" class="btn btn-primary" href="//{{project.url}}">See</a>
+    </div>
+</div>
