@@ -2,7 +2,7 @@
     <form action="javascript:void(0);" [formGroup]="contactInformationForm" (ngSubmit)="onSubmit()" novalidate>
 
         <div class="form-group ">
-            <label for="phone" class="text-light">Phone number <span class="small">[ code area in
+            <label for="phone" >Phone number <span class="small">[ code area in
                     parenthesis like this: (261)5556122 ]</span> </label>
             <input type="text" id="phone" class="form-control" formControlName="phone">
             <div *ngIf="m.phone.touched && m.phone.invalid" class="alert alert-danger">
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="email" class="text-light">Email</label>
+            <label for="email" >Email</label>
             <input type="text" id="email" class="form-control" formControlName="email">
             <div *ngIf="m.email.touched && m.email.invalid" class="alert alert-danger">
                 <div *ngIf="m.email.errors?.required">Please provide email</div>
@@ -19,35 +19,35 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="linkedIn" class="text-light">LinkedIn</label>
+            <label for="linkedIn" >LinkedIn</label>
             <input type="text" id="linkedIn" class="form-control" formControlName="linkedIn">
             <div *ngIf="m.linkedIn.touched && m.linkedIn.invalid" class="alert alert-danger">
                 <div *ngIf="m.linkedIn.errors?.urlOrWhitespace">This field must be a URL</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="facebook" class="text-light">Facebook</label>
+            <label for="facebook" >Facebook</label>
             <input type="text" id="facebook" class="form-control" formControlName="facebook">
             <div *ngIf="m.facebook.touched && m.facebook.invalid" class="alert alert-danger">
                 <div *ngIf="m.facebook.errors?.urlOrWhitespace">This field must be a URL</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="twitter" class="text-light">Twitter</label>
+            <label for="twitter" >Twitter</label>
             <input type="text" id="twitter" class="form-control" formControlName="twitter">
             <div *ngIf="m.twitter.touched && m.twitter.invalid" class="alert alert-danger">
                 <div *ngIf="m.twitter.errors?.urlOrWhitespace">This field must be a URL</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="instagram" class="text-light">Instagram</label>
+            <label for="instagram" >Instagram</label>
             <input type="text" id="instagram" class="form-control" formControlName="instagram">
             <div *ngIf="m.instagram.touched && m.instagram.invalid" class="alert alert-danger">
                 <div *ngIf="m.instagram.errors?.urlOrWhitespace">This field must be a URL</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="remoteRepository" class="text-light">Remote repository</label>
+            <label for="remoteRepository" >Remote repository</label>
             <input type="text" id="remoteRepository" class="form-control" formControlName="remoteRepository">
             <div *ngIf="m.remoteRepository.touched && m.remoteRepository.invalid" class="alert alert-danger">
                 <div *ngIf="m.remoteRepository.errors?.urlOrWhitespace">This field must be a URL</div>

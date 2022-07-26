@@ -27,8 +27,6 @@
   <div class="title-container">
     <h2>Experience</h2>
     <app-button [type]="'add'" (onButtonAction)="onAddExperience()"></app-button>
-    <!-- <a href='javascript:void(0);' (click)="onAddExperience()"><i class="fa-solid fa-plus"></i>
-    </a> -->
   </div>
   <app-experiences [experiences]="portfolio.experiences"></app-experiences>
 </div>
@@ -37,7 +35,6 @@
   <div class="title-container">
     <h2>Education</h2>
     <app-button [type]="'add'" (onButtonAction)="onAddEducation()"></app-button>
-    <!-- <a href='javascript:void(0);' (click)="onAddEducation()"><i class="fa-solid fa-plus"></i></a>-->
   </div>
   <app-educations [educations]="portfolio.educations"></app-educations>
 
@@ -50,7 +47,6 @@
     <div class="title-container">
       <h2>Projects</h2>
       <app-button [type]="'add'" (onButtonAction)="onAddProject()"></app-button>
-      <!-- <a href='javascript:void(0);' (click)="onAddProject()"><i class="fa-solid fa-plus"></i></a> -->
     </div>
     <app-projects [projects]="portfolio.projects"></app-projects>
   </div>

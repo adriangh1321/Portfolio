@@ -1,23 +1,73 @@
-<form action="javascript:void(0);" [formGroup]="projectForm" (ngSubmit)="onSubmit()" novalidate>
+<div class="project-container pl-0">
+    <img [src]="projectForm.controls['image'].value || './assets/img/noimage.jpeg'" alt="Add new image">
+    <div class="col pr-2">
+        <form action="javascript:void(0);" [formGroup]="projectForm" (ngSubmit)="onSubmit()" novalidate>
 
-    <div class="form-group ">
-        <label for="project-name-indexProject">Project name</label>
-        <input type="text" id="project-name-indexProject" class="form-control" formControlName="name">
-        <div *ngIf="m.name.touched && m.name.invalid" class="alert alert-danger">
-            <div *ngIf="m.name.errors?.required">Please provide a name</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="project-description-indexProject">Description</label>
-        <input type="text" id="project-description-indexProject" class="form-control" formControlName="description">
-        <div *ngIf="m.description.touched && m.description.invalid" class="alert alert-danger">
-            <div *ngIf="m.description.errors?.required">Please provide a description</div>
-            
-        </div>
-    </div>
+            <div class="form-group">
+                <label for="image">Project image file</label>
+                <input type="file" id="image" class="form-control-file" (change)="onImageProjectUpload($event)" [disabled]="checkboxImage">
+                <input type="hidden" formControlName="image">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="checkImage" [checked]="checkboxImage"
+                    (change)="disableImage()">
+                <label class="form-check-label" for="checkImage">No photo</label>
+            </div>
+            <div class="form-group ">
+                <label for="project-name-indexProject">Project name</label>
+                <input type="text" id="project-name-indexProject" class="form-control" formControlName="name">
+                <div *ngIf="m.name.touched && m.name.invalid" class="alert alert-danger">
+                    <div *ngIf="m.name.errors?.required">Please provide a name</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="project-description-indexProject">Description</label>
+                <input type="text" id="project-description-indexProject" class="form-control"
+                    formControlName="description">
+                <div *ngIf="m.description.touched && m.description.invalid" class="alert alert-danger">
+                    <div *ngIf="m.description.errors?.required">Please provide a description</div>
 
-    <button type="submit" class="btn btn-primary" id="btn-edit-project-indexProject"
-        [disabled]="!projectForm.valid">Save</button>
-    <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-project-indexProject"
-        (click)="onCloseEdit()">Cancel</button>
-</form>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="start-date">Start date</label>
+                <div class="input-group">
+                    <input id="start-date" class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
+                        ngbDatepicker #d="ngbDatepicker">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+                            class="fas fa-calendar-alt fa-fw"></i></button>
+                </div>
+                <div *ngIf="m.startDate.touched && m.startDate.invalid" class="alert alert-danger">
+                    <div *ngIf="m.startDate.errors?.required">You must provide a start date</div>
+                    <div *ngIf="m.startDate.errors?.ngbDate">The start date is invalid</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="end-date">End date</label>
+                <div class="input-group">
+                    <input id="end-date" class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate"
+                        ngbDatepicker #dEnd="ngbDatepicker">
+                    <button class="btn btn-outline-secondary calendar" (click)="dEnd.toggle()" type="button"><i
+                            class="fas fa-calendar-alt fa-fw"></i></button>
+                </div>
+                <div *ngIf="m.endDate.touched && m.endDate.invalid" class="alert alert-danger">
+                    The end date is invalid
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="project-url">URL</label>
+                <input type="text" id="project-url" class="form-control" formControlName="url">
+                <div *ngIf="m.url.touched && m.url.invalid" class="alert alert-danger">
+                    <div *ngIf="m.url.errors?.urlOrWhitespace">This field must be a URL</div>
+                </div>
+            </div>
+           
+
+            <button type="submit" class="btn btn-primary" id="btn-edit-project-indexProject"
+                [disabled]="!projectForm.valid">Save</button>
+            <button type="button" class="btn btn-secondary ml-2" id="btn-cancel-project-indexProject"
+                (click)="onCloseEdit()">Cancel</button>
+        </form>
+    </div>
+</div>
