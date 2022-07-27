@@ -3,4 +3,7 @@ export interface Profile{
     lastname:string
     nickname:string
     image:string
+    country:string;
+    state:string;
+    ocupation:string;
 }
