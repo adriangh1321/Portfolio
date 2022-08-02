@@ -1,0 +1,32 @@
+<div class="p-4 d-flex justify-content-center w-100">
+    <form class="w-50" action="javascript:void(0);" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="input-group col-9">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+                </div>
+                <input type="text" class="form-control" placeholder="find" aria-label="Username" [(ngModel)]="search"
+                    name="search" (input)="onInput()" aria-describedby="basic-addon1">
+
+            </div>
+            <div class="input-group col-3">
+                <!-- <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+            </div> -->
+                <select class="custom-select" [(ngModel)]="findBy" id="inputGroupSelect01" name="searchSelect">
+                    <option hidden value="" disabled selected>Choose... </option>
+                    <option value="name">Name</option>
+                    <option value="ocupation">Ocupation</option>
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+</div>

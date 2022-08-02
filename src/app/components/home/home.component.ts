@@ -16,12 +16,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(data=>this.profiles = this.route.snapshot.data["profiles"])
+    this.route.data.subscribe(data=>{
+      console.log(data)
+      
+      this.profiles = this.route.snapshot.data["profiles"]})
 
-    // this.portfolioService.getProfiles().subscribe({
-    //   next:profiles=>this.profiles=profiles,
-    //   error:error=>{throw error}
-    // })
+
   }
 
 }
