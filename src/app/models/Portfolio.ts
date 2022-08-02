@@ -12,7 +12,7 @@ export class Portfolio {
     private _id: number;
     private _firstname: string;
     private _lastname: string;
-    private _ocupation: string;
+    private _occupation: string;
     private _currentCompany: CurrentCompany;
     private _country: string;
     private _state: string;
@@ -97,13 +97,13 @@ export class Portfolio {
         this._lastname = lastname;
     }
 
-    public get ocupation(): string {
-        return this._ocupation;
+    public get occupation(): string {
+        return this._occupation;
     }
 
-    public set ocupation(ocupation: string
+    public set occupation(occupation: string
     ) {
-        this._ocupation = ocupation;
+        this._occupation = occupation;
     }
 
     public get country(): string {
@@ -172,7 +172,7 @@ export class Portfolio {
         this._id = 0;
         this._firstname = "firstname"
         this._lastname = "lastname"
-        this._ocupation = "ocupation"
+        this._occupation = "occupation"
         this._currentCompany = new CurrentCompany();
         this._country = "country"
         this._state = "state"

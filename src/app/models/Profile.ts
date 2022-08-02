@@ -5,5 +5,5 @@ export interface Profile{
     image:string
     country:string;
     state:string;
-    ocupation:string;
+    occupation:string;
 }

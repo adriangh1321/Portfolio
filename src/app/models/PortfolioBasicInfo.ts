@@ -4,7 +4,7 @@ export class PortfolioBasicInfo{
     private _id: number;
     private _firstname: string;
     private _lastname: string;
-    private _ocupation: string;
+    private _occupation: string;
     private _currentCompany: CurrentCompany;
     private _country: string;
     private _state: string;
@@ -14,7 +14,7 @@ export class PortfolioBasicInfo{
     id: number, 
     firstname: string, 
     lastname: string, 
-    ocupation: string, 
+    occupation: string, 
     currentCompany: CurrentCompany, 
     country: string, 
     state: string,
@@ -23,7 +23,7 @@ export class PortfolioBasicInfo{
     this._id = id
     this._firstname = firstname
     this._lastname = lastname
-    this._ocupation = ocupation
+    this._occupation = occupation
     this._currentCompany = currentCompany
     this._country = country
     this._state = state
@@ -61,14 +61,14 @@ export class PortfolioBasicInfo{
         this._lastname = lastname;
     }
 
-    public get ocupation(): string
+    public get occupation(): string
  {
-        return this._ocupation;
+        return this._occupation;
     }
 
-    public set ocupation(ocupation: string
+    public set occupation(occupation: string
 ) {
-        this._ocupation = ocupation;
+        this._occupation = occupation;
     }
 
     public get currentCompany(): CurrentCompany
