@@ -18,3 +18,11 @@
 .profiles-list li{
     list-style: none;
 }
+
+.search-container{
+    height: 25%
+}
+
+.profiles-container{
+    height: auto;
+}

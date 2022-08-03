@@ -1,32 +1,66 @@
-<div class="p-4 d-flex justify-content-center w-100">
-    <form class="w-50" action="javascript:void(0);" (ngSubmit)="onSubmit()">
-        <div class="form-row">
-            <div class="input-group col-9">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+<div class="container pt-4 pb-4">
+    <div class="row">
+        <div class="c-12">
 
+            <form action="javascript:void(0);" (ngSubmit)="onSubmit()">
+                <div class="form-row pb-2">
+                    <div class="input-group col-9">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i
+                                    class="fa-solid fa-magnifying-glass"></i></span>
+
+                        </div>
+                        <input type="text" class="form-control" placeholder="find" aria-label="Username"
+                            [(ngModel)]="search" name="search" (input)="onInput()" aria-describedby="basic-addon1">
+
+                    </div>
+                    <div class="input-group col-3">
+                        <!-- <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                    </div> -->
+                        <select class="custom-select" [(ngModel)]="findBy" id="inputGroupSelect01" name="searchSelect"
+                            #select>
+                            <option hidden value="" disabled selected>by.. </option>
+                            <option value="name">Name</option>
+                            <option value="occupation">Occupation</option>
+                        </select>
+                    </div>
                 </div>
-                <input type="text" class="form-control" placeholder="find" aria-label="Username" [(ngModel)]="search"
-                    name="search" (input)="onInput()" aria-describedby="basic-addon1">
+                <div *ngIf="showFilters" class="form-row pb-2">
+                    <div class="input-group col-3">
+                        <select class="custom-select" [(ngModel)]="filterCountry" id="inputGroupSelect02"
+                            name="countryFilter" #select>
+                            <option hidden value="" disabled selected>Country</option>
+                            <option value="USA">USA</option>
+                            <option value="Argentine">Argentine</option>
+                        </select>
+                    </div>
+                    <div class="input-group col-3">
+                        <select class="custom-select" [(ngModel)]="filterState" id="inputGroupSelect03"
+                            name="stateFilter" #select>
+                            <option hidden value="" disabled selected>State</option>
+                            <option value="New York">New York</option>
+                            <option value="Mendoza">Mendoza</option>
+                            <option value="Santa Fe">Santa Fe</option>
+                        </select>
+                    </div>
+                </div>
 
-            </div>
-            <div class="input-group col-3">
-                <!-- <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
-            </div> -->
-                <select class="custom-select" [(ngModel)]="findBy" id="inputGroupSelect01" name="searchSelect">
-                    <option hidden value="" disabled selected>Choose... </option>
-                    <option value="name">Name</option>
-                    <option value="occupation">Occupation</option>
-                </select>
-            </div>
+                
+
+                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="button" [ngClass]="{'btn-success':showFilters,'btn-danger':!showFilters}" class="btn ml-2"
+                    (click)="toggleFilters()"><i class="fa-solid fa-filter text-light"></i></button>
+                <button type="button"  class="btn btn-dark ml-2"
+                    (click)="toggleSort()"><i [ngClass]="{'fa-arrow-up-a-z':order=='ASC','fa-arrow-down-z-a':order=='DESC'}" class="fa-solid text-warning"></i></button>
+
+            </form>
+
+
+
+
+
         </div>
+    </div>
 
-
-
-
-
-
-        <button type="submit" class="btn btn-primary mt-2">Search</button>
-    </form>
 </div>

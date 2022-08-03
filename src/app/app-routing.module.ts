@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [RegisterGuard] },
   {
     path: 'home', component: HomeComponent,
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    runGuardsAndResolvers: 'always',
     resolve: {
       profiles: HomeResolverService
     }

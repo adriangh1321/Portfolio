@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, Subject, tap } from 'rxjs';
+import { delay, map, Observable, Subject, tap } from 'rxjs';
 import { Portfolio } from '../models/Portfolio';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as moment from 'moment';
@@ -145,14 +145,10 @@ export class PortfolioService {
       const paramValue = paramMap.get(paramMap.keys[key]);
 
       if (paramValue != null) {
-        console.log(paramKey)
-        console.log(paramValue)
+
         params=params.append(paramKey,paramValue)
       }
     }
-    console.log('service!!!')
-    console.log(paramMap)
-    console.log(params)
 
     return this.http.get<Profile[]>(this.apiUrl, { params: params })
   }
