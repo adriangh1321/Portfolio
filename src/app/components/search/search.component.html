@@ -27,21 +27,19 @@
                     </div>
                 </div>
                 <div *ngIf="showFilters" class="form-row pb-2">
-                    <div class="input-group col-3">
-                        <select class="custom-select" [(ngModel)]="filterCountry" id="inputGroupSelect02"
-                            name="countryFilter" #select>
+                    <div class="input-group col-3" >
+                        <select class="custom-select" [(ngModel)]="filterCountry" id="inputGroupSelect02" [disabled]="!isCountryReady"
+                            name="countryFilter" #select (change)="onChange()">
                             <option hidden value="" disabled selected>Country</option>
-                            <option value="USA">USA</option>
-                            <option value="Argentine">Argentine</option>
+                            <option *ngFor="let country of (countries$ | async)" [value]="country.id">{{country.name}}</option>
+                           
                         </select>
                     </div>
                     <div class="input-group col-3">
-                        <select class="custom-select" [(ngModel)]="filterState" id="inputGroupSelect03"
-                            name="stateFilter" #select>
-                            <option hidden value="" disabled selected>State</option>
-                            <option value="New York">New York</option>
-                            <option value="Mendoza">Mendoza</option>
-                            <option value="Santa Fe">Santa Fe</option>
+                        <select class="custom-select" [(ngModel)]="filterRegion" id="inputGroupSelect03" [disabled]="!isRegionReady"
+                            name="regionFilter" #select>
+                            <option hidden value="" disabled selected>Region</option>
+                            <option *ngFor="let region of (regions$ | async)" [value]="region.id">{{region.name}}</option>
                         </select>
                     </div>
                 </div>

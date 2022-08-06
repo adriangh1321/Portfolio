@@ -1,6 +1,7 @@
 <div id="edit-image-container">
     <div class="container-profile-img">
-        <img class="profile-image" [src]="basicInfoForm.controls['image'].value || './assets/img/default-profile.png'" alt="photo">
+        <img class="profile-image" [src]="basicInfoForm.controls['image'].value || './assets/img/default-profile.png'"
+            alt="photo">
     </div>
 </div>
 
@@ -39,6 +40,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-12 p-0">
+
                     <label for="input-country">Country</label>
                     <input type="text" id="input-country" class="form-control" formControlName="country">
                     <div *ngIf="m.country.touched && m.country.invalid" class="alert alert-danger">
@@ -65,5 +67,3 @@
 
     </form>
 </div>
-
-

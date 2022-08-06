@@ -1,10 +1,15 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, Query } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subject, switchMap, tap } from 'rxjs';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
+import { Country } from 'src/app/models/Country';
+import { Region } from 'src/app/models/Region';
+import { CountryService } from 'src/app/services/country.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { RegionService } from 'src/app/services/region.service';
 
 @Component({
   selector: 'app-search',
@@ -14,40 +19,72 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class SearchComponent implements OnInit {
   search!: string;
   findBy!: string | null;
-  filterCountry!:string;
-  filterState!:string;
-  order!:string;
-  showFilters!:boolean;
-  showSort!:boolean;
-  query:any
+  filterCountry!: string;
+  filterRegion!: string;
+  order!: string;
+  showFilters!: boolean;
+  showSort!: boolean;
+  query: any
+  countries$!: Observable<Country[]>
+  regions$!: Observable<Region[]>
+  private countryToLoad = new Subject<number>()
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private notificationService: NotificationService, private loaderService: LoaderService) {
-    
+
+  isRegionReady!: boolean
+  isCountryReady!: boolean
+
+
+
+
+  constructor(private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private notificationService: NotificationService,
+    private loaderService: LoaderService,
+    private countryService: CountryService,
+    private regionService: RegionService) {
+
   }
 
   ngOnInit(): void {
-    this.query={}
-    this.showFilters=false;
-    
+    this.countries$ = this.countryService.getAll().pipe(tap(d => { 
+      this.isCountryReady = true
+      if(this.filterCountry){
+      this.countryToLoad.next(parseInt(this.filterCountry))
+      }
+    }))
+    this.regions$ = this.countryToLoad
+      .pipe(
+        switchMap(countryId => this.regionService.getAllByCountry(countryId)
+          .pipe(
+            tap(regions => this.isRegionReady = true))))
+    this.isCountryReady = false
+    this.isRegionReady = false
+
+    this.query = {}
+    this.showFilters = false;
+
 
     this.activatedRoute.queryParamMap.subscribe(paramMap => {
 
       const findBy = paramMap.keys[0]
-      const search= paramMap.get(findBy)
-      const filterCountry= paramMap.get('country')
-      const filterState=paramMap.get('state')
-      const order=paramMap.get('order')
-      this.findBy=findBy?findBy:''
-      this.search=search?search:''
-      if(filterCountry || filterState){
-        this.showFilters=true
+      const search = paramMap.get(findBy)
+      const filterCountry = paramMap.get('country')
+      const filterRegion = paramMap.get('region')
+      const order = paramMap.get('order')
+      this.findBy = findBy ? findBy : ''
+      this.search = search ? search : ''
+      this.filterCountry = filterCountry ? filterCountry : ''
+      this.filterRegion = filterRegion ? filterRegion : ''
+      this.order = order ? order : 'ASC'
+      if (filterCountry || filterRegion) {
+        this.showFilters = true
+        
+        
       }
-      this.filterCountry=filterCountry?filterCountry:''
-      this.filterState=filterState?filterState:''
-      this.order=order?order:'ASC'
       
-      
-      
+
+
+
 
     })
 
@@ -65,7 +102,7 @@ export class SearchComponent implements OnInit {
       this.notificationService.showNotification({ type: NotificationType.WARNING, message: NotificationMessage.NO_FILTERS })
       return;
     }
-    
+
     this.setFindBy()
     this.setFilters()
     this.setOrder()
@@ -77,42 +114,64 @@ export class SearchComponent implements OnInit {
   onInput() {
     console.log('search:' + this.search)
     console.log('findBy:' + this.findBy)
+    console.log('filterCountry:' + this.filterCountry)
+    console.log('filterRegion:' + this.filterRegion)
   }
 
   isFindByInvalid() {
     return this.findBy == ""
 
   }
-  isFiltersInvalid(){
-    return this.filterCountry=="" && this.filterState=="" && this.showFilters
+  isFiltersInvalid() {
+    return this.filterCountry == "" && this.filterRegion == "" && this.showFilters
   }
 
-  toggleFilters(){
-    this.showFilters=!this.showFilters
+  toggleFilters() {
+
+    this.showFilters = !this.showFilters
+    if (this.showFilters) {
+      console.log(this.showFilters)
+      this.filterCountry=''
+      this.filterRegion=''
+      this.isCountryReady=false
+      this.isRegionReady=false
+      this.countryService.getAll()
+    }
   }
-  toggleSort(){
-    this.order=this.order=='ASC'?'DESC':'ASC'
+  toggleSort() {
+    this.order = this.order == 'ASC' ? 'DESC' : 'ASC'
   }
 
-  setFindBy(){
-    this.query={}
+  setFindBy() {
+    this.query = {}
     this.query[`${this.findBy}`] = this.search
   }
 
-  setFilters(){
-    if(!this.showFilters){
+  setFilters() {
+    if (!this.showFilters) {
       return
     }
-    if(this.filterCountry){
-      this.query['country']=this.filterCountry
+    if (this.filterCountry) {
+      this.query['country'] = this.filterCountry
     }
-    if(this.filterState){
-      this.query['state']=this.filterState
+    if (this.filterRegion) {
+      this.query['region'] = this.filterRegion
     }
 
   }
-  setOrder(){
-    this.query['order']=this.order
+  setOrder() {
+    this.query['order'] = this.order
+  }
+
+  onChange() {
+    console.log(this.filterCountry);
+    
+    this.isRegionReady=false
+    this.filterRegion=''
+    this.countryToLoad.next(parseInt(this.filterCountry))
+    
+
+
   }
 
 
