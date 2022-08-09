@@ -1,3 +1,4 @@
+
 import { ContactInformation } from "./ContactInformation";
 import { CurrentCompany } from "./CurrentCompany";
 import { Education } from "./Education";
@@ -6,6 +7,7 @@ import { Interest } from "./Interest";
 import { Project } from "./Project";
 import { Skill } from "./Skill";
 import { User } from "./User";
+import { Location } from "./Location";
 
 
 export class Portfolio {
@@ -14,8 +16,7 @@ export class Portfolio {
     private _lastname: string;
     private _occupation: string;
     private _currentCompany: CurrentCompany;
-    private _country: string;
-    private _state: string;
+    private _location: Location;
     private _image: string;
     private _banner: string;
     private _aboutMe: string;
@@ -25,9 +26,9 @@ export class Portfolio {
     private _skills: Skill[]
     private _projects: Project[]
     private _interests: Interest[];
-    
 
-    
+
+
 
 
     public get interests(): Interest[] {
@@ -71,6 +72,14 @@ export class Portfolio {
         this._currentCompany = currentCompany;
     }
 
+    public get location(): Location {
+        return this._location;
+    }
+
+    public set location(location: Location) {
+        this._location = location;
+    }
+
     public get contactInformation(): ContactInformation {
         return this._contactInformation;
     }
@@ -104,24 +113,6 @@ export class Portfolio {
     public set occupation(occupation: string
     ) {
         this._occupation = occupation;
-    }
-
-    public get country(): string {
-        return this._country;
-    }
-
-    public set country(country: string
-    ) {
-        this._country = country;
-    }
-
-    public get state(): string {
-        return this._state;
-    }
-
-    public set state(state: string
-    ) {
-        this._state = state;
     }
 
     public get image(): string {
@@ -174,8 +165,7 @@ export class Portfolio {
         this._lastname = "lastname"
         this._occupation = "occupation"
         this._currentCompany = new CurrentCompany();
-        this._country = "country"
-        this._state = "state"
+        this._location =new Location()
         this._image = ""
         this._banner = ""
         this._aboutMe = "aboutMe"
@@ -185,7 +175,7 @@ export class Portfolio {
         this._skills = []
         this._projects = []
         this._interests = []
-        
+
 
     }
 

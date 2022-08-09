@@ -174,6 +174,11 @@ export class SearchComponent implements OnInit {
 
   }
 
+  onView(){
+    document.getElementById("router-outlet")!.scrollIntoView();
+    
+  }
+
 
 
 }

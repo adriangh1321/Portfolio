@@ -3,12 +3,14 @@ import { Region } from "./Region"
 export class Location {
     private _id: number
     private _address: string
-    private _region: Region
+    private _region: Region|null
 
-    constructor(_id: number, _address: string, _region: Region) {
-        this._id = _id
-        this._address = _address
-        this._region = _region
+
+
+    constructor(){
+        this._id =0
+        this._address =''
+        this._region = null
     }
 
 
@@ -30,11 +32,11 @@ export class Location {
         this._address = address;
     }
 
-    public get region(): Region {
+    public get region(): Region|null {
         return this._region;
     }
 
-    public set region(region: Region) {
+    public set region(region: Region|null) {
         this._region = region;
     }
 
