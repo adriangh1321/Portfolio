@@ -22,8 +22,6 @@ export class BasicInfoEditComponent implements OnInit {
   country!: string
   countries$!: Observable<Country[]>
   regions$!: Observable<Region[]>
-  
-
   private countryToLoad = new Subject<number>()
 
   constructor(
@@ -82,7 +80,6 @@ export class BasicInfoEditComponent implements OnInit {
       return;
     }
     this.basicInfoForm.removeControl('countryId')
-    console.log(this.basicInfoForm.getRawValue())
     this.loaderService.showLoading()
     this.portfolioService.patchBasicInfo(this.portfolio.id, this.basicInfoForm.getRawValue()).subscribe({
       next: data => { },

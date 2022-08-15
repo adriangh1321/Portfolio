@@ -50,14 +50,8 @@
                     <div *ngIf="m.countryId.touched && m.countryId.invalid" class="alert alert-danger">
                         <div *ngIf="m.countryId.errors?.required">Please provide a country</div>
                     </div>
-
-                    <!-- <label for="input-country">Country</label>
-                    <input type="text" id="input-country" class="form-control" formControlName="country">
-                    <div *ngIf="m.country.touched && m.country.invalid" class="alert alert-danger">
-                        <div *ngIf="m.country.errors?.required">Please provide a country</div>
-                        <div *ngIf="m.country.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
-                    </div> -->
                 </div>
+                
                 <div class="form-group col-md-12 p-0">
                     <label for="inputGroupSelect03">Region</label>
                     <select class="form-control" formControlName="regionId" id="inputGroupSelect03"
@@ -68,13 +62,6 @@
                     <div *ngIf="m.regionId.touched && m.regionId.invalid" class="alert alert-danger">
                         <div *ngIf="m.regionId.errors?.required">Please provide a region</div>
                     </div>
-
-                    <!-- <label for="input-location">State</label>
-                    <input type="text" id="input-location" class="form-control" formControlName="state">
-                    <div *ngIf="m.state.touched && m.state.invalid" class="alert alert-danger">
-                        <div *ngIf="m.state.errors?.required">Please provide a state</div>
-                        <div *ngIf="m.state.errors?.onlyWhitespace">The field cannot contain only whitespace</div>
-                    </div> -->
                 </div>
 
                 <div class="form-group col-md-12 p-0">

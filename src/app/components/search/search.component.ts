@@ -1,5 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit, Query } from '@angular/core';
+import { Component, OnInit, Query, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, switchMap, tap } from 'rxjs';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
@@ -28,7 +29,7 @@ export class SearchComponent implements OnInit {
   countries$!: Observable<Country[]>
   regions$!: Observable<Region[]>
   private countryToLoad = new Subject<number>()
-
+  @ViewChild('myForm') ngForm!: NgForm;
 
   isRegionReady!: boolean
   isCountryReady!: boolean
@@ -92,6 +93,8 @@ export class SearchComponent implements OnInit {
 
 
   }
+
+  send() { this.ngForm.ngSubmit.emit(); }
 
   onSubmit() {
     if (this.isFindByInvalid()) {

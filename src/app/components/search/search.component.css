@@ -1,0 +1,51 @@
+.custom-input{
+    background-color: rgba(255, 255, 255, 0);
+    color:white;
+    border-right: none;
+    
+    
+}
+
+.custom-input::placeholder{
+    color:white !important;
+}
+
+.custom-icon{
+    
+    color:white;
+    margin-left: 0;
+    
+    border-left: 0;
+    background-color: rgba(255, 255, 255,0);
+    border-bottom-right-radius: 0.25rem!important;
+    border-top-right-radius: 0.25rem!important;
+    
+}
+
+.custom-select{
+    background-color: rgba(255, 255, 255, 0.2);
+    color:white;
+}
+
+.text-select{
+    color:black;
+}
+.custom-select:disabled{
+    background-color:rgb(83, 83, 83) ;
+    color: rgb(168, 168, 168);
+}
+
+.custom-input-group{
+    min-width: 150px;
+}
+
+
+
+
+
+
+
+
+
+
+

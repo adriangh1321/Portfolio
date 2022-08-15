@@ -50,7 +50,7 @@ export class ShowProfileComponent implements OnInit,OnDestroy {
 
   onAddExperience() {
     this.loaderService.showLoading()
-    const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
+    const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!)}
     const s2$=this.experienceService.addExperience(newExperience).subscribe({
       next: () => {
         this.notificationService.requestNotification(

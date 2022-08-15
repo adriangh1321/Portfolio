@@ -2,12 +2,19 @@ import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Experience } from 'src/app/models/Experience';
+import { Location } from 'src/app/models/Location';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from 'src/app/services/loader.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { NotificationType } from 'src/app/enums/NotificationType';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
+import { Observable, Subject, switchMap, tap } from 'rxjs';
+import { Country } from 'src/app/models/Country';
+import { Region } from 'src/app/models/Region';
+import { RegionService } from 'src/app/services/region.service';
+import { CountryService } from 'src/app/services/country.service';
+import { onlyWhitespace } from 'src/app/validators/WhitespaceValidatorDirective';
 
 @Component({
   selector: 'app-experience-edit',
@@ -18,6 +25,9 @@ export class ExperienceEditComponent implements OnInit {
   experienceForm!: FormGroup;
   @Output() onShowDetails = new EventEmitter()
   @Input() experience: Experience;
+  countries$!: Observable<Country[]>
+  regions$!: Observable<Region[]>
+  private countryToLoad = new Subject<number>()
 
 
   constructor(
@@ -25,12 +35,32 @@ export class ExperienceEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private parserFormatter: NgbDateParserFormatter,
     private loaderService: LoaderService,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService,
+    private countryService: CountryService,
+    private regionService: RegionService) {
     this.experience = new Experience()
   }
 
   ngOnInit(): void {
-    console.log(this.experience.startDate)
+    this.regions$ = this.countryToLoad
+    .pipe(
+      switchMap(countryId => this.regionService.getAllByCountry(countryId)
+        .pipe(
+          tap(regions => this.experienceForm.get('regionId')?.enable()))))
+
+  this.countries$ = this.countryService.getAll()
+    .pipe(
+      tap(d => {
+        this.experienceForm.get('countryId')?.enable()
+        if (this.experienceForm.get('countryId')?.value) {
+          this.countryToLoad.next(parseInt(this.experienceForm.get('countryId')?.value))
+        }
+      }))
+
+
+
+
+    
     this.experienceForm = this.formBuilder.group({
       position: [this.experience.position, [Validators.required]],
       company: [this.experience.company, [Validators.required]],
@@ -45,8 +75,9 @@ export class ExperienceEditComponent implements OnInit {
         month: this.experience.endDate!.getMonth() + 1,
         day: this.experience.endDate!.getDate(),
       } : null, []],
-      state: [this.experience.state, [Validators.required]],
-      country: [this.experience.country, [Validators.required]],
+      countryId: [{ value: this.experience.location.region == null ? '' : this.experience.location.region.country.id, disabled: true }, [Validators.required]],
+      regionId: [{ value: this.experience.location.region == null ? '' : this.experience.location.region.id, disabled: true }, [Validators.required]],
+      address:[this.experience.location.address==null?'':this.experience.location.address],
       image: [this.experience.image, []]
     })
   }
@@ -66,7 +97,12 @@ export class ExperienceEditComponent implements OnInit {
       startDate: this.parserFormatter.format(this.experienceForm.get("startDate")!.value),
 
     })
-
+    if((this.experienceForm.get('address')!.value as string).trim().length == 0){
+      this.experienceForm.patchValue({
+        address: null
+      })
+    }
+    this.experienceForm.removeControl('countryId')
     this.loaderService.showLoading()
     this.experienceService.updateExperience(this.experience.id, this.experienceForm.getRawValue()).subscribe({
       next: data => this.notificationService.requestNotification({ type: NotificationType.SUCCESS, message: NotificationMessage.EXP_UPDATE }),
@@ -99,6 +135,12 @@ export class ExperienceEditComponent implements OnInit {
 
   get m() {
     return this.experienceForm!.controls;
+  }
+
+  onChangeCountry() {
+    this.experienceForm.get('regionId')?.disable()
+    this.experienceForm.patchValue({ regionId: '' })
+    this.countryToLoad.next(this.experienceForm.get('countryId')?.value)
   }
 
 }
