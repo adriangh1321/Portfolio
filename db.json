@@ -4,7 +4,7 @@
       "id": 1,
       "firstname": "Gustavo",
       "lastname": "Hernández",
-      "ocupation": "Chemical Engineer",
+      "occupation": "Chemical Engineer",
       "currentCompany": {
         "name": "Ecogas",
         "image": "./assets/img/ecogas-logo.png",

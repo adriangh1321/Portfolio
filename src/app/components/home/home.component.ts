@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Profile } from 'src/app/models/Profile';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 
 @Component({
@@ -10,18 +12,30 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 })
 export class HomeComponent implements OnInit {
   profiles:Profile[]
-  constructor(private portfolioService:PortfolioService,
-    private route: ActivatedRoute,) { 
+  nickname!:string;
+  constructor(
+    private portfolioService:PortfolioService,
+    private loaderService:LoaderService,
+    private route: ActivatedRoute,
+    private router:Router,
+    private authService:AuthService) { 
+      
     this.profiles=[]
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(data=>this.profiles = this.route.snapshot.data["profiles"])
+    this.nickname=this.authService.getNickname();
+    
+    this.route.data.subscribe(data=>{
+      console.log(data)
+      
+      this.profiles = this.route.snapshot.data["profiles"]
+    this.loaderService.hideLoading()})
 
-    // this.portfolioService.getProfiles().subscribe({
-    //   next:profiles=>this.profiles=profiles,
-    //   error:error=>{throw error}
-    // })
+
+  }
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn()
   }
 
 }

@@ -55,7 +55,11 @@ export class AuthService {
     const payload = atob(token.split('.')[1]); // decode payload of token
     const parsedPayload = JSON.parse(payload); // convert payload into an Object
 
-    return parsedPayload.exp > Date.now() / 1000; // check if token is expired
+    const isLoggedIn= parsedPayload.exp > Date.now() / 1000; // check if token is expired
+    if(!isLoggedIn){
+      this.cleanLocalStorage()
+    }
+    return isLoggedIn
 
   }
 
@@ -72,11 +76,14 @@ export class AuthService {
       }),
       tap(resp => this._userRequest.next(resp.user)))
   }
-
-  logout() {
+  cleanLocalStorage(){
     localStorage.removeItem('auth_token')
     localStorage.removeItem('nickname')
     localStorage.removeItem('id_portfolio')
+  }
+
+  logout() {
+    this.cleanLocalStorage()
     this.emitLogout()
     this.router.navigate(['login'])
 

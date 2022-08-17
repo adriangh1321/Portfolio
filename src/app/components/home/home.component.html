@@ -1,6 +1,27 @@
+<div class="welcome">
+    <img src="./assets/img/home.jpg" alt="" id="welcome-img">
+    <p  *ngIf="!isLoggedIn();else welcome_logged" class="welcome-text text-center"><a routerLink="/register" routerLinkActive="active"  href="" id="welcome-register">Register now!</a> Share your portfolio with everybody.<br> Find thousands of occupations.</p>
+    <ng-template #welcome_logged>
+        <p class="welcome-text text-center">Hello <span id="nickname">{{nickname}}</span>, what are you looking for?<br>Explore more profiles like yours <i class="fa-solid fa-hand-point-down"></i></p>
 
+    </ng-template>
+    <div class="search-container" id="search-container">
+        <app-search></app-search>
+    </div>
+</div>
+
+
+
+
+
+<div class="profiles-container">
     <ul class="profiles-list">
-        <li *ngFor="let profile of profiles" >
+        <li *ngFor="let profile of profiles">
             <app-profile-item [profile]="profile"></app-profile-item>
         </li>
     </ul>
+</div>
+
+<div *ngIf="!profiles.length" class="alert alert-warning text-center mr-4 ml-4" role="alert">
+    No results found
+</div>

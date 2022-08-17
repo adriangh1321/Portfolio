@@ -3,10 +3,12 @@
     <div role="alert" aria-live="assertive" aria-atomic="true" class="toast fade show" data-delay="5000">
         <div class="toast-header " [ngClass]="{
                 'bg-success': notificationType.SUCCESS === notification.type,
-                'bg-danger' : notificationType.ERROR === notification.type }">
+                'bg-danger' : notificationType.ERROR === notification.type,
+                'bg-warning' : notificationType.WARNING === notification.type }">
             <i class="text-white" [ngClass]="{
                 'fa-regular fa-circle-check': notificationType.SUCCESS === notification.type,
-                'fa-solid fa-triangle-exclamation' : notificationType.ERROR === notification.type }"></i>
+                'fa-solid fa-xmark' : notificationType.ERROR === notification.type,
+                'fa-solid fa-triangle-exclamation' : notificationType.WARNING === notification.type}"></i>
             <strong class="mr-auto ml-2 text-white">{{notification.type}}</strong>
             
             <button type="button" class="ml-2 mb-1 close" (click)="close()" data-dismiss="toast" aria-label="Close">
@@ -15,7 +17,8 @@
         </div>
         <div class="toast-body bg-light"[ngClass]="{
             'text-success': notificationType.SUCCESS === notification.type,
-            'text-danger' : notificationType.ERROR === notification.type }">
+            'text-danger' : notificationType.ERROR === notification.type,
+            'text-dark' : notificationType.WARNING === notification.type }">
             {{notification.message}}
         </div>
     </div>

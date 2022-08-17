@@ -56,6 +56,7 @@ import { BannerEditComponent } from './components/banner-edit/banner-edit.compon
 import { HomeComponent } from './components/home/home.component';
 import { ProfileItemComponent } from './components/profile-item/profile-item.component';
 import { ButtonComponent } from './components/button/button.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import { ButtonComponent } from './components/button/button.component';
     BannerEditComponent,
     HomeComponent,
     ProfileItemComponent,
-    ButtonComponent
+    ButtonComponent,
+    SearchComponent
 
   ],
   imports: [

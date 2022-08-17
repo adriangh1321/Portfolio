@@ -15,8 +15,11 @@
         </h1>
     </div>
 
-    <div class="row h-25" id="ocupation">{{portfolio.ocupation || 'My ocupation'}}</div>
+    <div class="row h-25 p-0" id="occupation">
+        <p class="pl-0 m-0"><i class="fa-solid fa-briefcase mr-1"></i>{{portfolio.occupation || ' - '}}</p>
+    </div>
     <div class="row h-25" id="info-contact">
-        <p class="pl-0">{{portfolio.state || 'My State'}} ({{portfolio.country || 'My country'}})</p>
+        <p *ngIf="portfolio.location.region"class="pl-0"><i class="fa-solid fa-location-dot mr-1"></i>{{portfolio.location.region.name}}, {{portfolio.location.region.country.name}}</p>
+        <p *ngIf="!portfolio.location.region"class="pl-0"><i class="fa-solid fa-location-dot mr-1"></i> - </p>
     </div>
 </div>

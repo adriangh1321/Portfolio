@@ -13,12 +13,23 @@ import { PortfolioResolverService } from './resolvers/portfolio-resolver.service
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent ,canActivate: [LoginGuard]},
-  { path: 'register', component: RegisterComponent,canActivate: [RegisterGuard] },
-  { path: 'home', component: HomeComponent,
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [RegisterGuard] },
+  {
+    path: 'home', component: HomeComponent,
+    runGuardsAndResolvers: 'always',
     resolve: {
-    profiles: HomeResolverService
-  } },
+      profiles: HomeResolverService
+    }
+  },
+  {
+    path: 'portfolios', component: HomeComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    resolve: {
+      profiles: HomeResolverService
+    }
+  },
+
   {
     path: "profile/:nickname",
     runGuardsAndResolvers: "always",

@@ -37,9 +37,8 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
       next: response => {
         this.portfolio.firstname = response['firstname']
         this.portfolio.lastname = response['lastname']
-        this.portfolio.ocupation = response['ocupation']
-        this.portfolio.country = response['country']
-        this.portfolio.state = response['state']
+        this.portfolio.occupation = response['occupation']
+        this.portfolio.location = response['location']
         this.portfolio.image = response['image']
         this.loaderService.hideLoading()
         this.notificationService.showNotification({

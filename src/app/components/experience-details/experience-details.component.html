@@ -2,8 +2,8 @@
   <img [src]="experience.image || './assets/img/default-experience.png'" alt="Add new image">
   <div class="item-text">
     <div class="item-title-edit">
-      <h4>{{experience.position}}</h4>
-      <div>
+      <h4 class="position-text">{{experience.position}}</h4>
+      <div class="btn-container">
         <app-button [type]="'edit'" (onButtonAction)="editExperience()"></app-button>
         <app-button [type]="'delete'" (onButtonAction)="removeExperience()"></app-button>
       </div>
@@ -22,6 +22,7 @@
         date:'dd-MM-yyyy'):'-'}}
       </span>
     </p>
-    <p>{{experience.state}} ({{experience.country}})</p>
+    <p *ngIf="experience.location.region"class="pl-0"><i class="fa-solid fa-location-dot mr-1"></i>{{experience.location.address}} {{experience.location.region.name}} - {{experience.location.region.country.name}}</p>
+    <p *ngIf="!experience.location.region"><i class="fa-solid fa-location-dot mr-1"></i> - </p>
   </div>
 </div>

@@ -27,7 +27,11 @@ export enum NotificationMessage{
 
     CONTACT_EDIT="Contact information was updated",
 
-    BANNER_EDIT="Banner was updated"
+    BANNER_EDIT="Banner was updated",
+
+    NO_SEARCH_METHOD="Please select a search method",
+
+    NO_FILTERS="Please select a filter"
 
     
 

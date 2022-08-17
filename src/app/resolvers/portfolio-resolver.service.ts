@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import { catchError, map, Observable, tap } from 'rxjs';
 import { Portfolio } from '../models/Portfolio';
+import { AuthService } from '../services/auth.service';
 import { ButtonService } from '../services/button.service';
 import { PortfolioService } from '../services/portfolio.service';
 
@@ -13,7 +14,7 @@ import { PortfolioService } from '../services/portfolio.service';
 })
 export class PortfolioResolverService {
 
-  constructor(private portfolioService: PortfolioService, private router: Router, private buttonService:ButtonService) { }
+  constructor(private portfolioService: PortfolioService, private router: Router, private buttonService:ButtonService,private authService:AuthService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -22,7 +23,7 @@ export class PortfolioResolverService {
   ): Observable<Portfolio> {
     const nickname = localStorage.getItem('nickname')
     const paramNickname=route.params['nickname']
-    if (paramNickname == nickname) {
+    if (this.authService.isLoggedIn() && paramNickname == nickname) {
       return this.portfolioService.getMeByToken().pipe(
         map(response => {
           response.experiences.forEach(experience => {

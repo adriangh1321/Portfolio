@@ -4,6 +4,6 @@ export interface Profile{
     nickname:string
     image:string
     country:string;
-    state:string;
-    ocupation:string;
+    region:string;
+    occupation:string;
 }
