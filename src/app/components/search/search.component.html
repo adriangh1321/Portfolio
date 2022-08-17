@@ -2,38 +2,37 @@
     <div class="row">
         <div class="c-12">
 
-            <form action="javascript:void(0);" (ngSubmit)="onSubmit()"  #myForm="ngForm">
+            <form action="javascript:void(0);" (ngSubmit)="onSubmit()" #myForm="ngForm">
                 <div class="form-row pb-2">
-                    <div class="input-group col-9">
+                    <div class="input-group col-12">
+                        <input type="text" class="form-control custom-input" placeholder="find a name, occupation..."
+                                aria-label="Username" [(ngModel)]="search" name="search" (input)="onInput()"
+                                aria-describedby="basic-addon1" (click)="onView()">
+                            <div class="input-group-prepend custom-margin " (click)="send()">
+                                <span class="input-group-text custom-icon" id="basic-addon1"><i
+                                        class="fa-solid fa-magnifying-glass"></i></span>
 
-                        <input type="text" class="form-control custom-input" placeholder="find" aria-label="Username"
-                            [(ngModel)]="search" name="search" (input)="onInput()" aria-describedby="basic-addon1"
-                            (click)="onView()">
-                        <div class="input-group-prepend " (click)="send()">
-                            <span class="input-group-text custom-icon" id="basic-addon1"><i
-                                    class="fa-solid fa-magnifying-glass"></i></span>
+                            </div>
 
-                        </div>
 
                     </div>
-                    <div class="input-group col-3" >
-                        <!-- <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                    </div> -->
+                    <!-- <div class="input-group col-3" >
+                       
                         <select class="custom-select" [(ngModel)]="findBy" id="inputGroupSelect01" name="searchSelect"
                             #select>
                             <option hidden value="" disabled selected class="text-select">by.. </option>
                             <option value="name" class="text-select">Name</option>
                             <option value="occupation" class="text-select">Occupation</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
                 <div *ngIf="showFilters" class="form-row pb-2">
                     <div class="input-group col-3 custom-input-group">
                         <select class="custom-select" [(ngModel)]="filterCountry" id="inputGroupSelect02"
                             [disabled]="!isCountryReady" name="countryFilter" #select (change)="onChange()">
                             <option hidden value="" disabled selected class="text-select">Country</option>
-                            <option class="text-select" *ngFor="let country of (countries$ | async)" [value]="country.id">{{country.name}}
+                            <option class="text-select" *ngFor="let country of (countries$ | async)"
+                                [value]="country.id">{{country.name}}
                             </option>
 
                         </select>
@@ -42,7 +41,8 @@
                         <select class="custom-select" [(ngModel)]="filterRegion" id="inputGroupSelect03"
                             [disabled]="!isRegionReady" name="regionFilter" #select>
                             <option hidden value="" disabled selected class="text-select">Region</option>
-                            <option class="text-select" *ngFor="let region of (regions$ | async)" [value]="region.id">{{region.name}}
+                            <option class="text-select" *ngFor="let region of (regions$ | async)" [value]="region.id">
+                                {{region.name}}
                             </option>
                         </select>
                     </div>
@@ -67,3 +67,4 @@
     </div>
 
 </div>
+

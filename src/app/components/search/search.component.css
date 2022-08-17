@@ -2,6 +2,8 @@
     background-color: rgba(255, 255, 255, 0);
     color:white;
     border-right: none;
+    backdrop-filter: blur(10px)
+    
     
     
 }
@@ -11,20 +13,19 @@
 }
 
 .custom-icon{
-    
     color:white;
-    margin-left: 0;
-    
     border-left: 0;
-    background-color: rgba(255, 255, 255,0);
+    background-color: rgba(255, 255, 255,0.3);
     border-bottom-right-radius: 0.25rem!important;
     border-top-right-radius: 0.25rem!important;
+    backdrop-filter: blur(10px);
     
 }
 
 .custom-select{
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0);
     color:white;
+    backdrop-filter: blur(10px)
 }
 
 .text-select{
@@ -33,11 +34,28 @@
 .custom-select:disabled{
     background-color:rgb(83, 83, 83) ;
     color: rgb(168, 168, 168);
+    backdrop-filter: blur(10px)
 }
 
 .custom-input-group{
     min-width: 150px;
 }
+
+
+.custom-margin{
+    margin-left: 0!important;
+}
+.custom-icon:hover{
+    background-color: gray;
+    
+}
+.custom-icon:active{
+    background-color: rgb(201, 201, 201);
+    color:black;
+}
+
+
+
 
 
 

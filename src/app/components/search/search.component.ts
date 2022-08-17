@@ -19,7 +19,7 @@ import { RegionService } from 'src/app/services/region.service';
 })
 export class SearchComponent implements OnInit {
   search!: string;
-  findBy!: string | null;
+  
   filterCountry!: string;
   filterRegion!: string;
   order!: string;
@@ -67,12 +67,11 @@ export class SearchComponent implements OnInit {
 
     this.activatedRoute.queryParamMap.subscribe(paramMap => {
 
-      const findBy = paramMap.keys[0]
-      const search = paramMap.get(findBy)
+      
+      const search = paramMap.get('find')
       const filterCountry = paramMap.get('country')
       const filterRegion = paramMap.get('region')
       const order = paramMap.get('order')
-      this.findBy = findBy ? findBy : ''
       this.search = search ? search : ''
       this.filterCountry = filterCountry ? filterCountry : ''
       this.filterRegion = filterRegion ? filterRegion : ''
@@ -97,16 +96,13 @@ export class SearchComponent implements OnInit {
   send() { this.ngForm.ngSubmit.emit(); }
 
   onSubmit() {
-    if (this.isFindByInvalid()) {
-      this.notificationService.showNotification({ type: NotificationType.WARNING, message: NotificationMessage.NO_SEARCH_METHOD })
-      return;
-    }
+    
     if (this.isFiltersInvalid()) {
       this.notificationService.showNotification({ type: NotificationType.WARNING, message: NotificationMessage.NO_FILTERS })
       return;
     }
 
-    this.setFindBy()
+    this.setFind()
     this.setFilters()
     this.setOrder()
     this.loaderService.showLoading()
@@ -116,15 +112,12 @@ export class SearchComponent implements OnInit {
 
   onInput() {
     console.log('search:' + this.search)
-    console.log('findBy:' + this.findBy)
+    
     console.log('filterCountry:' + this.filterCountry)
     console.log('filterRegion:' + this.filterRegion)
   }
 
-  isFindByInvalid() {
-    return this.findBy == ""
-
-  }
+  
   isFiltersInvalid() {
     return this.filterCountry == "" && this.filterRegion == "" && this.showFilters
   }
@@ -145,9 +138,9 @@ export class SearchComponent implements OnInit {
     this.order = this.order == 'ASC' ? 'DESC' : 'ASC'
   }
 
-  setFindBy() {
+  setFind() {
     this.query = {}
-    this.query[`${this.findBy}`] = this.search
+    this.query['find'] = this.search
   }
 
   setFilters() {
@@ -178,7 +171,7 @@ export class SearchComponent implements OnInit {
   }
 
   onView(){
-    document.getElementById("router-outlet")!.scrollIntoView();
+    document.getElementById("search-container")!.scrollIntoView();
     
   }
 

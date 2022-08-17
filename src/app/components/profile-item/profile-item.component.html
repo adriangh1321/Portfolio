@@ -5,16 +5,16 @@
   </div>
   <div class="card-body card-body-custom ">
     <div class="name-container"*ngIf="profile.firstname && profile.lastname">
-      <h5 class="card-title text-card pl-3 pr-3 mb-0  text-overflow text-center font-weight-bold ">{{profile.firstname}}</h5>
-      <h5 class="card-title text-card pl-1 pr-1 mb-0 text-overflow text-center font-weight-bold">{{profile.lastname}}</h5>
+      <h5 class="card-title text-card pl-3 pr-3 mb-0  text-overflow text-center font-weight-bold text-light ">{{profile.firstname}}</h5>
+      <h5 class="card-title text-card pl-1 pr-1 mb-0 text-overflow text-center font-weight-bold text-light">{{profile.lastname}}</h5>
     </div>
     <div class="name-container"*ngIf="!profile.firstname && !profile.lastname">
-      <h5 class="card-title text-card text-overflow text-center font-weight-bold" >{{profile.nickname}}</h5>
+      <h5 class="card-title text-card text-overflow text-center font-weight-bold text-light" >{{profile.nickname}}</h5>
     </div>
     
     <div class="info-container">
-      <p class="card-title text-card m-0 pl-1 pr-1  text-overflow"><i class="fa-solid fa-location-dot mr-1"></i><small class="text-muted">{{profile.region? profile.region:'-'}},{{profile.country?profile.country:'-'}}</small></p>
-      <p class="card-title text-card m-0 pl-1 pr-1 text-overflow"><i class="fa-solid fa-briefcase mr-1"></i><small >{{profile.occupation? profile.occupation: '-'}}</small></p>
+      <p class="card-title text-card m-0 pl-1 pr-1  text-overflow text-light"><i class="fa-solid fa-location-dot mr-1 text-danger"></i><small class="text-light">{{profile.region? profile.region:'-'}},{{profile.country?profile.country:'-'}}</small></p>
+      <p class="card-title text-card m-0 pl-1 pr-1 text-overflow text-light"><i class="fa-solid fa-briefcase mr-1 text-primary"></i><small >{{profile.occupation? profile.occupation: '-'}}</small></p>
     </div>
     
   </div>
