@@ -6,25 +6,14 @@
                 <div class="form-row pb-2">
                     <div class="input-group col-12">
                         <input type="text" class="form-control custom-input" placeholder="find a name, occupation..."
-                                aria-label="Username" [(ngModel)]="search" name="search" (input)="onInput()"
-                                aria-describedby="basic-addon1" (click)="onView()">
-                            <div class="input-group-prepend custom-margin " (click)="send()">
-                                <span class="input-group-text custom-icon" id="basic-addon1"><i
-                                        class="fa-solid fa-magnifying-glass"></i></span>
-
-                            </div>
-
-
+                            aria-label="Username" [(ngModel)]="search" name="search" aria-describedby="basic-addon1"
+                            (click)="onView()">
+                        <div class="input-group-prepend custom-margin " (click)="send()">
+                            <span class="input-group-text custom-icon" id="basic-addon1"><i
+                                    class="fa-solid fa-magnifying-glass"></i></span>
+                        </div>
                     </div>
-                    <!-- <div class="input-group col-3" >
-                       
-                        <select class="custom-select" [(ngModel)]="findBy" id="inputGroupSelect01" name="searchSelect"
-                            #select>
-                            <option hidden value="" disabled selected class="text-select">by.. </option>
-                            <option value="name" class="text-select">Name</option>
-                            <option value="occupation" class="text-select">Occupation</option>
-                        </select>
-                    </div> -->
+
                 </div>
                 <div *ngIf="showFilters" class="form-row pb-2">
                     <div class="input-group col-3 custom-input-group">
@@ -50,7 +39,7 @@
 
 
 
-                <!-- <button type="submit" class="btn btn-primary">Search</button> -->
+
                 <button type="button" [ngClass]="{'btn-success':showFilters,'btn-danger':!showFilters}" class="btn"
                     (click)="toggleFilters()"><i class="fa-solid fa-filter text-light"></i></button>
                 <button type="button" class="btn btn-dark ml-2" (click)="toggleSort()"><i
@@ -67,4 +56,3 @@
     </div>
 
 </div>
-

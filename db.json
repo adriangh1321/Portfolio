@@ -39,7 +39,7 @@
           "position": "Position",
           "company": "Company",
           "description": "Description",
-          "image": "./assets/img/add-image.png",
+          "image": "./assets/img/default-experience.png",
           "startDate": null,
           "endDate": null,
           "state": "State",

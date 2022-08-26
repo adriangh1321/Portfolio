@@ -2,15 +2,49 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 30px;
+    height: fit-content;
     width: 100%;
     
   
   }
   
-  .design-by{
+  .text-footer{
     color: white;
-    text-decoration: none;
     
-  
+    margin:0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
   }
+
+  .title-footer{
+    
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .text-secondary{
+    color: white!important;
+    font-size:0.6rem!important;
+  }
+
+  .github-link{
+    color:rgb(0, 233, 233)!important;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .github-link:hover{
+    color:rgb(0, 233, 233)!important;
+    text-shadow: 2px 2px 8px #ffffff;
+}
+
+.custom-icon{
+  font-size: 1rem;
+}
+

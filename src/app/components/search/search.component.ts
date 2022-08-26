@@ -11,6 +11,8 @@ import { CountryService } from 'src/app/services/country.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { RegionService } from 'src/app/services/region.service';
+import { ScrollService } from 'src/app/services/scroll.service';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-search',
@@ -42,7 +44,8 @@ export class SearchComponent implements OnInit {
     private notificationService: NotificationService,
     private loaderService: LoaderService,
     private countryService: CountryService,
-    private regionService: RegionService) {
+    private regionService: RegionService,
+    private scrollService:ScrollService) {
 
   }
 
@@ -106,15 +109,9 @@ export class SearchComponent implements OnInit {
     this.setFilters()
     this.setOrder()
     this.loaderService.showLoading()
-    console.log(this.query)
-    this.router.navigate(['/home'], { queryParams: this.query })
-  }
-
-  onInput() {
-    console.log('search:' + this.search)
+    this.scrollService.scrollEmit()
     
-    console.log('filterCountry:' + this.filterCountry)
-    console.log('filterRegion:' + this.filterRegion)
+    this.router.navigate(['/home'], { queryParams: this.query })
   }
 
   
@@ -126,7 +123,6 @@ export class SearchComponent implements OnInit {
 
     this.showFilters = !this.showFilters
     if (this.showFilters) {
-      console.log(this.showFilters)
       this.filterCountry=''
       this.filterRegion=''
       this.isCountryReady=false
@@ -160,14 +156,9 @@ export class SearchComponent implements OnInit {
   }
 
   onChange() {
-    console.log(this.filterCountry);
-    
     this.isRegionReady=false
     this.filterRegion=''
     this.countryToLoad.next(parseInt(this.filterCountry))
-    
-
-
   }
 
   onView(){

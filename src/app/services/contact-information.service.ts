@@ -47,7 +47,6 @@ export class ContactInformationService {
   }
 
   emitContactInformation(contactInformation:ContactInformation){
-    console.log(contactInformation)
     this._contactInformationRequired.next(contactInformation)
   }
 }
