@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit {
       this.authService.getMeUser().subscribe(user => this.authService.emitUser(user))
       this.contactInformationService.getMeByToken().subscribe(resp => this.contactInformationService.emitContactInformation(resp))
       this.portfolioService.getImage().subscribe(resp => {
-        console.log(resp)
         this.portfolioService.emitImage(resp.image)
       })
     }

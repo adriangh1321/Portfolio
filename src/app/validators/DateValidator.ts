@@ -4,17 +4,7 @@ import { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors, ValidatorF
 
 export function dateValidator(nameRe: RegExp): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    let e = document.getElementById('alfa') as HTMLInputElement
-    
-    // console.log(e.checkValidity() ? e.value : 'partial');
-  //   e.addEventListener("blur", function() {
-  //     console.log("valueMissing : " + e.validity.valueMissing);
-  //     console.log("badInput : " + e.validity.badInput);
-  //     console.log("valid : " + e.validity.valid);
-  //     console.log("value : " + e.value);
-  // });
-    // console.log(control.value)
-    // console.log((control.value as String) == '')
+    let e = document.getElementById('alfa') as HTMLInputElement   
     const forbidden = nameRe.test(control.value);
     return forbidden || e.checkValidity() ? null : { datePattern: { value: control.value } };
   };
