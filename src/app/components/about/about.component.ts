@@ -27,12 +27,12 @@ export class AboutComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$=this.portfolioService.AboutMeRefreshRequired.subscribe(() => this.getAboutMe(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$=this.portfolioService.AboutMeRefreshRequired.subscribe(() => this.getAboutMe())
     this.subscription.add(s1$)
   }
 
-  getAboutMe(idPortfolio: number) {
-    const s2$=this.portfolioService.getAboutMe(idPortfolio).subscribe({
+  getAboutMe() {
+    const s2$=this.portfolioService.getAboutMe().subscribe({
       next: data => {
         this.aboutMe = data.aboutMe
         this.loaderService.hideLoading()

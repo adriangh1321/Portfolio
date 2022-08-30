@@ -59,8 +59,8 @@ export class PortfolioService {
     );
   }
 
-  getAboutMe(id: number): Observable<AboutMe> {
-    const url = `${this.apiUrl}/${id}/aboutMe`
+  getAboutMe(): Observable<AboutMe> {
+    const url = `${this.apiUrl}/me/aboutMe`
     return this.http.get<AboutMe>(url)
   }
 
