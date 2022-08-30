@@ -11,7 +11,7 @@ export class ContactInformationService {
 
   private apiUrl: string = `${environment.baseUrl}/v1/contactInformations`
 
-  private _contactInformationRefreshRequired = new Subject<number>()
+  private _contactInformationRefreshRequired = new Subject<void>()
   private _contactInformationRequired=new Subject<ContactInformation>()
 
 
@@ -23,6 +23,7 @@ export class ContactInformationService {
   }
 
   constructor(private http: HttpClient) { }
+
   getMeByToken():Observable<ContactInformation>{
     const url = `${this.apiUrl}/me`
     return this.http.get<ContactInformation>(url).pipe(
@@ -37,11 +38,11 @@ export class ContactInformationService {
   //   );
   // }
   
-  updateContactInformation(id: number, contactInformation: ContactInformation): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+  updateContactInformation(contactInformation: ContactInformation): Observable<void> {
+    const url = `${this.apiUrl}/me`
     return this.http.put<void>(url, contactInformation).pipe(
       tap(() => {
-        this.ContactInformationRefreshRequired.next(id)
+        this.ContactInformationRefreshRequired.next()
       })
     );
   }

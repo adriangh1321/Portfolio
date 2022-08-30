@@ -69,7 +69,7 @@ export class ContactInfoEditComponent implements OnInit {
       })
     }
     this.loaderService.showLoading()
-    this.contactInformationService.updateContactInformation(this.contactInformation.id, this.contactInformationForm.getRawValue()).subscribe({
+    this.contactInformationService.updateContactInformation(this.contactInformationForm.getRawValue()).subscribe({
       next: data => { },
       error: error => {
         this.loaderService.hideLoading()
