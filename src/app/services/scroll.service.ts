@@ -5,19 +5,21 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ScrollService {
-  private _scrollRequest=new Subject<void>()
+  private _scrollRequest = new Subject<void>()
   constructor() { }
 
-  get scrollRequest(){
+  get scrollRequest() {
     return this._scrollRequest.asObservable()
   }
 
-  scrollEmit(){
+  scrollEmit() {
     this._scrollRequest.next();
   }
 
-  scrollTo(id:string){
-    
-    document.getElementById(id)!.scrollIntoView();
+  scrollTo(id: string) {
+    let element = document.getElementById(id);
+    if (element !== null) {
+      element.scrollIntoView();
+    }
   }
 }

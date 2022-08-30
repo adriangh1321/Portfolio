@@ -57,6 +57,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileItemComponent } from './components/profile-item/profile-item.component';
 import { ButtonComponent } from './components/button/button.component';
 import { SearchComponent } from './components/search/search.component';
+import { ServerOfflineComponent } from './components/server-offline/server-offline.component';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { SearchComponent } from './components/search/search.component';
     HomeComponent,
     ProfileItemComponent,
     ButtonComponent,
-    SearchComponent
+    SearchComponent,
+    ServerOfflineComponent
 
   ],
   imports: [

@@ -55,13 +55,14 @@ export class AuthInterceptor implements HttpInterceptor {
                 // send cloned request with header to the next handler.
                 return next.handle(authReq).pipe(
                     catchError((err: HttpErrorResponse) => {
+                        if (err.status === 0) {
+                            this.router.navigateByUrl('/server-offline');
+                            this.zone.runGuarded(()=>{throw new Error("The server is not online")});  
+                        }
     
-                        if (err.status === 401) {
-                            
+                        if (err.status === 401) {                           
                             this.zone.runGuarded(()=>{throw err});
-                            this.router.navigateByUrl('/login');
-                            
-                            
+                            this.router.navigateByUrl('/login');  
                         }
     
                         return throwError(()=>err)
