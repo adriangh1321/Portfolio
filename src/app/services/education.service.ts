@@ -39,9 +39,9 @@ export class EducationService {
     );
   }
 
-  getEducationsByPortfolioId(idPortfolio: number): Observable<Education[]> {
-    let params = new HttpParams().set('portfolioId', idPortfolio)
-    return this.http.get<Education[]>(this.apiUrl, { params: params }).pipe(
+  getMeByToken(): Observable<Education[]> {
+    const url = `${this.apiUrl}/me`
+    return this.http.get<Education[]>(url).pipe(
       map(response => {
         response.forEach(education => {
           if (education.startDate !== null) {
