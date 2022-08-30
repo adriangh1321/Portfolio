@@ -162,8 +162,7 @@ export class SearchComponent implements OnInit {
   }
 
   onView(){
-    document.getElementById("search-container")!.scrollIntoView();
-    
+    this.scrollService.scrollTo("search-container")
   }
 
 
