@@ -60,7 +60,7 @@ export class CurrentCompanyEditComponent implements OnInit {
       })
     }
     this.loaderService.showLoading()
-    this.currentCompanyService.updateCurrentCompany(this.currentCompany.id, this.currentCompanyForm.getRawValue()).subscribe({
+    this.currentCompanyService.updateCurrentCompany(this.currentCompanyForm.getRawValue()).subscribe({
       next: data => { },
       error: error => {
         this.loaderService.hideLoading()

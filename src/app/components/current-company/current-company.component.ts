@@ -28,11 +28,11 @@ export class CurrentCompanyComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$=this.currentCompanyService.CurrentCompanyRefreshRequired.subscribe((id) => this.getCurrentCompany(id))
+    const s1$=this.currentCompanyService.CurrentCompanyRefreshRequired.subscribe(() => this.getCurrentCompany())
     this.subscription.add(s1$)
   }
-  getCurrentCompany(id: number) {
-    const s2$=this.currentCompanyService.getById(id).subscribe({
+  getCurrentCompany() {
+    const s2$=this.currentCompanyService.getMeByToken().subscribe({
       next: response => {
         this.currentCompany = response
         this.loaderService.hideLoading()

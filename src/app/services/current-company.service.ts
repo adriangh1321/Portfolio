@@ -11,7 +11,7 @@ export class CurrentCompanyService {
 
   private apiUrl: string = `${environment.baseUrl}/v1/currentCompanies`
 
-  private _currentCompanyRefreshRequired = new Subject<number>()
+  private _currentCompanyRefreshRequired = new Subject<void>()
 
   get CurrentCompanyRefreshRequired() {
     return this._currentCompanyRefreshRequired;
@@ -19,16 +19,16 @@ export class CurrentCompanyService {
 
   constructor(private http: HttpClient) { }
 
-  getById(id:number):Observable<CurrentCompany>{
-    const url = `${this.apiUrl}/${id}`
+  getMeByToken():Observable<CurrentCompany>{
+    const url = `${this.apiUrl}/me`
     return this.http.get<CurrentCompany>(url);
   }
   
-  updateCurrentCompany(id: number, currentCompany: CurrentCompany): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+  updateCurrentCompany(currentCompany: CurrentCompany): Observable<void> {
+    const url = `${this.apiUrl}/me`
     return this.http.put<void>(url, currentCompany).pipe(
       tap(() => {
-        this.CurrentCompanyRefreshRequired.next(id)
+        this.CurrentCompanyRefreshRequired.next()
       })
     );
   }
