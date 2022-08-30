@@ -41,7 +41,7 @@ export class AboutEditComponent implements OnInit {
     }
 
     this.loaderService.showLoading()
-    this.portfolioService.updateAboutMe(this.aboutMeForm.getRawValue()).subscribe({
+    this.portfolioService.patchAboutMe(this.aboutMeForm.getRawValue()).subscribe({
       next: data => {},
       error: error => {
         this.loaderService.hideLoading()

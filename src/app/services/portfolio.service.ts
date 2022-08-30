@@ -50,7 +50,7 @@ export class PortfolioService {
     return this.http.get<Portfolio>(url)
   }
 
-  updateAboutMe(aboutMe: any): Observable<void> {
+  patchAboutMe(aboutMe: any): Observable<void> {
     const url = `${this.apiUrl}/me/aboutMe`
     return this.http.patch<void>(url, aboutMe).pipe(
       tap(() => {
@@ -64,8 +64,8 @@ export class PortfolioService {
     return this.http.get<AboutMe>(url)
   }
 
-  patchBasicInfo(id: number, basicInfo: any): Observable<any> {
-    const url = `${this.apiUrl}/${id}`
+  patchBasicInfo(basicInfo: any): Observable<any> {
+    const url = `${this.apiUrl}/me`
     return this.http.patch<void>(url, basicInfo).pipe(
       tap(() => {
         this.BasicInfoRefreshRequired.next()
