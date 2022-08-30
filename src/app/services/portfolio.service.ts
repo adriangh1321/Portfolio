@@ -88,8 +88,8 @@ export class PortfolioService {
     return this.http.get<any>(url)
   }
 
-  getBasicInfo(id: number): Observable<any> {
-    const url = `${this.apiUrl}/${id}/basicInfo`
+  getBasicInfo(): Observable<any> {
+    const url = `${this.apiUrl}/me/basicInfo`
     return this.http.get<any>(url).pipe(tap(resp => this.emitBasicInfo(resp)))
   }
 

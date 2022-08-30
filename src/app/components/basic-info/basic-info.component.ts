@@ -28,12 +28,12 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$ = this.portfolioService.BasicInfoRefreshRequired.subscribe(() => this.getBasicInfo(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$ = this.portfolioService.BasicInfoRefreshRequired.subscribe(() => this.getBasicInfo())
     this.subscription.add(s1$)
   }
 
-  getBasicInfo(idPortfolio: number) {
-    const s2$ = this.portfolioService.getBasicInfo(idPortfolio).subscribe({
+  getBasicInfo() {
+    const s2$ = this.portfolioService.getBasicInfo().subscribe({
       next: response => {
         this.portfolio.firstname = response['firstname']
         this.portfolio.lastname = response['lastname']
