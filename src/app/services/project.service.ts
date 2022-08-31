@@ -21,7 +21,7 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   updateProject(id: number, project: Project): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, project).pipe(
       tap(() => {
         this.RefreshRequired.next()
