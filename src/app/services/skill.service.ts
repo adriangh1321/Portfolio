@@ -29,9 +29,9 @@ export class SkillService {
 
   }
 
-  getSkillsByPortfolioId(idPortfolio: number): Observable<Skill[]> {
-    let params = new HttpParams().set('portfolioId', idPortfolio)
-    return this.http.get<Skill[]>(this.apiUrl, { params: params })
+  getMeByToken(): Observable<Skill[]> {
+    const url = `${this.apiUrl}/me`
+    return this.http.get<Skill[]>(url)
   }
 
   addSkill(skill: any): Observable<void> {

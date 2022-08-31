@@ -30,14 +30,14 @@ export class SkillsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$ = this.skillService.RefreshRequired.subscribe(() => this.getSkills(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$ = this.skillService.RefreshRequired.subscribe(() => this.getSkills())
     const s2$ = this.notificationService.RequestNotification.subscribe((notification) => this.notification = notification)
     this.subscription.add(s1$)
     this.subscription.add(s2$)
   }
 
-  getSkills(idPortfolio: number) {
-    const s3$ = this.skillService.getSkillsByPortfolioId(idPortfolio).subscribe({
+  getSkills() {
+    const s3$ = this.skillService.getMeByToken().subscribe({
       next: skills => {
         this.skills = skills
         this.loaderService.hideLoading()
