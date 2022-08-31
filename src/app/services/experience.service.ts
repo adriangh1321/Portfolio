@@ -34,10 +34,9 @@ export class ExperienceService {
 
   }
 
-  getExperiencesByPortfolioId(idPortfolio: number): Observable<Experience[]> {
-    
-      let params = new HttpParams().set('portfolioId', idPortfolio)
-      return this.http.get<Experience[]>(this.apiUrl, { params: params }).pipe(
+  getMeByToken(): Observable<Experience[]> {
+    const url = `${this.apiUrl}/me`
+      return this.http.get<Experience[]>(url).pipe(
         map(response => {
           response.forEach(experience => {
             if (experience.startDate !== null) {
