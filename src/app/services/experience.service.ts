@@ -50,30 +50,20 @@ export class ExperienceService {
           })
   
           return response
-        }))
-
-   
-
-    
+        }))  
   }
 
   addExperience(experience: any): Observable<void> {
     const url = `${this.apiUrl}/me`
     return this.http.post<void>(url, experience).pipe(
-
       tap(() => {
         this.RefreshRequired.next();
       })
-
-
     )
-     
-    
-
   }
 
   deleteExperience(id: number): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.delete<void>(url).pipe(
       tap(() => {
         this.RefreshRequired.next()
