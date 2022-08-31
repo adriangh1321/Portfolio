@@ -58,7 +58,8 @@ export class ExperienceService {
   }
 
   addExperience(experience: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, experience).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, experience).pipe(
 
       tap(() => {
         this.RefreshRequired.next();
