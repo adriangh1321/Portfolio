@@ -25,7 +25,7 @@ export class ExperienceService {
 
   updateExperience(id: number, experience: Experience): Observable<void> {
 
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, experience).pipe(
       tap(() => {
         this.RefreshRequired.next()
