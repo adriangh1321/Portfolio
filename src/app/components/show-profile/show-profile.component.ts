@@ -17,7 +17,7 @@ import { ScrollService } from 'src/app/services/scroll.service';
   templateUrl: './show-profile.component.html',
   styleUrls: ['./show-profile.component.css']
 })
-export class ShowProfileComponent implements OnInit,OnDestroy,AfterViewInit {
+export class ShowProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   portfolio: Portfolio;
   skillType = SkillType;
   subscription: Subscription = new Subscription;
@@ -30,7 +30,7 @@ export class ShowProfileComponent implements OnInit,OnDestroy,AfterViewInit {
     private route: ActivatedRoute,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
-    private scrollService:ScrollService
+    private scrollService: ScrollService
 
   ) {
     this.portfolio = new Portfolio();
@@ -45,8 +45,8 @@ export class ShowProfileComponent implements OnInit,OnDestroy,AfterViewInit {
   }
 
   ngOnInit(): void {
-    
-    const s1$=this.route.params.subscribe(data=>this.portfolio = this.route.snapshot.data["portfolio"])
+
+    const s1$ = this.route.params.subscribe(data => this.portfolio = this.route.snapshot.data["portfolio"])
     this.subscription.add(s1$)
 
   }
@@ -55,8 +55,8 @@ export class ShowProfileComponent implements OnInit,OnDestroy,AfterViewInit {
 
   onAddExperience() {
     this.loaderService.showLoading()
-    const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!)}
-    const s2$=this.experienceService.addExperience(newExperience).subscribe({
+    const newExperience: any = { position: "Position", company: "Company", description: "Description", image: null, state: "State", country: "Country", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
+    const s2$ = this.experienceService.addExperience(newExperience).subscribe({
       next: () => {
         this.notificationService.requestNotification(
           {
@@ -74,8 +74,8 @@ export class ShowProfileComponent implements OnInit,OnDestroy,AfterViewInit {
 
   onAddEducation() {
     this.loaderService.showLoading()
-    const newEducation: any = { title: "Title", institute: "Institute", image: null, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
-    const s3$= this.educationService.addEducation(newEducation).subscribe({
+    const newEducation: any = { title: "Title", institute: "Institute", image: null, startDate: null, endDate: null }
+    const s3$ = this.educationService.addEducation(newEducation).subscribe({
       next: () => {
         this.notificationService.requestNotification(
           {
@@ -95,8 +95,8 @@ export class ShowProfileComponent implements OnInit,OnDestroy,AfterViewInit {
 
   onAddProject() {
     this.loaderService.showLoading()
-    const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!),startDate: new Date().toISOString().slice(0, 10) }
-    const s4$=this.projectService.addProject(newProject).subscribe({
+    const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
+    const s4$ = this.projectService.addProject(newProject).subscribe({
       next: () => {
         this.notificationService.requestNotification(
           {
