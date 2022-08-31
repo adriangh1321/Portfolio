@@ -22,7 +22,7 @@ export class EducationService {
   constructor(private http: HttpClient) { }
 
   updateEducation(id: number, education: Education): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, education).pipe(
       tap(() => {
         this.RefreshRequired.next()
@@ -32,7 +32,8 @@ export class EducationService {
   }
 
   addEducation(education: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, education).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, education).pipe(
       tap(() => {
         this.RefreshRequired.next()
       })
