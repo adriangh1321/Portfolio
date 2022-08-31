@@ -20,7 +20,7 @@ export class SkillService {
   constructor(private http: HttpClient) { }
 
   updateSkill(id: number, skill: Skill): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, skill).pipe(
       tap(() => {
         this.RefreshRequired.next()
@@ -35,7 +35,8 @@ export class SkillService {
   }
 
   addSkill(skill: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, skill).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, skill).pipe(
       tap(() => {
         this.RefreshRequired.next()
       })

@@ -54,7 +54,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
 
   onAddSkill(type: SkillType) {
     this.loaderService.showLoading()
-    const newSkill: any = { type: type, name: "Skill", percent: 1, idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
+    const newSkill: any = { type: type, name: "Skill", percent: 1 }
     const s4$ = this.skillService.addSkill(newSkill).subscribe({
       next: data => {
         this.notificationService.requestNotification(
