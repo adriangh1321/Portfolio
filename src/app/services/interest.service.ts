@@ -29,9 +29,9 @@ export class InterestService {
 
   }
 
-  getInterestsByPortfolioId(idPortfolio: number): Observable<Interest[]> {
-    let params = new HttpParams().set('portfolioId', idPortfolio)
-    return this.http.get<Interest[]>(this.apiUrl, { params: params })     
+  getMeByToken(): Observable<Interest[]> {
+    const url = `${this.apiUrl}/me`
+    return this.http.get<Interest[]>(url)     
   }
 
   addInterest(interest: any): Observable<void> {
