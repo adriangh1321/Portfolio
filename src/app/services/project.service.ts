@@ -51,7 +51,8 @@ export class ProjectService {
   }
 
   addProject(project: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, project).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, project).pipe(
       tap(() => {
         this.RefreshRequired.next()
       })

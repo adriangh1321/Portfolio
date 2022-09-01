@@ -95,7 +95,7 @@ export class ShowProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onAddProject() {
     this.loaderService.showLoading()
-    const newProject: any = { name: "Name", description: "Description", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!), startDate: new Date().toISOString().slice(0, 10) }
+    const newProject: any = { name: "Name", description: "Description", startDate: null, endDate: null, url: null }
     const s4$ = this.projectService.addProject(newProject).subscribe({
       next: () => {
         this.notificationService.requestNotification(
