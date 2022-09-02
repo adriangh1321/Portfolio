@@ -44,7 +44,7 @@ export class InterestService {
   }
 
   deleteInterest(id: number): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.delete<void>(url).pipe(
       tap(() => {
         this.InterestsRefreshRequired.next()
