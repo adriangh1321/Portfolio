@@ -53,7 +53,7 @@ export class PortfolioResolverService {
               project.endDate = moment(project.endDate, 'YYYY-MM-DD').toDate()
             }
           })
-          localStorage.setItem("id_portfolio", response.id.toString())
+          
           this.buttonService.activateButton()
           return response
         }),
@@ -82,7 +82,7 @@ export class PortfolioResolverService {
             education.endDate = moment(education.endDate, 'YYYY-MM-DD').toDate()
           }
         })
-        localStorage.setItem("id_portfolio", response.id.toString())
+        
         
         return response
       }),
