@@ -20,7 +20,7 @@ export class InterestService {
   constructor(private http: HttpClient) { }
 
   updateInterest(id: number, interest: Interest): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, interest).pipe(
       tap(() => {
         this.InterestsRefreshRequired.next()
@@ -29,13 +29,14 @@ export class InterestService {
 
   }
 
-  getInterestsByPortfolioId(idPortfolio: number): Observable<Interest[]> {
-    let params = new HttpParams().set('portfolioId', idPortfolio)
-    return this.http.get<Interest[]>(this.apiUrl, { params: params })     
+  getMeByToken(): Observable<Interest[]> {
+    const url = `${this.apiUrl}/me`
+    return this.http.get<Interest[]>(url)
   }
 
   addInterest(interest: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, interest).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, interest).pipe(
       tap(() => {
         this.InterestsRefreshRequired.next()
       })
@@ -43,7 +44,7 @@ export class InterestService {
   }
 
   deleteInterest(id: number): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.delete<void>(url).pipe(
       tap(() => {
         this.InterestsRefreshRequired.next()

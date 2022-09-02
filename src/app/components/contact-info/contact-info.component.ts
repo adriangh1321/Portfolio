@@ -27,10 +27,10 @@ export class ContactInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$ = this.contactInformationService.ContactInformationRefreshRequired.subscribe((id) => this.getContactInformation(id))
+    const s1$ = this.contactInformationService.ContactInformationRefreshRequired.subscribe(() => this.getContactInformation())
     this.subscription.add(s1$)
   }
-  getContactInformation(id: number) {
+  getContactInformation() {
     const s2$ = this.contactInformationService.getMeByToken().subscribe({
       next: response => {
         this.contactInformation = response

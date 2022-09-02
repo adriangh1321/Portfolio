@@ -1,5 +1,5 @@
 <div class="new-item-container">
-  <img [src]="experience.image || './assets/img/default-experience.png'" alt="Add new image">
+  <img [src]="experience.image || './assets/img/default-experience.png'" onerror="this.src='./assets/img/img-not-found.png';" alt="Add new image">
   <div class="item-text">
     <div class="item-title-edit">
       <h4 class="position-text">{{experience.position}}</h4>

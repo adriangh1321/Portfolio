@@ -25,15 +25,15 @@ export class ProjectsComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$=this.projectService.RefreshRequired.subscribe(() => this.getProjects(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$=this.projectService.RefreshRequired.subscribe(() => this.getProjects())
     const s2$=this.notificationService.RequestNotification.subscribe((notification) => this.notification = notification)
     this.subscription.add(s1$)
     this.subscription.add(s2$)
 
   }
 
-  getProjects(idPortfolio: number) {
-    const s3$=this.projectService.getProjectsByPortfolioId(idPortfolio).subscribe({
+  getProjects() {
+    const s3$=this.projectService.getMeByToken().subscribe({
       next: projects => {
         this.projects = projects
         this.loaderService.hideLoading()

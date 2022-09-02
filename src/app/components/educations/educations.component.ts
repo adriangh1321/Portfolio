@@ -25,14 +25,14 @@ export class EducationsComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$=this.educationService.RefreshRequired.subscribe(() => this.getEducations(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$=this.educationService.RefreshRequired.subscribe(() => this.getEducations())
     const s2$=this.notificationService.RequestNotification.subscribe((notification) => this.notification = notification)
     this.subscription.add(s1$)
     this.subscription.add(s2$)
   }
 
-  getEducations(idPortfolio: number) {
-    const s3$=this.educationService.getEducationsByPortfolioId(idPortfolio).subscribe({
+  getEducations() {
+    const s3$=this.educationService.getMeByToken().subscribe({
       next: educations => {
         this.educations = educations
         this.loaderService.hideLoading()

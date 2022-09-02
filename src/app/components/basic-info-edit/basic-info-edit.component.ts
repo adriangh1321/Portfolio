@@ -81,7 +81,7 @@ export class BasicInfoEditComponent implements OnInit {
     }
     this.basicInfoForm.removeControl('countryId')
     this.loaderService.showLoading()
-    this.portfolioService.patchBasicInfo(this.portfolio.id, this.basicInfoForm.getRawValue()).subscribe({
+    this.portfolioService.patchBasicInfo(this.basicInfoForm.getRawValue()).subscribe({
       next: data => { },
       error: error => {
         this.loaderService.hideLoading()

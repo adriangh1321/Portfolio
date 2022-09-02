@@ -1,5 +1,5 @@
 <div id="profile-background">
-    <img class="profile-image" [src]="bannerForm.controls['banner'].value || './assets/img/default-banner.jpg'"
+    <img class="profile-image" [src]="bannerForm.controls['banner'].value || './assets/img/default-banner.jpg'" onerror="this.src='./assets/img/img-not-found.png';"
         alt="photo">
     <div class="edit-banner">
         <form action="javascript:void();" [formGroup]="bannerForm" (ngSubmit)="onSubmit()">

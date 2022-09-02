@@ -17,7 +17,7 @@ export class AboutEditComponent implements OnInit {
   aboutMeForm!: FormGroup;
   @Output() onShowDetails = new EventEmitter()
   @Input() aboutMe!: String;
-  idPortfolio!: number;
+  
 
 
   constructor(
@@ -28,7 +28,7 @@ export class AboutEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.idPortfolio = parseInt(localStorage.getItem("id_portfolio")!)
+   
     this.aboutMeForm = this.formBuilder.group({
       aboutMe: [this.aboutMe == null ? '' : this.aboutMe, [Validators.required, onlyWhitespace()]],
     })
@@ -41,7 +41,7 @@ export class AboutEditComponent implements OnInit {
     }
 
     this.loaderService.showLoading()
-    this.portfolioService.updateAboutMe(this.idPortfolio, this.aboutMeForm.getRawValue()).subscribe({
+    this.portfolioService.patchAboutMe(this.aboutMeForm.getRawValue()).subscribe({
       next: data => {},
       error: error => {
         this.loaderService.hideLoading()

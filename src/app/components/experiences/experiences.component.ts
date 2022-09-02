@@ -25,16 +25,16 @@ export class ExperiencesComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$=this.experienceService.RefreshRequired.subscribe(() => this.getExperiences(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$=this.experienceService.RefreshRequired.subscribe(() => this.getExperiences())
     const s2$=this.notificationService.RequestNotification.subscribe((notification)=>this.notification=notification)
     this.subscription.add(s1$)
     this.subscription.add(s2$)
   }
 
-  getExperiences(idPortfolio: number) {
+  getExperiences() {
     
     
-    const s3$=this.experienceService.getExperiencesByPortfolioId(idPortfolio)
+    const s3$=this.experienceService.getMeByToken()
     .subscribe({
       next: experiences => { 
         this.experiences=experiences

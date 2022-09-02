@@ -21,7 +21,7 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   updateProject(id: number, project: Project): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, project).pipe(
       tap(() => {
         this.RefreshRequired.next()
@@ -30,9 +30,9 @@ export class ProjectService {
 
   }
 
-  getProjectsByPortfolioId(idPortfolio: number): Observable<Project[]> {
-    let params = new HttpParams().set('portfolioId', idPortfolio)
-    return this.http.get<Project[]>(this.apiUrl, { params: params }).pipe(map(
+  getMeByToken(): Observable<Project[]> {
+    const url = `${this.apiUrl}/me`
+    return this.http.get<Project[]>(url).pipe(map(
       response => {
         response.forEach(project => {
           if (project.startDate !== null) {
@@ -51,7 +51,8 @@ export class ProjectService {
   }
 
   addProject(project: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, project).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, project).pipe(
       tap(() => {
         this.RefreshRequired.next()
       })
@@ -59,7 +60,7 @@ export class ProjectService {
   }
 
   deleteProject(id: number): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.delete<void>(url).pipe(
       tap(() => {
         this.RefreshRequired.next()

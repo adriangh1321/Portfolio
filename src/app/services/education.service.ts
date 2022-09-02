@@ -22,7 +22,7 @@ export class EducationService {
   constructor(private http: HttpClient) { }
 
   updateEducation(id: number, education: Education): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, education).pipe(
       tap(() => {
         this.RefreshRequired.next()
@@ -32,16 +32,17 @@ export class EducationService {
   }
 
   addEducation(education: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, education).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, education).pipe(
       tap(() => {
         this.RefreshRequired.next()
       })
     );
   }
 
-  getEducationsByPortfolioId(idPortfolio: number): Observable<Education[]> {
-    let params = new HttpParams().set('portfolioId', idPortfolio)
-    return this.http.get<Education[]>(this.apiUrl, { params: params }).pipe(
+  getMeByToken(): Observable<Education[]> {
+    const url = `${this.apiUrl}/me`
+    return this.http.get<Education[]>(url).pipe(
       map(response => {
         response.forEach(education => {
           if (education.startDate !== null) {
@@ -58,7 +59,7 @@ export class EducationService {
   }
 
   deleteEducation(id: number): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.delete<void>(url).pipe(
       tap(() => {
         this.RefreshRequired.next()

@@ -28,14 +28,14 @@ export class InterestsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const s1$ = this.interestService.InterestsRefreshRequired.subscribe(() => this.getInterests(parseInt(localStorage.getItem("id_portfolio")!)))
+    const s1$ = this.interestService.InterestsRefreshRequired.subscribe(() => this.getInterests())
     const s2$ = this.notificationService.RequestNotification.subscribe(notification => this.notification = notification)
     this.subscription.add(s1$)
     this.subscription.add(s2$)
   }
 
-  getInterests(idPortfolio: number) {
-    const s3$ = this.interestService.getInterestsByPortfolioId(idPortfolio).subscribe({
+  getInterests() {
+    const s3$ = this.interestService.getMeByToken().subscribe({
       next: interests => {
         this.interests = interests
         this.loaderService.hideLoading()
@@ -51,7 +51,7 @@ export class InterestsComponent implements OnInit, OnDestroy {
 
   addInterest() {
     this.loaderService.showLoading()
-    const newInterest: any = { name: "New", image: "./assets/img/new-interest.jpg", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
+    const newInterest: any = { name: "New", image: null }
     const s4$ = this.interestService.addInterest(newInterest).subscribe({
       next: data => {
         this.notificationService.requestNotification({

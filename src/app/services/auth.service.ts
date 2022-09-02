@@ -79,7 +79,6 @@ export class AuthService {
   cleanLocalStorage(){
     localStorage.removeItem('auth_token')
     localStorage.removeItem('nickname')
-    localStorage.removeItem('id_portfolio')
   }
 
   logout() {
