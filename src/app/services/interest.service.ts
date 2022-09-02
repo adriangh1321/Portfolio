@@ -20,7 +20,7 @@ export class InterestService {
   constructor(private http: HttpClient) { }
 
   updateInterest(id: number, interest: Interest): Observable<void> {
-    const url = `${this.apiUrl}/${id}`
+    const url = `${this.apiUrl}/me/${id}`
     return this.http.put<void>(url, interest).pipe(
       tap(() => {
         this.InterestsRefreshRequired.next()
