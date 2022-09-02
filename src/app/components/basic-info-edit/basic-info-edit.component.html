@@ -1,6 +1,6 @@
 <div id="edit-image-container">
     <div class="container-profile-img">
-        <img class="profile-image" [src]="basicInfoForm.controls['image'].value || './assets/img/default-profile.png'"
+        <img class="profile-image" [src]="basicInfoForm.controls['image'].value || './assets/img/default-profile.png'" onerror="this.src='./assets/img/img-not-found.png';"
             alt="photo">
     </div>
 </div>

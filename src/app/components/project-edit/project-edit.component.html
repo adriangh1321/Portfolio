@@ -1,5 +1,5 @@
 <div class="project-container pl-0">
-    <img [src]="projectForm.controls['image'].value || './assets/img/noimage.jpeg'" alt="Add new image">
+    <img [src]="projectForm.controls['image'].value || './assets/img/noimage.jpeg'" onerror="this.src='./assets/img/img-not-found.png';" alt="Add new image">
     <div class="col pr-2">
         <form action="javascript:void(0);" [formGroup]="projectForm" (ngSubmit)="onSubmit()" novalidate>
 

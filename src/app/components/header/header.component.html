@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-dark justify-content-between">
   <div class="d-flex align-items-center">
     <a class="navbar-brand" href="https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa">
-      <img id="logo-argprograma" [src]="'./assets/img/argentina-programa-logo.png'">
+      <img id="logo-argprograma" [src]="'./assets/img/argentina-programa-logo.png'" onerror="this.src='./assets/img/img-not-found.png';">
     </a>
   </div>
 
@@ -48,7 +48,7 @@
         <a class="nav-link pl-0 pr-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
           <div class="container-profile-image">
-            <img [src]="data.image || './assets/img/default-profile.png'" id="profile-image">
+            <img [src]="data.image || './assets/img/default-profile.png'" onerror="this.src='./assets/img/img-not-found.png';" id="profile-image">
           </div>
 
 

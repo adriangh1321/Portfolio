@@ -31,11 +31,12 @@ export class InterestService {
 
   getMeByToken(): Observable<Interest[]> {
     const url = `${this.apiUrl}/me`
-    return this.http.get<Interest[]>(url)     
+    return this.http.get<Interest[]>(url)
   }
 
   addInterest(interest: any): Observable<void> {
-    return this.http.post<void>(this.apiUrl, interest).pipe(
+    const url = `${this.apiUrl}/me`
+    return this.http.post<void>(url, interest).pipe(
       tap(() => {
         this.InterestsRefreshRequired.next()
       })

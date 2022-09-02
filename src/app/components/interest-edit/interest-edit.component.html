@@ -1,6 +1,6 @@
 <div class="card" style="width: 12rem; height: 32rem!important;;">
 
-    <img class="card-img-top" style="height: 40%;" [src]="interestForm.controls['image'].value" alt="Card image cap">
+    <img class="card-img-top" style="height: 40%;" [src]="interestForm.controls['image'].value || './assets/img/default-interest.jpg'" onerror="this.src='./assets/img/img-not-found.png';" alt="Card image cap">
     <div class="card-body">
         <form action="javascript:void(0);" [formGroup]="interestForm" (ngSubmit)="onSubmit()" novalidate>
 

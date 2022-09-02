@@ -1,5 +1,5 @@
 <div class="education-container">
-    <img [src]="educationForm.controls['image'].value || './assets/img/default-education.png'" alt="Add new image">
+    <img [src]="educationForm.controls['image'].value || './assets/img/default-education.png'" onerror="this.src='./assets/img/img-not-found.png';" alt="Add new image">
 
     <div class="col pr-2">
         <form action="javascript:void(0);" [formGroup]="educationForm" (ngSubmit)="onSubmit()" novalidate>

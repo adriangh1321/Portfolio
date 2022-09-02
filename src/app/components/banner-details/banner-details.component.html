@@ -1,4 +1,4 @@
-<div id="profile-background"><img [src]="banner ||'./assets/img/default-banner.jpg'" alt=""></div>
+<div id="profile-background"><img [src]="banner ||'./assets/img/default-banner.jpg'" onerror="this.src='./assets/img/img-not-found.png';" alt=""></div>
 <app-button [type]="'edit'" id="btn-edit-banner" (onButtonAction)="editBanner()"></app-button>
 
 

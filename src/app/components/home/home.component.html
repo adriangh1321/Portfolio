@@ -1,5 +1,5 @@
 <div class="welcome">
-    <img src="./assets/img/home.jpg" alt="" id="welcome-img">
+    <img src="./assets/img/home.jpg" onerror="this.src='./assets/img/img-not-found.png';" alt="" id="welcome-img">
     <p  *ngIf="!isLoggedIn();else welcome_logged" class="welcome-text text-center"><a routerLink="/register" routerLinkActive="active"  href="" id="welcome-register">Register now!</a> Share your portfolio with everybody.<br> Find thousands of profiles.</p>
     <ng-template #welcome_logged>
         <p class="welcome-text text-center">Hi! <span id="nickname">{{nickname}}</span>, what are you looking for?<br>Explore more profiles like yours <i class="fa-solid fa-hand-point-down"></i></p>

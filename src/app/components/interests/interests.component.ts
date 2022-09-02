@@ -51,7 +51,7 @@ export class InterestsComponent implements OnInit, OnDestroy {
 
   addInterest() {
     this.loaderService.showLoading()
-    const newInterest: any = { name: "New", image: "./assets/img/new-interest.jpg", idPortfolio: parseInt(localStorage.getItem("id_portfolio")!) }
+    const newInterest: any = { name: "New", image: null }
     const s4$ = this.interestService.addInterest(newInterest).subscribe({
       next: data => {
         this.notificationService.requestNotification({

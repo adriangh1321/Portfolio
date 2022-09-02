@@ -3,7 +3,7 @@
         <app-button [type]="'edit'" (onButtonAction)="editInterest()"></app-button>
         <app-button [type]="'delete'" (onButtonAction)="removeInterest()"></app-button>
     </div>
-    <img class="card-img-top" style="height: 60% ;"  [src]="interest.image" alt="Card image cap">
+    <img class="card-img-top" style="height: 60% ;"  [src]="interest.image || './assets/img/default-interest.jpg'" onerror="this.src='./assets/img/img-not-found.png';" alt="interest image">
     <div class="card-body">
         <h6 class="card-title text-center">{{interest.name}}</h6>
     </div>
