@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NotificationMessage } from 'src/app/enums/NotificationMessage';
 import { NotificationType } from 'src/app/enums/NotificationType';
@@ -21,6 +21,7 @@ export class ShowProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   portfolio: Portfolio;
   skillType = SkillType;
   subscription: Subscription = new Subscription;
+ 
 
 
   constructor(
@@ -31,10 +32,8 @@ export class ShowProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     private loaderService: LoaderService,
     private notificationService: NotificationService,
     private scrollService: ScrollService
-
   ) {
     this.portfolio = new Portfolio();
-
 
   }
   ngAfterViewInit(): void {
@@ -45,10 +44,13 @@ export class ShowProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    this.scrollService.scrollRequest.subscribe(()=>this.onView())
     const s1$ = this.route.params.subscribe(data => this.portfolio = this.route.snapshot.data["portfolio"])
     this.subscription.add(s1$)
 
+  }
+  onView() {
+    this.scrollService.scrollTo('principal-container')
   }
 
 

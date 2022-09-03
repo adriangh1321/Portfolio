@@ -9,6 +9,8 @@ import { Country } from 'src/app/models/Country';
 import { Region } from 'src/app/models/Region';
 import { CountryService } from 'src/app/services/country.service';
 import { RegionService } from 'src/app/services/region.service';
+import { maxFileSize } from 'src/app/validators/MaxFileSize';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-basic-info-edit',
@@ -23,6 +25,7 @@ export class BasicInfoEditComponent implements OnInit {
   countries$!: Observable<Country[]>
   regions$!: Observable<Region[]>
   private countryToLoad = new Subject<number>()
+  readonly maxSizeAllowed = environment.maxFileSize
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,7 +58,7 @@ export class BasicInfoEditComponent implements OnInit {
       countryId: [{ value: this.portfolio.location.region == null ? '' : this.portfolio.location.region.country.id, disabled: true }, [Validators.required]],
       regionId: [{ value: this.portfolio.location.region == null ? '' : this.portfolio.location.region.id, disabled: true }, [Validators.required]],
       address:[this.portfolio.location.address==null?'':this.portfolio.location.address,[Validators.required, onlyWhitespace()]],
-      image: [this.portfolio.image, []]
+      image: [this.portfolio.image, [maxFileSize(this.maxSizeAllowed)]]
       
     })
   }

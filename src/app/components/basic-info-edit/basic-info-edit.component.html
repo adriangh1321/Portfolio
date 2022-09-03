@@ -14,6 +14,9 @@
                     <input type="file" id="education-image-indexEducation" class="form-control-file"
                         (change)="onImageUpload($event)">
                     <input type="hidden" formControlName="image">
+                    <div *ngIf="m.image.invalid && m.image.errors?.maxFileSize " class="alert alert-danger">
+                        The file exceeds {{maxSizeAllowed}}MB
+                    </div>
                 </div>
                 <div class="form-group col-md-12 p-0">
                     <label for="input-firstname">Firstname</label>

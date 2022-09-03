@@ -7,7 +7,9 @@ import { Project } from 'src/app/models/Project';
 import { LoaderService } from 'src/app/services/loader.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { maxFileSize } from 'src/app/validators/MaxFileSize';
 import { urlOrWhitespace } from 'src/app/validators/UrlOrWhitespace';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-project-edit',
@@ -20,6 +22,7 @@ export class ProjectEditComponent implements OnInit {
   @Output() onShowDetails = new EventEmitter()
   @Input() project: Project;
   checkboxImage: boolean;
+  readonly maxSizeAllowed = environment.maxFileSize
 
 
   constructor(
@@ -48,7 +51,7 @@ export class ProjectEditComponent implements OnInit {
         day: this.project.endDate!.getDate(),
       } : null, []],
       url: [this.project.url == null ? "" : this.project.url, [urlOrWhitespace()]],
-      image: [this.project.image, []]
+      image: [this.project.image, [maxFileSize(this.maxSizeAllowed)]]
 
     })
   }

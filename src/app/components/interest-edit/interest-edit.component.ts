@@ -6,7 +6,9 @@ import { Interest } from 'src/app/models/Interest';
 import { InterestService } from 'src/app/services/interest.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { maxFileSize } from 'src/app/validators/MaxFileSize';
 import { onlyWhitespace } from 'src/app/validators/WhitespaceValidatorDirective';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-interest-edit',
@@ -17,6 +19,7 @@ export class InterestEditComponent implements OnInit {
   interestForm!: FormGroup;
   @Output() onShowDetails = new EventEmitter()
   @Input() interest: Interest;
+  readonly maxSizeAllowed = environment.maxFileSize
 
 
   constructor(
@@ -30,7 +33,7 @@ export class InterestEditComponent implements OnInit {
   ngOnInit(): void {
     this.interestForm = this.formBuilder.group({
       name: [this.interest.name, [Validators.required, onlyWhitespace()]],
-      image: [this.interest.image, []]
+      image: [this.interest.image, [maxFileSize(this.maxSizeAllowed)]]
     })
   }
 

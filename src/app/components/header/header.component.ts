@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import isOnline from 'is-online';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ContactInformation } from 'src/app/models/ContactInformation';
-import { Portfolio } from 'src/app/models/Portfolio';
-import { PortfolioImage } from 'src/app/models/PortfolioImage';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { ContactInformationService } from 'src/app/services/contact-information.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +23,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private portfolioService: PortfolioService,
-    private contactInformationService: ContactInformationService) {
+    private contactInformationService: ContactInformationService,
+    private router: Router,
+    private scrollService: ScrollService) {
     this.showNetworks = false
   }
   networkStatus: boolean = false;
@@ -75,5 +75,26 @@ export class HeaderComponent implements OnInit {
     e.stopPropagation();
     this.showNetworks = !this.showNetworks
   }
+
+  navigate(nickname: string) {
+
+
+    let oldUrl: string = this.router.url
+    let newUrl;
+    this.router.navigate(['profile', nickname])
+      .then(() => {
+        newUrl = this.router.url
+        this.scrollService.scrollEmit()
+        if (oldUrl == newUrl) {
+
+          window.location.reload();
+        }
+
+
+      });
+
+
+  }
+
 
 }

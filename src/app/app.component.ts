@@ -41,8 +41,8 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    let height =window.visualViewport.height;
-    let width = window.visualViewport.width;
+    let height =window.visualViewport!.height;
+    let width = window.visualViewport!.width;
     this.metaService.updateTag({
       name: 'viewport',
       content: `height=${height}, width=${width}, initial-scale=1.0`

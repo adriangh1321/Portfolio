@@ -7,6 +7,8 @@ import { Education } from 'src/app/models/Education';
 import { EducationService } from 'src/app/services/education.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { maxFileSize } from 'src/app/validators/MaxFileSize';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-education-edit',
@@ -17,6 +19,7 @@ export class EducationEditComponent implements OnInit {
   educationForm!: FormGroup;
   @Output() onShowDetails = new EventEmitter()
   @Input() education: Education;
+  readonly maxSizeAllowed = environment.maxFileSize
 
 
   constructor(
@@ -43,7 +46,7 @@ export class EducationEditComponent implements OnInit {
         month: this.education.endDate!.getMonth() + 1,
         day: this.education.endDate!.getDate(),
       } : null, []],
-      image: [this.education.image, []]
+      image: [this.education.image, [maxFileSize(this.maxSizeAllowed)]]
     })
   }
 

@@ -55,7 +55,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right bg-secondary" aria-labelledby="navbarDropdownMenuLink">
 
-          <a class="dropdown-item text-light" [routerLink]="['/profile', data.user.nickname]"><i
+          <a class="dropdown-item text-light" (click)=navigate(data.user.nickname) href='javascript:void(0);'><i
               class="fa-solid fa-briefcase mr-2"></i>My
             portfolio</a>
 
