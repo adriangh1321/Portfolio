@@ -15,6 +15,8 @@ import { Region } from 'src/app/models/Region';
 import { RegionService } from 'src/app/services/region.service';
 import { CountryService } from 'src/app/services/country.service';
 import { onlyWhitespace } from 'src/app/validators/WhitespaceValidatorDirective';
+import { maxFileSize } from 'src/app/validators/MaxFileSize';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-experience-edit',
@@ -28,6 +30,7 @@ export class ExperienceEditComponent implements OnInit {
   countries$!: Observable<Country[]>
   regions$!: Observable<Region[]>
   private countryToLoad = new Subject<number>()
+  readonly maxSizeAllowed = environment.maxFileSize
 
 
   constructor(
@@ -78,7 +81,7 @@ export class ExperienceEditComponent implements OnInit {
       countryId: [{ value: this.experience.location.region == null ? '' : this.experience.location.region.country.id, disabled: true }, [Validators.required]],
       regionId: [{ value: this.experience.location.region == null ? '' : this.experience.location.region.id, disabled: true }, [Validators.required]],
       address:[this.experience.location.address==null?'':this.experience.location.address],
-      image: [this.experience.image, []]
+      image: [this.experience.image, [maxFileSize(this.maxSizeAllowed)]]
     })
   }
 

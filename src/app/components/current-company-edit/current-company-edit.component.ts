@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrentCompany } from 'src/app/models/CurrentCompany';
 import { CurrentCompanyService } from 'src/app/services/current-company.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { maxFileSize } from 'src/app/validators/MaxFileSize';
 import { urlOrWhitespace } from 'src/app/validators/UrlOrWhitespace';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-current-company-edit',
@@ -17,6 +19,7 @@ export class CurrentCompanyEditComponent implements OnInit {
   @Output() onShowDetails = new EventEmitter()
   currentCompanyForm!: FormGroup
   checkboxImage: boolean;
+  readonly maxSizeAllowed = environment.maxFileSize
   constructor(
     private formBuilder: FormBuilder,
     private currentCompanyService: CurrentCompanyService,
@@ -28,7 +31,7 @@ export class CurrentCompanyEditComponent implements OnInit {
     this.currentCompanyForm = this.formBuilder.group({
       name: [this.currentCompany.name == null ? "" : this.currentCompany.name, []],
       url: [this.currentCompany.url == null ? "" : this.currentCompany.url, [urlOrWhitespace()]],
-      image: [this.currentCompany.image, []]
+      image: [this.currentCompany.image, [maxFileSize(this.maxSizeAllowed)]]
     })
   }
 

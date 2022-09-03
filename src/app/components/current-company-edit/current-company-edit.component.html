@@ -12,6 +12,9 @@
                 <label for="company-image">Company photo</label>
                 <input type="file" id="company-image" class="form-control-file" (change)="onImageUpload($event)" [disabled]="checkboxImage">
                 <input type="hidden" formControlName="image">
+                <div *ngIf="m.image.invalid && m.image.errors?.maxFileSize " class="alert alert-danger">
+                    The file exceeds {{maxSizeAllowed}}MB
+                </div>
                
             </div>
             <div class="form-check">

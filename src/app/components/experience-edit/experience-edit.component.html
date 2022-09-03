@@ -1,5 +1,6 @@
 <div class="experience-container">
-    <img [src]="experienceForm.controls['image'].value || './assets/img/default-experience.png'" onerror="this.src='./assets/img/img-not-found.png';" alt="Add new image">
+    <img [src]="experienceForm.controls['image'].value || './assets/img/default-experience.png'"
+        onerror="this.src='./assets/img/img-not-found.png';" alt="Add new image">
 
     <div class="col pr-2">
         <form action="javascript:void(0);" [formGroup]="experienceForm" (ngSubmit)="onSubmit()" novalidate>
@@ -94,6 +95,9 @@
                 <label for="experience-image-indexExperience">Company image file</label>
                 <input type="file" id="experience-image-indexExperience" class="form-control-file"
                     (change)="onImageExperienceUpload($event)">
+                <div *ngIf="m.image.invalid && m.image.errors?.maxFileSize " class="alert alert-danger">
+                    The file exceeds {{maxSizeAllowed}}MB
+                </div>
                 <input type="hidden" formControlName="image">
             </div>
             <button type="submit" class="btn btn-primary" id="btn-edit-experience-indexExperience"

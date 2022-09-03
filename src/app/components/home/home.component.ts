@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     private scrollService: ScrollService) {
 
     this.profiles = []
-   
+    
   }
 
   ngOnInit(): void {

@@ -1,6 +1,8 @@
 <div class="card" style="width: 12rem; height: 32rem!important;;">
 
-    <img class="card-img-top" style="height: 40%;" [src]="interestForm.controls['image'].value || './assets/img/default-interest.jpg'" onerror="this.src='./assets/img/img-not-found.png';" alt="Card image cap">
+    <img class="card-img-top" style="height: 40%;"
+        [src]="interestForm.controls['image'].value || './assets/img/default-interest.jpg'"
+        onerror="this.src='./assets/img/img-not-found.png';" alt="Card image cap">
     <div class="card-body">
         <form action="javascript:void(0);" [formGroup]="interestForm" (ngSubmit)="onSubmit()" novalidate>
 
@@ -17,6 +19,9 @@
                 <label for="interest-image">Interes image</label>
                 <input type="file" id="interest-image" class="form-control-file"
                     (change)="onImageInterestUpload($event)">
+                <div *ngIf="m.image.invalid && m.image.errors?.maxFileSize " class="alert alert-danger">
+                    The file exceeds {{maxSizeAllowed}}MB
+                </div>
                 <input type="hidden" formControlName="image">
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="!interestForm.valid">Save</button>

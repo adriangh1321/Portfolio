@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoaderService } from 'src/app/services/loader.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { maxFileSize } from 'src/app/validators/MaxFileSize';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-banner-edit',
@@ -12,6 +14,7 @@ export class BannerEditComponent implements OnInit {
   @Input() banner!: string;
   @Output() onShowDetails = new EventEmitter()
   bannerForm!: FormGroup
+  readonly maxSizeAllowed = environment.maxFileSize
   constructor(
     private formBuilder: FormBuilder,
     private portfolioService: PortfolioService,
@@ -19,8 +22,8 @@ export class BannerEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.bannerForm = this.formBuilder.group({
-      banner: [this.banner , []],
-      
+      banner: [this.banner, [Validators.required, maxFileSize(this.maxSizeAllowed)]],
+
     })
   }
 
@@ -36,6 +39,7 @@ export class BannerEditComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+
   onSubmit() {
     if (this.bannerForm.invalid) {
       alert('Invalid input');
@@ -43,7 +47,7 @@ export class BannerEditComponent implements OnInit {
     }
     this.loaderService.showLoading()
     this.portfolioService.patchBanner(this.bannerForm.getRawValue()).subscribe({
-      next: data => {},
+      next: data => { },
       error: error => {
         this.loaderService.hideLoading()
         throw error

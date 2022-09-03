@@ -8,6 +8,9 @@
                     <input type="file" class="btn btn-secondary" id="banner-image" class="form-control-file"
                         (change)="onImageUpload($event)">Upload banner
                 </label>
+                <div *ngIf="m.banner.invalid && m.banner.errors?.maxFileSize " class="alert alert-danger">
+                    The file exceeds {{maxSizeAllowed}}MB
+                </div>
                 <input type="hidden" formControlName="banner">
             </div>
             <div class="d-flex justify-content-center">

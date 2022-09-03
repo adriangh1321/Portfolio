@@ -1,5 +1,6 @@
 <div class="education-container">
-    <img [src]="educationForm.controls['image'].value || './assets/img/default-education.png'" onerror="this.src='./assets/img/img-not-found.png';" alt="Add new image">
+    <img [src]="educationForm.controls['image'].value || './assets/img/default-education.png'"
+        onerror="this.src='./assets/img/img-not-found.png';" alt="Add new image">
 
     <div class="col pr-2">
         <form action="javascript:void(0);" [formGroup]="educationForm" (ngSubmit)="onSubmit()" novalidate>
@@ -50,6 +51,9 @@
                 <label for="education-image-indexEducation">Institute image file</label>
                 <input type="file" id="education-image-indexEducation" class="form-control-file"
                     (change)="onImageEducationUpload($event)">
+                <div *ngIf="m.image.invalid && m.image.errors?.maxFileSize " class="alert alert-danger">
+                    The file exceeds {{maxSizeAllowed}}MB
+                </div>
                 <input type="hidden" formControlName="image">
             </div>
             <button type="submit" class="btn btn-primary" id="btn-edit-education-indexEducation"
