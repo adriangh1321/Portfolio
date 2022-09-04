@@ -77,23 +77,17 @@ export class HeaderComponent implements OnInit {
   }
 
   navigate(nickname: string) {
-
-
     let oldUrl: string = this.router.url
-    let newUrl;
+    let newUrl=`/profile/${nickname}`
+    if (oldUrl == newUrl) {
+      window.location.reload();
+      return
+    }
+
     this.router.navigate(['profile', nickname])
       .then(() => {
-        newUrl = this.router.url
         this.scrollService.scrollEmit()
-        if (oldUrl == newUrl) {
-
-          window.location.reload();
-        }
-
-
       });
-
-
   }
 
 
